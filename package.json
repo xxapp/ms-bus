@@ -1,0 +1,20 @@
+{
+  "name": "component-avalon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "avalonjs": "https://github.com/RubyLouvre/avalon/archive/1.5.8.tar.gz",
+    "bootbox.js": "https://github.com/makeusabrew/bootbox/archive/v4.3.0.tar.gz"
+  },
+  "devDependencies": {
+    "fis3-hook-commonjs": "^0.1.25",
+    "fis3-hook-node_modules": "^2.2.8",
+    "fis3-postpackager-loader": "^2.1.3"
+  }
+}

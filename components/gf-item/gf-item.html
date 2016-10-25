@@ -1,0 +1,83 @@
+<div class="row" ms-controller="gf-item">
+    <div class="col-xs-12 col-md-12">
+        <ms:dialog $id="dialog_item" ms-skip>
+            <div class="row">
+                <div class="col-md-12">
+                    <form role="form">
+                        <ms:control-text label="商品名称" col="name"></ms:control-text>
+                        <ms:control-select label="商品分类" col="catalog" store="category"></ms:control-select>
+                        <ms:control-text label="商品单价" col="price"></ms:control-text>
+                        <ms:control-text label="库存" col="store_count"></ms:control-text>
+                        <ms:control-file label="大缩略图" btn-text="选择图片" col="tag.large_thumb" store="file"></ms:control-file>
+                        <ms:control-file label="缩略图" btn-text="选择图片" col="tag.thumb" store="file"></ms:control-file>
+                        <ms:control-textarea label="商品详情" col="tag.description" rows="4"></ms:control-textarea>
+                        <ms:control-text label="浏览量" col="view_count"></ms:control-text>
+                    </form>
+                </div>
+            </div>
+        </ms:dialog>
+        <ms:dialog $id="dialog_item_push" ms-skip>
+            <span slot="header">推送</span>
+            <div class="row">
+                <div class="col-md-12">
+                    <form role="form">
+                        <ms:control-text label="标题" duplex="state.text" ms-repeat="state.subs"></ms:control-text>
+                        <ms:control-textarea label="副标题" rows="4"></ms:control-textarea>
+                        <ms:control-text label="标签"></ms:control-text>
+                        <ms:control-select label="商品分类">
+                            <option value="1">大图</option>
+                            <option value="2">小图</option>
+                        </ms:control-select>
+                        <ms:control-datepicker label="上线时间" format="yyyy-mm-dd"></ms:control-datepicker>
+                        <ms:control-text label="推送内容"></ms:control-text>
+                    </form>
+                </div>
+            </div>
+        </ms:dialog>
+        <ms:data-box $id="data-box_item" on-init="dataBoxInit" config="$data-box_config">
+            <div slot="content" class="widget">
+                <div class="widget-header bg-blue">
+                    <span class="widget-caption">商品列表</span>
+                </div>
+                <div class="widget-body">
+                    <form class="form-inline">
+                        <ms:search-item label="名称" col="name"></ms:search-item>
+                        <ms:search-item-select label="类别" col="catalog" store="category"></ms:search-item-select>
+                        <ms:search-item label="单价" col="price"></ms:search-item>
+                        <ms:search-item-datepicker label="上线时间" col="date"></ms:search-item-datepicker>
+                    </form>
+                    <br>
+                    <form class="form-inline">
+                        <ms:search-item label="状态" col="state"></ms:search-item>
+                        <ms:search-button class="btn btn-info">搜索</ms:search-button>
+                    </form>
+                    <div class="table-toolbar">
+                        <button class="btn btn-info" ms-click="actions.add">
+                            <span class="fa fa-plus">
+                            </span>新增商品
+                        </button>
+                        <button class="btn btn-info" ms-click="actions.upShelves">
+                            <span class="fa fa-plus">
+                            </span>批量上架
+                        </button>
+                        <button class="btn btn-info" ms-click="actions.downShelves">
+                            <span class="fa fa-plus">
+                            </span>批量下架
+                        </button>
+                    </div>
+                    <ms:table class="table table-hover table-bordered">
+                        <ms:check-header slot="header" col="id" width="60"></ms:check-header>
+                        <ms:text-header slot="header" col="name" text="商品名称"></ms:text-header>
+                        <ms:text-header slot="header" col="catalog" text="类别"></ms:text-header>
+                        <ms:text-header slot="header" col="price" text="单价"></ms:text-header>
+                        <ms:text-header slot="header" col="store_count" text="剩余数量"></ms:text-header>
+                        <ms:text-header slot="header" col="state" text="状态"></ms:text-header>
+                        <ms:action-header slot="header" text="推送" action-type="push"></ms:action-header>
+                        <ms:action-header slot="header" text="操作"></ms:action-header>
+                    </ms:table>
+                    <ms:pagination current-page="1" page-count="4"></ms:pagination>
+                </div>
+            </div>
+        </ms:data-box>
+    </div>
+</div>

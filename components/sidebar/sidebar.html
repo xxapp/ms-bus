@@ -1,0 +1,61 @@
+<!-- Page Sidebar Header>
+<div class="sidebar-header-wrapper">
+    <input type="text" class="searchinput" ms-click="search"/>
+    <i class="searchicon fa fa-search"></i>
+    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+</div>
+<!-- /Page Sidebar Header -->
+<!-- Sidebar Menu -->
+<ul class="nav sidebar-menu">
+    <!--Dashboard-->
+    <li ms-class="active:actived===item.name" ms-class-1="open:isChildActived(item)"  ms-repeat-item="menu">
+        <a ms-attr-href="{{ item.href }}" ms-class="menu-dropdown:item.children && item.children.size() > 0"  ms-click="menuClick(item)">
+            <i ms-class="menu-icon glyphicon {{ item.icon }}"></i>
+            <span class="menu-text"> {{ item.title }} </span>
+            <i class="menu-expand" ms-if="item.children && item.children.size() > 0"></i>
+        </a>
+        <ul class="submenu" ms-if="item.children && item.children.size() > 0">
+            <li ms-class="active:actived===sub.name" ms-repeat-sub="item.children">
+                <a ms-attr-href="{{ sub.href }}" ms-click="menuClick(sub, item)">
+                    <span class="menu-text">{{ sub.title }}</span>
+                </a>
+            </li>
+            <!--<li>
+                <a href="#" class="menu-dropdown">
+                    <span class="menu-text">
+                        Icons
+                    </span>
+                    <i class="menu-expand"></i>
+                </a>
+
+                <ul class="submenu">
+                    <li>
+                        <a href="font-awesome.html">
+                            <i class="menu-icon fa fa-rocket"></i>
+                            <span class="menu-text">Font Awesome</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="glyph-icons.html">
+                            <i class="menu-icon glyphicon glyphicon-stats"></i>
+                            <span class="menu-text">Glyph Icons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="typicon.html">
+                            <i class="menu-icon typcn typcn-location-outline"></i>
+                            <span class="menu-text"> Typicons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="weather-icons.html">
+                            <i class="menu-icon wi-day-snow"></i>
+                            <span class="menu-text">Weather Icons</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>-->
+        </ul>
+    </li>
+</ul>
+<!-- /Sidebar Menu -->

@@ -1,0 +1,209 @@
+{
+    "code": "0",
+    "columns": [
+        {
+            "name": "id",
+            "type": "INT"
+        },
+        {
+            "name": "name",
+            "type": "STRING"
+        },
+        {
+            "name": "type",
+            "type": "STRING"
+        },
+        {
+            "name": "sub_type",
+            "type": "STRING"
+        },
+        {
+            "name": "price",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "tag",
+            "type": "JSONB"
+        },
+        {
+            "name": "created",
+            "type": "DATE"
+        },
+        {
+            "name": "state",
+            "type": "STRING"
+        },
+        {
+            "name": "inputed",
+            "type": "DATE"
+        },
+        {
+            "name": "input_employee",
+            "type": "INT"
+        },
+        {
+            "name": "removed",
+            "type": "DATE"
+        },
+        {
+            "name": "view_count",
+            "type": "INT"
+        },
+        {
+            "name": "real_view_count",
+            "type": "INT"
+        },
+        {
+            "name": "store_count",
+            "type": "INT"
+        },
+        {
+            "name": "supplier",
+            "type": "INT"
+        },
+        {
+            "name": "channel",
+            "type": "INT"
+        },
+        {
+            "name": "buy_count",
+            "type": "INT"
+        },
+        {
+            "name": "real_buy_count",
+            "type": "INT"
+        },
+        {
+            "name": "catalog",
+            "type": "INT"
+        },
+        {
+            "name": "id",
+            "type": "INT"
+        },
+        {
+            "name": "name",
+            "type": "STRING"
+        },
+        {
+            "name": "assignee",
+            "type": "INT"
+        },
+        {
+            "name": "suites",
+            "type": "JSONB"
+        },
+        {
+            "name": "author_name",
+            "type": "STRING"
+        },
+        {
+            "name": "author_field",
+            "type": "STRING"
+        },
+        {
+            "name": "brief",
+            "type": "STRING"
+        }
+    ],
+    "rows": [
+        {
+            "id": 6,
+            "name": "商品6",
+            "type": "C",
+            "sub_type": "C",
+            "price": 200,
+            "tag": null,
+            "created": "2016-09-12T21:29:35.000Z",
+            "state": "1",
+            "inputed": "2016-09-12T21:29:39.000Z",
+            "input_employee": 1,
+            "removed": null,
+            "view_count": 200,
+            "real_view_count": 32342,
+            "store_count": 234,
+            "supplier": 1,
+            "channel": 6,
+            "buy_count": 23,
+            "real_buy_count": 32,
+            "catalog": 3,
+            "assignee": 1,
+            "suites": [
+                {
+                    "name": "免费试用2天",
+                    "type": "T",
+                    "price": 0,
+                    "effectDuration": 222
+                },
+                {
+                    "name": "精彩一月",
+                    "price": 50,
+                    "effectDuration": 222
+                },
+                {
+                    "name": "超值半年",
+                    "price": 150,
+                    "effectDuration": 222
+                },
+                {
+                    "name": "惊喜一年",
+                    "price": 200,
+                    "effectDuration": 222
+                }
+            ],
+            "author_name": "马光元",
+            "author_field": "期货6",
+            "brief": "期货5期货5期货5"
+        },
+        {
+            "id": 5,
+            "name": "商品5",
+            "type": "C",
+            "sub_type": "C",
+            "price": 200,
+            "tag": null,
+            "created": "2016-09-12T21:28:33.000Z",
+            "state": "1",
+            "inputed": "2016-09-12T21:28:37.000Z",
+            "input_employee": 1,
+            "removed": null,
+            "view_count": 200,
+            "real_view_count": 213123,
+            "store_count": 123213,
+            "supplier": 1,
+            "channel": 5,
+            "buy_count": 200,
+            "real_buy_count": 20,
+            "catalog": 3,
+            "assignee": 1,
+            "suites": [
+                {
+                    "name": "免费试用2天",
+                    "type": "T",
+                    "price": 0,
+                    "effectDuration": 222
+                },
+                {
+                    "name": "精彩一月",
+                    "price": 50,
+                    "effectDuration": 222
+                },
+                {
+                    "name": "超值半年",
+                    "price": 150,
+                    "effectDuration": 222
+                },
+                {
+                    "name": "惊喜一年",
+                    "price": 200,
+                    "effectDuration": 222
+                }
+            ],
+            "author_name": "马光元",
+            "author_field": "期货5",
+            "brief": "期货期货1"
+        }
+    ],
+    "total": 4,
+    "start": 0
+}

@@ -1,0 +1,36 @@
+<div ms-controller="gf-select-item">
+    <ms:dialog $id="dialog_select_item" ms-skip on-init="dialogInit">
+        <span slot="header">选择商品</span>
+        <div class="row">
+            <div class="col-md-12" ms-controller="gf-select-item_data">
+                <form role="form">
+                    <ms:control-file label="请选择图片" btn-text="选择图片" col="thumb" store="file"></ms:control-file>
+                </form>
+                <ms:data-box $id="data-box_select_item" on-init="dataBoxInit" config="$data-box_config">
+                    <div slot="content">
+                        <form class="form-inline">
+                            <ms:search-item label="名称" col="name"></ms:search-item>
+                            <ms:search-item label="类别" col="catalog"></ms:search-item>
+                            <ms:search-item label="单价" col="price"></ms:search-item>
+                        </form>
+                        <br>
+                        <form class="form-inline">
+                            <ms:search-item label="状态" col="state"></ms:search-item>
+                            <ms:search-button class="btn btn-info">搜索</ms:search-button>
+                        </form>
+                        <ms:table class="table table-hover table-bordered">
+                            <ms:check-header slot="header" col="id" width="60"></ms:check-header>
+                            <ms:text-header slot="header" col="name" text="商品名称"></ms:text-header>
+                            <ms:text-header slot="header" col="catalog" text="类别"></ms:text-header>
+                            <ms:text-header slot="header" col="price" text="单价"></ms:text-header>
+                            <ms:text-header slot="header" col="store_count" text="剩余数量"></ms:text-header>
+                            <ms:text-header slot="header" col="state" text="状态"></ms:text-header>
+                            <ms:action-header slot="header" text="操作"></ms:action-header>
+                        </ms:table>
+                        <ms:pagination current-page="1"></ms:pagination>
+                    </div>
+                </ms:data-box>
+            </div>
+        </div>
+    </ms:dialog>
+</div>

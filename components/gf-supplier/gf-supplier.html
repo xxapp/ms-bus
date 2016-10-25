@@ -1,0 +1,39 @@
+<div class="row" ms-controller="gf-supplier">
+    <div class="col-xs-12 col-md-12">
+        <ms:dialog $id="dialog_supplier" ms-skip>
+            <div class="row">
+                <div class="col-md-12">
+                    <form role="form">
+                        <ms:control-text label="供货人" col="name"></ms:control-text>
+                    </form>
+                </div>
+            </div>
+        </ms:dialog>
+        <ms:data-box $id="data-box_supplier" on-init="dataBoxInit" config="$data-box_config">
+            <div slot="content" class="widget">
+                <div class="widget-header bg-blue">
+                    <span class="widget-caption">供货人列表</span>
+                </div>
+                <div class="widget-body">
+                    <form class="form-inline">
+                        <ms:search-item label="名称" col="name"></ms:search-item>
+                        <ms:search-button class="btn btn-info">搜索</ms:search-button>
+                    </form>
+                    <div class="table-toolbar">
+                        <button class="btn btn-info" ms-click="actions.add">
+                            <span class="fa fa-plus">
+                            </span>新增供货人
+                        </button>
+                    </div>
+                    <ms:table class="table table-hover table-bordered">
+                        <ms:check-header slot="header" col="id" width="60"></ms:check-header>
+                        <ms:text-header slot="header" col="id" text="ID"></ms:text-header>
+                        <ms:text-header slot="header" col="name" text="名称"></ms:text-header>
+                        <ms:action-header slot="header" text="操作"></ms:action-header>
+                    </ms:table>
+                    <ms:pagination current-page="1" page-count="4"></ms:pagination>
+                </div>
+            </div>
+        </ms:data-box>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="clearfix" style="width:100%;margin-top:10px">
+    <div class="btn-group pull-right">
+        <a class="btn blue" ms-attr-disabled="currentPage===1" ms-click="prevPage">
+            <i class="icon-step-backward"></i>上一页
+        </a>
+        <a class="btn success">{{ currentPage }}/{{ Math.ceil(total/limit) }}</a>
+        <a class="btn blue" ms-attr-disabled="currentPage===Math.ceil(total/limit)" ms-click="nextPage">
+            <i class="icon-step-forward"></i>下一页
+        </a>
+    </div>
+</div>
