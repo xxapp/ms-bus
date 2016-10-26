@@ -14,7 +14,8 @@ fis.unhook('components');
 fis.hook('node_modules', {
     ignoreDevDependencies: true,
     shimBuffer: false,
-    shimProcess: false
+    shimProcess: false,
+    shutup: true
 });
 
 
