@@ -129,11 +129,7 @@ avalon.state.config({
     onLoad: function(fromStat, toState) {
         var breadCrumb = [], flagTree;
         menuService.walkMenu(toState.stateName, function (item, level) {
-            if (level === 1) {
-                breadCrumb = [item];
-            } else {
-                breadCrumb.push(item);
-            }
+            breadCrumb.unshift(item);
         });
         if (breadCrumb.length) {
             flagTree = breadCrumb[breadCrumb.length-1]
