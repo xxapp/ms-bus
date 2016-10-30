@@ -37,10 +37,10 @@ avalon.component('ms:table', {
                         name: avalon.vmodels[vm.$containerVmId]['actionBtns'][$cheader.attr('action-type') || 'operation']
                     });
                 } break;
-                default: {
+                case 'ms:table-header': {
                     columnConfig.push({
-                        type: 'text',
-                        name: $cheader.attr('col')
+                        type: 'custom',
+                        name: $cheader
                     });
                 } break;
             }
@@ -55,17 +55,12 @@ avalon.component('ms:table', {
         // 根据表头配置生成表格内容模板
         vm.tbody = $.map(columnConfig, function (n) {
             if (!n.name) return 'check config';
-            var expr = 'el.' + n.name;
-            if (n.name && ~n.name.indexOf('$index')) {
-                expr = n.name;
-            } else if (n.type == 'action') {
-                // 如果是a标签，也不加修饰
-                expr = n.name;
-            }
+            var expr = n.name;
             switch (n.type) {
-                case 'text': return '{{' + expr + '}}';
-                case 'check': return '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-attr-value="' + expr + '"><span class="text"></span></label></div>';
+                case 'text': return '{{el.' + expr + '}}';
+                case 'check': return '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-attr-value="el.' + expr + '"><span class="text"></span></label></div>';
                 case 'action': return expr;
+                case 'custom': return expr.html();
             }
         });
     },

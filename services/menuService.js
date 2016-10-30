@@ -30,14 +30,13 @@ var menu = [{
     title: 'item',
     stateName: 'root.item',
     icon: 'glyphicon-category',
-    href: '#!/item',
-    children: [{
-        name: 'channel',
-        title: 'channel',
-        stateName: 'root.channel',
-        icon: 'glyphicon-category',
-        href: '#!/channel'
-    }]
+    href: '#!/item'
+}, {
+    name: 'channel',
+    title: 'channel',
+    stateName: 'root.channel',
+    icon: 'glyphicon-category',
+    href: '#!/channel'
 }];
 
 // 根据权限过滤菜单

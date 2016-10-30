@@ -31,7 +31,7 @@
                     </div>
                     <ms:table class="table table-hover table-bordered">
                         <ms:check-header slot="header" col="region_id" width="60"></ms:check-header>
-                        <ms:text-header slot="header" col="$outer.$index + 1" text="#"></ms:text-header>
+                        <ms:table-header slot="header" text="#">{{$outer.$index + 1}}</ms:table-header>
                         <ms:text-header slot="header" col="region_id" text="ID"></ms:text-header>
                         <ms:text-header slot="header" col="region_name" text="名称"></ms:text-header>
                         <ms:text-header slot="header" col="region_parent_id" text="PID"></ms:text-header>
@@ -41,5 +41,7 @@
                 </div>
             </div>
         </ms:data-box>
+        <input type="text" ms-duplex="buttonText" />
+        <ms:input-box ms-attr-text="buttonText" ms-on-abc="update"></ms:input-box>
     </div>
 </div>
