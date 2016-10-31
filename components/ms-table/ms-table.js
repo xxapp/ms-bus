@@ -16,28 +16,28 @@ avalon.component('ms:table', {
         $(vm.$model.header).children().each(function (i, n) {
             var type;
             // 由于框架原因，父组件内部动态生成的子组件不能放进$refs,因此将需要传递的值通过属性放入子组件
-            var $cheader = $(n);
+            var $cheader = $(n), type = $cheader.get(0).tagName.toLowerCase().replace(/^ms:/, '');
             $cheader.attr('container-vm-id', vm.$containerVmId);
-            switch ($cheader.get(0).tagName.toLowerCase()) {
-                case 'ms:text-header': {
+            switch (type) {
+                case 'text-header': {
                     columnConfig.push({
                         type: 'text',
                         name: $cheader.attr('col')
                     });
                 } break;
-                case 'ms:check-header': {
+                case 'check-header': {
                     columnConfig.push({
                         type: 'check',
                         name: $cheader.attr('col')
                     });
                 } break;
-                case 'ms:action-header': {
+                case 'action-header': {
                     columnConfig.push({
                         type: 'action',
                         name: avalon.vmodels[vm.$containerVmId]['actionBtns'][$cheader.attr('action-type') || 'operation']
                     });
                 } break;
-                case 'ms:table-header': {
+                case 'table-header': {
                     columnConfig.push({
                         type: 'custom',
                         name: $cheader
