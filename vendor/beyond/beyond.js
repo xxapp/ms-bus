@@ -218,9 +218,7 @@ require.async = function(n, part, onerror) {
             return new Promise(function(rs, rj) {
                 require_async(n, function(m) {
                     rs(part ? m[part] : m);
-                }, function() {
-                    rj();
-                });
+                }, rj);
             });
         }
     }
