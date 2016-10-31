@@ -5,7 +5,7 @@ avalon.component('ms:checkHeader', {
     $replace: 1,
     $init: function (vm, el) {
         vm.toggleCheckd = function () {
-            avalon.fireDom(el, 'abc', { data: vm.col, checked: this.checked });
+            avalon.fireDom(el, 'datasetchanged', { data: vm.col, checked: this.checked });
         }
         vm.checkboxClick = function () {
             this.blur();
