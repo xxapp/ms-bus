@@ -62,6 +62,22 @@ avalon.component('ms:dataBox', {
                 vm.checked.clear();
             });
         }
+        vm.toggleAllCheck = function (e) {
+            if (e.checked) {
+                avalon.each(vm.list, function(i, v){
+                    vm.checked.ensure(String(v[e.data]));
+                });
+            } else {
+                vm.checked.clear();
+            }
+        }
+        vm.$watch('checked.length', function (newV) {
+            if (newV == vm.list.size()) {
+                vm.isAllChecked = true;
+            } else {
+                vm.isAllChecked = false;
+            }
+        });
         if (dialogVm) {
             dialogVm.$post = function (package) {
                 if (!dialogVm.$beforePost()) {
@@ -115,7 +131,9 @@ avalon.component('ms:dataBox', {
     total: 1,
     $dirtyQuery: {},
     checked: [],
+    isAllChecked: false,
     actions: {},
     loadData: avalon.noop,
-    processData: avalon.noop
+    processData: avalon.noop,
+    toggleAllCheck: avalon.noop
 });

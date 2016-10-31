@@ -13,21 +13,6 @@ require.loadCss({
     url: '/vendor/uploadify/uploadify.css'
 });
 
-avalon.component('ms:inputBox', {
-    $template: '<button ms-click="update(text)">{{text}}</button>',
-    $init: function (vm, el) {
-        vm.update = function (text) {
-            var evt = document.createEvent('HTMLEvents');
-            evt.initEvent('abc', false, false);
-            evt.data = text;
-            el.dispatchEvent(evt);
-        }
-    },
-    text: '',
-    update: avalon.noop,
-    onAbc: avalon.noop
-});
-
 var currentState = mmState.currentState;
 /**
  * data-box配置
@@ -39,10 +24,6 @@ var currentState = mmState.currentState;
  */
 var demo = avalon.define({
     $id: 'demo',
-    buttonText: '1234',
-    update: function ($event) {
-        demo.buttonText = $event.data;
-    },
     '$data-box_config': {
         store: 'demo',
         dialogId: 'dialog_demo',
