@@ -39,7 +39,7 @@ avalon.component('ms:controlDatepicker', {
     $init: function (vm, el) {},
     $ready: function (vm, el) {
         var datepickerId = 'picker' + vm.$id, datepicker;
-        var $input = $(el).find('input:hidden');
+        var $input = $(el).find('input.hidden');
         vm.$datepickerId = datepickerId; 
         datepicker = $(el).find('input.date-picker').attr('id', datepickerId).val(moment($input.val()).format());
         datepicker.datetimepicker({

@@ -5,8 +5,14 @@ avalon.component('ms:searchButton', {
     content: '',
     $template: '<button type="button" ms-click="search">{{content|html}}</button>',
     $replace: 1,
-    $init: function (vm) {
+    $init: function (vm, el) {
+        var $form = $(el).closest('form');
         vm.search = function () {
+            var bv = $form.data('bootstrapValidator');
+            bv.validate();
+            if (!bv.isValid()) {
+                return ;
+            }
             var containerVm = avalon.vmodels[vm.$containerVmId];
             containerVm.$dirtyQuery.start = 0;
             containerVm.loadData(function () {

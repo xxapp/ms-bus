@@ -3,10 +3,16 @@ var avalon = require('avalon');
 avalon.directive('formvalid', {
     init: function (binding) {
         var elem = binding.element, $form = $(elem);
-        var vm = binding.vmodels[0];
+        var vm;
+        for (var i in binding.vmodels) {
+            if (binding.vmodels[i].hasOwnProperty(binding.expr)) {
+                vm = binding.vmodels[i];
+                break;
+            }
+        }
         setTimeout(function () {
             $form.bootstrapValidator({
-                excluded: [],
+                excluded: [':hidden'],
                 feedbackIcons: {
                     valid: 'glyphicon glyphicon-ok',
                     invalid: 'glyphicon glyphicon-remove',

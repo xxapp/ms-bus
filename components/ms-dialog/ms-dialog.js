@@ -11,7 +11,7 @@ avalon.component('ms:dialog', {
     $init: function (vm, el) {
         vm.power = function () {
             !vm.novalidate && vm.$dialog.find('form').bootstrapValidator({
-                excluded: [],
+                excluded: [':hidden'],
                 feedbackIcons: {
                     valid: 'glyphicon glyphicon-ok',
                     invalid: 'glyphicon glyphicon-remove',
@@ -45,6 +45,16 @@ avalon.component('ms:dialog', {
                 vm.valid = true;
                 return true;
             }
+        }
+        vm.resetForm = function (resetFormData) {
+            if (!vm.$dialog) {
+                return ;
+            }
+            var bv = vm.$dialog.find('form').data('bootstrapValidator');
+            if (!bv) {
+                return ;
+            }
+            bv.resetForm(resetFormData);
         }
         vm.$watch('show', function (newV) {
             var header = $(vm.header).children().text();
@@ -87,7 +97,10 @@ avalon.component('ms:dialog', {
                 });
                 avalon.scan(vm.$dialog.get(0));
             } else {
-                vm.$dialog && vm.$dialog.find('.bootbox-close-button').trigger('click');
+                if (vm.$dialog) {
+                    vm.$dialog.find('.bootbox-close-button').trigger('click');
+                    vm.$cache = {};
+                }
             }
         });
         vm.$watch('valid', function (newV) {
@@ -128,9 +141,11 @@ avalon.component('ms:dialog', {
     uploading: false,
     record: {},
     state: {},
+    $cache: {},
     $validateFields: {},
     containerVmId: '',
     $post: avalon.noop,
     power: avalon.noop,
-    $beforePost: avalon.noop
+    $beforePost: avalon.noop,
+    resetForm: avalon.noop
 });

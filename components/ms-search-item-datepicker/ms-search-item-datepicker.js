@@ -25,7 +25,7 @@ avalon.component('ms:searchItemDatepicker', {
     $init: function (vm, el) {},
     $ready: function (vm, el) {
         var datepickerId = 'picker' + vm.$id, datepicker;
-        var $input = $(el).find('input:hidden');
+        var $input = $(el).find('input.hidden');
         vm.$datepickerId = datepickerId; 
         datepicker = $(el).find('input.date-picker').attr('id', datepickerId).val($input.val());
         datepicker.datetimepicker({
@@ -33,6 +33,7 @@ avalon.component('ms:searchItemDatepicker', {
         });
         datepicker.on('dp.change', function (e) {
             $input.val(moment(e.target.value).utc().format());
+            datepicker.trigger('input');
         });
         vm.$watch('val', function (newV) {
             var containerVm = avalon.vmodels[vm.$containerVmId];
@@ -63,6 +64,7 @@ avalon.component('ms:searchItemDatetimepicker', {
         });
         datepicker.on('dp.change', function (e) {
             $input.val(moment(e.target.value).utc().format());
+            datepicker.trigger('input');
         });
         vm.$watch('val', function (newV) {
             var containerVm = avalon.vmodels[vm.$containerVmId];
