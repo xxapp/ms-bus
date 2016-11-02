@@ -9,9 +9,11 @@ avalon.component('ms:searchButton', {
         var $form = $(el).closest('form');
         vm.search = function () {
             var bv = $form.data('bootstrapValidator');
-            bv.validate();
-            if (!bv.isValid()) {
-                return ;
+            if (bv) {
+                bv.validate();
+                if (!bv.isValid()) {
+                    return ;
+                }
             }
             var containerVm = avalon.vmodels[vm.$containerVmId];
             containerVm.$dirtyQuery.start = 0;
