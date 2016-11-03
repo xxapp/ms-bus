@@ -29,7 +29,8 @@ avalon.component('ms:searchItemDatepicker', {
         vm.$datepickerId = datepickerId; 
         datepicker = $(el).find('input.date-picker').attr('id', datepickerId).val($input.val());
         datepicker.datetimepicker({
-            format: vm.format
+            format: vm.format,
+            ignoreReadonly: true
         });
         datepicker.on('dp.change', function (e) {
             $input.val(moment(e.target.value).utc().format());
@@ -60,7 +61,8 @@ avalon.component('ms:searchItemDatetimepicker', {
         datepicker = $(el).find('input.date-picker').attr('id', datepickerId).val($input.val());
         datepicker.datetimepicker({
             format: vm.format,
-            showClose: true
+            showClose: true,
+            ignoreReadonly: true
         });
         datepicker.on('dp.change', function (e) {
             $input.val(moment(e.target.value).utc().format());
