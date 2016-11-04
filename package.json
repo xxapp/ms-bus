@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "avalonjs": "https://github.com/RubyLouvre/avalon/archive/1.5.8.tar.gz",
-    "bootbox.js": "https://github.com/makeusabrew/bootbox/archive/v4.3.0.tar.gz"
+    "bootbox.js": "https://github.com/makeusabrew/bootbox/archive/v4.3.0.tar.gz",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "fis3-hook-commonjs": "^0.1.25",

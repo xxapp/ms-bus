@@ -4,7 +4,8 @@ fis.hook('commonjs', {
         avalon: '/node_modules/avalonjs/dist/avalon.shim.js',
         mmState: '/vendor/mmState/mmState.js',
         jquery: '/vendor/jquery/jquery.js',
-        moment: '/vendor/moment/moment.min.js'
+        moment: '/vendor/moment/moment.min.js',
+        redux: '/node_modules/redux/dist/redux.js'
     }
 });
 
@@ -23,14 +24,14 @@ fis.match('/test/*.js', {
     isMod: true,
     release: '/static/$0'
 });
-fis.match('/{node_modules,components,services}/**/*.js', {
+fis.match('/{node_modules,components}/**/*.js', {
     isMod: true, // 设置 comp 下都是一些组件，组件建议都是匿名方式 define
     release: '/static/$0'
 });
 fis.match('/{node_modules,components}/**/*.html', {
     release: false
 });
-fis.match('/services/*.js', {
+fis.match('/{services,stores}/*.js', {
     isMod: true,
     release: '/static/$0'
 });
