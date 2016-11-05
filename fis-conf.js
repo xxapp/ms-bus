@@ -31,7 +31,7 @@ fis.match('/{node_modules,components}/**/*.js', {
 fis.match('/{node_modules,components}/**/*.html', {
     release: false
 });
-fis.match('/{services,stores}/*.js', {
+fis.match('/{services,stores,events}/*.js', {
     isMod: true,
     release: '/static/$0'
 });

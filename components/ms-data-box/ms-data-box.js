@@ -4,7 +4,7 @@ var Notify = beyond.Notify;
 var bootbox = require('bootbox.js/bootbox');
 
 var store = require('/services/storeService.js');
-var componentStore = require('../../stores/componentStore');
+var cEvent = require('../../events/componentEvent');
 
 avalon.component('ms:dataBox', {
     $solt: 'content',
@@ -67,13 +67,12 @@ avalon.component('ms:dataBox', {
                 vm.checked.clear();
             });
         }
-        componentStore.subscribe(function () {
-            var state = componentStore.getState();
-            if (state.checkHeader.checked) {
+        cEvent.on('checkHeader', function (data) {
+            if (data.type === 'checked') {
                 avalon.each(vm.list, function(i, v){
-                    vm.checked.ensure(String(v[state.checkHeader.key]));
+                    vm.checked.ensure(String(v[data.key]));
                 });
-            } else {
+            } else if (data.type === 'unchecked') {
                 vm.checked.clear();
             }
         });
