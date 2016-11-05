@@ -15,9 +15,9 @@ avalon.component('ms:table', {
         var tmp = [], columnConfig = [];
         $(vm.$model.header).children().each(function (i, n) {
             var type;
-            // 由于框架原因，父组件内部动态生成的子组件不能放进$refs,因此将需要传递的值通过属性放入子组件
             var $cheader = $(n), type = $cheader.get(0).tagName.toLowerCase().replace(/^ms:/, '');
-            $cheader.attr('container-vm-id', vm.$containerVmId);
+            // 由于框架原因，父组件内部动态生成的子组件不能放进$refs,因此将需要传递的值通过属性放入子组件
+            $cheader.attr('parent-vm-id', vm.$id);
             switch (type) {
                 case 'text-header': {
                     columnConfig.push({

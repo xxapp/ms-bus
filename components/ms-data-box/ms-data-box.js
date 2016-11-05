@@ -5,6 +5,7 @@ var bootbox = require('bootbox.js/bootbox');
 
 var store = require('/services/storeService.js');
 var cEvent = require('../../events/componentEvent');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 avalon.component('ms:dataBox', {
     $solt: 'content',
@@ -68,6 +69,9 @@ avalon.component('ms:dataBox', {
             });
         }
         cEvent.on('checkHeader', function (data) {
+            if (!avxUtil.containChild(vm, data.id)) {
+                return ;
+            }
             if (data.type === 'checked') {
                 avalon.each(vm.list, function(i, v){
                     vm.checked.ensure(String(v[data.key]));
