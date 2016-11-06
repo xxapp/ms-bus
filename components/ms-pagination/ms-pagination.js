@@ -1,10 +1,12 @@
 var avalon = require('avalon');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 var limit = 10;
 avalon.component('ms:pagination', {
     $template: __inline('./ms-pagination.html'),
     $replace: 1,
-    $init: function (vm) {
+    $init: function (vm, el) {
+        avxUtil.pickToRefs(vm, el);
         vm.prevPage = function () {
             var containerVm = avalon.vmodels[vm.$containerVmId];
             if (vm.currentPage > 1) {

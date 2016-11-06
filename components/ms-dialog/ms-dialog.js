@@ -1,5 +1,6 @@
 var avalon = require('avalon');
 var bootbox = require('bootbox.js/bootbox');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 avalon.component('ms:dialog', {
     $slot: 'content',
@@ -9,6 +10,7 @@ avalon.component('ms:dialog', {
     $replace: 0,
     onInit: avalon.noop,
     $init: function (vm, el) {
+        avxUtil.pickToRefs(vm, el);
         vm.power = function () {
             !vm.novalidate && vm.$dialog.find('form').bootstrapValidator({
                 excluded: [':hidden'],

@@ -1,5 +1,9 @@
 var avalon = require('avalon');
+var $ = require('jquery');
 
+/**
+ * 判断父组件 vm 的 $refs 链上有没有名为 childVmId 的组件
+ */
 exports.containChild = function (vm, childVmId) {
     if (!vm.$refs) {
         return false
@@ -16,4 +20,26 @@ exports.containChild = function (vm, childVmId) {
         }
     }
     return false;
+}
+
+/**
+ * 给声明子组件的元素加标记，用于那些不能自动把子组件添加到父组件 $refs 对象的情况，让子组件自己把自己添加到父组件的 $refs 中去
+ * @param {Component} vm 父组件 VM
+ * @param {Element} el 声明子组件的元素
+ */
+exports.markPick = function (vm, el) {
+    $(el).attr('parent-vm-id', vm.$id);
+}
+
+/**
+ * 判断如果父组件的 $refs 对象中不存在自己，则把自己加到父组件的 $refs 中去
+ * @param {Component} vm 子组件 VM
+ * @param {Element} el 声明子组件的元素
+ */
+exports.pickToRefs = function (vm, el) {
+    var parentVmId = $(el).attr('parent-vm-id');
+    var parentVm = avalon.vmodels[parentVmId];
+    if (parentVm && !parentVm.$refs.hasOwnProperty(vm.$id)) {
+        parentVm.$refs[vm.$id] = vm;
+    }
 }

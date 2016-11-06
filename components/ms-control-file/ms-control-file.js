@@ -1,5 +1,6 @@
 var avalon = require('avalon');
 var store = require('/services/storeService');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 /**
  * 文件输入组件
@@ -30,6 +31,7 @@ avalon.component('ms:controlFile', {
         return tmpl;
     },
     $init: function (vm, el) {
+        avxUtil.pickToRefs(vm, el);
         if (!store[vm.store]) {
             avalon.error('数据源[' + vm.store + ']似乎未定义，检查/services/storeService.js');
         }

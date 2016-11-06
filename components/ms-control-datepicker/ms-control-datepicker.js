@@ -1,4 +1,5 @@
 var avalon = require('avalon');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 /**
  * datepicker组件
@@ -29,7 +30,9 @@ avalon.component('ms:controlDatepicker', {
         }
         return tmpl;
     },
-    $init: function (vm, el) {},
+    $init: function (vm, el) {
+        avxUtil.pickToRefs(vm, el);
+    },
     $ready: function (vm, el) {
         var datepickerId = 'editor' + vm.$id, datepicker;
         var $input = $(el).find('input:hidden');

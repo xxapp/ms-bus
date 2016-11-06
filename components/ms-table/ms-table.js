@@ -1,12 +1,14 @@
 var $ = require('jquery');
 var avalon = require('avalon');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 avalon.component('ms:table', {
     header: '',
     thead: [],
     $template: __inline('./ms-table.html'),
     $replace: 1,
-    $init: function (vm) {
+    $init: function (vm, el) {
+        avxUtil.pickToRefs(vm, el);
     },
     $childReady: function (vm, el) {
     },
@@ -17,7 +19,7 @@ avalon.component('ms:table', {
             var type;
             var $cheader = $(n), type = $cheader.get(0).tagName.toLowerCase().replace(/^ms:/, '');
             // 由于框架原因，父组件内部动态生成的子组件不能放进$refs,因此将需要传递的值通过属性放入子组件
-            $cheader.attr('parent-vm-id', vm.$id);
+            avxUtil.markPick(vm, n);
             switch (type) {
                 case 'text-header': {
                     columnConfig.push({

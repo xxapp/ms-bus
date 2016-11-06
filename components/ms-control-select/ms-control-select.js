@@ -1,5 +1,6 @@
 var avalon = require('avalon');
 var store = require('/services/storeService');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 /**
  * 文本输入组件
@@ -41,6 +42,7 @@ avalon.component('ms:controlSelect', {
         return tmpl;
     },
     $init: function (vm, el) {
+        avxUtil.pickToRefs(vm, el);
         if (vm.store && !store[vm.store]) { avalon.error('配置了数据源，但数据源[' + vm.store + ']似乎未定义，/services/storeService.js') }
         
         if (vm.store) {

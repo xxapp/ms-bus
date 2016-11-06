@@ -1,11 +1,12 @@
 var avalon = require('avalon');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 avalon.component('ms:tableHeader', {
     $template: '<span>{{text}}</span>',
     $replace: 1,
     $init: function (vm, el) {
         // 借元素之力将此组件实例与父组件实例联系起来
-        avalon.vmodels[$(el).attr('parent-vm-id')].$refs[vm.$id] = vm;
+        avxUtil.pickToRefs(vm, el);
     },
     text: '',
     width: '',

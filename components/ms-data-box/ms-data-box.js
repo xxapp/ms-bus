@@ -12,10 +12,11 @@ avalon.component('ms:dataBox', {
     content: '',
     $template: '{{content|html}}',
     $replace: 0,
-    $init: function (vm) {
+    $init: function (vm, el) {
         var entityStore;
         var dialogVm = avalon.vmodels[vm.dialogId];
 
+        avxUtil.pickToRefs(vm, el);
         entityStore = store[vm.store];
         if (!vm.store) { avalon.error('没有配置数据源，<ms:data-box store="demo">......') }
         if (!entityStore) { avalon.error('配置了数据源，但数据源[' + vm.store + ']似乎未定义，/services/storeService.js') }

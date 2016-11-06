@@ -1,4 +1,5 @@
 var avalon = require('avalon');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 /**
  * 多行文本输入组件
@@ -30,7 +31,7 @@ avalon.component('ms:controlTextarea', {
         return tmpl;
     },
     $init: function (vm, el) {
-        
+        avxUtil.pickToRefs(vm, el);
     },
     label: '',
     col: '',

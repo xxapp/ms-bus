@@ -6,6 +6,7 @@ require.loadCss({
     url: __uri('/vendor/bootstrapDatetimepicker/bootstrap-datetimepicker.css')
 });
 require('/vendor/bootstrapDatetimepicker/bootstrap-datetimepicker.min');
+var avxUtil = require('/vendor/avx-component/avx-util');
 
 /**
  * datepicker组件
@@ -36,7 +37,9 @@ avalon.component('ms:controlDatepicker', {
         }
         return tmpl;
     },
-    $init: function (vm, el) {},
+    $init: function (vm, el) {
+        avxUtil.pickToRefs(vm, el);
+    },
     $ready: function (vm, el) {
         var datepickerId = 'picker' + vm.$id, datepicker;
         var $input = $(el).find('input.hidden');
