@@ -28,7 +28,7 @@
                             <option value="1">大图</option>
                             <option value="2">小图</option>
                         </ms:control-select>
-                        <ms:control-datepicker label="上线时间" format="yyyy-mm-dd"></ms:control-datepicker>
+                        <ms:control-datepicker label="上线时间" format="YYYY-MM-DD"></ms:control-datepicker>
                         <ms:control-text label="推送内容"></ms:control-text>
                     </form>
                 </div>
@@ -65,7 +65,7 @@
                             </span>批量下架
                         </button>
                     </div>
-                    <ms:table class="table table-hover table-bordered">
+                    <ms:table class="table table-hover table-bordered" ms-cprop-data="list">
                         <ms:check-header slot="header" col="id" width="60"></ms:check-header>
                         <ms:text-header slot="header" col="name" text="商品名称"></ms:text-header>
                         <ms:text-header slot="header" col="catalog" text="类别"></ms:text-header>

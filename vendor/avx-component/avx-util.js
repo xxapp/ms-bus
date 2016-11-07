@@ -72,19 +72,25 @@ exports.enableDynamicProp = function (vm, el) {
         if (vmodels[id]) {
             ancestorVm = vmodels[id];
             // 对比每个定义在$dynamicProp中的属性，如果在此vm中，则添加watch来更新内部属性值
-            for (var j = 0, innerProp; innerProp = vm.$dynamicProp[j]; j++) {
+            for (var j = 0, innerPropObj; innerPropObj = vm.$dynamicProp[j]; j++) {
+                var innerProp = innerPropObj.name;
                 var prop = vm[camelize('prop-' + innerProp)];
                 if (ancestorVm[prop]) {
                     var source = {};
                     source[innerProp] = ancestorVm[prop];
                     avalon.mix(vm, source);
-                    (function (prop, innerProp) {
-                        ancestorVm.$watch(prop + '.length', function (v, oldV) {
+                    (function (ancestorVm, prop, innerPropObj) {
+                        var watchPath = prop + '.length';
+                        switch (innerPropObj.type) {
+                            case 'Array': watchPath  = prop + '.length'; break;
+                            case 'Object': watchPath  = prop + '.*'; break;
+                        }
+                        ancestorVm.$watch(watchPath, function (v, oldV) {
                             var source = {};
-                            source[innerProp] = ancestorVm[prop];
+                            source[innerPropObj.name] = ancestorVm[prop];
                             avalon.mix(vm, source);
                         });
-                    })(prop, innerProp);
+                    })(ancestorVm, prop, innerPropObj);
                     propCount--;
                 }
             }

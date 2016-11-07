@@ -7,7 +7,7 @@ avalon.component('ms:table', {
     thead: [],
     $template: __inline('./ms-table.html'),
     $replace: 1,
-    $dynamicProp: ['data'],
+    $dynamicProp: [{ type: 'Array', name: 'data' }],
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         avxUtil.enableDynamicProp(vm);
