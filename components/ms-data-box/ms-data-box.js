@@ -25,29 +25,29 @@ avalon.component('ms:dataBox', {
         avalon.mix(vm, {
             actions: {
                 add: function () {
-            var dialogVm = avalon.vmodels[vm.dialogId];
-            dialogVm.isEdit = false;
-            avalon.mix(dialogVm, { record: entityStore.initialData() });
-            dialogVm.show = true;
+                    var dialogVm = avalon.vmodels[vm.dialogId];
+                    dialogVm.isEdit = false;
+                    avalon.mix(dialogVm, { record: entityStore.initialData() });
+                    dialogVm.show = true;
                 },
                 edit: function (record) {
-            var dialogVm = avalon.vmodels[vm.dialogId];
-            dialogVm.isEdit = true;
-            avalon.mix(dialogVm, { record: record.$model });
-            dialogVm.show = true;
+                    var dialogVm = avalon.vmodels[vm.dialogId];
+                    dialogVm.isEdit = true;
+                    avalon.mix(dialogVm, { record: record.$model });
+                    dialogVm.show = true;
                 },
                 del: function (record) {
-            bootbox.confirm("确定删除?", function (result) {
-                if (result) {
-                    entityStore.del(record[entityStore.key]).then(function (r) {
-                        if (r.code == '0') {
-                            vm.loadData();
-                            Notify('删除成功', 'top-right', '5000', 'success', 'fa-check', true);
+                    bootbox.confirm("确定删除?", function (result) {
+                        if (result) {
+                            entityStore.del(record[entityStore.key]).then(function (r) {
+                                if (r.code == '0') {
+                                    vm.loadData();
+                                    Notify('删除成功', 'top-right', '5000', 'success', 'fa-check', true);
+                                }
+                            });
                         }
                     });
                 }
-            });
-        }
             }
         });
         vm.loadData = function (cb, params) {
@@ -148,6 +148,5 @@ avalon.component('ms:dataBox', {
     isAllChecked: false,
     actions: {},
     loadData: avalon.noop,
-    processData: avalon.noop,
-    toggleAllCheck: avalon.noop
+    processData: avalon.noop
 });
