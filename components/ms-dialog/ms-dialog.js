@@ -10,7 +10,7 @@ avalon.component('ms:dialog', {
     $replace: 0,
     onInit: avalon.noop,
     $init: function (vm, el) {
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         vm.power = function () {
             !vm.novalidate && vm.$dialog.find('form').bootstrapValidator({
                 excluded: [':hidden'],
@@ -129,9 +129,18 @@ avalon.component('ms:dialog', {
         });
     },
     $ready: function (vm, el) {
+        $(vm.content).find('*').each(function (i, n) {
+            if (n.tagName.toLowerCase().indexOf('ms:') > -1) {
+                avxUtil.markPick(vm, n);
+            }
+        });;
         vm.$content = $.trim($('<div>').append(vm.content).children().first().attr('ms-controller', vm.$id).parent().html());
         vm.onInit(vm);
     },
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
+    },
+    $parentVmId: '',
     $content: '',
     $dialog: null,
     show: false,

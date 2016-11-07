@@ -7,7 +7,7 @@ avalon.component('ms:searchButton', {
     $template: '<button type="button" ms-click="search">{{content|html}}</button>',
     $replace: 1,
     $init: function (vm, el) {
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         var $form = $(el).closest('form');
         vm.search = function () {
             var bv = $form.data('bootstrapValidator');
@@ -24,6 +24,10 @@ avalon.component('ms:searchButton', {
             }, containerVm.$dirtyQuery);
         }
     },
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
+    },
+    $parentVmId: '',
     search: avalon.noop,
     $containerVmId: ''
 });

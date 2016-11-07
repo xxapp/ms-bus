@@ -8,7 +8,7 @@ avalon.component('ms:table', {
     $template: __inline('./ms-table.html'),
     $replace: 1,
     $init: function (vm, el) {
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
     },
     $childReady: function (vm, el) {
     },
@@ -66,6 +66,10 @@ avalon.component('ms:table', {
             }
         });
     },
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
+    },
+    $parentVmId: '',
     tbody: [],
     $containerVmId: ''
 });

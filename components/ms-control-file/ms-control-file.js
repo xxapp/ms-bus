@@ -31,7 +31,7 @@ avalon.component('ms:controlFile', {
         return tmpl;
     },
     $init: function (vm, el) {
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         if (!store[vm.store]) {
             avalon.error('数据源[' + vm.store + ']似乎未定义，检查/services/storeService.js');
         }
@@ -52,6 +52,10 @@ avalon.component('ms:controlFile', {
         }
         $(el).find('input:file').change(changeHandler);
     },
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
+    },
+    $parentVmId: '',
     store: 'file',
     label: '',
     col: '',

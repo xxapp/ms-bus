@@ -31,7 +31,7 @@ avalon.component('ms:controlDatepicker', {
         return tmpl;
     },
     $init: function (vm, el) {
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
     },
     $ready: function (vm, el) {
         var datepickerId = 'editor' + vm.$id, datepicker;
@@ -46,8 +46,10 @@ avalon.component('ms:controlDatepicker', {
             datepicker.datepicker('hide');
         });
     },
-    $dispose: function (vm) {
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
     },
+    $parentVmId: '',
     label: '',
     col: '',
     duplex: '',

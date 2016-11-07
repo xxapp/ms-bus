@@ -24,7 +24,7 @@ avalon.component('ms:searchItemDatepicker', {
     $template: __inline('./ms-search-item-datepicker.html'),
     $replace: 1,
     $init: function (vm, el) {
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
     },
     $ready: function (vm, el) {
         var datepickerId = 'picker' + vm.$id, datepicker;
@@ -44,8 +44,10 @@ avalon.component('ms:searchItemDatepicker', {
             containerVm.$dirtyQuery[vm.col] = newV;
         });
     },
-    $dispose: function (vm) {
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
     },
+    $parentVmId: '',
     label: '',
     col: '',
     val: '',
@@ -56,7 +58,9 @@ avalon.component('ms:searchItemDatepicker', {
 avalon.component('ms:searchItemDatetimepicker', {
     $template: __inline('./ms-search-item-datepicker.html'),
     $replace: 1,
-    $init: function (vm, el) {},
+    $init: function (vm, el) {
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
+    },
     $ready: function (vm, el) {
         var datepickerId = 'picker' + vm.$id, datepicker;
         var $input = $(el).find('input.hidden');
@@ -76,8 +80,10 @@ avalon.component('ms:searchItemDatetimepicker', {
             containerVm.$dirtyQuery[vm.col] = newV;
         });
     },
-    $dispose: function (vm) {
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
     },
+    $parentVmId: '',
     label: '',
     col: '',
     val: '',

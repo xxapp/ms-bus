@@ -6,7 +6,7 @@ avalon.component('ms:pagination', {
     $template: __inline('./ms-pagination.html'),
     $replace: 1,
     $init: function (vm, el) {
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         vm.prevPage = function () {
             var containerVm = avalon.vmodels[vm.$containerVmId];
             if (vm.currentPage > 1) {
@@ -41,6 +41,10 @@ avalon.component('ms:pagination', {
             }
         });
     },
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
+    },
+    $parentVmId: '',
     currentPage: 1,
     pageCount: 1,
     limit: limit,

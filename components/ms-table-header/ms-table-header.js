@@ -6,8 +6,12 @@ avalon.component('ms:tableHeader', {
     $replace: 1,
     $init: function (vm, el) {
         // 借元素之力将此组件实例与父组件实例联系起来
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
     },
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
+    },
+    $parentVmId: '',
     text: '',
     width: '',
     containerVmId: ''

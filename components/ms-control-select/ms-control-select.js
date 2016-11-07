@@ -42,7 +42,7 @@ avalon.component('ms:controlSelect', {
         return tmpl;
     },
     $init: function (vm, el) {
-        avxUtil.pickToRefs(vm, el);
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         if (vm.store && !store[vm.store]) { avalon.error('配置了数据源，但数据源[' + vm.store + ']似乎未定义，/services/storeService.js') }
         
         if (vm.store) {
@@ -54,6 +54,10 @@ avalon.component('ms:controlSelect', {
             });
         }
     },
+    $dispose: function (vm, el) {
+        avxUtil.removeFromRefs(vm, el);
+    },
+    $parentVmId: '',
     label: '',
     col: '',
     duplex: '',
