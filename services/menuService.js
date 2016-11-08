@@ -79,22 +79,18 @@ function walkMenu(name, process, level, menuLet) {
     var finded = false;
     level = !level ? 1 : level;
     menuLet = !menuLet ? menu.slice(0) : menuLet;
-    console.log('进入' + level + '级, 开始遍历');
     for (var i = 0, item; item = menuLet[i++]; ) {
         if (item.name === name || item.stateName === name) {
-            console.log('找到' + name, '在' + level + '级');
             process && process(item, level);
             finded = true;
             break;
         }
-        console.log(item.childStates, name);
         if (item.childStates && ~item.childStates.indexOf(name)) {
             process && process(item, level);
             finded = true;
             break;
         }
         if (item.children && walkMenu(name, process, level + 1, item.children)) {
-            console.log('在子节点找到' + name, '在' + level + '级');
             process && process(item, level);
             finded = true;
             break;
