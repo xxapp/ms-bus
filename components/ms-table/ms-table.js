@@ -10,7 +10,7 @@ avalon.component('ms:table', {
     $dynamicProp: [{ type: 'Array', name: 'data' }],
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
-        avxUtil.enableDynamicProp(vm);
+        avxUtil.enableDynamicProp(vm, el);
     },
     $childReady: function (vm, el) {
     },

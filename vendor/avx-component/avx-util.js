@@ -63,33 +63,50 @@ exports.removeFromRefs = function (vm, el) {
  * @param {Component} vm 组件 VM
  */
 exports.enableDynamicProp = function (vm, el) {
-    // TODO: 目前只实现了对数组的支持，还需要其它监控类型
     var vmIds = vm.vmChain.split(',');
     var vmodels = avalon.vmodels, ancestorVm;
     var propCount = vm.$dynamicProp.length;
     // 按照vm链向上查找
     for (var i = 0, id; id = vmIds[i]; i++) {
-        if (vmodels[id]) {
+        if (vmodels.hasOwnProperty(id)) {
             ancestorVm = vmodels[id];
             // 对比每个定义在$dynamicProp中的属性，如果在此vm中，则添加watch来更新内部属性值
             for (var j = 0, innerPropObj; innerPropObj = vm.$dynamicProp[j]; j++) {
                 var innerProp = innerPropObj.name;
                 var prop = vm[camelize('prop-' + innerProp)];
-                if (ancestorVm[prop]) {
+                if (ancestorVm.hasOwnProperty(prop)) {
                     var source = {};
                     source[innerProp] = ancestorVm[prop];
                     avalon.mix(vm, source);
+                    // 根据不同的类型，添加不同的watch
                     (function (ancestorVm, prop, innerPropObj) {
-                        var watchPath = prop + '.length';
+                        var watchPath = prop, simple = false;
                         switch (innerPropObj.type) {
-                            case 'Array': watchPath  = prop + '.length'; break;
-                            case 'Object': watchPath  = prop + '.*'; break;
+                            case 'Array': watchPath = prop + '.length';  break;
+                            case 'Object': watchPath = prop + '.*'; break;
+                            case 'Boolean':
+                            case 'Number':
+                            case 'String': watchPath = prop; simple = true; break;
                         }
                         ancestorVm.$watch(watchPath, function (v, oldV) {
                             var source = {};
-                            source[innerPropObj.name] = ancestorVm[prop];
+                            if (simple) {
+                                source[innerPropObj.name] = ancestorVm[prop];
+                            } else {
+                                source[innerPropObj.name] = ancestorVm[prop].$model;
+                            }
                             avalon.mix(vm, source);
                         });
+                        if (innerPropObj.type == 'Array') {
+                            ancestorVm.$watch('*', function (v, oldV, path) {
+                                if (path === prop) {
+                                    var source = {};
+                                    source[innerPropObj.name] = ancestorVm[prop];
+                                    avalon.mix(vm, source);
+                                }
+                                //unwatch();
+                            });
+                        }
                     })(ancestorVm, prop, innerPropObj);
                     propCount--;
                 }
@@ -109,4 +126,9 @@ function camelize(str) {
     return str.replace(/[-_][^-_]/g, function (match) {
         return match.charAt(1).toUpperCase()
     });
+}
+
+exports.generateID = function (prefix) {
+    prefix = prefix || "avx"
+    return String(Math.random() + Math.random()).replace(/\d\.\d{4}/, prefix)
 }
