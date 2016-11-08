@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var avalon = require('avalon');
 var avxUtil = require('/vendor/avx-component/avx-util');
+var cEvent = require('../../events/componentEvent');
 
 avalon.component('ms:table', {
     header: '',
@@ -11,6 +12,31 @@ avalon.component('ms:table', {
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         avxUtil.enableDynamicProp(vm, el);
+
+        cEvent.on('checkHeader', function (data) {
+            if (!avxUtil.containChild(vm, data.id)) {
+                return ;
+            }
+            if (data.type === 'checked') {
+                avalon.each(vm.data, function(i, v){
+                    vm.checked.ensure(String(v[data.key]));
+                });
+            } else if (data.type === 'unchecked') {
+                vm.checked.clear();
+            }
+        });
+        vm.$watch('checked.length', function (newV) {
+            if (newV == vm.data.size()) {
+                vm.isAllChecked = true;
+            } else {
+                vm.isAllChecked = false;
+            }
+        });
+        vm.$watch('*', function (v, oldV, path) {
+            if (path === 'data') {
+                vm.checked.clear();
+            }
+        });
     },
     $childReady: function (vm, el) {
     },
@@ -74,5 +100,7 @@ avalon.component('ms:table', {
     $parentVmId: '',
     data: [],
     tbody: [],
+    checked: [],
+    isAllChecked: false,
     $containerVmId: ''
 });

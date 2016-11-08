@@ -62,28 +62,8 @@ avalon.component('ms:dataBox', {
                 // 更新vm
                 vm.list = result.list;
                 vm.total = result.total;
-                vm.checked.clear();
             });
         }
-        cEvent.on('checkHeader', function (data) {
-            if (!avxUtil.containChild(vm, data.id)) {
-                return ;
-            }
-            if (data.type === 'checked') {
-                avalon.each(vm.list, function(i, v){
-                    vm.checked.ensure(String(v[data.key]));
-                });
-            } else if (data.type === 'unchecked') {
-                vm.checked.clear();
-            }
-        });
-        vm.$watch('checked.length', function (newV) {
-            if (newV == vm.list.size()) {
-                vm.isAllChecked = true;
-            } else {
-                vm.isAllChecked = false;
-            }
-        });
         if (dialogVm) {
             dialogVm.$post = function (package) {
                 if (!dialogVm.$beforePost()) {
@@ -140,8 +120,6 @@ avalon.component('ms:dataBox', {
     },
     total: 1,
     $dirtyQuery: {},
-    checked: [],
-    isAllChecked: false,
     actions: {},
     loadData: avalon.noop,
     processData: avalon.noop
