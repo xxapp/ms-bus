@@ -28,13 +28,13 @@ avalon.component('ms:dataBox', {
             avalon.mix(dialogVm, { record: entityStore.initialData() });
             dialogVm.show = true;
         }
-        vm.actions.edit = function () {
+        vm.actions.edit = function (record) {
             var dialogVm = avalon.vmodels[vm.dialogId];
             dialogVm.isEdit = true;
             avalon.mix(dialogVm, { record: record.$model });
             dialogVm.show = true;
         }
-        vm.actions.del = function () {
+        vm.actions.del = function (record) {
             bootbox.confirm("确定删除?", function (result) {
                 if (result) {
                     entityStore.del(record[entityStore.key]).then(function (r) {
