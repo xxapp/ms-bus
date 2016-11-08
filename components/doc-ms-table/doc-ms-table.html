@@ -1,0 +1,18 @@
+<div class="row" ms-controller="doc-ms-table">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header bg-green">
+                <span class="widget-caption">Table组件</span>
+            </div>
+            <div class="widget-body">
+                <ms:table class="table table-hover table-bordered" ms-cprop-data="tableData">
+                    <ms:check-header slot="header" col="region_id" width="60"></ms:check-header>
+                    <ms:table-header slot="header" text="#">{{$outer.$index + 1}}</ms:table-header>
+                    <ms:text-header slot="header" col="region_id" text="ID"></ms:text-header>
+                    <ms:text-header slot="header" col="region_name" text="名称"></ms:text-header>
+                    <ms:text-header slot="header" col="region_parent_id" text="PID"></ms:text-header>
+                </ms:table>
+            </div>
+        </div>
+    </div>
+</div>

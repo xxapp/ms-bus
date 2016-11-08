@@ -37,6 +37,17 @@ var menu = [{
     stateName: 'root.channel',
     icon: 'glyphicon-category',
     href: '#!/channel'
+}, {
+    name: 'doc-ms',
+    title: '组件文档',
+    icon: 'glyphicon-book',
+    href: 'javascript:;',
+    children: [{
+        name: 'doc-ms-table',
+        stateName: 'root.doc-ms-table',
+        title: 'Table',
+        href: '#!/doc-ms-table'
+    }]
 }];
 
 // 根据权限过滤菜单

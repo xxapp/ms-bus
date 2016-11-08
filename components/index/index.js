@@ -120,6 +120,18 @@ avalon.state('root.supplier', {
         return !!type;
     }
 });
+avalon.state('root.doc-ms-talbe', {
+    url: 'doc-ms-table',
+    views: {
+        "content@": {
+            templateProvider: require.async('/components/doc-ms-table', 'view'),
+            controllerProvider: require.async('/components/doc-ms-table', 'controller')
+        }
+    },
+    ignoreChange: function (type) {
+        return !!type;
+    }
+});
 
 // mmState全局配置
 avalon.state.config({
