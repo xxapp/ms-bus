@@ -87,21 +87,30 @@ exports.enableDynamicProp = function (vm, el) {
                             case 'Boolean':
                             case 'Number':
                             case 'String': watchPath = prop; simple = true; break;
+                            case 'Function': break;
                         }
-                        ancestorVm.$watch(watchPath, function (v, oldV) {
+                        if (innerPropObj.type != 'Function') {
+                            ancestorVm.$watch(watchPath, function (v, oldV) {
+                                var source = {};
+                                if (simple) {
+                                    source[camelize(innerPropObj.name)] = ancestorVm[prop];
+                                } else {
+                                    source[camelize(innerPropObj.name)] = ancestorVm[prop].$model;
+                                }
+                                avalon.mix(vm, source);
+                            });
+                        } else {
+                            // 如果是Function类型的参数，则不去监控，直接赋值
                             var source = {};
-                            if (simple) {
-                                source[innerPropObj.name] = ancestorVm[prop];
-                            } else {
-                                source[innerPropObj.name] = ancestorVm[prop].$model;
-                            }
+                            source[camelize(innerPropObj.name)] = ancestorVm[prop];
                             avalon.mix(vm, source);
-                        });
+                        }
                         if (innerPropObj.type == 'Array') {
+                            // 应对外部vm属性重新赋值的情况
                             ancestorVm.$watch('*', function (v, oldV, path) {
                                 if (path === prop) {
                                     var source = {};
-                                    source[innerPropObj.name] = ancestorVm[prop];
+                                    source[camelize(innerPropObj.name)] = ancestorVm[prop];
                                     avalon.mix(vm, source);
                                 }
                                 //unwatch();
