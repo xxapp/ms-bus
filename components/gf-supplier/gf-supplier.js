@@ -14,8 +14,7 @@ var demo = avalon.define({
         store: 'supplier',
         dialogId: 'dialog_supplier',
         actionBtns: {
-            operation: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
-                '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(el)"><i class="fa fa-trash-o"></i> 删除</a>'
+            operation: ''
         },
         processData: function (package, post) {
             // package包含一些状态数据和要提交要用到的数据

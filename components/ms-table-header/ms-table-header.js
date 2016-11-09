@@ -13,6 +13,5 @@ avalon.component('ms:tableHeader', {
     },
     $parentVmId: '',
     text: '',
-    width: '',
-    containerVmId: ''
+    width: ''
 });

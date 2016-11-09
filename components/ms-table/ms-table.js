@@ -4,6 +4,7 @@ var avxUtil = require('/vendor/avx-component/avx-util');
 var cEvent = require('../../events/componentEvent');
 
 avalon.component('ms:table', {
+    $slot: 'header',
     header: '',
     thead: [],
     $template: __inline('./ms-table.html'),
@@ -44,36 +45,28 @@ avalon.component('ms:table', {
         // 因为自定义标签内部写tr或th会被忽略，因此改用div表示th并做此处理让ms-repeat正常遍历
         var tmp = [], columnConfig = [];
         $(vm.$model.header).children().each(function (i, n) {
-            var type;
-            var $cheader = $(n), type = $cheader.get(0).tagName.toLowerCase().replace(/^ms:/, '');
+            var $cheader = $(n);
+            var type = $cheader.get(0).tagName.toLowerCase().replace(/^ms:/, '');
+            var props = {
+                col: $cheader.attr('col'),
+                inlineTemplate: $cheader.attr('inline-template')
+            };
+            props.inlineTemplate = props.inlineTemplate != void 0;
+            var column = {};
             // 由于框架原因，父组件内部动态生成的子组件不能放进$refs,因此将需要传递的值通过属性放入子组件
             avxUtil.markPick(vm, n);
-            switch (type) {
-                case 'text-header': {
-                    columnConfig.push({
-                        type: 'text',
-                        name: $cheader.attr('col')
-                    });
-                } break;
-                case 'check-header': {
-                    columnConfig.push({
-                        type: 'check',
-                        name: $cheader.attr('col')
-                    });
-                } break;
-                case 'action-header': {
-                    columnConfig.push({
-                        type: 'action',
-                        name: avalon.vmodels[vm.$containerVmId]['actionBtns'][$cheader.attr('action-type') || 'operation']
-                    });
-                } break;
-                case 'table-header': {
-                    columnConfig.push({
-                        type: 'custom',
-                        name: $cheader
-                    });
-                } break;
+            if (type == 'check-header') {
+                column = {
+                    type: 'check',
+                    content: '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-attr-value="row.' + props.col + '"><span class="text"></span></label></div>'
+                };
+            } else if (type == 'table-header') {
+                column = {
+                    type: 'normal',
+                    content: props.inlineTemplate ? $cheader.html() : ('{{row.' + props.col + '}}')
+                };
             }
+            columnConfig.push(column);
             tmp.push({
                 width: $cheader.attr('width'),
                 content: $(n).prop('outerHTML')
@@ -84,14 +77,8 @@ avalon.component('ms:table', {
 
         // 根据表头配置生成表格内容模板
         vm.tbody = $.map(columnConfig, function (n) {
-            if (!n.name) return 'check config';
-            var expr = n.name;
-            switch (n.type) {
-                case 'text': return '{{el.' + expr + '}}';
-                case 'check': return '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-attr-value="el.' + expr + '"><span class="text"></span></label></div>';
-                case 'action': return expr;
-                case 'custom': return expr.html();
-            }
+            if (!n.content) return 'header 配置错误';
+            return n.content;
         });
     },
     $dispose: function (vm, el) {
@@ -101,6 +88,5 @@ avalon.component('ms:table', {
     data: [],
     tbody: [],
     checked: [],
-    isAllChecked: false,
-    $containerVmId: ''
+    isAllChecked: false
 });

@@ -19,9 +19,6 @@ var dataVm = avalon.define({
     $id: 'gf-select-item_data',
     '$data-box_config': {
         store: 'item',
-        actionBtns: {
-            operation: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.choose(el)"><i class="fa fa-edit"></i> 选择</a>'
-        },
         actions: {
             choose: function (record) {
                 dialogVm.show = false;

@@ -66,18 +66,21 @@
                         </button>
                     </div>
                     <ms:table class="table table-hover table-bordered" ms-cprop-data="list">
-                        <ms:check-header slot="header" col="id" width="60"></ms:check-header>
-                        <ms:text-header slot="header" col="name" text="商品名称"></ms:text-header>
-                        <ms:text-header slot="header" col="catalog" text="类别"></ms:text-header>
-                        <ms:text-header slot="header" col="price" text="单价"></ms:text-header>
-                        <ms:text-header slot="header" col="store_count" text="剩余数量"></ms:text-header>
-                        <ms:table-header slot="header" text="总价">{{el.price * el.store_count}}</ms:table-header>
-                        <ms:text-header slot="header" col="state" text="状态"></ms:text-header>
-                        <ms:table-header slot="header" text="推送">
-                            <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.push(el)"><i class="fa fa-edit"></i> 推送到首页</a>
+                        <ms:check-header col="id" width="60"></ms:check-header>
+                        <ms:table-header col="name" text="商品名称"></ms:table-header>
+                        <ms:table-header col="catalog" text="类别"></ms:table-header>
+                        <ms:table-header col="price" text="单价"></ms:table-header>
+                        <ms:table-header col="store_count" text="剩余数量"></ms:table-header>
+                        <ms:table-header text="总价" inline-template>{{el.price * el.store_count}}</ms:table-header>
+                        <ms:table-header col="state" text="状态"></ms:table-header>
+                        <ms:table-header text="推送" inline-template>
+                            <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.push(row)"><i class="fa fa-edit"></i> 推送到首页</a>
                         </ms:table-header>
-                        <!--<ms:action-header slot="header" text="推送" action-type="push"></ms:action-header>-->
-                        <ms:action-header slot="header" text="操作"></ms:action-header>
+                        <ms:table-header text="操作" inline-template>
+                            <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.upShelves(row)"><i class="fa fa-edit"></i> 上架</a>
+                            <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.edit(row)"><i class="fa fa-edit"></i> 编辑</a>
+                            <a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(row)"><i class="fa fa-trash-o"></i> 删除</a>
+                        </ms:table-header>
                     </ms:table>
                     <ms:pagination current-page="1" page-count="4"></ms:pagination>
                 </div>

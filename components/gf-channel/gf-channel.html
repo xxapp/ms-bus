@@ -35,12 +35,15 @@
                         </button>
                     </div>
                     <ms:table class="table table-hover table-bordered" ms-cprop-data="list">
-                        <ms:text-header slot="header" col="name" text="栏目名"></ms:text-header>
-                        <ms:text-header slot="header" col="author_name" text="学者姓名"></ms:text-header>
-                        <ms:text-header slot="header" col="author_field" text="学者领域"></ms:text-header>
-                        <ms:text-header slot="header" col="brief" text="一句话简介"></ms:text-header>
-                        <ms:text-header slot="header" col="store_count" text="订阅数"></ms:text-header>
-                        <ms:action-header slot="header"er text="操作"></ms:action-header>
+                        <ms:table-header col="name" text="栏目名"></ms:table-header>
+                        <ms:table-header col="author_name" text="学者姓名"></ms:table-header>
+                        <ms:table-header col="author_field" text="学者领域"></ms:table-header>
+                        <ms:table-header col="brief" text="一句话简介"></ms:table-header>
+                        <ms:table-header col="store_count" text="订阅数"></ms:table-header>
+                        <ms:table-header text="操作" inline-template>
+                            <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.edit(row)"><i class="fa fa-edit"></i> 编辑</a>
+                            <a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(row)"><i class="fa fa-trash-o"></i> 删除</a>
+                        </ms:table-header>
                     </ms:table>
                     <ms:pagination current-page="1" page-count="4"></ms:pagination>
                 </div>

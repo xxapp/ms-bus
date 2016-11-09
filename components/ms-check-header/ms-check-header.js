@@ -3,7 +3,7 @@ var cEvent = require('../../events/componentEvent');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
 avalon.component('ms:checkHeader', {
-    $template: '<th><div class="checkbox"><label><input type="checkbox" ms-duplex-checked="isAllChecked" ms-change="toggleCheckd()" ms-click="checkboxClick"><span class="text"></span></label></div></th>',
+    $template: '<th ms-if="show"><div class="checkbox"><label><input type="checkbox" ms-duplex-checked="isAllChecked" ms-change="toggleCheckd()" ms-click="checkboxClick"><span class="text"></span></label></div></th>',
     $replace: 1,
     $init: function (vm, el) {
         // 借元素之力将此组件实例与父组件实例联系起来

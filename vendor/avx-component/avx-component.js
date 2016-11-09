@@ -6,8 +6,6 @@ require('/components/ms-search-button');
 require('/components/ms-table');
 require('/components/ms-table-header');
 require('/components/ms-check-header');
-require('/components/ms-text-header');
-require('/components/ms-action-header');
 require('/components/ms-pagination');
 require('/components/ms-dialog');
 require('/components/ms-control-text');

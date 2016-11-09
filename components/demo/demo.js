@@ -19,7 +19,7 @@ var currentState = mmState.currentState;
  * @type component-config
  * @param store 数据源，对应/services/storeService.js中的配置
  * @param dialogId 指定表单的dialog，dialog定义在data-box的前面
- * @param actionBtns 表格中的操作按钮，其中edit和del是内置的方法，不需要另外定义，参数el代表当前行的数据
+ * @param actionBtns 表格中的操作按钮，其中edit和del是内置的方法，不需要另外定义，参数row代表当前行的数据
  * @param processData 在这个函数可以在提交数据前对数据进行处理，两个参数，package包含一些状态数据和要提交要用到的数据，post在执行后立即提交数据
  */
 var demo = avalon.define({
@@ -49,10 +49,6 @@ var demo = avalon.define({
                     }
                 }
             }
-        },
-        actionBtns: {
-            operation: '<a href="javascript:;" class="btn btn-link btn-xs" ms-click="actions.edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
-                '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(el)"><i class="fa fa-trash-o"></i> 删除</a>'
         },
         processData: function (package, post) {
             // package包含一些状态数据和要提交要用到的数据
