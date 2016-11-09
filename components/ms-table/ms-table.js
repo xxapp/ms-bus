@@ -9,10 +9,19 @@ avalon.component('ms:table', {
     thead: [],
     $template: __inline('./ms-table.html'),
     $replace: 1,
-    $dynamicProp: [{ type: 'Array', name: 'data' }],
+    $dynamicProp: [{ type: 'Array', name: 'data' }, { type: 'Function', name: 'selection-change' }],
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         avxUtil.enableDynamicProp(vm, el);
+
+        vm.onCheck = function (row) {
+            if (this.checked) {
+                vm.selection.push(row);
+            } else {
+                vm.selection.remove(row);
+            }
+            vm.selectionChange(vm.selection.$model);
+        }
 
         cEvent.on('checkHeader', function (data) {
             if (!avxUtil.containChild(vm, data.id)) {
@@ -21,10 +30,13 @@ avalon.component('ms:table', {
             if (data.type === 'checked') {
                 avalon.each(vm.data, function(i, v){
                     vm.checked.ensure(String(v[data.key]));
+                    vm.selection.ensure(v);
                 });
             } else if (data.type === 'unchecked') {
                 vm.checked.clear();
+                vm.selection.clear();
             }
+            vm.selectionChange(vm.selection.$model);
         });
         vm.$watch('checked.length', function (newV) {
             if (newV == vm.data.size()) {
@@ -58,7 +70,7 @@ avalon.component('ms:table', {
             if (type == 'check-header') {
                 column = {
                     type: 'check',
-                    content: '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-attr-value="row.' + props.col + '"><span class="text"></span></label></div>'
+                    content: '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-click="onCheck(row)" ms-attr-value="row.' + props.col + '"><span class="text"></span></label></div>'
                 };
             } else if (type == 'table-header') {
                 column = {
@@ -88,5 +100,7 @@ avalon.component('ms:table', {
     data: [],
     tbody: [],
     checked: [],
-    isAllChecked: false
+    selection: [],
+    isAllChecked: false,
+    onCheck: avalon.noop
 });

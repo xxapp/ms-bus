@@ -17,13 +17,20 @@ var selectorVm = avalon.define({
 });
 var dataVm = avalon.define({
     $id: 'gf-select-item_data',
+    onSelect: function (selection) {
+        if (selection.length > 0) {
+            avalon.mix(dialogVm, {
+                record: selection
+            });
+        }
+    },
     '$data-box_config': {
         store: 'item',
         actions: {
             choose: function (record) {
                 dialogVm.show = false;
                 dialogVm.$post({
-                    record: record
+                    record: [record]
                 });
             }
         }
@@ -47,8 +54,7 @@ exports.open = function (cb) {
             thumb: ''
         };
         dialogVm.$post = function (package) {
-            console.log(avalon.vmodels['data-box_select_item'].$model.checked);
-            cb(package.record);
+            cb(package.record[0]);
         }
     }
 }
