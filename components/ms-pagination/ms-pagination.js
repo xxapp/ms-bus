@@ -1,6 +1,28 @@
 var avalon = require('avalon');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
+/**
+ * 分页组件
+ * @prop {Number} [current-page=1] 当前页
+ * @prop {Number} [page-size=10] 每页的数据量
+ * @prop {Number} total 数据总量
+ * @event {Function} current-change 当页数改变时触发，参数currentPage
+ * 
+ * @example
+ * ```
+ * <ms:pagination
+ *     total="100"
+ *     ms-cprop-current-change="pageChange">
+ * </ms:pagination>
+ * 
+ * <ms:pagination
+ *     ms-cprop-current-page="currentPage"
+ *     ms-cprop-page-size="pageSize"
+ *     ms-cprop-total="total" 
+ *     ms-cprop-current-change="pageChange">
+ * </ms:pagination>
+ * ```
+ */
 avalon.component('ms:pagination', {
     $template: __inline('./ms-pagination.html'),
     $replace: 1,
