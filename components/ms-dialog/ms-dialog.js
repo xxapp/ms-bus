@@ -11,53 +11,7 @@ avalon.component('ms:dialog', {
     onInit: avalon.noop,
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
-        vm.power = function () {
-            !vm.novalidate && vm.$dialog.find('form').bootstrapValidator({
-                excluded: [':hidden'],
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                submitHandler: function (validator, form, submitButton) {
-                    // Do nothing
-                },
-                fields: vm.$validateFields
-            }).on('success.field.bv', function(e, data) {
-                if (data.bv.getInvalidFields().length > 0) {
-                    vm.valid = false;
-                } else {
-                    vm.valid = true;
-                }
-            }).on('error.field.bv', function (e, data) {
-                if (data.bv.getInvalidFields().length > 0) {
-                    vm.valid = false;
-                } else {
-                    vm.valid = true;
-                }
-            });
-        }
-        vm.$beforePost = function () {
-            if (vm.novalidate) return true;
-            vm.$dialog.find('form').data('bootstrapValidator').validate();
-            if (!vm.$dialog.find('form').data('bootstrapValidator').isValid()) {
-                vm.valid = false;
-                return false;
-            } else {
-                vm.valid = true;
-                return true;
-            }
-        }
-        vm.resetForm = function (resetFormData) {
-            if (!vm.$dialog) {
-                return ;
-            }
-            var bv = vm.$dialog.find('form').data('bootstrapValidator');
-            if (!bv) {
-                return ;
-            }
-            bv.resetForm(resetFormData);
-        }
+
         vm.$watch('show', function (newV) {
             var header = $(vm.header).children().text();
             if (newV) {
@@ -95,7 +49,7 @@ avalon.component('ms:dialog', {
                     }, 100);
                 })
                 .on('shown.bs.modal', function () {
-                    vm.power();
+                    
                 });
                 avalon.scan(vm.$dialog.get(0));
             } else {
@@ -105,6 +59,7 @@ avalon.component('ms:dialog', {
                 }
             }
         });
+        // TODO: valid通过组件事件来解耦
         vm.$watch('valid', function (newV) {
             if (!this.$dialog) return ;
             var $confirmBtn = this.$dialog.find('.modal-footer > button[data-bb-handler=save]');
@@ -129,6 +84,7 @@ avalon.component('ms:dialog', {
         });
     },
     $ready: function (vm, el) {
+        // TODO: 以后可能需要改为只寻找直接子组件
         $(vm.content).find('*').each(function (i, n) {
             if (n.tagName.toLowerCase().indexOf('ms:') > -1) {
                 avxUtil.markPick(vm, n);
@@ -146,17 +102,13 @@ avalon.component('ms:dialog', {
     show: false,
     size: '',
     title: '',
+    // TODO: 需要移动到state里面
     isEdit: false,
-    novalidate: false,
-    valid: true,
     uploading: false,
     record: {},
     state: {},
     $cache: {},
-    $validateFields: {},
     containerVmId: '',
     $post: avalon.noop,
-    power: avalon.noop,
-    $beforePost: avalon.noop,
-    resetForm: avalon.noop
+    $beforePost: avalon.noop
 });

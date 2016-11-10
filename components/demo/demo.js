@@ -27,7 +27,19 @@ var demo = avalon.define({
     '$data-box_config': {
         store: 'demo',
         dialogId: 'dialog_demo',
-        $validFields: {
+        processData: function (package, post) {
+            // package包含一些状态数据和要提交要用到的数据
+            console.log(package.isEdit ? '修改' : '新增', package.record);
+            post(function (r) {
+                console.log(r);
+            });
+        },
+        $beforePost: function () {
+            return avalon.vmodels['form_demo'].validate();
+        }
+    },
+    '$form_config': {
+        $validateFields: {
             region_id: {
                 validators: {
                     notEmpty: {
@@ -49,13 +61,6 @@ var demo = avalon.define({
                     }
                 }
             }
-        },
-        processData: function (package, post) {
-            // package包含一些状态数据和要提交要用到的数据
-            console.log(package.isEdit ? '修改' : '新增', package.record);
-            post(function (r) {
-                console.log(r);
-            });
         }
     },
     dataBoxInit: function (vm) {

@@ -67,6 +67,9 @@ avalon.component('ms:dataBox', {
             }, page);
         } 
         if (dialogVm) {
+            dialogVm.$beforePost = function () {
+                return vm.$beforePost();
+            }
             dialogVm.$post = function (package) {
                 if (!dialogVm.$beforePost()) {
                     return false;
@@ -126,5 +129,6 @@ avalon.component('ms:dataBox', {
     actions: {},
     loadData: avalon.noop,
     processData: avalon.noop,
+    $beforePost: avalon.noop,
     pageChange: avalon.noop
 });

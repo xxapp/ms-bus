@@ -3,12 +3,11 @@
         <ms:dialog $id="dialog_demo" ms-skip>
             <div class="row">
                 <div class="col-md-12">
-                    <form role="form">
-                        <ms:control-text label="ID" col="region_id" v-type="rule" regexp="sd/sdf/"></ms:control-text>
+                    <ms:form $id="form_demo" ms-attr-config="$form_config">
+                        <ms:control-text label="ID" col="region_id"></ms:control-text>
                         <ms:control-text label="名称" col="region_name"></ms:control-text>
                         <ms:control-text label="PID" col="region_parent_id"></ms:control-text>
-                        <ms:control-ueditor label="PID" col="region_parent_id"></ms:control-ueditor>
-                    </form>
+                    </ms:form>
                 </div>
             </div>
         </ms:dialog>
