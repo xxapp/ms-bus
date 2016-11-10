@@ -29,7 +29,11 @@
                                 <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.choose(row)"><i class="fa fa-edit"></i> 选择</a>
                             </ms:table-header>
                         </ms:table>
-                        <ms:pagination current-page="1"></ms:pagination>
+                        <ms:pagination
+                            ms-cprop-page-size="pageSize"
+                            ms-cprop-total="total" 
+                            ms-cprop-current-change="pageChange">
+                        </ms:pagination>
                     </div>
                 </ms:data-box>
             </div>

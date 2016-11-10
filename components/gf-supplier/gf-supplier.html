@@ -34,7 +34,11 @@
                             <a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(row)"><i class="fa fa-trash-o"></i> 删除</a>
                         </ms:table-header>
                     </ms:table>
-                    <ms:pagination current-page="1" page-count="4"></ms:pagination>
+                    <ms:pagination
+                        ms-cprop-page-size="pageSize"
+                        ms-cprop-total="total" 
+                        ms-cprop-current-change="pageChange">
+                    </ms:pagination>
                 </div>
             </div>
         </ms:data-box>

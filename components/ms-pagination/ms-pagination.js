@@ -1,54 +1,38 @@
 var avalon = require('avalon');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
-var limit = 10;
 avalon.component('ms:pagination', {
     $template: __inline('./ms-pagination.html'),
     $replace: 1,
+    $dynamicProp: [
+        { type: 'Number', name: 'total' },
+        { type: 'Number', name: 'page-size' },
+        { type: 'Number', name: 'current-page' },
+        { type: 'Function', name: 'current-change' }
+    ],
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
+        avxUtil.enableDynamicProp(vm, el);
+
         vm.prevPage = function () {
-            var containerVm = avalon.vmodels[vm.$containerVmId];
             if (vm.currentPage > 1) {
-                var page = {
-                    start: (--vm.currentPage-1) * limit,
-                    limit: limit
-                };
-                containerVm.loadData(function () {
-                    containerVm.$query = avalon.mix(containerVm.$query, page);
-                }, page);
+                vm.currentChange(--vm.currentPage);
             }
         }
         vm.nextPage = function () {
-            var containerVm = avalon.vmodels[vm.$containerVmId];
-            if (vm.currentPage < Math.ceil(containerVm.total/vm.limit)) {
-                var page = {
-                    start: (++vm.currentPage-1) * limit,
-                    limit: limit
-                };
-                containerVm.loadData(function () {
-                    containerVm.$query = avalon.mix(containerVm.$query, page);
-                }, page);
+            if (vm.currentPage < Math.ceil(vm.total/vm.pageSize)) {
+                vm.currentChange(++vm.currentPage);
             }
         }
     },
     $ready: function (vm) {
-        var containerVm = avalon.vmodels[vm.$containerVmId];
-        containerVm.$query.limit = limit;
-        containerVm.$watch('total', function (newV, oldV) {
-            if (newV == 0) {
-                containerVm.total = 1;
-            }
-        });
     },
     $dispose: function (vm, el) {
         avxUtil.removeFromRefs(vm, el);
     },
     $parentVmId: '',
     currentPage: 1,
-    pageCount: 1,
-    limit: limit,
+    pageSize: 10,
     prevPage: avalon.noop,
-    nextPage: avalon.noop,
-    $containerVmId: ''
+    nextPage: avalon.noop
 });

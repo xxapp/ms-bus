@@ -7,6 +7,7 @@ var store = require('/services/storeService.js');
 var cEvent = require('../../events/componentEvent');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
+var pageSize = 10;
 avalon.component('ms:dataBox', {
     $solt: 'content',
     content: '',
@@ -50,20 +51,21 @@ avalon.component('ms:dataBox', {
             vm.$query = avalon.mix(vm.$query, params);
             entityStore.list(vm.$query).then(function (result) {
                 cb && cb();
-                if (vm.$query.start == 0) {
-                    for (var i in vm.$refs) {
-                        if (vm.$refs.hasOwnProperty(i) && i.indexOf('pagination') == 0) {
-                            vm.$refs[i].currentPage = 1;
-                            break;
-                        }
-                    }
-                }
                 beyond.hideLoading();
                 // 更新vm
                 vm.list = result.list;
                 vm.total = result.total;
             });
         }
+        vm.pageChange = function (currentPage) {
+            var page = {
+                start: (currentPage - 1) * vm.pageSize,
+                limit: vm.pageSize
+            };
+            vm.loadData(function () {
+                vm.$query = avalon.mix(vm.$query, page);
+            }, page);
+        } 
         if (dialogVm) {
             dialogVm.$post = function (package) {
                 if (!dialogVm.$beforePost()) {
@@ -116,11 +118,13 @@ avalon.component('ms:dataBox', {
     list: [],
     $query: {
         start: 0,
-        limit: 10
+        limit: pageSize
     },
     total: 1,
+    pageSize: pageSize,
     $dirtyQuery: {},
     actions: {},
     loadData: avalon.noop,
-    processData: avalon.noop
+    processData: avalon.noop,
+    pageChange: avalon.noop
 });
