@@ -65,9 +65,12 @@ avalon.component('ms:dataBox', {
             vm.loadData(function () {
                 vm.$query = avalon.mix(vm.$query, page);
             }, page);
-        } 
+        }
         if (dialogVm) {
             dialogVm.$beforePost = function () {
+                if (vm.$beforePost == avalon.noop) {
+                    return true;
+                }
                 return vm.$beforePost();
             }
             dialogVm.$post = function (package) {

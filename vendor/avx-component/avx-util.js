@@ -89,7 +89,7 @@ exports.enableDynamicProp = function (vm, el) {
                             case 'String': watchPath = prop; simple = true; break;
                             case 'Function': break;
                         }
-                        if (innerPropObj.type != 'Function') {
+                        if (innerPropObj.type != 'Function' || prop.indexOf('$') != 0) {
                             ancestorVm.$watch(watchPath, function (v, oldV) {
                                 var source = {};
                                 if (simple) {
@@ -99,8 +99,11 @@ exports.enableDynamicProp = function (vm, el) {
                                 }
                                 avalon.mix(vm, source);
                             });
-                        } else {
-                            // 如果是Function类型的参数，则不去监控，直接赋值
+                        } else if (innerPropObj.name == 'config') {
+                            avalon.mix(vm, ancestorVm[prop]);
+                        }
+                        else {
+                            // 如果是Function类型的参数或者传入参数的外部引用属性名以'$'开头，则不去监控，直接赋值
                             var source = {};
                             source[camelize(innerPropObj.name)] = ancestorVm[prop];
                             avalon.mix(vm, source);

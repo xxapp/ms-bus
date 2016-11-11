@@ -1,0 +1,82 @@
+var $ = require('jquery');
+var avalon = require('avalon');
+var beyond = require('/vendor/beyond');
+var Notify = beyond.Notify;
+var bootbox = require('bootbox.js/bootbox');
+
+var ajax = require('/services/ajaxService');
+
+require('/vendor/avx-component');
+
+var vm = avalon.define({
+    $id: 'doc-ms-form',
+    record: {
+        name: '',
+        gender: '',
+        birthday: '',
+        avatar: '',
+        bio: ''
+    },
+    $form_config: {
+        rules: {
+            fields: {
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: '请填写姓名'
+                        }
+                    }
+                },
+                gender: {
+                    validators: {
+                        notEmpty: {
+                            message: '请选择性别'
+                        }
+                    }
+                },
+                birthday: {
+                    validators: {
+                        notEmpty: {
+                            message: '请选择出生日期'
+                        }
+                    }
+                },
+                avatar: {
+                    validators: {
+                        notEmpty: {
+                            message: '请选择头像图'
+                        }
+                    }
+                },
+                bio: {
+                    validators: {
+                        notEmpty: {
+                            message: '请填写个人简介'
+                        }
+                    }
+                }
+            }
+        }
+    },
+    json: '',
+    submit: function () {
+        if (!avalon.vmodels['doc_form'].validate()) {
+            return false;
+        }
+        vm.json = JSON.stringify(vm.record.$model);
+    }
+});
+
+// 导出模板
+exports.view = __inline('./doc-ms-form.html');
+// 导出逻辑
+exports.controller = avalon.controller(function($ctrl) {
+    $ctrl.$onRendered = function() {
+        beyond.hideLoading();
+    }
+    $ctrl.$onEnter = function(params, rs) {
+    }
+    $ctrl.$onBeforeUnload = function(oldState, newState) {
+    }
+    $ctrl.$vmodels = [];
+});

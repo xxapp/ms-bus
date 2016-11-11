@@ -3,7 +3,7 @@
         <ms:dialog $id="dialog_item" ms-skip>
             <div class="row">
                 <div class="col-md-12">
-                    <form role="form">
+                    <ms:form>
                         <ms:control-text label="商品名称" col="name"></ms:control-text>
                         <ms:control-select label="商品分类" col="catalog" store="category"></ms:control-select>
                         <ms:control-text label="商品单价" col="price"></ms:control-text>
@@ -12,7 +12,7 @@
                         <ms:control-file label="缩略图" btn-text="选择图片" col="tag.thumb" store="file"></ms:control-file>
                         <ms:control-textarea label="商品详情" col="tag.description" rows="4"></ms:control-textarea>
                         <ms:control-text label="浏览量" col="view_count"></ms:control-text>
-                    </form>
+                    </ms:form>
                 </div>
             </div>
         </ms:dialog>
@@ -20,7 +20,7 @@
             <span slot="header">推送</span>
             <div class="row">
                 <div class="col-md-12">
-                    <form role="form">
+                    <ms:form>
                         <ms:control-text label="标题" duplex="state.text" ms-repeat="state.subs"></ms:control-text>
                         <ms:control-textarea label="副标题" rows="4"></ms:control-textarea>
                         <ms:control-text label="标签"></ms:control-text>
@@ -30,7 +30,7 @@
                         </ms:control-select>
                         <ms:control-datepicker label="上线时间" format="YYYY-MM-DD"></ms:control-datepicker>
                         <ms:control-text label="推送内容"></ms:control-text>
-                    </form>
+                    </ms:form>
                 </div>
             </div>
         </ms:dialog>

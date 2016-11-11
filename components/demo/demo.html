@@ -2,8 +2,8 @@
     <div class="col-xs-12 col-md-12">
         <ms:dialog $id="dialog_demo" ms-skip>
             <div class="row">
-                <div class="col-md-12">
-                    <ms:form $id="form_demo" ms-attr-config="$form_config">
+                <div class="col-md-12" ms-controller="demo.form">
+                    <ms:form $id="form_demo" config="$form_config">
                         <ms:control-text label="ID" col="region_id"></ms:control-text>
                         <ms:control-text label="名称" col="region_name"></ms:control-text>
                         <ms:control-text label="PID" col="region_parent_id"></ms:control-text>

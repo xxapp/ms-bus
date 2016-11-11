@@ -132,6 +132,18 @@ avalon.state('root.doc-ms-talbe', {
         return !!type;
     }
 });
+avalon.state('root.doc-ms-form', {
+    url: 'doc-ms-form',
+    views: {
+        "content@": {
+            templateProvider: require.async('/components/doc-ms-form', 'view'),
+            controllerProvider: require.async('/components/doc-ms-form', 'controller')
+        }
+    },
+    ignoreChange: function (type) {
+        return !!type;
+    }
+});
 
 // mmState全局配置
 avalon.state.config({
