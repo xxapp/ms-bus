@@ -71,7 +71,7 @@
                         <ms:table-header col="catalog" text="类别"></ms:table-header>
                         <ms:table-header col="price" text="单价"></ms:table-header>
                         <ms:table-header col="store_count" text="剩余数量"></ms:table-header>
-                        <ms:table-header text="总价" inline-template>{{el.price * el.store_count}}</ms:table-header>
+                        <ms:table-header text="总价" inline-template>{{row.price * row.store_count}}</ms:table-header>
                         <ms:table-header col="state" text="状态"></ms:table-header>
                         <ms:table-header text="推送" inline-template>
                             <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.push(row)"><i class="fa fa-edit"></i> 推送到首页</a>
