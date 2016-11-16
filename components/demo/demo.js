@@ -32,6 +32,44 @@ var demo = avalon.define({
             return avalon.vmodels['form_demo'].validate();
         }
     },
+    '$form_search_config': {
+        rules: {
+            container: 'tooltip',
+            fields: {
+                startDate: {
+                    icon: false,
+                    validators: {
+                        date: {
+                            format: 'YYYY-MM-DD',
+                            max: 'endDate',
+                            message: '开始日期不能晚于结束日期'
+                        }
+                    }
+                },
+                endDate: {
+                    icon: false,
+                    validators: {
+                        date: {
+                            format: 'YYYY-MM-DD',
+                            min: 'startDate',
+                            message: '结束日期不能早于开始日期'
+                        }
+                    }
+                }
+            }
+        },
+        domEvents: {
+            'success.field.bv': function(e, data) {
+                if (data.field === 'startDate' && !data.bv.isValidField('endDate')) {
+                    data.bv.revalidateField('endDate');
+                }
+
+                if (data.field === 'endDate' && !data.bv.isValidField('startDate')) {
+                    data.bv.revalidateField('startDate');
+                }
+            }
+        }
+    },
     dataBoxInit: function (vm) {
         vm.loadData(function () {
             // 隐藏加载动画

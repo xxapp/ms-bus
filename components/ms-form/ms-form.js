@@ -24,31 +24,38 @@ avalon.component('ms:form', {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
 
         vm.power = function () {
-            !vm.novalidate && vm.$form.bootstrapValidator(
-                avalon.mix(true, {
-                    excluded: [':hidden'],
-                    feedbackIcons: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    submitHandler: function (validator, form, submitButton) {
-                        // Do nothing
+            if (!vm.novalidate) {
+                vm.$form.bootstrapValidator(
+                    avalon.mix(true, {
+                        excluded: [':hidden'],
+                        feedbackIcons: {
+                            valid: 'glyphicon glyphicon-ok',
+                            invalid: 'glyphicon glyphicon-remove',
+                            validating: 'glyphicon glyphicon-refresh'
+                        },
+                        submitHandler: function (validator, form, submitButton) {
+                            // Do nothing
+                        }
+                    }, vm.rules)
+                ).on('success.field.bv', function(e, data) {
+                    if (data.bv.getInvalidFields().length > 0) {
+                        vm.valid = false;
+                    } else {
+                        vm.valid = true;
                     }
-                }, vm.rules)
-            ).on('success.field.bv', function(e, data) {
-                if (data.bv.getInvalidFields().length > 0) {
-                    vm.valid = false;
-                } else {
-                    vm.valid = true;
+                }).on('error.field.bv', function (e, data) {
+                    if (data.bv.getInvalidFields().length > 0) {
+                        vm.valid = false;
+                    } else {
+                        vm.valid = true;
+                    }
+                });
+                for (var i in vm.domEvents) {
+                    if (vm.domEvents.hasOwnProperty(i) && typeof vm.domEvents[i] === 'function') {
+                        vm.$form.on(i, vm.domEvents[i])
+                    }
                 }
-            }).on('error.field.bv', function (e, data) {
-                if (data.bv.getInvalidFields().length > 0) {
-                    vm.valid = false;
-                } else {
-                    vm.valid = true;
-                }
-            });
+            }
         }
         vm.validate = function () {
             if (vm.novalidate) return true;
@@ -76,7 +83,7 @@ avalon.component('ms:form', {
     $dispose: function (vm, el) {
         avxUtil.removeFromRefs(vm, el);
     },
-    $skipArray: ['rules'],
+    $skipArray: ['rules', 'domEvents'],
     $parentVmId: '',
     $form: '',
     novalidate: false,
