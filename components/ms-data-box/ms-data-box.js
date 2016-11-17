@@ -66,6 +66,20 @@ avalon.component('ms:dataBox', {
                 vm.$query = avalon.mix(vm.$query, page);
             }, page);
         }
+        vm.search = function () {
+            var $form = $(this).closest('form');
+            var bv = $form.data('bootstrapValidator');
+            if (bv) {
+                bv.validate();
+                if (!bv.isValid()) {
+                    return ;
+                }
+            }
+            vm.$query.start = 0;
+            vm.loadData(function () {
+                vm.$query = avalon.mix(vm.$query, vm.searchFields.$model);
+            }, vm.searchFields.$model);
+        }
         if (dialogVm) {
             dialogVm.$beforePost = function () {
                 if (vm.$beforePost == avalon.noop) {
@@ -128,10 +142,11 @@ avalon.component('ms:dataBox', {
     },
     total: 1,
     pageSize: pageSize,
-    $dirtyQuery: {},
+    searchFields: {},
     actions: {},
     loadData: avalon.noop,
     processData: avalon.noop,
     $beforePost: avalon.noop,
-    pageChange: avalon.noop
+    pageChange: avalon.noop,
+    search: avalon.noop
 });

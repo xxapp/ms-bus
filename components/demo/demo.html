@@ -18,11 +18,14 @@
                 </div>
                 <div class="widget-body">
                     <ms:form class="form-inline" config="$form_search_config">
-                        <ms:search-item label="ID" col="region_id"></ms:search-item>
-                        <ms:search-item label="名称" col="region_name"></ms:search-item>
-						<ms:search-item-datepicker label="开始日期" col="startDate"></ms:search-item-datepicker>
-						<ms:search-item-datepicker label="结束日期" col="endDate"></ms:search-item-datepicker>
-                        <ms:search-button class="btn btn-info">搜索</ms:search-button>
+                        <ms:control-text label="ID" col="region_id" duplex="searchFields.region_id"></ms:control-text>
+                        <ms:control-text label="名称" col="region_name" duplex="searchFields.region_name"></ms:control-text>
+						<ms:control-datepicker label="开始日期" col="startDate" duplex="searchFields.startDate"></ms:control-datepicker>
+						<ms:control-datepicker label="结束日期" col="endDate" duplex="searchFields.endDate"></ms:control-datepicker>
+                        <button class="btn btn-info" ms-click="search">
+                            <span class="fa fa-search">
+                            </span>搜索
+                        </button>
                     </ms:form>
                     <div class="table-toolbar">
                         <button class="btn btn-info" ms-click="actions.add">

@@ -30,6 +30,12 @@ var demo = avalon.define({
         },
         $beforePost: function () {
             return avalon.vmodels['form_demo'].validate();
+        },
+        searchFields: {
+            region_id: '',
+            region_name: '',
+            startDate: '',
+            endDate: ''
         }
     },
     '$form_search_config': {
