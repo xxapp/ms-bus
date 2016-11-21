@@ -9,7 +9,7 @@ var ajax = require('/services/ajaxService');
 require('/vendor/avx-component');
 
 var demo = avalon.define({
-    $id: 'gfcategory',
+    $id: 'gf-category',
     '$data-box_config': {
         store: 'category',
         dialogId: 'dialog_category',
@@ -19,6 +19,9 @@ var demo = avalon.define({
             post(function (r) {
                 console.log(r);
             });
+        },
+        searchFields: {
+            name: ''
         }
     },
     dataBoxInit: function (vm) {

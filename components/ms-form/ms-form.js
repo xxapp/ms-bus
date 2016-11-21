@@ -5,6 +5,7 @@ var avxUtil = require('/vendor/avx-component/avx-util');
  * Form组件
  * @prop {Boolean} novalidate 不进行验证
  * @prop {Object} rules 表单验证规则，配置参考bootstrapValidator
+ * @prop {Object} domEvents 由事件名称和事件处理函数组成的map对象
  * 
  * @method validate 验证表单，通过返回true，未通过返回false
  * @method resetForm 重置表单，参数resetFormData是否重置数据
@@ -22,6 +23,13 @@ avalon.component('ms:form', {
     $init: function (vm, el) {
         // 借元素之力将此组件实例与父组件实例联系起来
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
+
+        // TODO: 以后可能需要改为只寻找直接子组件
+        $(el).find('*').each(function (i, n) {
+            if (n.tagName.toLowerCase().indexOf('ms:') > -1) {
+                avxUtil.markPick(vm, n);
+            }
+        });
 
         vm.power = function () {
             if (!vm.novalidate) {
@@ -83,11 +91,12 @@ avalon.component('ms:form', {
     $dispose: function (vm, el) {
         avxUtil.removeFromRefs(vm, el);
     },
-    $skipArray: ['rules', 'domEvents'],
+    $skipArray: ['model', 'rules', 'domEvents'],
     $parentVmId: '',
     $form: '',
     novalidate: false,
     valid: true,
+    model: '',
     rules: {},
     power: avalon.noop,
     validate: avalon.noop,

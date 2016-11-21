@@ -1,8 +1,4 @@
 require('/components/ms-data-box');
-require('/components/ms-search-item');
-require('/components/ms-search-item-select');
-require('/components/ms-search-item-datepicker');
-require('/components/ms-search-button');
 require('/components/ms-table');
 require('/components/ms-table-header');
 require('/components/ms-check-header');

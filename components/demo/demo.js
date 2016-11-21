@@ -39,6 +39,7 @@ var demo = avalon.define({
         }
     },
     '$form_search_config': {
+        model: 'searchFields',
         rules: {
             container: 'tooltip',
             fields: {

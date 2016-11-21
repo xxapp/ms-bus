@@ -19,18 +19,20 @@ avalon.component('ms:controlText', {
     $template: __inline('./ms-control-text.html'),
     $replace: 1,
     $$template: function (tmpl) {
+        var $parent = avalon.vmodels[this.parentVmId];
+        var recordScope = 'record';
+        if ($parent && $parent.model) recordScope = $parent.model;
         if (this.duplex) {
             // 如果配置了duplex属性，则直接使用duplex的属性值绑定控件
             return tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + this.duplex + '"');
         }
         if (this.col) {
             // 否则用col的配置，使用record[col]去绑定控件
-            return tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="record[\'' + this.col.replace('.', '\'][\'') + '\']"');
+            return tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + recordScope + '[\'' + this.col.replace('.', '\'][\'') + '\']"');
         }
         return tmpl;
     },
     $init: function (vm, el) {
-        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
     },
     $dispose: function (vm, el) {
         avxUtil.removeFromRefs(vm, el);
