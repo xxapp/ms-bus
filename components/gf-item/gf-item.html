@@ -40,17 +40,22 @@
                     <span class="widget-caption">商品列表</span>
                 </div>
                 <div class="widget-body">
-                    <form class="form-inline">
-                        <ms:search-item label="名称" col="name"></ms:search-item>
-                        <ms:search-item-select label="类别" col="catalog" store="category"></ms:search-item-select>
-                        <ms:search-item label="单价" col="price"></ms:search-item>
-                        <ms:search-item-datepicker label="上线时间" col="date"></ms:search-item-datepicker>
-                    </form>
-                    <br>
-                    <form class="form-inline">
-                        <ms:search-item label="状态" col="state"></ms:search-item>
-                        <ms:search-button class="btn btn-info">搜索</ms:search-button>
-                    </form>
+                    <ms:form model="searchFields">
+                        <div class="form-inline">
+                            <ms:control-text label="名称" col="name"></ms:control-text>
+                            <ms:control-select label="类别" col="catalog" store="category"></ms:control-select>
+                            <ms:control-text label="单价" col="price"></ms:control-text>
+                            <ms:control-datepicker label="上线时间" col="date"></ms:control-datepicker>
+                        </div>
+                        <br>
+                        <div class="form-inline">
+                            <ms:control-text label="状态" col="state"></ms:control-text>
+                            <button type="button" class="btn btn-info" ms-click="search">
+                                <span class="fa fa-search">
+                                </span>搜索
+                            </button>
+                        </div>
+                    </ms:form>
                     <div class="table-toolbar">
                         <button class="btn btn-info" ms-click="actions.add">
                             <span class="fa fa-plus">

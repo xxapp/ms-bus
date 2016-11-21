@@ -33,6 +33,12 @@ var dataVm = avalon.define({
                     record: [record]
                 });
             }
+        },
+        searchFields: {
+            name: '',
+            catalog: '',
+            price: '',
+            state: ''
         }
     },
     dataBoxInit: function (vm) {

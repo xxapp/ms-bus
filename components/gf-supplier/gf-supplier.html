@@ -15,10 +15,13 @@
                     <span class="widget-caption">供货人列表</span>
                 </div>
                 <div class="widget-body">
-                    <form class="form-inline">
-                        <ms:search-item label="名称" col="name"></ms:search-item>
-                        <ms:search-button class="btn btn-info">搜索</ms:search-button>
-                    </form>
+                    <ms:form class="form-inline" model="searchFields">
+                        <ms:control-text label="名称" col="name"></ms:control-text>
+                        <button type="button" class="btn btn-info" ms-click="search">
+                            <span class="fa fa-search">
+                            </span>搜索
+                        </button>
+                    </ms:form>
                     <div class="table-toolbar">
                         <button class="btn btn-info" ms-click="actions.add">
                             <span class="fa fa-plus">

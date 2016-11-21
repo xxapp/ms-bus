@@ -35,6 +35,13 @@ var item = avalon.define({
             downShelves: function () {
                 Notify('下架成功', 'top-right', '5000', 'success', 'fa-check', true);
             }
+        },
+        searchFields: {
+            name: '',
+            catalog: '',
+            price: '',
+            date: '',
+            state: ''
         }
     },
     dataBoxInit: function (vm) {

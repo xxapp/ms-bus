@@ -3,21 +3,23 @@
         <span slot="header">选择商品</span>
         <div class="row">
             <div class="col-md-12" ms-controller="gf-select-item_data">
-                <form role="form">
-                    <ms:control-file label="请选择图片" btn-text="选择图片" col="thumb" store="file"></ms:control-file>
-                </form>
                 <ms:data-box $id="data-box_select_item" on-init="dataBoxInit" config="$data-box_config">
                     <div slot="content">
-                        <form class="form-inline">
-                            <ms:search-item label="名称" col="name"></ms:search-item>
-                            <ms:search-item label="类别" col="catalog"></ms:search-item>
-                            <ms:search-item label="单价" col="price"></ms:search-item>
-                        </form>
-                        <br>
-                        <form class="form-inline">
-                            <ms:search-item label="状态" col="state"></ms:search-item>
-                            <ms:search-button class="btn btn-info">搜索</ms:search-button>
-                        </form>
+                        <ms:form model="searchFields">
+                            <div class="form-inline">
+                                <ms:control-text label="名称" col="name"></ms:control-text>
+                                <ms:control-select label="类别" col="catalog" store="category"></ms:control-select>
+                                <ms:control-text label="单价" col="price"></ms:control-text>
+                            </div>
+                            <br>
+                            <div class="form-inline">
+                                <ms:control-text label="状态" col="state"></ms:control-text>
+                                <button type="button" class="btn btn-info" ms-click="search">
+                                    <span class="fa fa-search">
+                                    </span>搜索
+                                </button>
+                            </div>
+                        </ms:form>
                         <ms:table class="table table-hover table-bordered" ms-cprop-data="list" ms-cprop-selection-change="onSelect">
                             <ms:check-header col="id" width="60"></ms:check-header>
                             <ms:table-header col="name" text="商品名称"></ms:table-header>

@@ -22,6 +22,9 @@ var demo = avalon.define({
             post(function (r) {
                 console.log(r);
             });
+        },
+        searchFields: {
+            name: ''
         }
     },
     dataBoxInit: function (vm) {

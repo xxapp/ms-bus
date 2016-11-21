@@ -20,6 +20,11 @@ var demo = avalon.define({
             post(function (r) {
                 console.log(r);
             });
+        },
+        searchFields: {
+            name: '',
+            author_name: '',
+            author_field: ''
         }
     },
     dataBoxInit: function (vm) {
