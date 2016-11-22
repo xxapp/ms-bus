@@ -76,7 +76,7 @@ exports.enableDynamicProp = function (vm, el) {
                 var prop = vm[camelize('prop-' + innerProp)];
                 if (ancestorVm.hasOwnProperty(prop)) {
                     var source = {};
-                    source[innerProp] = ancestorVm[prop];
+                    source[camelize(innerProp)] = ancestorVm[prop];
                     avalon.mix(vm, source);
                     // 根据不同的类型，添加不同的watch
                     (function (ancestorVm, prop, innerPropObj) {

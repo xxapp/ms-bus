@@ -11,6 +11,15 @@ var pageSize = 10;
 avalon.component('ms:dataBox', {
     $solt: 'content',
     content: '',
+    $construct: function (componentDefinition, vmOpts, elemOpts) {
+        componentDefinition.actions.add = avalon.noop;
+        componentDefinition.actions.edit = avalon.noop;
+        componentDefinition.actions.del = avalon.noop;
+        for (var i in vmOpts.actions) {
+            componentDefinition.actions[i] = vmOpts.actions[i];
+        }
+        return avalon.mix(componentDefinition, vmOpts, elemOpts);
+    },
     $template: '{{content|html}}',
     $replace: 0,
     $init: function (vm, el) {
@@ -121,10 +130,6 @@ avalon.component('ms:dataBox', {
         }
     },
     $childReady: function (vm, e) {
-        // 在所有子组件上面保存容器组件的vmId
-        for (var i in vm.$refs) {
-            vm.$refs[i].$containerVmId = vm.$id;
-        }
     },
     $ready: function (vm) {
         vm.onInit(vm);

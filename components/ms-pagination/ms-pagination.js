@@ -34,6 +34,7 @@ avalon.component('ms:pagination', {
     ],
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
+        debugger;
         avxUtil.enableDynamicProp(vm, el);
 
         vm.prevPage = function () {
@@ -55,6 +56,8 @@ avalon.component('ms:pagination', {
     $parentVmId: '',
     currentPage: 1,
     pageSize: 10,
+    total: 0,
     prevPage: avalon.noop,
-    nextPage: avalon.noop
+    nextPage: avalon.noop,
+    currentChange: avalon.noop
 });

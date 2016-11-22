@@ -102,5 +102,6 @@ avalon.component('ms:table', {
     checked: [],
     selection: [],
     isAllChecked: false,
-    onCheck: avalon.noop
+    onCheck: avalon.noop,
+    selectionChange: avalon.noop
 });
