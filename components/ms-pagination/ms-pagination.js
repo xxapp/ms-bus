@@ -34,7 +34,6 @@ avalon.component('ms:pagination', {
     ],
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
-        debugger;
         avxUtil.enableDynamicProp(vm, el);
 
         vm.prevPage = function () {

@@ -18,6 +18,7 @@ avalon.component('ms:dataBox', {
         for (var i in vmOpts.actions) {
             componentDefinition.actions[i] = vmOpts.actions[i];
         }
+        delete vmOpts.actions;
         return avalon.mix(componentDefinition, vmOpts, elemOpts);
     },
     $template: '{{content|html}}',

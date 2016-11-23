@@ -1,27 +1,10 @@
 <div class="form-group ms-control-filec957t895y">
-    <style>
-        .ms-control-filec957t895y .input-group-btn > input {
-            width: 100px;
-            height: 40px;
-            position: absolute;
-            cursor: pointer;
-            outline: medium none;
-            filter: alpha(opacity=0);
-            -moz-opacity: 0;
-            opacity: 0;
-            top: -10%;
-            z-index: 3;
-        }
-        .ms-control-filec957t895y .input-group-btn > button {
-            width: 100px;
-        }
-    </style>
     <label class="control-label">{{label}}</label>
     <div class="input-group">
         <input type="text" class="form-control" ms-duplex="record[col]" disabled ms-attr-name="col" ms-attr-placeholder="placeholder">
         <span class="input-group-btn">
-            <input type="file" name="file">
-            <button class="btn btn-info" type="button">{{btnText}}</button>
+            <label class="btn btn-info" ms-attr-for="helpId">{{btnText}}</label>
+            <input type="file" name="file" ms-attr-id="helpId">
         </span>
     </div>
 </div>

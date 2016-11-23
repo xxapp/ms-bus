@@ -2,6 +2,10 @@ var avalon = require('avalon');
 var store = require('/services/storeService');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
+require.loadCss({
+    url: '/components/ms-control-file/ms-control-file.css'
+});
+
 /**
  * 文件输入组件
  * @prop label 文本框前的label标签内容
@@ -38,6 +42,7 @@ avalon.component('ms:controlFile', {
         if (!store[vm.store]) {
             avalon.error('数据源[' + vm.store + ']似乎未定义，检查/services/storeService.js');
         }
+        vm.helpId = vm.$id;
     },
     $ready: function (vm, el) {
         function changeHandler() {
@@ -64,5 +69,6 @@ avalon.component('ms:controlFile', {
     col: '',
     duplex: '',
     placeholder: '',
-    btnText: '选择文件'
+    btnText: '选择文件',
+    helpId: ''
 });
