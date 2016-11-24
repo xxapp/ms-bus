@@ -8,14 +8,14 @@
 <!-- Sidebar Menu -->
 <ul class="nav sidebar-menu">
     <!--Dashboard-->
-    <li ms-class="active:actived===item.name" ms-class-1="open:isChildActived(item)"  ms-repeat-item="menu">
+    <li ms-visible="item.show" ms-class="active:actived===item.name" ms-class-1="open:isChildActived(item)"  ms-repeat-item="menu">
         <a ms-attr-href="{{ item.href }}" ms-class="menu-dropdown:item.children && item.children.size() > 0"  ms-click="menuClick(item)">
             <i ms-class="menu-icon glyphicon {{ item.icon }}"></i>
             <span class="menu-text"> {{ item.title }} </span>
             <i class="menu-expand" ms-if="item.children && item.children.size() > 0"></i>
         </a>
         <ul class="submenu" ms-if="item.children && item.children.size() > 0">
-            <li ms-class="active:actived===sub.name" ms-repeat-sub="item.children">
+            <li ms-visible="sub.show" ms-class="active:actived===sub.name" ms-repeat-sub="item.children">
                 <a ms-attr-href="{{ sub.href }}" ms-click="menuClick(sub, item)">
                     <span class="menu-text">{{ sub.title }}</span>
                 </a>

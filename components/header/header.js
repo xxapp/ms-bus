@@ -19,13 +19,6 @@ exports.controller = avalon.controller(function($ctrl) {
     }
     // 进入视图
     $ctrl.$onEnter = function() {
-        ajax({
-            url: '/api/loged',
-            type: 'get'
-        }).then(function (result) {
-            $('.login-area').removeClass('hidden').addClass('animated flipInX');
-            avalon.mix(avalon.vmodels.root, { user: result.t });
-        });
     }
     // 对应的视图销毁前
     $ctrl.$onBeforeUnload = function() {}

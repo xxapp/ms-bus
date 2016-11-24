@@ -29,7 +29,7 @@ var menu = [{
     name: 'item',
     title: 'item',
     stateName: 'root.item',
-    icon: 'glyphicon-category',
+    icon: 'glyphicon-circle',
     href: '#!/item'
 }, {
     name: 'channel',
@@ -52,39 +52,41 @@ var menu = [{
 
 // 根据权限过滤菜单
 var menuPromise = new Promise(function (rs, rj) {
-    // ajax({
-    //     type: 'get',
-    //     data: {
-    //         method: 'adminAccount.getCurrentPermission'
-    //     }
-    // }).then(function (result) {
-    //     if (result.code === '0') {
-    //     	$('#loadImg').css('display','none');
-    //         for (var i = 0, item; item = menu[i++]; ) {
-    //             if (item.name === 'dashboard' || item.name === 'demo1') {
-    //                 item.show = true;
-    //             } else {
-    //                 item.show = false;
-    //             }
-    //             var hasPermission = false;
-    //             for (var j = 0, permission; permission = result.list[j++]; ) {
-    //                 if (permission.permission_name === item.name) {
-    //                     hasPermission = true;
-    //                     break;
-    //                 }
-    //             }
-    //             if (hasPermission) {
-    //                 item.show = true;
-    //             }
-    //         }
-    //         rs(menu.slice(0));
-    //     } else {
-    //         rj();
-    //     }
-    // });
-    $('#loadImg').css('display','none');
-    rs(menu.slice(0));
+    ajax({
+        url: '/api/loged',
+        type: 'get'
+    }).then(function (result) {
+        if (result.code == '0') {
+            $('#loadImg').css('display', 'none');
+            $('.login-area').removeClass('hidden').addClass('animated flipInX');
+            travelMenu(menu, result.data.t.functions, result.data.t.allowedFunctions);
+            avalon.mix(avalon.vmodels.root, { user: result.data.t });
+            rs(menu.slice(0));
+        } else {
+            rj(result);
+        }
+    });
 });
+
+function travelMenu(menulet, functions, allowedFunctions) {
+    if (!menulet) {
+        return ;
+    }
+    for (var i = 0, item; item = menulet[i++]; ) {
+        var hasPermission = false;
+        for (var j = 0, func; func = functions[j++]; ) {
+            if (func.code === item.name && allowedFunctions[func.code]) {
+                item.href = func.uri || 'javascript:;';
+                item.icon = func.icon_url;
+                hasPermission = true;
+                break;
+            }
+        }
+        item.show = hasPermission == true;
+
+        travelMenu(item.children, functions, allowedFunctions);
+    }
+}
 
 function walkMenu(name, process, level, menuLet) {
     var finded = false;

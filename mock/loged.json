@@ -1,6 +1,58 @@
 {
     "code": "0",
     "t": {
-        "name": "Jobs"
+        "name": "qweqw",
+        "functions": [
+            {
+                "id": 9,
+                "name": "例子一级",
+                "parent_id": 0,
+                "menu_index": 12,
+                "status": "N",
+                "developer": null,
+                "code": "demo1",
+                "uri": null,
+                "icon_url": "glyphicon-home",
+                "open_mode": "N",
+                "dispatch_mode": "T"
+            },
+            {
+                "id": 9,
+                "name": "例子",
+                "parent_id": 0,
+                "menu_index": 12,
+                "status": "N",
+                "developer": null,
+                "code": "demo",
+                "uri": "#!/demo",
+                "icon_url": "glyphicon-home",
+                "open_mode": "N",
+                "dispatch_mode": "T"
+            },
+            {
+                "id": 1928,
+                "name": "商品",
+                "parent_id": 602,
+                "menu_index": 3,
+                "status": "N",
+                "developer": null,
+                "code": "item",
+                "uri": "#!/item",
+                "icon_url": "glyphicon-home",
+                "open_mode": "C",
+                "dispatch_mode": "T"
+            }
+        ],
+        "allowedFunctions": {
+            "demo1": true,
+            "demo": true,
+            "item": true
+        },
+        "allowed": {
+            "demo.query": true,
+            "demo.add": true,
+            "demo.edit": true,
+            "demo.delete": true
+        }
     }
 }
