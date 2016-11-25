@@ -11,5 +11,4 @@ require('/components/ms-control-select');
 require('/components/ms-control-file');
 require('/components/ms-control-datetimepicker');
 
-require('/components/directive-form-validate');
 require('/components/directive-cprop');
