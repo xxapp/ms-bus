@@ -63,7 +63,11 @@ exports.removeFromRefs = function (vm, el) {
  * @param {Component} vm 组件 VM
  */
 exports.enableDynamicProp = function (vm, el) {
-    var vmIds = vm.vmChain.split(',');
+    var vmChain = el.getAttribute('data-vm-chain');
+    if (vmChain === null) {
+        return ;
+    }
+    var vmIds = vmChain.split(',');
     var vmodels = avalon.vmodels, ancestorVm;
     var propCount = vm.$dynamicProp.length;
     // 按照vm链向上查找
@@ -73,7 +77,7 @@ exports.enableDynamicProp = function (vm, el) {
             // 对比每个定义在$dynamicProp中的属性，如果在此vm中，则添加watch来更新内部属性值
             for (var j = 0, innerPropObj; innerPropObj = vm.$dynamicProp[j]; j++) {
                 var innerProp = innerPropObj.name;
-                var prop = vm[camelize('prop-' + innerProp)];
+                var prop = el.getAttribute('data-prop-' + innerProp);
                 if (ancestorVm.hasOwnProperty(prop)) {
                     var source = {};
                     source[camelize(innerProp)] = ancestorVm[prop];
@@ -106,7 +110,7 @@ exports.enableDynamicProp = function (vm, el) {
                             // 如果是Function类型的参数，改变此函数内部this的指向后赋值
                             var source = {};
                             source[camelize(innerPropObj.name)] = function () {
-                                return ancestorVm[prop].apply(ancestorVm, Array.prototype.slice.call(arguments));
+                                return ancestorVm[prop].apply(avalon.isWindow(this) ? ancestorVm : this, Array.prototype.slice.call(arguments));
                             };
                             avalon.mix(vm, source);
                         } else {

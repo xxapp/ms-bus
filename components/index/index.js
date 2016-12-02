@@ -164,6 +164,17 @@ avalon.state.config({
     }
 })
 
+// avalon.component全局配置
+avalon.libraries.ms.$init = function(vm) {
+    for (var i in vm) {
+        if (vm.hasOwnProperty(i) && typeof vm[i] === "function") {
+            if (i === '$$template') {
+                vm[i] = vm[i].bind(vm);
+            }
+        }
+    }
+}
+
 avalon.history.start({
     fireAnchor: false
 });

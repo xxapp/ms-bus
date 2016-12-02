@@ -1,5 +1,5 @@
 var avalon = require('avalon');
-var avxUtil = require('/vendor/avx-component/avx-util');
+var cEvent = require('/events/componentEvent');
 
 avalon.directive('cprop', {
     init: function (binding) {
@@ -11,8 +11,10 @@ avalon.directive('cprop', {
                 vmChain.push(vmodels[i].$id);
             }
         }
-        elem.setAttribute('vm-chain', vmChain.join(','));
-        elem.setAttribute('prop-' + binding.param, binding.expr);
+        elem.setAttribute('data-vm-chain', vmChain.join(','));
+        if (binding.param) {
+            elem.setAttribute('data-prop-' + binding.param, binding.expr);
+        }
 
         binding.rollback = function () {
         }

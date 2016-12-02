@@ -44,6 +44,7 @@
             }
         ],
         "allowedFunctions": {
+            "all": true,
             "demo1": true,
             "demo": true,
             "item": true

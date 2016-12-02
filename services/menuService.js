@@ -75,9 +75,9 @@ function travelMenu(menulet, functions, allowedFunctions) {
     for (var i = 0, item; item = menulet[i++]; ) {
         var hasPermission = false;
         for (var j = 0, func; func = functions[j++]; ) {
-            if (func.code === item.name && allowedFunctions[func.code]) {
-                item.href = func.uri || 'javascript:;';
-                item.icon = func.icon_url;
+            if (func.code === item.name && (allowedFunctions[func.code]) || allowedFunctions['all']) {
+                item.href = func.uri || item.href || 'javascript:;';
+                item.icon = func.icon_url || item.icon;
                 hasPermission = true;
                 break;
             }

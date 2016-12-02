@@ -28,8 +28,7 @@ avalon.component('ms:controlSelect', {
     $$template: function (tmpl) {
         var vm = this;
         var $parent = avalon.vmodels[this.parentVmId];
-        var recordScope = 'record';
-        if ($parent && $parent.model) recordScope = $parent.model;
+        this.model = this.model || ($parent && $parent.model) || 'record';
         if (vm.store) {
             tmpl = tmpl.replace(/\{\{content\|html\}\}/g, '<option ms-repeat="options" ms-attr-value="el.' + vm.colKey + '">{{el.' + vm.colVal + '}}</option>');
         }
@@ -40,7 +39,7 @@ avalon.component('ms:controlSelect', {
         }
         if (this.col) {
             // 否则用col的配置，使用record[col]去绑定控件
-            tmpl =  tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + recordScope + '[\'' + this.col.replace('.', '\'][\'') + '\']"');
+            tmpl =  tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + this.model + '[\'' + this.col.replace('.', '\'][\'') + '\']"');
         }
         return tmpl;
     },
@@ -67,5 +66,6 @@ avalon.component('ms:controlSelect', {
     store: '',
     colKey: 'id',
     colVal: 'name',
-    options: []
+    options: [],
+    model: ''
 });

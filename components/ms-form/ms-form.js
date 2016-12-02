@@ -6,6 +6,7 @@ var avxUtil = require('/vendor/avx-component/avx-util');
  * @prop {Boolean} novalidate 不进行验证
  * @prop {Object} rules 表单验证规则，配置参考bootstrapValidator
  * @prop {Object} domEvents 由事件名称和事件处理函数组成的map对象
+ * @prop {String} model 表单数据对象
  * 
  * @method validate 验证表单，通过返回true，未通过返回false
  * @method resetForm 重置表单，参数resetFormData是否重置数据
@@ -26,7 +27,8 @@ avalon.component('ms:form', {
 
         // TODO: 以后可能需要改为只寻找直接子组件
         $(el).find('*').each(function (i, n) {
-            if (n.tagName.toLowerCase().indexOf('ms:') > -1) {
+            if (n.tagName.toLowerCase().indexOf('control-') > -1) {
+                // 只标记表单类型的组件
                 avxUtil.markPick(vm, n);
             }
         });

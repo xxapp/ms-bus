@@ -10,5 +10,6 @@ require('/components/ms-control-textarea');
 require('/components/ms-control-select');
 require('/components/ms-control-file');
 require('/components/ms-control-datetimepicker');
+require('/components/ms-checkbox');
 
 require('/components/directive-cprop');

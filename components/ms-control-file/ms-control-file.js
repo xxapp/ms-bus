@@ -25,15 +25,14 @@ avalon.component('ms:controlFile', {
     $replace: 1,
     $$template: function (tmpl) {
         var $parent = avalon.vmodels[this.parentVmId];
-        var recordScope = 'record';
-        if ($parent && $parent.model) recordScope = $parent.model;
+        this.model = this.model || ($parent && $parent.model) || 'record';
         if (this.duplex) {
             // 如果配置了duplex属性，则直接使用duplex的属性值绑定控件
             return tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + this.duplex + '"');
         }
         if (this.col) {
             // 否则用col的配置，使用record[col]去绑定控件
-            return tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + recordScope + '[\'' + this.col.replace('.', '\'][\'') + '\']"');
+            return tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + this.model + '[\'' + this.col.replace('.', '\'][\'') + '\']"');
         }
         return tmpl;
     },
@@ -70,5 +69,6 @@ avalon.component('ms:controlFile', {
     duplex: '',
     placeholder: '',
     btnText: '选择文件',
-    helpId: ''
+    helpId: '',
+    model: ''
 });

@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var avalon = require('avalon');
 var avxUtil = require('/vendor/avx-component/avx-util');
-var cEvent = require('../../events/componentEvent');
+var cEvent = require('/events/componentEvent');
 
 avalon.component('ms:table', {
     $slot: 'header',
@@ -57,11 +57,11 @@ avalon.component('ms:table', {
         // 因为自定义标签内部写tr或th会被忽略，因此改用div表示th并做此处理让ms-repeat正常遍历
         var tmp = [], columnConfig = [];
         $(vm.$model.header).children().each(function (i, n) {
-            var $cheader = $(n);
-            var type = $cheader.get(0).tagName.toLowerCase().replace(/^ms:/, '');
+            var $checker = $(n);
+            var type = $checker.get(0).tagName.toLowerCase().replace(/^ms:/, '');
             var props = {
-                col: $cheader.attr('col'),
-                inlineTemplate: $cheader.attr('inline-template')
+                col: $checker.attr('col'),
+                inlineTemplate: $checker.attr('inline-template')
             };
             props.inlineTemplate = props.inlineTemplate != void 0;
             var column = {};
@@ -70,17 +70,18 @@ avalon.component('ms:table', {
             if (type == 'check-header') {
                 column = {
                     type: 'check',
-                    content: '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-click="onCheck(row)" ms-attr-value="row.' + props.col + '"><span class="text"></span></label></div>'
+                    content: '<ms:checkbox duplex="checked" change="onCheck(row)" ms-attr-value="row.' + props.col + '"></ms:checkbox>'
+                    //content: '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-click="onCheck(row)" ms-attr-value="row.' + props.col + '"><span class="text"></span></label></div>'
                 };
             } else if (type == 'table-header') {
                 column = {
                     type: 'normal',
-                    content: props.inlineTemplate ? $cheader.html() : ('{{row.' + props.col + '}}')
+                    content: props.inlineTemplate ? $checker.html() : ('{{row.' + props.col + '}}')
                 };
             }
             columnConfig.push(column);
             tmp.push({
-                width: $cheader.attr('width'),
+                width: $checker.attr('width'),
                 content: $(n).prop('outerHTML')
             });
         });
