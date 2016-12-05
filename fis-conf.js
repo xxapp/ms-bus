@@ -4,7 +4,7 @@ fis.hook('commonjs', {
         avalon: '/node_modules/avalonjs/dist/avalon.shim.js',
         mmState: '/vendor/mmState/mmState.js',
         jquery: '/vendor/jquery/jquery.js',
-        moment: '/vendor/moment/moment.min.js',
+        'moment-locale': '/node_modules/moment/locale/zh-cn.js',
         redux: '/node_modules/redux/dist/redux.js'
     }
 });

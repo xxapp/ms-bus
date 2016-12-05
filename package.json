@@ -13,6 +13,7 @@
     "avalonjs": "https://github.com/RubyLouvre/avalon/archive/1.5.8.tar.gz",
     "bootbox.js": "https://github.com/makeusabrew/bootbox/archive/v4.3.0.tar.gz",
     "events": "^1.1.1",
+    "moment": "^2.17.1",
     "redux": "^3.6.0"
   },
   "devDependencies": {

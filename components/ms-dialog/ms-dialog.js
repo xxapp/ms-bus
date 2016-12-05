@@ -84,8 +84,7 @@ avalon.component('ms:dialog', {
         });
     },
     $ready: function (vm, el) {
-        // TODO: 以后可能需要改为只寻找直接子组件
-        $(vm.content).find('*').each(function (i, n) {
+        $(vm.content).children().each(function (i, n) {
             if (n.tagName.toLowerCase().indexOf('ms:') > -1) {
                 avxUtil.markPick(vm, n);
             }

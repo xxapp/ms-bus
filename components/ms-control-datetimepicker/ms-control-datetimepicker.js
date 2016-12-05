@@ -1,6 +1,6 @@
 var avalon = require('avalon');
 var moment = require('moment');
-require('/vendor/moment/zh-cn');
+require('moment-locale');
 moment.locale('zh-cn');
 require.loadCss({
     url: __uri('/vendor/bootstrapDatetimepicker/bootstrap-datetimepicker.css')

@@ -25,8 +25,7 @@ avalon.component('ms:form', {
         // 借元素之力将此组件实例与父组件实例联系起来
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
 
-        // TODO: 以后可能需要改为只寻找直接子组件
-        $(el).find('*').each(function (i, n) {
+        $(el).children().each(function (i, n) {
             if (n.tagName.toLowerCase().indexOf('control-') > -1) {
                 // 只标记表单类型的组件
                 avxUtil.markPick(vm, n);
