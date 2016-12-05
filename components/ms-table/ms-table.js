@@ -3,6 +3,8 @@ var avalon = require('avalon');
 var avxUtil = require('/vendor/avx-component/avx-util');
 var cEvent = require('/events/componentEvent');
 
+var checkHeaderListener = avalon.noop;
+
 avalon.component('ms:table', {
     $slot: 'header',
     header: '',
@@ -23,7 +25,7 @@ avalon.component('ms:table', {
             vm.selectionChange(vm.selection.$model);
         }
 
-        cEvent.on('checkHeader', function (data) {
+        checkHeaderListener = function (data) {
             if (!avxUtil.containChild(vm, data.id)) {
                 return ;
             }
@@ -37,7 +39,8 @@ avalon.component('ms:table', {
                 vm.selection.clear();
             }
             vm.selectionChange(vm.selection.$model);
-        });
+        }
+        cEvent.on('checkHeader', checkHeaderListener);
         vm.$watch('checked.length', function (newV) {
             if (newV == vm.data.size()) {
                 vm.isAllChecked = true;
@@ -96,6 +99,7 @@ avalon.component('ms:table', {
     },
     $dispose: function (vm, el) {
         avxUtil.removeFromRefs(vm, el);
+        cEvent.removeListener('checkHeader', checkHeaderListener);
     },
     $parentVmId: '',
     data: [],
