@@ -103,30 +103,38 @@ avalon.component('ms:dataBox', {
                 }
                 if (dialogVm.uploading) return false;
                 dialogVm.uploading = true;
-                vm.processData(package, function (handleResult) {
-                    if (!package.isEdit) {
-                        entityStore.insert(package.record).then(function (r) {
-                            if (r.code == '0') {
-                                Notify('添加成功', 'top-right', '5000', 'success', 'fa-check', true);
-                                vm.loadData();
-                                dialogVm.show = false;
-                            }
-                            handleResult(r);
-                            setTimeout(function () { dialogVm.uploading = false; }, 1000);
-                        });
-                    } else {
-                        entityStore.update(package.record).then(function (r) {
-                            if (r.code == '0') {
-                                Notify('修改成功', 'top-right', '5000', 'success', 'fa-check', true);
-                                vm.loadData();
-                                dialogVm.show = false;
-                            }
-                            handleResult(r);
-                            setTimeout(function () { dialogVm.uploading = false; }, 1000);
-                        });
-                    }
-                });
+                if (vm.processData !== avalon.noop) {
+                    vm.processData(package, function (handleResult) {
+                        syncData.call(this, package, handleResult);
+                    });
+                } else {
+                    syncData(package, avalon.noop);
+                }
                 return false;
+            }
+        }
+
+        function syncData(package, handleResult) {
+            if (!package.isEdit) {
+                entityStore.insert(package.record).then(function (r) {
+                    if (r.code == '0') {
+                        Notify('添加成功', 'top-right', '5000', 'success', 'fa-check', true);
+                        vm.loadData();
+                        dialogVm.show = false;
+                    }
+                    handleResult(r);
+                    setTimeout(function () { dialogVm.uploading = false; }, 1000);
+                });
+            } else {
+                entityStore.update(package.record).then(function (r) {
+                    if (r.code == '0') {
+                        Notify('修改成功', 'top-right', '5000', 'success', 'fa-check', true);
+                        vm.loadData();
+                        dialogVm.show = false;
+                    }
+                    handleResult(r);
+                    setTimeout(function () { dialogVm.uploading = false; }, 1000);
+                });
             }
         }
     },
