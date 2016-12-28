@@ -7,6 +7,7 @@
                         <ms:control-text label="ID" col="region_id"></ms:control-text>
                         <ms:control-text label="名称" col="region_name"></ms:control-text>
                         <ms:control-text label="PID" col="region_parent_id"></ms:control-text>
+                        <ms:control-text label="套餐" col="suites[].name" duplex="el.name" ms-repeat="record.suites"></ms:control-text>
                     </ms:form>
                 </div>
             </div>

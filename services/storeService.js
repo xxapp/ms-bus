@@ -8,7 +8,10 @@ exports.demo = {
             region_id: '',
             region_name: '',
             region_parent_id: '',
-            region_type: ''
+            region_type: '',
+            suites: [{
+                name: ''
+            }]
         };
     },
     list: function (params) {
