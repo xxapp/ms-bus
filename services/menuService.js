@@ -47,6 +47,11 @@ var menu = [{
         stateName: 'root.doc-ms-table',
         title: 'Table',
         href: '#!/doc-ms-table'
+    }, {
+        name: 'doc-ms-form',
+        stateName: 'root.doc-ms-form',
+        title: 'Form',
+        href: '#!/doc-ms-form'
     }]
 }];
 
