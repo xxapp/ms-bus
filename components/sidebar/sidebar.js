@@ -3,23 +3,54 @@ var beyond = require('/vendor/beyond');
 
 var menuService = require('/services/menuService');
 
+avalon.effect('collapse', {
+    enter: function (elem, done) {
+        $(elem).slideDown(200, done);
+    },
+    leave: function (elem, done) {
+        $(elem).slideUp(200, done);
+    }
+});
+
 var sidebar = avalon.define({
     $id: 'sidebar',
     menu: [],
     actived: 'dashboard',
+    opened: '',
+    compact: false,
     menuClick: function (item, parent) {
-        sidebar.actived = item.name;
+        if (!item.children || item.children.length === 0) {
+            sidebar.actived = item.name;
+            if (parent) {
+                sidebar.opened = parent.name;
+            }
+        } else {
+            if (sidebar.opened == item.name) {
+                sidebar.opened = '';
+            } else {
+                sidebar.opened = item.name
+            }
+        }
     },
     search: function() {
         sidebar.$fire('all!title', 'Demo');
     },
     isChildActived: function (item) {
-        if (item.name === sidebar.actived) {
-            return false;
+        // if (item.name === sidebar.actived) {
+        //     return false;
+        // }
+        // for (var i = 0, bread; bread = avalon.vmodels.root.breadCrumb.$model[i++]; ) {
+        //     return bread.name === item.name;
+        // }
+        if (!item.children) return;
+        if (item.children.length === 0) return;
+        for (var i = 0, child; child = item.children[i++]; ) {
+            if (child.name === sidebar.actived) {
+                sidebar.opened = item.name;
+                return true;
+            }
         }
-        for (var i = 0, bread; bread = avalon.vmodels.root.breadCrumb.$model[i++]; ) {
-            return bread.name === item.name;
-        }
+        return false;
     }
 });
 

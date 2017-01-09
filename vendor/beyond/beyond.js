@@ -12,38 +12,21 @@ function getThemeColorFromCss(n) {
     i
 }
 function InitiateSideMenu() {
+    // 用途不明
     $(".sidebar-toggler").on("click", function() {
         return $("#sidebar").toggleClass("hide"),
         $(".sidebar-toggler").toggleClass("active"),
         !1
     });
     var isMenuCompacted = $("#sidebar").hasClass("menu-compact");
+    // 菜单展开和收起
     $("#sidebar-collapse").on("click", function() {
         $("#sidebar").is(":visible") || $("#sidebar").toggleClass("hide");
         $("#sidebar").toggleClass("menu-compact");
         $(".sidebar-collapse").toggleClass("active");
-        isMenuCompacted = $("#sidebar").hasClass("menu-compact");
+        avalon.vmodels.sidebar.compact = isMenuCompacted = $("#sidebar").hasClass("menu-compact");
         isMenuCompacted && $(".open > .submenu").removeClass("open")
     });
-    $(".sidebar-menu").on("click", function(e) {
-        var $btnItem = $(e.target).closest("a"), eleTitle, r, f;
-        if ($btnItem && $btnItem.length != 0) {
-            if (!$btnItem.hasClass("menu-dropdown"))
-                return isMenuCompacted && $btnItem.get(0).parentNode.parentNode == this && (eleTitle = $btnItem.find(".menu-text").get(0),
-                e.target != eleTitle && !$.contains(eleTitle, e.target)) ? !1 : void 0;
-            if (r = $btnItem.next().get(0),
-            !$(r).is(":visible")) {
-                if (f = $(r.parentNode).closest("ul"),
-                isMenuCompacted && f.hasClass("sidebar-menu"))
-                    return;
-                f.find("> .open > .submenu").each(function() {
-                    this == r || $(this.parentNode).hasClass("active") || $(this).slideUp(200).parent().removeClass("open")
-                })
-            }
-            return isMenuCompacted && $(r.parentNode.parentNode).hasClass("sidebar-menu") ? !1 : ($(r).slideToggle(200).parent().toggleClass("open"),
-            !1)
-        }
-    })
 }
 function InitiateWidgets() {
     $('.widget-buttons *[data-toggle="maximize"]').on("click", function(n) {

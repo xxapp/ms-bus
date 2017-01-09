@@ -120,7 +120,7 @@ avalon.state('root.supplier', {
         return !!type;
     }
 });
-avalon.state('root.doc-ms-talbe', {
+avalon.state('root.doc-ms-table', {
     url: 'doc-ms-table',
     views: {
         "content@": {
