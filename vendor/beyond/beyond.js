@@ -1,8 +1,8 @@
 ﻿var $ = require('jquery');
 var avalon = require('avalon');
-require('mmState');
 var toastr = require('/vendor/toastr');
 var bootbox = require('bootbox.js/bootbox');
+bootbox.setDefaults('locale', 'zh_CN');
 
 function getThemeColorFromCss(n) {
     var t = $("<span><\/span>").hide().appendTo("body"), i;
@@ -205,40 +205,6 @@ require.async = function(n, part, onerror) {
             });
         }
     }
-}
-
-// 实现bootbox.stateDialog
-bootbox.stateDialog = function (options) {
-    var tempCallback;
-    if (options.buttons) {
-        for (var i in options.buttons) {
-            var btn = options.buttons[i];
-            if (options.buttons.hasOwnProperty(i)) {
-                btn.tempCallback = btn.callback;
-                btn.callback = (function (btn) {
-                    return function () {
-                        var skip;
-                        btn.tempCallback && (skip = btn.tempCallback(function () {
-                            avalon.router.go(options.parentStateName);
-                            bootbox.hideAll();
-                        }) !== false);
-                        !skip && avalon.router.go(options.parentStateName, {}, { reload: true });
-                        return skip;
-                    }
-                }(btn));
-            }
-        }
-    }
-    if (options.onEscape || true) {
-        tempCallback = options.onEscape;
-        options.onEscape = function () {
-            tempCallback && tempCallback();
-            //avalon.router.go(options.parentStateName, {}, { reload: true });
-        }
-    }
-    var el_dialog = bootbox.dialog(options);
-    avalon.scan(el_dialog[0]);
-    return el_dialog;
 }
 
 exports.init = function () {

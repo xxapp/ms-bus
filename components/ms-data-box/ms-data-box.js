@@ -1,9 +1,9 @@
 var avalon = require('avalon');
 var beyond = require('/vendor/beyond');
-var Notify = beyond.Notify;
 var bootbox = require('bootbox.js/bootbox');
 
 var store = require('/services/storeService.js');
+var msg = require('/services/messageService.js');
 var cEvent = require('../../events/componentEvent');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
@@ -51,7 +51,7 @@ avalon.component('ms:dataBox', {
                     entityStore.del(record[entityStore.key]).then(function (r) {
                         if (r.code == '0') {
                             vm.loadData();
-                            Notify('删除成功', 'top-right', '5000', 'success', 'fa-check', true);
+                            msg.success('删除成功');
                         }
                     });
                 }
@@ -118,7 +118,7 @@ avalon.component('ms:dataBox', {
             if (!package.isEdit) {
                 entityStore.insert(package.record).then(function (r) {
                     if (r.code == '0') {
-                        Notify('添加成功', 'top-right', '5000', 'success', 'fa-check', true);
+                        msg.success('添加成功');
                         vm.loadData();
                         dialogVm.show = false;
                     }
@@ -128,7 +128,7 @@ avalon.component('ms:dataBox', {
             } else {
                 entityStore.update(package.record).then(function (r) {
                     if (r.code == '0') {
-                        Notify('修改成功', 'top-right', '5000', 'success', 'fa-check', true);
+                        msg.success('修改成功');
                         vm.loadData();
                         dialogVm.show = false;
                     }

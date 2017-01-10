@@ -1,10 +1,10 @@
 var $ = require('jquery');
 var avalon = require('avalon');
 var beyond = require('/vendor/beyond');
-var Notify = beyond.Notify;
 var bootbox = require('bootbox.js/bootbox');
 
 var ajax = require('/services/ajaxService');
+var msg = require('/services/messageService');
 
 require('/vendor/avx-component');
 

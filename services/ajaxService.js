@@ -2,7 +2,8 @@ var avalon = require('avalon');
 var $ = require('jquery');
 var bootbox = require('bootbox.js/bootbox');
 var beyond = require('/vendor/beyond');
-var Notify = beyond.Notify;
+
+var msg = require('/services/messageService.js');
 
 // 拦截ajax请求，检测是否超时，以重新登录
 $(document).ajaxComplete(function (event, xhr, settings) {
@@ -18,14 +19,14 @@ $(document).ajaxComplete(function (event, xhr, settings) {
                 });
             } else if (result.error) {
                 beyond.hideLoading();
-                Notify(result.error.message, 'top-right', '5000', 'danger', 'fa-bolt', true);
+                msg.success(result.error.message);
             }
         }
     } else if (xhr.status == undefined) {
     	beyond.hideLoading();
     } else {
         beyond.hideLoading();
-        Notify('请求错误，请联系管理员', 'top-right', '5000', 'danger', 'fa-bolt', true);
+        msg.error('请求错误，请联系管理员');
     }
 });
 

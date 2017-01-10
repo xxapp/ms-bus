@@ -1,10 +1,10 @@
 var $ = require('jquery');
 var avalon = require('avalon');
 var beyond = require('/vendor/beyond');
-var Notify = beyond.Notify;
 var bootbox = require('bootbox.js/bootbox');
 
 var ajax = require('/services/ajaxService');
+var msg = require('/services/messageService');
 
 require('/vendor/avx-component');
 
@@ -30,10 +30,10 @@ var item = avalon.define({
                 dialogVm.show = true;
             },
             upShelves: function () {
-                Notify('上架成功', 'top-right', '5000', 'success', 'fa-check', true);
+                msg.success('上架成功');
             },
             downShelves: function () {
-                Notify('下架成功', 'top-right', '5000', 'success', 'fa-check', true);
+                msg.success('下架成功');
             }
         },
         searchFields: {
