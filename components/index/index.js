@@ -1,3 +1,6 @@
+global.jQuery = global.$ = require('jquery');
+require('bootstrap');
+
 var avalon = require('avalon');
 require('mmState');
 var beyond = require('/vendor/beyond');
@@ -5,7 +8,7 @@ var ajax= require('/services/ajaxService');
 var menuService = require('/services/menuService');
 var configService = require('/services/configService');
 
-// 加载jquery插件
+// 加载表单验证插件插件
 require('/vendor/bootstrapValidator');
 require('/vendor/bootstrapValidator/zh_CN');
 

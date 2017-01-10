@@ -1,3 +1,4 @@
+var jQuery = require('jquery');
 
 jQuery.extend({
 	

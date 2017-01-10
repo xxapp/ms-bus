@@ -283,22 +283,22 @@ exports.initHeader = function () {
     $("#btn-setting").on("click", function() {
         $(".navbar-account").toggleClass("setting-open")
     });
-    InitiateSettings();
+    //InitiateSettings();
 }
 exports.initSidebar = function () {
-    rtlchanger = document.getElementById("rtl-changer");
-    location.pathname != "/index-rtl-fa.html" && location.pathname != "/index-rtl-ar.html" && (readCookie("rtl-support") ? (switchClasses("pull-right", "pull-left"),
-    switchClasses("databox-right", "databox-left"),
-    switchClasses("item-right", "item-left"),
-    $(".navbar-brand small img").attr("src", "/static/beyond/img/logo-rtl.png"),
-    rtlchanger != null && (document.getElementById("rtl-changer").checked = !0)) : rtlchanger != null && (rtlchanger.checked = !1),
-    rtlchanger != null && (rtlchanger.onchange = function() {
-        this.checked ? createCookie("rtl-support", "true", 10) : eraseCookie("rtl-support");
-        setTimeout(function() {
-            window.location.reload()
-        }, 600)
-    }
-    ));
+    // rtlchanger = document.getElementById("rtl-changer");
+    // location.pathname != "/index-rtl-fa.html" && location.pathname != "/index-rtl-ar.html" && (readCookie("rtl-support") ? (switchClasses("pull-right", "pull-left"),
+    // switchClasses("databox-right", "databox-left"),
+    // switchClasses("item-right", "item-left"),
+    // $(".navbar-brand small img").attr("src", "/static/beyond/img/logo-rtl.png"),
+    // rtlchanger != null && (document.getElementById("rtl-changer").checked = !0)) : rtlchanger != null && (rtlchanger.checked = !1),
+    // rtlchanger != null && (rtlchanger.onchange = function() {
+    //     this.checked ? createCookie("rtl-support", "true", 10) : eraseCookie("rtl-support");
+    //     setTimeout(function() {
+    //         window.location.reload()
+    //     }, 600)
+    // }
+    // ));
     InitiateSideMenu();
 }
 

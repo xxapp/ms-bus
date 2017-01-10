@@ -1,4 +1,5 @@
 var ajax = require('/services/ajaxService.js');
+require('/vendor/jquery/ajaxfileupload');
 
 exports.demo = {
     key: 'region_id',

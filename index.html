@@ -24,7 +24,7 @@ Purchase: http://wrapbootstrap.com
     <![endif]-->
 
     <!--Basic Styles-->
-    <link href="./static/beyond/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link id="bootstrap-rtl-link" rel="stylesheet" />
     <link href="./static/beyond/css/font-awesome.min.css" rel="stylesheet" />
     <link href="./static/beyond/css/weather-icons.min.css" rel="stylesheet" />
@@ -34,15 +34,13 @@ Purchase: http://wrapbootstrap.com
 
     <!--Beyond styles-->
     <link id="beyond-link" href="./static/beyond/css/beyond.min.css" rel="stylesheet" type="text/css" />
-    <link id="datepicker-link" href="./static/beyond/css/datepicker.min.css" rel="stylesheet" type="text/css" />
     <link href="./static/beyond/css/demo.min.css" rel="stylesheet" />
     <link href="./static/beyond/css/typicons.min.css" rel="stylesheet" />
     <link href="./static/beyond/css/animate.min.css" rel="stylesheet" />
-    <link href="./static/lightbox/lightbox.css" rel="stylesheet" />
     <link id="skin-link" href="./static/beyond/css/skins/teal.min.css" rel="stylesheet" type="text/css" />
 
     <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
-    <script src="./static/beyond/js/skins.min.js"></script>
+    <!--<script src="./static/beyond/js/skins.min.js"></script>-->
 
     <!--Custom styles-->
     <style>
@@ -132,14 +130,9 @@ Purchase: http://wrapbootstrap.com
 
     </div>
     <div id="dialog_layer"></div>
-
-    <script src="./static/jquery/jquery.js"></script>
-    <script src="./static/jquery/ajaxfileupload.js"></script>
-    <script src="./static/jquery/bootstrap-datepicker.js"></script>
-    <script src="./static/bootstrap/bootstrap.min.js"></script>
-	<script src="./static/lightbox/lightbox.js"></script>
 	
     <script>
+        window.global = window;
         require(['/components/index']);
     </script>
 

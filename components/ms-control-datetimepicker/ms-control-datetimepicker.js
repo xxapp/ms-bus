@@ -3,9 +3,9 @@ var moment = require('moment');
 require('moment-locale');
 moment.locale('zh-cn');
 require.loadCss({
-    url: __uri('/vendor/bootstrapDatetimepicker/bootstrap-datetimepicker.css')
+    url: __uri('/node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')
 });
-require('/vendor/bootstrapDatetimepicker/bootstrap-datetimepicker.min');
+require('eonasdan-bootstrap-datetimepicker');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
 /**
