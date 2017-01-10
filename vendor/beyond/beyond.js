@@ -190,23 +190,6 @@ function hasClass(n, t) {
 }
 var themeprimary = getThemeColorFromCss("themeprimary"), themesecondary = getThemeColorFromCss("themesecondary"), themethirdcolor = getThemeColorFromCss("themethirdcolor"), themefourthcolor = getThemeColorFromCss("themefourthcolor"), themefifthcolor = getThemeColorFromCss("themefifthcolor"), rtlchanger, popovers, hoverpopovers;
 
-// 覆写require.async,改写为promise
-var require_async = require.async;
-window.require_async = require_async;
-require.async = function(n, part, onerror) {
-    if (typeof part == 'function') {
-        return require_async.call(require, n, part, onerror);
-    } else {
-        return function () {
-            return new Promise(function(rs, rj) {
-                require_async(n, function(m) {
-                    rs(part ? m[part] : m);
-                }, rj);
-            });
-        }
-    }
-}
-
 exports.init = function () {
     $(window).load(function() {
         setTimeout(function() {
