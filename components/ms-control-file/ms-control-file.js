@@ -2,10 +2,6 @@ var avalon = require('avalon');
 var store = require('/services/storeService');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
-require.loadCss({
-    url: '/components/ms-control-file/ms-control-file.css'
-});
-
 /**
  * 文件输入组件
  * @prop label 文本框前的label标签内容

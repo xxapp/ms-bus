@@ -1,99 +1,101 @@
-<div class="row" ms-controller="gf-item">
-    <div class="col-xs-12 col-md-12">
-        <ms:dialog $id="dialog_item" ms-skip>
-            <div class="row">
-                <div class="col-md-12">
-                    <ms:form>
-                        <ms:control-text label="商品名称" col="name"></ms:control-text>
-                        <ms:control-select label="商品分类" col="catalog" store="category"></ms:control-select>
-                        <ms:control-text label="商品单价" col="price"></ms:control-text>
-                        <ms:control-text label="库存" col="store_count"></ms:control-text>
-                        <ms:control-file label="大缩略图" btn-text="选择图片" col="tag.large_thumb" store="file"></ms:control-file>
-                        <ms:control-file label="缩略图" btn-text="选择图片" col="tag.thumb" store="file"></ms:control-file>
-                        <ms:control-textarea label="商品详情" col="tag.description" rows="4"></ms:control-textarea>
-                        <ms:control-text label="浏览量" col="view_count"></ms:control-text>
-                    </ms:form>
+<template>
+    <div class="row" ms-controller="gf-item">
+        <div class="col-xs-12 col-md-12">
+            <ms:dialog $id="dialog_item" ms-skip>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ms:form>
+                            <ms:control-text label="商品名称" col="name"></ms:control-text>
+                            <ms:control-select label="商品分类" col="catalog" store="category"></ms:control-select>
+                            <ms:control-text label="商品单价" col="price"></ms:control-text>
+                            <ms:control-text label="库存" col="store_count"></ms:control-text>
+                            <ms:control-file label="大缩略图" btn-text="选择图片" col="tag.large_thumb" store="file"></ms:control-file>
+                            <ms:control-file label="缩略图" btn-text="选择图片" col="tag.thumb" store="file"></ms:control-file>
+                            <ms:control-textarea label="商品详情" col="tag.description" rows="4"></ms:control-textarea>
+                            <ms:control-text label="浏览量" col="view_count"></ms:control-text>
+                        </ms:form>
+                    </div>
                 </div>
-            </div>
-        </ms:dialog>
-        <ms:dialog $id="dialog_item_push" ms-skip>
-            <span slot="header">推送</span>
-            <div class="row">
-                <div class="col-md-12">
-                    <ms:form>
-                        <ms:control-text label="标题" duplex="state.text" ms-repeat="state.subs"></ms:control-text>
-                        <ms:control-textarea label="副标题" rows="4"></ms:control-textarea>
-                        <ms:control-text label="标签"></ms:control-text>
-                        <ms:control-select label="商品分类">
-                            <option value="1">大图</option>
-                            <option value="2">小图</option>
-                        </ms:control-select>
-                        <ms:control-datepicker label="上线时间" format="YYYY-MM-DD"></ms:control-datepicker>
-                        <ms:control-text label="推送内容"></ms:control-text>
-                    </ms:form>
+            </ms:dialog>
+            <ms:dialog $id="dialog_item_push" ms-skip>
+                <span slot="header">推送</span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ms:form>
+                            <ms:control-text label="标题" duplex="state.text" ms-repeat="state.subs"></ms:control-text>
+                            <ms:control-textarea label="副标题" rows="4"></ms:control-textarea>
+                            <ms:control-text label="标签"></ms:control-text>
+                            <ms:control-select label="商品分类">
+                                <option value="1">大图</option>
+                                <option value="2">小图</option>
+                            </ms:control-select>
+                            <ms:control-datepicker label="上线时间" format="YYYY-MM-DD"></ms:control-datepicker>
+                            <ms:control-text label="推送内容"></ms:control-text>
+                        </ms:form>
+                    </div>
                 </div>
-            </div>
-        </ms:dialog>
-        <ms:data-box $id="data-box_item" on-init="dataBoxInit" config="$data-box_config">
-            <div slot="content" class="widget">
-                <div class="widget-header bg-blue">
-                    <span class="widget-caption">商品列表</span>
-                </div>
-                <div class="widget-body">
-                    <ms:form model="searchFields">
-                        <div class="form-inline">
-                            <ms:control-text label="名称" col="name"></ms:control-text>
-                            <ms:control-select label="类别" col="catalog" store="category"></ms:control-select>
-                            <ms:control-text label="单价" col="price"></ms:control-text>
-                            <ms:control-datepicker label="上线时间" col="date"></ms:control-datepicker>
-                        </div>
-                        <br>
-                        <div class="form-inline">
-                            <ms:control-text label="状态" col="state"></ms:control-text>
-                            <button type="button" class="btn btn-info" ms-click="search">
-                                <span class="fa fa-search">
-                                </span>搜索
+            </ms:dialog>
+            <ms:data-box $id="data-box_item" on-init="dataBoxInit" config="$data-box_config">
+                <div slot="content" class="widget">
+                    <div class="widget-header bg-blue">
+                        <span class="widget-caption">商品列表</span>
+                    </div>
+                    <div class="widget-body">
+                        <ms:form model="searchFields">
+                            <div class="form-inline">
+                                <ms:control-text label="名称" col="name"></ms:control-text>
+                                <ms:control-select label="类别" col="catalog" store="category"></ms:control-select>
+                                <ms:control-text label="单价" col="price"></ms:control-text>
+                                <ms:control-datepicker label="上线时间" col="date"></ms:control-datepicker>
+                            </div>
+                            <br>
+                            <div class="form-inline">
+                                <ms:control-text label="状态" col="state"></ms:control-text>
+                                <button type="button" class="btn btn-info" ms-click="search">
+                                    <span class="fa fa-search">
+                                    </span>搜索
+                                </button>
+                            </div>
+                        </ms:form>
+                        <div class="table-toolbar">
+                            <button class="btn btn-info" ms-click="actions.add">
+                                <span class="fa fa-plus">
+                                </span>新增商品
+                            </button>
+                            <button class="btn btn-info" ms-click="actions.upShelves">
+                                <span class="fa fa-plus">
+                                </span>批量上架
+                            </button>
+                            <button class="btn btn-info" ms-click="actions.downShelves">
+                                <span class="fa fa-plus">
+                                </span>批量下架
                             </button>
                         </div>
-                    </ms:form>
-                    <div class="table-toolbar">
-                        <button class="btn btn-info" ms-click="actions.add">
-                            <span class="fa fa-plus">
-                            </span>新增商品
-                        </button>
-                        <button class="btn btn-info" ms-click="actions.upShelves">
-                            <span class="fa fa-plus">
-                            </span>批量上架
-                        </button>
-                        <button class="btn btn-info" ms-click="actions.downShelves">
-                            <span class="fa fa-plus">
-                            </span>批量下架
-                        </button>
+                        <ms:table class="table table-hover table-bordered" ms-cprop-data="list">
+                            <ms:check-header col="id" width="60"></ms:check-header>
+                            <ms:table-header col="name" text="商品名称"></ms:table-header>
+                            <ms:table-header col="catalog" text="类别"></ms:table-header>
+                            <ms:table-header col="price" text="单价"></ms:table-header>
+                            <ms:table-header col="store_count" text="剩余数量"></ms:table-header>
+                            <ms:table-header text="总价" inline-template>{{row.price * row.store_count}}</ms:table-header>
+                            <ms:table-header col="state" text="状态"></ms:table-header>
+                            <ms:table-header text="推送" inline-template>
+                                <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.push(row)"><i class="fa fa-edit"></i> 推送到首页</a>
+                            </ms:table-header>
+                            <ms:table-header text="操作" inline-template>
+                                <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.upShelves(row)"><i class="fa fa-edit"></i> 上架</a>
+                                <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.edit(row)"><i class="fa fa-edit"></i> 编辑</a>
+                                <a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(row)"><i class="fa fa-trash-o"></i> 删除</a>
+                            </ms:table-header>
+                        </ms:table>
+                        <ms:pagination
+                            ms-cprop-page-size="pageSize"
+                            ms-cprop-total="total" 
+                            ms-cprop-current-change="pageChange">
+                        </ms:pagination>
                     </div>
-                    <ms:table class="table table-hover table-bordered" ms-cprop-data="list">
-                        <ms:check-header col="id" width="60"></ms:check-header>
-                        <ms:table-header col="name" text="商品名称"></ms:table-header>
-                        <ms:table-header col="catalog" text="类别"></ms:table-header>
-                        <ms:table-header col="price" text="单价"></ms:table-header>
-                        <ms:table-header col="store_count" text="剩余数量"></ms:table-header>
-                        <ms:table-header text="总价" inline-template>{{row.price * row.store_count}}</ms:table-header>
-                        <ms:table-header col="state" text="状态"></ms:table-header>
-                        <ms:table-header text="推送" inline-template>
-                            <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.push(row)"><i class="fa fa-edit"></i> 推送到首页</a>
-                        </ms:table-header>
-                        <ms:table-header text="操作" inline-template>
-                            <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.upShelves(row)"><i class="fa fa-edit"></i> 上架</a>
-                            <a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.edit(row)"><i class="fa fa-edit"></i> 编辑</a>
-                            <a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(row)"><i class="fa fa-trash-o"></i> 删除</a>
-                        </ms:table-header>
-                    </ms:table>
-                    <ms:pagination
-                        ms-cprop-page-size="pageSize"
-                        ms-cprop-total="total" 
-                        ms-cprop-current-change="pageChange">
-                    </ms:pagination>
                 </div>
-            </div>
-        </ms:data-box>
+            </ms:data-box>
+        </div>
     </div>
-</div>
+</template>

@@ -1,31 +1,33 @@
-<!-- Page Sidebar Header>
-<div class="sidebar-header-wrapper">
-    <input type="text" class="searchinput" ms-click="search"/>
-    <i class="searchicon fa fa-search"></i>
-    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
-</div>
-<!-- /Page Sidebar Header -->
-<!-- Sidebar Menu -->
-<ul class="nav sidebar-menu">
-    <!--Dashboard-->
-    <li ms-visible="item.show" 
-        ms-class="active:actived===item.name || isChildActived(item)" 
-        ms-class-1="open:opened === item.name && !compact"  
-        ms-repeat-item="menu">
-        <a ms-attr-href="{{ item.href }}" 
-            ms-class="menu-dropdown:item.children && item.children.size() > 0"  
-            ms-click="menuClick(item)">
-            <i ms-class="menu-icon glyphicon {{ item.icon }}"></i>
-            <span class="menu-text"> {{ item.title }} </span>
-            <i class="menu-expand" ms-if="item.children && item.children.size() > 0"></i>
-        </a>
-        <ul class="submenu" ms-effect="collapse" ms-visible="opened === item.name">
-            <li ms-visible="sub.show" ms-class="active:actived===sub.name" ms-repeat-sub="item.children || []">
-                <a ms-attr-href="{{ sub.href }}" ms-click="menuClick(sub, item)">
-                    <span class="menu-text">{{ sub.title }}</span>
-                </a>
-            </li>
-        </ul>
-    </li>
-</ul>
-<!-- /Sidebar Menu -->
+<template>
+    <!-- Page Sidebar Header>
+    <div class="sidebar-header-wrapper">
+        <input type="text" class="searchinput" ms-click="search"/>
+        <i class="searchicon fa fa-search"></i>
+        <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+    </div>
+    <!-- /Page Sidebar Header -->
+    <!-- Sidebar Menu -->
+    <ul class="nav sidebar-menu">
+        <!--Dashboard-->
+        <li ms-visible="item.show" 
+            ms-class="active:actived===item.name || isChildActived(item)" 
+            ms-class-1="open:opened === item.name && !compact"  
+            ms-repeat-item="menu">
+            <a ms-attr-href="{{ item.href }}" 
+                ms-class="menu-dropdown:item.children && item.children.size() > 0"  
+                ms-click="menuClick(item)">
+                <i ms-class="menu-icon glyphicon {{ item.icon }}"></i>
+                <span class="menu-text"> {{ item.title }} </span>
+                <i class="menu-expand" ms-if="item.children && item.children.size() > 0"></i>
+            </a>
+            <ul class="submenu" ms-effect="collapse" ms-visible="opened === item.name">
+                <li ms-visible="sub.show" ms-class="active:actived===sub.name" ms-repeat-sub="item.children || []">
+                    <a ms-attr-href="{{ sub.href }}" ms-click="menuClick(sub, item)">
+                        <span class="menu-text">{{ sub.title }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- /Sidebar Menu -->
+</template>

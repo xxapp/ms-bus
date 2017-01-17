@@ -32,7 +32,7 @@ var demo = avalon.define({
         },
         searchFields: {
             region_id: '',
-            region_name: '',
+            region_name: {firstName: 'hello'},
             startDate: '',
             endDate: ''
         }

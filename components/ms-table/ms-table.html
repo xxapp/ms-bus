@@ -1,12 +1,14 @@
-<table>
-    <thead>
-        <tr>
-            <th ms-repeat="thead" style="vertical-align: middle;" ms-css-width="el.width">{{el.content|html}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ms-repeat-row="data">
-            <td ms-repeat-td="tbody" style="vertical-align: middle;">{{td|html}}</td>
-        </tr>
-    </tbody>
-</table>
+<template>
+    <table>
+        <thead>
+            <tr>
+                <th ms-repeat="thead" style="vertical-align: middle;" ms-css-width="el.width">{{el.content|html}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ms-repeat-row="data">
+                <td ms-repeat-td="tbody" style="vertical-align: middle;">{{td|html}}</td>
+            </tr>
+        </tbody>
+    </table>
+</template>

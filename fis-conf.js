@@ -42,6 +42,13 @@ fis.match('/services/*.js', {
             .replace('__SPRING_API_URL__', 'localhost:8080/api');
     }
 });
+fis.match('/components/**/*.html', {
+    postprocessor: fis.plugin('component-view', {
+    })
+});
+fis.match('/components/**/*.css', {
+    release: '/static/$0'
+});
 fis.match('/vendor/**/*.js', {
     isMod: true,
     release: '/static/$0'

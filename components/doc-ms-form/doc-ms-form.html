@@ -1,28 +1,30 @@
-<div class="row" ms-controller="doc-ms-form">
-    <div class="col-xs-12 col-md-12">
-        <div class="widget">
-            <div class="widget-header bg-green">
-                <span class="widget-caption">Form组件</span>
-            </div>
-            <div class="widget-body">
-                <ms:form $id="doc_form" config="$form_config">
-                    <ms:control-text label="姓名" col="name"></ms:control-text>
-                    <ms:control-select label="性别" col="gender">
-                        <option value="">--请选择--</option>
-                        <option value="M">男</option>
-                        <option value="F">女</option>
-                    </ms:control-select>
-                    <ms:control-datepicker label="出生日期" col="birthday"></ms:control-datepicker>
-                    <ms:control-file label="头像" col="avatar" store="file"></ms:control-file>
-                    <ms:control-textarea label="个人简介" col="bio" rows="5"></ms:control-textarea>
-                </ms:form>
-                <pre>{{json}}</pre>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="btn btn-info pull-right" ms-click="submit"><i class="fa fa-save"></i>提交</button>
+<template>
+    <div class="row" ms-controller="doc-ms-form">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header bg-green">
+                    <span class="widget-caption">Form组件</span>
+                </div>
+                <div class="widget-body">
+                    <ms:form $id="doc_form" config="$form_config">
+                        <ms:control-text label="姓名" col="name"></ms:control-text>
+                        <ms:control-select label="性别" col="gender">
+                            <option value="">--请选择--</option>
+                            <option value="M">男</option>
+                            <option value="F">女</option>
+                        </ms:control-select>
+                        <ms:control-datepicker label="出生日期" col="birthday"></ms:control-datepicker>
+                        <ms:control-file label="头像" col="avatar" store="file"></ms:control-file>
+                        <ms:control-textarea label="个人简介" col="bio" rows="5"></ms:control-textarea>
+                    </ms:form>
+                    <pre>{{json}}</pre>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-info pull-right" ms-click="submit"><i class="fa fa-save"></i>提交</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</template>
