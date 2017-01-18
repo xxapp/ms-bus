@@ -24,15 +24,15 @@ avalon.state('root', {
     url: '/',
     views: {
         'header': {
-            template: require('/components/header').view,
-            controller: require('/components/header').controller
+            template: require('/components/common-header').view,
+            controller: require('/components/common-header').controller
         },
         'sidebar': {
-            template: require('/components/sidebar').view,
-            controller: require('/components/sidebar').controller
+            template: require('/components/common-sidebar').view,
+            controller: require('/components/common-sidebar').controller
         },
         'content': {
-            template: '<h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1>',
+            template: '<h1>Welcome</h1>',
             controller: avalon.controller(function ($ctrl) {
                 // 视图渲染后，意思是avalon.scan完成
                 $ctrl.$onRendered = function() {
@@ -60,8 +60,8 @@ avalon.state('root.demo', {
     url: 'demo',
     views: {
         "content@": {
-            templateProvider: require.async('/components/demo', 'view'),
-            controllerProvider: require.async('/components/demo', 'controller')
+            templateProvider: require.async('/components/gf-demo', 'view'),
+            controllerProvider: require.async('/components/gf-demo', 'controller')
         }
     },
     ignoreChange: function (type) {

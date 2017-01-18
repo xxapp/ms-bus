@@ -11,7 +11,7 @@ var header = avalon.define({
     }
 });
 
-exports.view = __inline('./header.html');
+exports.view = __inline('./common-header.html');
 exports.controller = avalon.controller(function($ctrl) {
     // 视图渲染后，意思是avalon.scan完成
     $ctrl.$onRendered = function() {

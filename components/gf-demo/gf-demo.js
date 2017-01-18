@@ -118,7 +118,7 @@ var form = avalon.define({
 });
 
 // 导出模板
-exports.view = __inline('./demo.html');
+exports.view = __inline('./gf-demo.html');
 // 导出逻辑
 exports.controller = avalon.controller(function($ctrl) {
     $ctrl.$onRendered = function() {

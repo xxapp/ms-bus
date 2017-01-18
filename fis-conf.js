@@ -9,6 +9,8 @@ fis.hook('commonjs', {
     }
 });
 
+fis.set('project.ignore', ['node_modules/**', 'output/**', '.git/**', 'fis-conf.js', 
+                            'README.md', 'readme.txt', 'cmd.cmd', 'package.json', 'LICENSE']);
 fis.set('baseurl', '');
 
 fis.unhook('components');
@@ -19,8 +21,15 @@ fis.hook('node_modules', {
     shutup: true
 });
 
-
-fis.match('/test/*.js', {
+// 默认情况下不添加hash
+fis.match('**', {
+    useHash: false,
+    release: false
+});
+fis.match('/*.html', {
+    release: '/$0'
+});
+fis.match('/*.js', {
     isMod: true,
     release: '/static/$0'
 });
@@ -28,10 +37,14 @@ fis.match('/{node_modules,components}/**/*.js', {
     isMod: true, // 设置 comp 下都是一些组件，组件建议都是匿名方式 define
     release: '/static/$0'
 });
-fis.match('/{node_modules,components}/**/*.html', {
+fis.match('/components/**/*.html', {
+    postprocessor: fis.plugin('component-view', { }),
     release: false
 });
-fis.match('/{services,stores,events}/*.js', {
+fis.match('/{node_modules,components}/**/*.{css,eot,svg,ttf,woff,map}', {
+    release: '/static/$0'
+});
+fis.match('/{services,events}/*.js', {
     isMod: true,
     release: '/static/$0'
 });
@@ -42,20 +55,17 @@ fis.match('/services/*.js', {
             .replace('__SPRING_API_URL__', 'localhost:8080/api');
     }
 });
-fis.match('/components/**/*.html', {
-    postprocessor: fis.plugin('component-view', {
-    })
-});
-fis.match('/components/**/*.css', {
-    release: '/static/$0'
-});
 fis.match('/vendor/**/*.js', {
     isMod: true,
     release: '/static/$0'
 });
-fis.match('/{README.md,Readme.txt,cmd.cmd,package.json}', {
-    release: false
-})
+fis.match('/static/**', {
+    release: '/static/$0'
+});
+// mock假数据
+fis.match('/mock/**', {
+    release: '/$0'
+});
 
 fis.match('::package', {
     // npm install [-g] fis3-postpackager-loader

@@ -54,7 +54,7 @@ var sidebar = avalon.define({
     }
 });
 
-exports.view = __inline('./sidebar.html');
+exports.view = __inline('./common-sidebar.html');
 exports.controller = avalon.controller(function($ctrl) {
     // 视图渲染后，意思是avalon.scan完成
     $ctrl.$onRendered = function() {

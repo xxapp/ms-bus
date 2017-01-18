@@ -1,5 +1,8 @@
 var avalon = require('avalon');
 var avxUtil = require('/vendor/avx-component/avx-util');
+// 加载表单验证插件插件
+require('/vendor/bootstrapValidator');
+require('/vendor/bootstrapValidator/zh_CN');
 
 /**
  * Form组件
