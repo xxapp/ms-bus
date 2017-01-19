@@ -41,7 +41,7 @@ fis.match('/components/**/*.html', {
     postprocessor: fis.plugin('component-view', { }),
     release: false
 });
-fis.match('/{node_modules,components}/**/*.{css,eot,svg,ttf,woff,map}', {
+fis.match('/{node_modules,components}/**/*.{css,eot,svg,ttf,woff,woff2,map}', {
     release: '/static/$0'
 });
 fis.match('/{services,events}/*.js', {

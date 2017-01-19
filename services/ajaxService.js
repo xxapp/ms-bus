@@ -1,6 +1,6 @@
 var avalon = require('avalon');
 var $ = require('jquery');
-var bootbox = require('bootbox.js/bootbox');
+var bootbox = require('bootbox');
 var beyond = require('/vendor/beyond');
 
 var msg = require('/services/messageService.js');

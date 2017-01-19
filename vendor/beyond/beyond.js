@@ -1,7 +1,7 @@
 ﻿var $ = require('jquery');
 var avalon = require('avalon');
 var toastr = require('/vendor/toastr');
-var bootbox = require('bootbox.js/bootbox');
+var bootbox = require('bootbox');
 bootbox.setDefaults('locale', 'zh_CN');
 
 function getThemeColorFromCss(n) {

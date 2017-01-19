@@ -1,5 +1,5 @@
 var avalon = require('avalon');
-var bootbox = require('bootbox.js/bootbox');
+var bootbox = require('bootbox');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
 avalon.component('ms:dialog', {

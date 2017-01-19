@@ -1,6 +1,6 @@
 var avalon = require('avalon');
 var beyond = require('/vendor/beyond');
-var bootbox = require('bootbox.js/bootbox');
+var bootbox = require('bootbox');
 
 var store = require('/services/storeService.js');
 var msg = require('/services/messageService.js');
