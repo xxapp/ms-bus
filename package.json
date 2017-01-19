@@ -8,10 +8,14 @@
     "dev": "fis3 server start -p 8081 & fis3 release -w"
   },
   "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xxapp/msBus.git"
+  },
   "license": "ISC",
   "dependencies": {
     "avalonjs": "https://github.com/RubyLouvre/avalon/archive/1.5.8.tar.gz",
-    "bootbox.js": "https://github.com/makeusabrew/bootbox/archive/v4.3.0.tar.gz",
+    "bootbox": "^4.4.0",
     "bootstrap": "^3.2.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "events": "^1.1.1",
