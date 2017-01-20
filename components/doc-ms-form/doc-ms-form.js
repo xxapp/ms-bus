@@ -14,6 +14,7 @@ var vm = avalon.define({
         name: '',
         gender: '',
         birthday: '',
+        hobby: [],
         avatar: '',
         bio: ''
     },

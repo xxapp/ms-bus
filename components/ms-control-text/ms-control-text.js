@@ -33,6 +33,7 @@ avalon.component('ms:controlText', {
         return tmpl;
     },
     $init: function (vm, el) {
+        vm.$parentVmId = avxUtil.pickToRefs(vm, el);
     },
     $dispose: function (vm, el) {
         avxUtil.removeFromRefs(vm, el);

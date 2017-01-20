@@ -8,6 +8,10 @@
                 <div class="widget-body">
                     <ms:form $id="doc_form" config="$form_config">
                         <ms:control-text label="姓名" col="name"></ms:control-text>
+                        <ms:control-checkbox-group label="性别" col="hobby">
+                            <ms:checkbox value="M">男</ms:checkbox>
+                            <ms:checkbox value="F">女</ms:checkbox>
+                        </ms:control-checkbox-group>
                         <ms:control-select label="性别" col="gender">
                             <option value="">--请选择--</option>
                             <option value="M">男</option>

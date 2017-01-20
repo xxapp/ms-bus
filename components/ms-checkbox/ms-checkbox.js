@@ -3,8 +3,11 @@ var cEvent = require('/events/componentEvent');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
 avalon.component('ms:checkbox', {
+    $slot: 'label',
     $template: __inline('./ms-checkbox.html'),
     $$template: function (tmpl) {
+        var $parent = avalon.vmodels[this.parentVmId];
+        this.duplex = this.duplex || ($parent && $parent.duplex) || '';
         tmpl = tmpl.replace(/ms-duplex="duplex"/g, this.duplex ? 'ms-duplex="' + this.duplex + '"' : '');
         tmpl = tmpl.replace(/ms-duplex-checked="duplexChecked"/g, this.duplexChecked ? 'ms-duplex-checked="' + this.duplexChecked + '"' : '');
         tmpl = tmpl.replace(/ms-change="change"/g, this.change ? 'ms-change="' + this.change + '"' : '');
@@ -20,6 +23,10 @@ avalon.component('ms:checkbox', {
             this.focus();
         }
         vm.helpId = vm.$id;
+        // // inline在IE8下显示有问题，待解决
+        // if (vm.inline != void 0) {
+        //     vm.wrapper = 'checkbox-inline';
+        // }
     },
     $ready: function (vm, el) {
         if (~window.navigator.userAgent.indexOf('MSIE 8.0')) {
@@ -40,10 +47,15 @@ avalon.component('ms:checkbox', {
     $computed: {
         hasLabel: {
             get: function () {
-                return this.label.trim() !== '';
+                if (typeof this.label === 'string') {
+                    return this.label.trim() !== '';
+                } else {
+                    return this.label !== null;
+                }
             }
         }
     },
+    wrapper: 'checkbox',
     label: '',
     duplex: '',
     duplexChecked: '',
