@@ -27,10 +27,26 @@ avalon.component('ms:controlCheckboxGroup', {
     $dispose: function (vm, el) {
         avxUtil.removeFromRefs(vm, el);
     },
+    $ready: function (vm, el) {
+        vm.elHiddenInput = $(el).find('input:hidden');
+    },
+    $computed: {
+        strValue: {
+            get: function () {
+                var me = this;
+                avalon.nextTick(function () {
+                    me.elHiddenInput && me.elHiddenInput.trigger('input');
+                });
+                return this.value.join();
+            }
+        }
+    },
+    $skipArray: ['elHiddenInput'],
     $parentVmId: '',
     label: '',
     col: '',
     duplex: '',
     model: '',
-    value: ''
+    value: [],
+    elHiddenInput: ''
 });

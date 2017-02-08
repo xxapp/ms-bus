@@ -13,4 +13,4 @@ require('/components/ms-control-datetimepicker');
 require('/components/ms-checkbox');
 require('/components/ms-control-checkbox-group');
 
-require('/components/directive-cprop');
+require('./directive-cprop');

@@ -28,6 +28,13 @@ var vm = avalon.define({
                         }
                     }
                 },
+                hobby: {
+                    validators: {
+                        notEmpty: {
+                            message: '请选择兴趣'
+                        }
+                    }
+                },
                 gender: {
                     validators: {
                         notEmpty: {

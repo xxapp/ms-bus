@@ -27,6 +27,18 @@ avalon.component('ms:checkbox', {
         // if (vm.inline != void 0) {
         //     vm.wrapper = 'checkbox-inline';
         // }
+
+        vm.innerChnage = function () {
+            if (vm.parentVmId.indexOf('control-checkbox-group') > -1) {
+                // 如果在checkbox-group下，则通知当前组件的change
+                var $parent = avalon.vmodels[vm.parentVmId];
+                if (this.checked) {
+                    $parent.value.push(this.value);
+                } else {
+                    $parent.value.remove(this.value);
+                }
+            }
+        }
     },
     $ready: function (vm, el) {
         if (~window.navigator.userAgent.indexOf('MSIE 8.0')) {
@@ -61,6 +73,7 @@ avalon.component('ms:checkbox', {
     duplexChecked: '',
     value: '',
     change: '',
+    innerChnage: avalon.noop,
     click: '',
     flush: avalon.noop,
     helpId: ''

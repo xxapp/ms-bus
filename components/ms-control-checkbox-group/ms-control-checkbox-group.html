@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
-        <label class="control-label">{{label}}</label>
-        <input type="hidden" class="form-control" ms-duplex="value" ms-attr-name="col">
+        <label class="control-label">{{label}}{{record.hobby.join()}}</label>
+        <input type="hidden" class="form-control" ms-duplex="strValue" data-bv-excluded="false" ms-attr-name="col">
         {{ content | html }}
     </div>
 </template>
