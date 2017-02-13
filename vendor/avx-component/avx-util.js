@@ -75,15 +75,17 @@ exports.enableDynamicProp = function (vm, el) {
         if (vmodels.hasOwnProperty(id)) {
             ancestorVm = vmodels[id];
             // 对比每个定义在$dynamicProp中的属性，如果在此vm中，则添加watch来更新内部属性值
-            for (var j = 0, innerPropObj; innerPropObj = vm.$dynamicProp[j]; j++) {
-                var innerProp = innerPropObj.name;
+            for (var innerProp in vm.$dynamicProp) {
+                var innerPropObj = vm.$dynamicProp[innerProp];
                 var prop = el.getAttribute('data-prop-' + innerProp);
-                if (ancestorVm.hasOwnProperty(prop)) {
+                if (!prop) { continue; }
+                var value = excuteProp(ancestorVm, prop);
+                if (value !== undefined && value !== null && !innerPropObj.matched) {
                     var source = {};
-                    source[camelize(innerProp)] = ancestorVm[prop];
+                    source[camelize(innerProp)] = value;
                     avalon.mix(vm, source);
                     // 根据不同的类型，添加不同的watch
-                    (function (ancestorVm, prop, innerPropObj) {
+                    (function (ancestorVm, prop, innerProp, innerPropObj) {
                         var watchPath = prop, simple = false;
                         switch (innerPropObj.type) {
                             case 'Array': watchPath = prop + '.length';  break;
@@ -97,26 +99,28 @@ exports.enableDynamicProp = function (vm, el) {
                             ancestorVm.$watch(watchPath, function (v, oldV) {
                                 var source = {};
                                 if (simple) {
-                                    source[camelize(innerPropObj.name)] = ancestorVm[prop];
+                                    source[camelize(innerProp)] = excuteProp(ancestorVm, prop);
                                 } else {
-                                    source[camelize(innerPropObj.name)] = ancestorVm[prop].$model;
+                                    source[camelize(innerProp)] = excuteProp(ancestorVm, prop).$model;
                                 }
                                 avalon.mix(vm, source);
                             });
-                        } else if (innerPropObj.name == 'config') {
-                            avalon.mix(vm, ancestorVm[prop]);
-                        }
-                        else if (innerPropObj.type == 'Function') {
+                            innerPropObj.setter = function (val) {
+                                excuteProp(ancestorVm, prop, val);
+                            }
+                        } else if (innerProp == 'config') {
+                            avalon.mix(vm, excuteProp(ancestorVm, prop));
+                        } else if (innerPropObj.type == 'Function') {
                             // 如果是Function类型的参数，改变此函数内部this的指向后赋值
                             var source = {};
-                            source[camelize(innerPropObj.name)] = function () {
-                                return ancestorVm[prop].apply(avalon.isWindow(this) ? ancestorVm : this, Array.prototype.slice.call(arguments));
+                            source[camelize(innerProp)] = function () {
+                                return excuteProp(ancestorVm, prop).apply(avalon.isWindow(this) ? ancestorVm : this, Array.prototype.slice.call(arguments));
                             };
                             avalon.mix(vm, source);
                         } else {
                             // 如果传入参数的外部引用属性名以'$'开头，则不去监控，直接赋值
                             var source = {};
-                            source[camelize(innerPropObj.name)] = ancestorVm[prop];
+                            source[camelize(innerProp)] = excuteProp(ancestorVm, prop);
                             avalon.mix(vm, source);
                         }
                         if (innerPropObj.type == 'Array') {
@@ -124,14 +128,18 @@ exports.enableDynamicProp = function (vm, el) {
                             ancestorVm.$watch('*', function (v, oldV, path) {
                                 if (path === prop) {
                                     var source = {};
-                                    source[camelize(innerPropObj.name)] = ancestorVm[prop];
+                                    if (simple) {
+                                        source[camelize(innerProp)] = excuteProp(ancestorVm, prop);
+                                    } else {
+                                        source[camelize(innerProp)] = excuteProp(ancestorVm, prop).$model;
+                                    }
                                     avalon.mix(vm, source);
                                 }
                                 //unwatch();
                             });
                         }
-                    })(ancestorVm, prop, innerPropObj);
-                    propCount--;
+                    })(ancestorVm, prop, innerProp, innerPropObj);
+                    innerPropObj.matched = true;
                 }
             }
             // 如果全部找到，则不在向上查找
@@ -149,6 +157,41 @@ function camelize(str) {
     return str.replace(/[-_][^-_]/g, function (match) {
         return match.charAt(1).toUpperCase()
     });
+}
+
+/**
+ * 根据表达式获取/设置对象的属性值
+ */
+function excuteProp(obj, expr, val) {
+    // 'record.gender[0].name[test].kk[bar]' --> ["record", "gender", "0", "name", "test", "bar", ""]
+    var rDivider = /\.|\]\.|\]\[|\]|\[/;
+    // '"bar"' --> 'bar'
+    var rNormalize = /^(\'|\")|(\'|\")$/g;
+
+    var result = obj, parent;
+    var propList = expr.split(rDivider);
+
+    if (!result) { return result; }
+    for (var i = propList.length - 1; i >= 0; i--) {
+        var item = propList[i].replace(rNormalize, '');
+        if (!item) {
+            propList.splice(i, i + 1);
+        }
+    }
+    for (var i = 0, len = propList.length; i < len; i++) {
+        var item = propList[i].replace(rNormalize, '');
+        if (!item) { continue; }
+        if (!result[item]) {
+            return result[item];
+        } else {
+            if (val && i == len - 1) {
+                result[item] = val;
+            }
+            result = result[item];
+        }
+    }
+
+    return result;
 }
 
 exports.generateID = function (prefix) {

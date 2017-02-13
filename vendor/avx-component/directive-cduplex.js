@@ -1,6 +1,6 @@
 var avalon = require('avalon');
 
-avalon.directive('cprop', {
+avalon.directive('cduplex', {
     init: function (binding) {
         var elem = binding.element, parent = elem.parentNode;
         var vmodels = binding.vmodels;
@@ -11,9 +11,7 @@ avalon.directive('cprop', {
             }
         }
         elem.setAttribute('data-vm-chain', vmChain.join(','));
-        if (binding.param) {
-            elem.setAttribute('data-prop-' + binding.param, binding.expr);
-        }
+        elem.setAttribute('data-prop-value', binding.expr);
 
         binding.rollback = function () {
         }

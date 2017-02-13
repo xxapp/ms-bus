@@ -12,11 +12,19 @@
                             <ms:checkbox value="code">编程</ms:checkbox>
                             <ms:checkbox value="other">其他</ms:checkbox>
                         </ms:control-checkbox-group>
-                        <ms:control-select label="性别" col="gender">
-                            <option value="">--请选择--</option>
+                        <ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
                             <option value="M">男</option>
                             <option value="F">女</option>
-                        </ms:control-select>
+                        </ms:control-select2>
+                        <ms:control-select2 
+                            label="代表作" 
+                            col="masterpiece" 
+                            ms-cduplex="record.masterpiece" 
+                            store="github" 
+                            action="repository" 
+                            col-key="full_name" 
+                            col-val="full_name">
+                        </ms:control-select2>
                         <ms:control-datepicker label="出生日期" col="birthday"></ms:control-datepicker>
                         <ms:control-file label="头像" col="avatar" store="file"></ms:control-file>
                         <ms:control-textarea label="个人简介" col="bio" rows="5"></ms:control-textarea>

@@ -1,4 +1,7 @@
 global.jQuery = global.$ = require('jquery');
+/**
+ * @require ./node_modules/bootstrap/dist/css/bootstrap.css
+ */
 require('bootstrap');
 
 var avalon = require('avalon');

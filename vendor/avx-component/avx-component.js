@@ -8,9 +8,11 @@ require('/components/ms-form');
 require('/components/ms-control-text');
 require('/components/ms-control-textarea');
 require('/components/ms-control-select');
+require('/components/ms-control-select2');
 require('/components/ms-control-file');
 require('/components/ms-control-datetimepicker');
 require('/components/ms-checkbox');
 require('/components/ms-control-checkbox-group');
 
 require('./directive-cprop');
+require('./directive-cduplex');

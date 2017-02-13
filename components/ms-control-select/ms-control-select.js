@@ -3,8 +3,8 @@ var store = require('/services/storeService');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
 /**
- * 文本输入组件
- * @prop label 文本框前的label标签内容
+ * 选择组件
+ * @prop label 选择框前的label标签内容
  * @prop col 如果有绑定的数据行，此属性值指的是数据的字段名称
  * @prop duplex 自定义的绑定数据，如果同时存在则会覆盖col
  * @prop store 数据源，组件会自动寻找数据源中的dict方法，如果dict没定义则使用list方法

@@ -13,6 +13,7 @@ var vm = avalon.define({
     record: {
         name: '',
         gender: '',
+        masterpiece: '',
         birthday: '',
         hobby: [],
         avatar: '',

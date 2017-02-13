@@ -276,3 +276,27 @@ exports.file = {
         });
     }
 };
+
+exports.github = {
+    limit: 30,
+    repository: function (params) {
+        return ajax({
+            url: "/search/repositories",
+            type: 'get',
+            data: params
+        });
+    },
+    processRequest: function (params) {
+        return {
+            q: params.query,
+            start: (params.page - 1) * this.limit,
+            limit: this.limit
+        };
+    },
+    processResponse: function (data, params) {
+        var data = data.data;
+        data.rows = data.items;
+        data.total = data.total_count;
+        return data;
+    }
+};

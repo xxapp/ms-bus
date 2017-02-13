@@ -26,12 +26,12 @@ var avxUtil = require('/vendor/avx-component/avx-util');
 avalon.component('ms:pagination', {
     $template: __inline('./ms-pagination.html'),
     $replace: 1,
-    $dynamicProp: [
-        { type: 'Number', name: 'total' },
-        { type: 'Number', name: 'page-size' },
-        { type: 'Number', name: 'current-page' },
-        { type: 'Function', name: 'current-change' }
-    ],
+    $dynamicProp: {
+        total: { type: 'Number' },
+        'page-size': { type: 'Number' },
+        'current-page': { type: 'Number' },
+        'current-change': { type: 'Function' }
+    },
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
         avxUtil.enableDynamicProp(vm, el);
