@@ -181,7 +181,7 @@ function excuteProp(obj, expr, val) {
     for (var i = 0, len = propList.length; i < len; i++) {
         var item = propList[i].replace(rNormalize, '');
         if (!item) { continue; }
-        if (!result[item]) {
+        if (result[item] === undefined || result[item] === null) {
             return result[item];
         } else {
             if (val && i == len - 1) {

@@ -36,7 +36,6 @@ avalon.component('ms:controlSelect2', {
     $dynamicProp: {
         value: { type: 'String' }
     },
-    $valueHost: { vmId: '', prop: '' },
     $$template: function (tmpl) {
         var vm = this;
         var $parent = avalon.vmodels[this.parentVmId];
