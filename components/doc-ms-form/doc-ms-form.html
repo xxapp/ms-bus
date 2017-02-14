@@ -25,6 +25,11 @@
                             col-key="full_name" 
                             col-val="full_name">
                         </ms:control-select2>
+                        <ms:control-select2 
+                            ms-repeat="record.genders" label="性别" col="genders[]" ms-cduplex="record.genders[$index]">
+                            <option value="M">男</option>
+                            <option value="F">女</option>
+                        </ms:control-select2>
                         <ms:control-datepicker label="出生日期" col="birthday"></ms:control-datepicker>
                         <ms:control-file label="头像" col="avatar" store="file"></ms:control-file>
                         <ms:control-textarea label="个人简介" col="bio" rows="5"></ms:control-textarea>

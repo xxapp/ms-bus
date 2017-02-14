@@ -13,7 +13,7 @@ require('/node_modules/select2/dist/js/i18n/zh-CN');
  * select2组件
  * @prop label 选择框前的label标签内容
  * @prop col 指定name属性值
- * @prop store 数据源，组件会自动寻找数据源中的dict方法，如果dict没定义则使用list方法
+ * @prop store 数据源，组件会自动寻找storeService.js中的配置
  * @prop action 指定使用数据源中的那个方法，默认为list
  * @prop col-key 数据中作为select的value属性值的字段，默认为id
  * @prop col-val 数据中作为select的展示值的字段，默认为name

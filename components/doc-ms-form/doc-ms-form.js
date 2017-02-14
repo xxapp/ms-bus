@@ -17,7 +17,8 @@ var vm = avalon.define({
         birthday: '',
         hobby: [],
         avatar: '',
-        bio: ''
+        bio: '',
+        genders: ['F', 'M']
     },
     $form_config: {
         rules: {
