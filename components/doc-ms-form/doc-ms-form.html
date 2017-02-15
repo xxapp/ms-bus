@@ -19,16 +19,12 @@
                         <ms:control-select2 
                             label="代表作" 
                             col="masterpiece" 
-                            ms-cduplex="record.masterpiece" 
+                            ms-cprop-value-list="record.masterpiece" 
                             store="github" 
                             action="repository" 
                             col-key="full_name" 
-                            col-val="full_name">
-                        </ms:control-select2>
-                        <ms:control-select2 
-                            ms-repeat="record.genders" label="性别" col="genders[]" ms-cduplex="record.genders[$index]">
-                            <option value="M">男</option>
-                            <option value="F">女</option>
+                            col-val="full_name"
+                            multiple="true">
                         </ms:control-select2>
                         <ms:control-datepicker label="出生日期" col="birthday"></ms:control-datepicker>
                         <ms:control-file label="头像" col="avatar" store="file"></ms:control-file>

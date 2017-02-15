@@ -13,12 +13,11 @@ var vm = avalon.define({
     record: {
         name: '',
         gender: '',
-        masterpiece: '',
+        masterpiece: ['xxapp/msBus'],
         birthday: '',
         hobby: [],
         avatar: '',
-        bio: '',
-        genders: ['F', 'M']
+        bio: ''
     },
     $form_config: {
         rules: {

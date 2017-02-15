@@ -18,6 +18,7 @@ require('/node_modules/select2/dist/js/i18n/zh-CN');
  * @prop col-key 数据中作为select的value属性值的字段，默认为id
  * @prop col-val 数据中作为select的展示值的字段，默认为name
  * @prop multiple 是否多选
+ * @prop value-list 值列表，当multiple为true时有效，可通过ms-cprop双向绑定
  * 
  * @example
  *  <ms:control-select2 label="图片尺寸">
@@ -27,6 +28,13 @@ require('/node_modules/select2/dist/js/i18n/zh-CN');
  * 
  * 
  *  <ms:control-select2 label="商品分类" store="category"></ms:control-select2>
+ * 
+ * <ms:control-select2 
+        label="代表作" 
+        col="masterpiece" 
+        ms-cprop-value-list="record.masterpiece" 
+        multiple="true">
+    </ms:control-select2>
  */
 avalon.component('ms:controlSelect2', {
     $slot: 'content',
@@ -34,14 +42,15 @@ avalon.component('ms:controlSelect2', {
     $template: __inline('./ms-control-select2.html'),
     $replace: 1,
     $dynamicProp: {
-        value: { type: 'String' }
+        value: { type: 'String' },
+        'value-list': { type: 'Array' }
     },
     $$template: function (tmpl) {
         var vm = this;
         var $parent = avalon.vmodels[this.parentVmId];
         this.model = this.model || ($parent && $parent.model) || 'record';
         if (vm.store) {
-            tmpl = tmpl.replace(/\{\{content\|html\}\}/g, '');
+            tmpl = tmpl.replace(/\{\{content\|html\}\}/g, '<option ms-repeat="options" ms-attr-value="el.id" ms-attr-selected="el.selected">{{el.text}}</option>');
         }
         return tmpl;
     },
@@ -56,10 +65,29 @@ avalon.component('ms:controlSelect2', {
             }
             vm.$select.val(v).trigger('change');
         });
+        vm.$watch('*', function (v, oldV, path) {
+            if (path === 'valueList') {
+                if (vm.$select.val().toString() == v.$model.toString()) {
+                    return ;
+                }
+                vm.$select.val(v.$model).trigger('change');
+            }
+        });
     },
     $ready: function (vm, el) {
         vm.$select = $(el).find('select');
-        vm.$select.val(vm.value).trigger('change');
+        if (vm.store) {
+            if (vm.multiple) {
+                vm.options = [];
+                avalon.each(vm.valueList, function (i, n) {
+                    vm.options.push({ id: n, text: n });
+                });
+                vm.$select.val(vm.valueList.$model).trigger('change');
+            } else {
+                vm.options = [{ id: vm.value, text: vm.value, selected: true }];
+                vm.$select.val(vm.value).trigger('change');
+            }
+        }
         var select2Options = {
             language: 'zh-CN',
             placeholder: vm.placeholder,
@@ -107,7 +135,11 @@ avalon.component('ms:controlSelect2', {
         vm.$select
             .select2(select2Options)
             .on('change', function () {
-                vm.$dynamicProp.value.setter(this.value);
+                if (vm.multiple) {
+                    vm.$dynamicProp['value-list'].setter(vm.$select.val());
+                } else {
+                    vm.$dynamicProp.value.setter(this.value);
+                }
                 $(this).trigger('input');
             });
     },
@@ -126,5 +158,7 @@ avalon.component('ms:controlSelect2', {
     model: '',
     placeholder: '请选择一项',
     value: '',
+    valueList: [],
+    options: [],
     multiple: false
 });
