@@ -1,6 +1,6 @@
 {
-  "name": "component-avalon",
-  "version": "1.0.1",
+  "name": "ms-bus",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
