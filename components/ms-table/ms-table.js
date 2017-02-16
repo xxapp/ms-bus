@@ -76,7 +76,7 @@ avalon.component('ms:table', {
             if (type == 'check-header') {
                 column = {
                     type: 'check',
-                    content: '<ms:checkbox duplex="checked" change="onCheck(row)" ms-attr-value="row.' + props.col + '"></ms:checkbox>'
+                    content: '<ms:checkbox ms-cduplex="checked" change="onCheck(row)" ms-attr-value="row.' + props.col + '"></ms:checkbox>'
                     //content: '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-click="onCheck(row)" ms-attr-value="row.' + props.col + '"><span class="text"></span></label></div>'
                 };
             } else if (type == 'table-header') {

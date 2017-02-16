@@ -6,17 +6,17 @@ avalon.component('ms:checkbox', {
     $slot: 'label',
     $template: __inline('./ms-checkbox.html'),
     $$template: function (tmpl) {
-        var $parent = avalon.vmodels[this.parentVmId];
-        this.duplex = this.duplex || ($parent && $parent.duplex) || '';
-        tmpl = tmpl.replace(/ms-duplex="duplex"/g, this.duplex ? 'ms-duplex="' + this.duplex + '"' : '');
-        tmpl = tmpl.replace(/ms-duplex-checked="duplexChecked"/g, this.duplexChecked ? 'ms-duplex-checked="' + this.duplexChecked + '"' : '');
         tmpl = tmpl.replace(/ms-change="change"/g, this.change ? 'ms-change="' + this.change + '"' : '');
         return tmpl;
     },
     $replace: 1,
+    $dynamicProp: {
+        duplex: { type: 'Array' }
+    },
     $init: function (vm, el) {
         // 借元素之力将此组件实例与父组件实例联系起来
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
+        avxUtil.enableDynamicProp(vm, el);
 
         vm.flush = function () {
             this.blur();
@@ -29,13 +29,14 @@ avalon.component('ms:checkbox', {
         // }
 
         vm.innerChnage = function () {
-            if (vm.parentVmId.indexOf('control-checkbox-group') > -1) {
+            vm.$dynamicProp.duplex.setter && vm.$dynamicProp.duplex.setter(vm.duplex.$model);
+            if (vm.parentVmId && vm.parentVmId.indexOf('control-checkbox-group') > -1) {
                 // 如果在checkbox-group下，则通知当前组件的change
                 var $parent = avalon.vmodels[vm.parentVmId];
                 if (this.checked) {
-                    $parent.value.push(this.value);
+                    $parent.duplex.push(this.value);
                 } else {
-                    $parent.value.remove(this.value);
+                    $parent.duplex.remove(this.value);
                 }
             }
         }
@@ -69,8 +70,7 @@ avalon.component('ms:checkbox', {
     },
     wrapper: 'checkbox',
     label: '',
-    duplex: '',
-    duplexChecked: '',
+    duplex: [],
     value: '',
     change: '',
     innerChnage: avalon.noop,

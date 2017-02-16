@@ -6,16 +6,15 @@ avalon.component('ms:controlCheckboxGroup', {
     content: '',
     $template: __inline('./ms-control-checkbox-group.html'),
     $replace: 1,
+    $dynamicProp: {
+        duplex: { type: 'Array' }
+    },
     $$template: function (tmpl) {
-        var $parent = avalon.vmodels[this.parentVmId];
-        this.model = this.model || ($parent && $parent.model) || 'record';
-        if (!this.duplex && this.col) {
-            this.duplex = this.model + '.' + this.col;
-        }
         return tmpl;
     },
     $init: function (vm, el) {
         vm.$parentVmId = avxUtil.pickToRefs(vm, el);
+        avxUtil.enableDynamicProp(vm, el);
 
         $(el).find('*').each(function (i, n) {
             if (n.tagName.toLowerCase().indexOf('checkbox') > -1) {
@@ -23,12 +22,23 @@ avalon.component('ms:controlCheckboxGroup', {
                 avxUtil.markPick(vm, n);
             }
         });
+        vm.$watch('*', function (v, oldV, path) {
+            if (path === 'duplex') {
+                checkChildren(vm.$refs, v.$model);
+                vm.$dynamicProp.duplex.setter && vm.$dynamicProp.duplex.setter(v.$model);
+            }
+        });
+        vm.$watch('duplex.length', function () {
+            checkChildren(vm.$refs, vm.duplex.$model);
+            vm.$dynamicProp.duplex.setter && vm.$dynamicProp.duplex.setter(vm.duplex.$model);
+        });
     },
     $dispose: function (vm, el) {
         avxUtil.removeFromRefs(vm, el);
     },
     $ready: function (vm, el) {
         vm.elHiddenInput = $(el).find('input:hidden');
+        checkChildren(vm.$refs, vm.duplex.$model);
     },
     $computed: {
         strValue: {
@@ -37,7 +47,7 @@ avalon.component('ms:controlCheckboxGroup', {
                 avalon.nextTick(function () {
                     me.elHiddenInput && me.elHiddenInput.trigger('input');
                 });
-                return this.value.join();
+                return this.duplex.join();
             }
         }
     },
@@ -45,8 +55,14 @@ avalon.component('ms:controlCheckboxGroup', {
     $parentVmId: '',
     label: '',
     col: '',
-    duplex: '',
-    model: '',
-    value: [],
+    duplex: [],
     elHiddenInput: ''
 });
+
+function checkChildren(children, value) {
+    for (var i in children) {
+        if (children.hasOwnProperty(i)) {
+            children[i].duplex = value;
+        }
+    }
+}

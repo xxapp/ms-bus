@@ -185,7 +185,10 @@ function excuteProp(obj, expr, val) {
             return result[item];
         } else {
             if (val && i == len - 1) {
-                result[item] = val;
+                if (result[item].toString() !== val.toString()) {
+                    // 阻止循环调用
+                    result[item] = val;
+                }
             }
             result = result[item];
         }

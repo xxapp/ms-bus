@@ -42,7 +42,7 @@ avalon.component('ms:controlSelect2', {
     $template: __inline('./ms-control-select2.html'),
     $replace: 1,
     $dynamicProp: {
-        value: { type: 'String' },
+        duplex: { type: 'String' },
         'value-list': { type: 'Array' }
     },
     $$template: function (tmpl) {
@@ -59,7 +59,7 @@ avalon.component('ms:controlSelect2', {
         avxUtil.enableDynamicProp(vm, el);
         if (vm.store && !store[vm.store]) { avalon.error('配置了数据源，但数据源[' + vm.store + ']似乎未定义，/services/storeService.js') }
 
-        vm.$watch('value', function (v) {
+        vm.$watch('duplex', function (v) {
             if (vm.$select.val() == v) {
                 return ;
             }
@@ -84,8 +84,8 @@ avalon.component('ms:controlSelect2', {
                 });
                 vm.$select.val(vm.valueList.$model).trigger('change');
             } else {
-                vm.options = [{ id: vm.value, text: vm.value, selected: true }];
-                vm.$select.val(vm.value).trigger('change');
+                vm.options = [{ id: vm.duplex, text: vm.duplex, selected: true }];
+                vm.$select.val(vm.duplex).trigger('change');
             }
         }
         var select2Options = {
@@ -138,7 +138,7 @@ avalon.component('ms:controlSelect2', {
                 if (vm.multiple) {
                     vm.$dynamicProp['value-list'].setter(vm.$select.val());
                 } else {
-                    vm.$dynamicProp.value.setter(this.value);
+                    vm.$dynamicProp.duplex.setter(this.value);
                 }
                 $(this).trigger('input');
             });
@@ -157,7 +157,7 @@ avalon.component('ms:controlSelect2', {
     colVal: 'name',
     model: '',
     placeholder: '请选择一项',
-    value: '',
+    duplex: '',
     valueList: [],
     options: [],
     multiple: false

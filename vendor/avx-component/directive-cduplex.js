@@ -40,7 +40,7 @@ avalon.directive('cduplex', {
             }
         }
         elem.setAttribute('data-vm-chain', vmChain.join(','));
-        elem.setAttribute('data-prop-value', binding.expr);
+        elem.setAttribute('data-prop-duplex', binding.expr);
 
         binding.rollback = function () {
         }
