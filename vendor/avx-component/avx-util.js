@@ -69,7 +69,6 @@ exports.enableDynamicProp = function (vm, el) {
     }
     var vmIds = vmChain.split(',');
     var vmodels = avalon.vmodels, ancestorVm;
-    var propCount = vm.$dynamicProp.length;
     // 按照vm链向上查找
     for (var i = 0, id; id = vmIds[i]; i++) {
         if (vmodels.hasOwnProperty(id)) {
@@ -141,10 +140,6 @@ exports.enableDynamicProp = function (vm, el) {
                     })(ancestorVm, prop, innerProp, innerPropObj);
                     innerPropObj.matched = true;
                 }
-            }
-            // 如果全部找到，则不在向上查找
-            if (propCount === 0) {
-                break;
             }
         }
     }

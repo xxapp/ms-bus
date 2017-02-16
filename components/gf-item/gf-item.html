@@ -5,14 +5,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ms:form>
-                            <ms:control-text label="商品名称" col="name"></ms:control-text>
+                            <ms:control-text label="商品名称" col="name" ms-cduplex="record.name"></ms:control-text>
                             <ms:control-select label="商品分类" col="catalog" store="category"></ms:control-select>
-                            <ms:control-text label="商品单价" col="price"></ms:control-text>
-                            <ms:control-text label="库存" col="store_count"></ms:control-text>
+                            <ms:control-text label="商品单价" col="price" ms-cduplex="record.price"></ms:control-text>
+                            <ms:control-text label="库存" col="store_count" ms-cduplex="record.store_count"></ms:control-text>
                             <ms:control-file label="大缩略图" btn-text="选择图片" col="tag.large_thumb" store="file"></ms:control-file>
                             <ms:control-file label="缩略图" btn-text="选择图片" col="tag.thumb" store="file"></ms:control-file>
                             <ms:control-textarea label="商品详情" col="tag.description" rows="4"></ms:control-textarea>
-                            <ms:control-text label="浏览量" col="view_count"></ms:control-text>
+                            <ms:control-text label="浏览量" col="view_count" ms-cduplex="record.view_count"></ms:control-text>
                         </ms:form>
                     </div>
                 </div>
@@ -22,9 +22,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ms:form>
-                            <ms:control-text label="标题" duplex="state.text" ms-repeat="state.subs"></ms:control-text>
+                            <ms:control-text label="标题" ms-cduplex="record.pushContent"></ms:control-text>
                             <ms:control-textarea label="副标题" rows="4"></ms:control-textarea>
-                            <ms:control-text label="标签"></ms:control-text>
+                            <ms:control-text label="标签" ms-repeat="state.subs" ms-cduplex="state.subs[$index]"></ms:control-text>
                             <ms:control-select label="商品分类">
                                 <option value="1">大图</option>
                                 <option value="2">小图</option>
@@ -43,14 +43,14 @@
                     <div class="widget-body">
                         <ms:form model="searchFields">
                             <div class="form-inline">
-                                <ms:control-text label="名称" col="name"></ms:control-text>
+                                <ms:control-text label="名称" col="name" ms-cduplex="searchFields.name"></ms:control-text>
                                 <ms:control-select label="类别" col="catalog" store="category"></ms:control-select>
-                                <ms:control-text label="单价" col="price"></ms:control-text>
+                                <ms:control-text label="单价" col="price" ms-cduplex="searchFields.price"></ms:control-text>
                                 <ms:control-datepicker label="上线时间" col="date"></ms:control-datepicker>
                             </div>
                             <br>
                             <div class="form-inline">
-                                <ms:control-text label="状态" col="state"></ms:control-text>
+                                <ms:control-text label="状态" col="state" ms-cduplex="searchFields.state"></ms:control-text>
                                 <button type="button" class="btn btn-info" ms-click="search">
                                     <span class="fa fa-search">
                                     </span>搜索

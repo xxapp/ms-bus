@@ -5,10 +5,10 @@
                 <div class="row">
                     <div class="col-md-12" ms-controller="demo.form">
                         <ms:form $id="form_demo" config="$form_config">
-                            <ms:control-text label="ID" col="region_id"></ms:control-text>
-                            <ms:control-text label="名称" col="region_name"></ms:control-text>
-                            <ms:control-text label="PID" col="region_parent_id"></ms:control-text>
-                            <ms:control-text label="套餐" col="suites[].name" duplex="el.name" ms-repeat="record.suites"></ms:control-text>
+                            <ms:control-text label="ID" col="region_id" ms-cduplex="record.region_id"></ms:control-text>
+                            <ms:control-text label="名称" col="region_name" ms-cduplex="record.region_name"></ms:control-text>
+                            <ms:control-text label="PID" col="region_parent_id" ms-cduplex="record.region_parent_id"></ms:control-text>
+                            <ms:control-text label="套餐" col="suites[].name" ms-repeat="record.suites" ms-cduplex="record.suites[$index].name"></ms:control-text>
                         </ms:form>
                     </div>
                 </div>
@@ -20,8 +20,8 @@
                     </div>
                     <div class="widget-body">
                         <ms:form class="form-inline" config="$form_search_config">
-                            <ms:control-text label="ID" col="region_id"></ms:control-text>
-                            <ms:control-text label="名称" col="region_name.firstName"></ms:control-text>
+                            <ms:control-text label="ID" col="region_id" ms-cduplex="searchFields.region_id"></ms:control-text>
+                            <ms:control-text label="名称" col="region_name.firstName" ms-cduplex="searchFields.region_name.firstName"></ms:control-text>
                             <ms:control-datepicker label="开始日期" col="startDate"></ms:control-datepicker>
                             <ms:control-datepicker label="结束日期" col="endDate"></ms:control-datepicker>
                             <button type="button" class="btn btn-info" ms-click="search">

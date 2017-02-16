@@ -8,13 +8,13 @@
                         <div slot="content">
                             <ms:form model="searchFields">
                                 <div class="form-inline">
-                                    <ms:control-text label="名称" col="name"></ms:control-text>
+                                    <ms:control-text label="名称" col="name" ms-cduplex="searchFields.name"></ms:control-text>
                                     <ms:control-select label="类别" col="catalog" store="category"></ms:control-select>
-                                    <ms:control-text label="单价" col="price"></ms:control-text>
+                                    <ms:control-text label="单价" col="price" ms-cduplex="searchFields.price"></ms:control-text>
                                 </div>
                                 <br>
                                 <div class="form-inline">
-                                    <ms:control-text label="状态" col="state"></ms:control-text>
+                                    <ms:control-text label="状态" col="state" ms-cduplex="searchFields.state"></ms:control-text>
                                     <button type="button" class="btn btn-info" ms-click="search">
                                         <span class="fa fa-search">
                                         </span>搜索

@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ms:form>
-                            <ms:control-text label="分类名称" col="name"></ms:control-text>
+                            <ms:control-text label="分类名称" col="name" ms-cduplex="record.name"></ms:control-text>
                         </ms:form>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="widget-body">
                         <ms:form class="form-inline" model="searchFields">
-                            <ms:control-text label="名称" col="name"></ms:control-text>
+                            <ms:control-text label="名称" col="name" ms-cduplex="searchFields.name"></ms:control-text>
                             <button type="button" class="btn btn-info" ms-click="search">
                                 <span class="fa fa-search">
                                 </span>搜索

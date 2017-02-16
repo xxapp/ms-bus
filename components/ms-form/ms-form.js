@@ -16,7 +16,7 @@ require('/vendor/bootstrapValidator/zh_CN');
  * 
  * @example
  * <ms:form>
- *   <ms:control-text label="分类名称" col="name"></ms:control-text>
+ *   <ms:control-text label="分类名称" col="name" ms-cduplex="record.name"></ms:control-text>
  * </ms:form>
  */
 avalon.component('ms:form', {
