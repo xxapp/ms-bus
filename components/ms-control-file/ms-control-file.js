@@ -12,7 +12,6 @@ var avxUtil = require('/vendor/avx-component/avx-util');
  * 
  * @example
  * ``` html
- * <!-- 注：例1和例2效果是一样的 -->
  * <ms:control-file label="标题1" col="name" ms-cduplex="record.name"></ms:control-file>
  * ```
  */
@@ -42,7 +41,8 @@ avalon.component('ms:controlFile', {
             store.file.insert({
                 fileElementId: inputId,
                 success: function (data, status) {
-                    $(el).find('input:text').val(data.url).trigger('input');
+                    vm.duplex = data.url;
+                    $(el).find('input:text').trigger('input');
                 }
             });
             $(this).replaceWith('<input type="file" name="file">');
