@@ -6,7 +6,7 @@
                     <div class="col-md-12">
                         <ms:form>
                             <ms:control-text label="商品名称" col="name" ms-cduplex="record.name"></ms:control-text>
-                            <ms:control-select label="商品分类" col="catalog" store="category"></ms:control-select>
+                            <ms:control-select label="商品分类" col="catalog" store="category" ms-cduplex="record.catalog"></ms:control-select>
                             <ms:control-text label="商品单价" col="price" ms-cduplex="record.price"></ms:control-text>
                             <ms:control-text label="库存" col="store_count" ms-cduplex="record.store_count"></ms:control-text>
                             <ms:control-file label="大缩略图" btn-text="选择图片" col="tag.large_thumb" store="file"></ms:control-file>
@@ -44,7 +44,7 @@
                         <ms:form model="searchFields">
                             <div class="form-inline">
                                 <ms:control-text label="名称" col="name" ms-cduplex="searchFields.name"></ms:control-text>
-                                <ms:control-select label="类别" col="catalog" store="category"></ms:control-select>
+                                <ms:control-select label="类别" col="catalog" store="category" ms-cduplex="searchFields.catalog"></ms:control-select>
                                 <ms:control-text label="单价" col="price" ms-cduplex="searchFields.price"></ms:control-text>
                                 <ms:control-datepicker label="上线时间" col="date"></ms:control-datepicker>
                             </div>
