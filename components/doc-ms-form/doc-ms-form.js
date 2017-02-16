@@ -12,7 +12,7 @@ var vm = avalon.define({
     $id: 'doc-ms-form',
     record: {
         name: '',
-        gender: '',
+        gender: 'F',
         masterpiece: ['xxapp/msBus'],
         birthday: '2017-03-25T16:00:00Z',
         hobby: ['code'],

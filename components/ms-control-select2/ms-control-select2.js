@@ -84,7 +84,16 @@ avalon.component('ms:controlSelect2', {
                 });
                 vm.$select.val(vm.valueList.$model).trigger('change');
             } else {
-                vm.options = [{ id: vm.duplex, text: vm.duplex, selected: true }];
+                vm.options = [];
+                if (vm.duplex) {
+                    vm.options.push({ id: vm.duplex, text: vm.duplex, selected: true });
+                }
+                vm.$select.val(vm.duplex).trigger('change');
+            }
+        } else {
+            if (vm.multiple) {
+                vm.$select.val(vm.valueList.$model).trigger('change');
+            } else {
                 vm.$select.val(vm.duplex).trigger('change');
             }
         }
