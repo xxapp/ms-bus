@@ -14,7 +14,7 @@ var vm = avalon.define({
         name: '',
         gender: '',
         masterpiece: ['xxapp/msBus'],
-        birthday: '',
+        birthday: '2017-03-25T16:00:00Z',
         hobby: ['code'],
         avatar: '',
         bio: ''
