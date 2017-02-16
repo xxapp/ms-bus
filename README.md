@@ -1,4 +1,23 @@
-# msBus
+# msBus 基于 AvalonJs 的组件库 beta
 
-* 人类的审美会随时间变化，通过更新界面设计来应对用户的视觉疲劳问题，并且不同的企业或组织大多有自己的设计风格，有没有这样的组件库，可以适应不同的UI风格呢？
-* 我们用数据结构来描述世界，世界在变化，数据在流动，有没有这样的组件库，可以掌控数据的流动呢？
+## For developer
+
+1. 首先安装配置 node 环境, 推荐 4.x 和 6.x 版本。
+
+2. 全局安装构建工具 FIS3。
+  ``` bash
+  npm install fis3 -g
+  ```
+3. 克隆项目到本地，并安装依赖模块
+  ``` bash
+  git clone https://github.com/xxapp/msBus.git
+  
+  cd msBus
+  
+  npm install
+  ```
+4. 日常运行项目
+  ``` bash
+  
+  npm run dev
+  ```
