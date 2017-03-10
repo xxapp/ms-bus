@@ -14,7 +14,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "avalonjs": "https://github.com/RubyLouvre/avalon/archive/1.5.9.tar.gz",
+    "avalon2": "^2.2.4",
     "bootbox": "^4.4.0",
     "bootstrap": "^3.2.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
