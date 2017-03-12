@@ -28,7 +28,14 @@ fis.match('**', {
 fis.match('/*.html', {
     release: '/$0'
 });
+fis.match('/pages/**/*.html', {
+    release: '/$0'
+});
 fis.match('/*.js', {
+    isMod: true,
+    release: '/static/$0'
+});
+fis.match('/pages/**/*.js', {
     isMod: true,
     release: '/static/$0'
 });
