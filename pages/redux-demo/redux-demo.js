@@ -1,6 +1,12 @@
 var Redux = require('redux');
 var avalon = require('avalon2');
 
+global.jQuery = global.$ = require('jquery');
+/**
+ * @require ./node_modules/bootstrap/dist/css/bootstrap.css
+ */
+require('/components/ms-control-text');
+
 function counter(state, action) {
     if (typeof state === 'undefined') {
         return 0
@@ -26,6 +32,7 @@ store.subscribe(render)
 var vm = avalon.define({
     $id: 'demo',
     value: 0,
+    title1: 'hello',
     increment: function () {
         store.dispatch({ type: 'INCREMENT' });
     },
