@@ -1,4 +1,4 @@
-var avalon = require('avalon');
+var avalon = require('avalon2');
 var $ = require('jquery');
 var bootbox = require('bootbox');
 var beyond = require('/vendor/beyond');

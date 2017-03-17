@@ -46,24 +46,18 @@ Purchase: http://wrapbootstrap.com
         .ms-controller,.ms-important,[ms-controller],[ms-important]{
             visibility: hidden;
         }
-         *{font-family:"微软雅黑"}
 
         ms:dialog > * {
             display: none;
         }
     </style>
     <script src="./static/mod.js"></script>
-    <script>
-        if (document.namespaces) {
-            document.namespaces.add('ms', 'http://www.w3.org/1999/xhtml');
-        }
-    </script><!--ignore-->
 </head>
 <!-- /Head -->
 <!-- Body -->
 <body ms-controller="root">
     <!-- Loading Container -->
-    <div class="loading-container">
+    <div class="loading-container loading-inactive">
         <div class="loading-progress">
             <div class="rotator">
                 <div class="rotator">
@@ -86,7 +80,8 @@ Purchase: http://wrapbootstrap.com
     </div>
     <!--  /Loading Container -->
     <!-- Navbar -->
-    <div class="navbar" id="header" ms-view="header">
+    <div class="navbar">
+        <xmp is="ms-view" ms-widget="{path:'sidebar'}"></xmp>
     </div>
     <!-- /Navbar -->
     <!-- Main Container -->
@@ -96,15 +91,14 @@ Purchase: http://wrapbootstrap.com
         	<img id="loadImg" style="position: fixed;z-index: 1000;top: 50%;left: 80px;" src="./static/project/image/2013112931.gif" alt="" />
              	
             <!-- Page Sidebar -->
-            <div class="page-sidebar" id="sidebar" ms-view="sidebar" ms-controller="sidebar">
-            	
-            
+            <div class="page-sidebar">
+                <xmp is="ms-view" ms-widget="{path:'sidebar'}"></xmp>
             </div>
             <!-- /Page Sidebar -->
             <!-- Page Content -->
             <div class="page-content">
                 <!-- Page Breadcrumb -->
-                <div class="page-breadcrumbs">
+                <!--<div class="page-breadcrumbs">
                     <ul class="breadcrumb">
                         <li ms-class="active:$index+1===breadCrumb.size()" ms-repeat-bread="breadCrumb">
                             <i class="glyphicon" ms-class="{{bread.icon}}" style="font-size:14px;"></i>
@@ -112,13 +106,13 @@ Purchase: http://wrapbootstrap.com
                             <span ms-if="$index+1===breadCrumb.size()">{{bread.title}}</span>
                         </li>
                     </ul>
-                </div>
+                </div>-->
                 <!-- /Page Breadcrumb -->
                 <!-- Page Header -->
                 <!-- /Page Header -->
                 <!-- Page Body -->
                 <div class="page-body">
-                    <div id="content" ms-view="content"></div>
+                    <div id="content" ms-html="@currentPage"></div>
                 </div>
                 <!-- /Page Body -->
             </div>

@@ -1,4 +1,4 @@
-var avalon = require('avalon');
+var avalon = require('avalon2');
 var beyond = require('/vendor/beyond');
 
 var menuService = require('/services/menuService');
@@ -55,7 +55,7 @@ var sidebar = avalon.define({
 });
 
 exports.view = __inline('./common-sidebar.html');
-exports.controller = avalon.controller(function($ctrl) {
+exports.controller = sidebar;/*avalon.controller(function($ctrl) {
     // 视图渲染后，意思是avalon.scan完成
     $ctrl.$onRendered = function() {
         beyond.initSidebar();
@@ -70,4 +70,4 @@ exports.controller = avalon.controller(function($ctrl) {
     $ctrl.$onBeforeUnload = function() {}
     // 指定一个avalon.scan视图的vmodels，vmodels = $ctrl.$vmodels.concact(DOM树上下文vmodels)
     $ctrl.$vmodels = []
-});
+});*/

@@ -1,4 +1,4 @@
-var avalon = require('avalon');
+var avalon = require('avalon2');
 var beyond = require('/vendor/beyond');
 var ajax = require('/services/ajaxService');
 
@@ -12,7 +12,7 @@ var header = avalon.define({
 });
 
 exports.view = __inline('./common-header.html');
-exports.controller = avalon.controller(function($ctrl) {
+exports.controller = header;/*avalon.controller(function($ctrl) {
     // 视图渲染后，意思是avalon.scan完成
     $ctrl.$onRendered = function() {
         beyond.initHeader();
@@ -24,4 +24,4 @@ exports.controller = avalon.controller(function($ctrl) {
     $ctrl.$onBeforeUnload = function() {}
     // 指定一个avalon.scan视图的vmodels，vmodels = $ctrl.$vmodels.concact(DOM树上下文vmodels)
     $ctrl.$vmodels = []
-});
+});*/

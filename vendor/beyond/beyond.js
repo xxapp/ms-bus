@@ -1,5 +1,5 @@
 ﻿var $ = require('jquery');
-var avalon = require('avalon');
+var avalon = require('avalon2');
 var toastr = require('/vendor/toastr');
 var bootbox = require('bootbox');
 bootbox.setDefaults('locale', 'zh_CN');
