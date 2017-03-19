@@ -7,22 +7,21 @@
     </div>
     <!-- /Page Sidebar Header -->
     <!-- Sidebar Menu -->
-    <ul class="nav sidebar-menu">
+    <ul class="nav sidebar-menu" ms-controller="sidebar">
         <!--Dashboard-->
-        <li ms-visible="item.show" 
-            ms-class="active:actived===item.name || isChildActived(item)" 
-            ms-class-1="open:opened === item.name && !compact"  
-            ms-repeat-item="menu">
-            <a ms-attr-href="{{ item.href }}" 
-                ms-class="menu-dropdown:item.children && item.children.size() > 0"  
-                ms-click="menuClick(item)">
-                <i ms-class="menu-icon glyphicon {{ item.icon }}"></i>
-                <span class="menu-text"> {{ item.title }} </span>
-                <i class="menu-expand" ms-if="item.children && item.children.size() > 0"></i>
+        <li :visible="item.show" 
+            :class="[((@actived===item.name || @isChildActived(item)) ? 'active' : ''), ((@opened === item.name && !@compact) ? 'open' : '')]" 
+            :for="item in @menu">
+            <a :attr="{href: item.href}" 
+                :class="[((item.children && item.children.length > 0) ? 'menu-dropdown' : '')]"  
+                :click="@menuClick(item)">
+                <i :class="['menu-icon', 'glyphicon', item.icon]"></i>
+                <span class="menu-text"> {{ item.name }} </span>
+                <i class="menu-expand" :if="item.children && item.children.length > 0"></i>
             </a>
-            <ul class="submenu" ms-effect="collapse" ms-visible="opened === item.name">
-                <li ms-visible="sub.show" ms-class="active:actived===sub.name" ms-repeat-sub="item.children || []">
-                    <a ms-attr-href="{{ sub.href }}" ms-click="menuClick(sub, item)">
+            <ul class="submenu" :effect="{is:'collapse',action:@opened == item.name?'enter':'leave'}">
+                <li :visible="sub.show" :class="[(actived===sub.name ? 'active' : '')]" :for="sub in item.children || []">
+                    <a :attr="{href: sub.href}" :click="@menuClick(sub, item)">
                         <span class="menu-text">{{ sub.title }}</span>
                     </a>
                 </li>

@@ -18,6 +18,7 @@
     "bootbox": "^4.4.0",
     "bootstrap": "^3.2.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
+    "es6-promise": "^4.1.0",
     "events": "^1.1.1",
     "jquery": "^1.12.4",
     "lightbox2": "^2.9.0",

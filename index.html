@@ -81,7 +81,7 @@ Purchase: http://wrapbootstrap.com
     <!--  /Loading Container -->
     <!-- Navbar -->
     <div class="navbar">
-        <xmp is="ms-view" ms-widget="{path:'sidebar'}"></xmp>
+        <xmp is="ms-view" ms-widget="{path:'header'}"></xmp>
     </div>
     <!-- /Navbar -->
     <!-- Main Container -->
@@ -126,6 +126,11 @@ Purchase: http://wrapbootstrap.com
 	
     <script>
         window.global = window;
+        if (!global.Promise) {
+            require.async('es6-promise', function (m) {
+                m.polyfill();
+            });
+        }
         require(['./index']);
     </script>
 

@@ -46,7 +46,7 @@ var sidebar = avalon.define({
         if (item.children.length === 0) return;
         for (var i = 0, child; child = item.children[i++]; ) {
             if (child.name === sidebar.actived) {
-                sidebar.opened = item.name;
+                //sidebar.opened = item.name;
                 return true;
             }
         }
@@ -55,7 +55,13 @@ var sidebar = avalon.define({
 });
 
 exports.view = __inline('./common-sidebar.html');
-exports.controller = sidebar;/*avalon.controller(function($ctrl) {
+exports.controller = sidebar;
+beyond.initSidebar();
+menuService.menu.then(function (menu) {
+    console.log(menu);
+    sidebar.menu = menu;
+});
+/*avalon.controller(function($ctrl) {
     // 视图渲染后，意思是avalon.scan完成
     $ctrl.$onRendered = function() {
         beyond.initSidebar();

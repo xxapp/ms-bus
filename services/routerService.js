@@ -52,8 +52,8 @@ addState('header',
     require('/components/common-header').view,
     require('/components/common-header').controller);
 addState('sidebar',
-    require('/components/common-header').view,
-    require('/components/common-header').controller);
+    require('/components/common-sidebar').view,
+    require('/components/common-sidebar').controller);
 avalon.router.add('/');
 
 addState('aaa', 

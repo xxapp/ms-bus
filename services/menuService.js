@@ -83,6 +83,8 @@ function travelMenu(menulet, functions, allowedFunctions) {
             if (func.code === item.name && (allowedFunctions[func.code]) || allowedFunctions['all']) {
                 item.href = func.uri || item.href || 'javascript:;';
                 item.icon = func.icon_url || item.icon;
+                item.children = item.children || [];
+                item.opened = false;
                 hasPermission = true;
                 break;
             }
