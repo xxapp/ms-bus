@@ -30,7 +30,7 @@ var menu = [{
     title: 'item',
     stateName: 'root.item',
     icon: 'glyphicon-circle',
-    href: '#!/item'
+    href: '#!/aaa'
 }, {
     name: 'channel',
     title: 'channel',

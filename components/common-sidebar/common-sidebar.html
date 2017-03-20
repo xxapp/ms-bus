@@ -1,13 +1,5 @@
 <template>
-    <!-- Page Sidebar Header>
-    <div class="sidebar-header-wrapper">
-        <input type="text" class="searchinput" ms-click="search"/>
-        <i class="searchicon fa fa-search"></i>
-        <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
-    </div>
-    <!-- /Page Sidebar Header -->
-    <!-- Sidebar Menu -->
-    <ul class="nav sidebar-menu" ms-controller="sidebar">
+    <ul class="nav sidebar-menu">
         <!--Dashboard-->
         <li :visible="item.show" 
             :class="[((@actived===item.name || @isChildActived(item)) ? 'active' : ''), ((@opened === item.name && !@compact) ? 'open' : '')]" 
@@ -28,5 +20,4 @@
             </ul>
         </li>
     </ul>
-    <!-- /Sidebar Menu -->
 </template>

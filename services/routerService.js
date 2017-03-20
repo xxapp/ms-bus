@@ -1,6 +1,5 @@
 var avalon = require('avalon2');
 require('mmRouter');
-var msView = require('/components/ms-view'), addState = msView.add;
 var beyond = require('/vendor/beyond');
 var menuService = require('/services/menuService');
 
@@ -21,51 +20,46 @@ require.async = function(n, part, onerror) {
     }
 }
 
-// 覆写avalon.router.add，自动应用通用配置
-var router_add = avalon.router.add;
-avalon.router.add = function (path, callback, opts) {
-    router_add.call(avalon.router, path, function () {
-        var path = this.path;
-        root.currentPath = path;
-        msView.resolve(this.path.slice(1)).then(function (result) {
-            root.currentPage = getPage(path);
-            if (callback) {
-                return callback.apply(this, arguments);
-            }
-        });
-    }, opts);
+function getPage(component) {
+    var html = '<xmp cached="true" is="' + component + '" :widget="{id:\'' + component + '\'}"></xmp>';
+    return html
 }
 
-function getPage(path) {
-    path = path.slice(1)
-    var html = '<xmp is="ms-view" class="view-container" ms-widget="{path:\'' + path + '\',page: @page}"><xmp>'
-    return html
+function applyRouteConfig(config) {
+    config.map(function (route) {
+        avalon.router.add(route.path, function () {
+            if (typeof route.component == 'function') {
+                route.component().then(function () {
+                    root.currentPage = getPage(route.name);
+                });
+            } else {
+                root.currentPage = getPage(route.name);
+            }
+        });
+        return 
+    });
 }
 
 var root = avalon.vmodels['root'];
 
 // 默认首页为gf-dashboard
-addState('',
-    require('/components/gf-dashboard').view,
-    require('/components/gf-dashboard').controller);
-addState('header',
-    require('/components/common-header').view,
-    require('/components/common-header').controller);
-addState('sidebar',
-    require('/components/common-sidebar').view,
-    require('/components/common-sidebar').controller);
-avalon.router.add('/');
+require('/components/common-header');
+require('/components/common-sidebar');
+require('/components/gf-dashboard');
+avalon.router.add('/', function () {
+    root.currentPage = getPage('gf-dashboard');
+});
 
-addState('aaa', 
-    require.async('/components/gf-aaa', 'view'),
-    require.async('/components/gf-aaa', 'controller'));
-avalon.router.add('/aaa');
+root.$routeConfig = [{ 
+    path: '/aaa',
+    name: 'gf-aaa',
+    component: require.async('/components/gf-aaa')
+}];
 
-avalon.router.add('/bbb/:id');
+applyRouteConfig(root.$routeConfig);
 
-// 恢复覆写的require.async和avalon.router.add
+// 恢复覆写的require.async
 require.async = require_async;
-avalon.router.add = router_add;
 
 // mmState全局配置
 // avalon.state.config({
