@@ -3,23 +3,6 @@ import 'mmRouter';
 import beyond from '/vendor/beyond';
 import menuService from '/services/menuService';
 
-// 覆写require.async,改写为promise
-var require_async = require.async;
-window.require_async = require_async;
-require.async = function(n, part, onerror) {
-    if (typeof part == 'function') {
-        return require_async.call(require, n, part, onerror);
-    } else {
-        return function () {
-            return new Promise(function(rs, rj) {
-                require_async(n, function(m) {
-                    rs(part ? m[part] : m);
-                }, rj);
-            });
-        }
-    }
-}
-
 function getPage(component) {
     var html = `<xmp cached="true" is="${component}" :widget="{id:\'${component}\'}"></xmp>`;
     return html
@@ -29,7 +12,7 @@ function applyRouteConfig(config) {
     config.map(function (route) {
         avalon.router.add(route.path, function () {
             if (typeof route.component == 'function') {
-                route.component().then(function () {
+                route.component(function () {
                     root.currentPage = getPage(route.name);
                 });
             } else {
@@ -53,13 +36,12 @@ avalon.router.add('/', function () {
 root.$routeConfig = [{ 
     path: '/aaa',
     name: 'gf-aaa',
-    component: require.async('/components/gf-aaa')
+    component: function (resolve) {
+        require.async('/components/gf-aaa', resolve)
+    } 
 }];
 
 applyRouteConfig(root.$routeConfig);
-
-// 恢复覆写的require.async
-require.async = require_async;
 
 // mmState全局配置
 // avalon.state.config({

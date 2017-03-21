@@ -1,12 +1,13 @@
-declare var window, require;
-if (!window.Promise) {
+/// <reference path="./typings/index.d.ts" />
+
+if (!global.Promise) {
     require.async('es6-promise', function (m) {
         m.polyfill();
     });
 }
 
 import * as jQuery from 'jquery';
-window.$ = window.jQuery = jQuery;
+global.$ = global.jQuery = jQuery;
 /**
  * @require ./node_modules/bootstrap/dist/css/bootstrap.css
  */
@@ -14,7 +15,6 @@ import 'bootstrap';
 
 import * as avalon from 'avalon2';
 import 'mmRouter';
-
 // root vm
 const root = avalon.define({
     $id: 'root',
