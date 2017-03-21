@@ -125,13 +125,7 @@ Purchase: http://wrapbootstrap.com
     <div id="dialog_layer"></div>
 	
     <script>
-        window.global = window;
-        if (!global.Promise) {
-            require.async('es6-promise', function (m) {
-                m.polyfill();
-            });
-        }
-        require(['./index']);
+        require(['./index.ts']);
     </script>
 
 

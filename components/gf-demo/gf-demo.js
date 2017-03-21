@@ -13,16 +13,16 @@ var currentState = mmState.currentState;
  * @type component-config
  * @param store 数据源，对应/services/storeService.js中的配置
  * @param dialogId 指定表单的dialog，dialog定义在data-box的前面
- * @param processData 可选，在这个函数可以在提交数据前对数据进行处理，两个参数，package包含一些状态数据和要提交要用到的数据，post在执行后立即提交数据。不配置此项则不做任何额外处理
+ * @param processData 可选，在这个函数可以在提交数据前对数据进行处理，两个参数，payload包含一些状态数据和要提交要用到的数据，post在执行后立即提交数据。不配置此项则不做任何额外处理
  */
 var demo = avalon.define({
     $id: 'demo',
     '$data-box_config': {
         store: 'demo',
         dialogId: 'dialog_demo',
-        processData: function (package, post) {
-            // package包含一些状态数据和要提交要用到的数据
-            console.log(package.isEdit ? '修改' : '新增', package.record);
+        processData: function (payload, post) {
+            // payload包含一些状态数据和要提交要用到的数据
+            console.log(payload.isEdit ? '修改' : '新增', payload.record);
             post(function (r) {
                 console.log(r);
             });

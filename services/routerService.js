@@ -1,7 +1,7 @@
-var avalon = require('avalon2');
-require('mmRouter');
-var beyond = require('/vendor/beyond');
-var menuService = require('/services/menuService');
+import * as avalon from 'avalon2';
+import 'mmRouter';
+import beyond from '/vendor/beyond';
+import menuService from '/services/menuService';
 
 // 覆写require.async,改写为promise
 var require_async = require.async;
@@ -21,7 +21,7 @@ require.async = function(n, part, onerror) {
 }
 
 function getPage(component) {
-    var html = '<xmp cached="true" is="' + component + '" :widget="{id:\'' + component + '\'}"></xmp>';
+    var html = `<xmp cached="true" is="${component}" :widget="{id:\'${component}\'}"></xmp>`;
     return html
 }
 

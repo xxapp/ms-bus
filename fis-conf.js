@@ -1,10 +1,10 @@
 // npm install [-g] fis3-hook-commonjs
 fis.hook('commonjs', {
     paths: {
-        mmState: '/vendor/mmState/mmState.js',
-        'moment-locale': '/node_modules/moment/locale/zh-cn.js',
-        redux: '/node_modules/redux/dist/redux.js',
-        bootstrap: '/node_modules/bootstrap/dist/js/bootstrap.js'
+        mmState: './vendor/mmState/mmState.js',
+        'moment-locale': './node_modules/moment/locale/zh-cn.js',
+        redux: './node_modules/redux/dist/redux.js',
+        bootstrap: './node_modules/bootstrap/dist/js/bootstrap.js'
     }
 });
 
@@ -21,9 +21,25 @@ fis.hook('node_modules', {
 });
 
 // 默认情况下不添加hash
+['/{pages,components,services,vendor}/**.{ts,js}', '/*.{ts,js}'].forEach(function (blob) {
+    fis.match(blob, {
+        parser: fis.plugin('typescript', {
+            jsx: 1,
+            showNotices: true,
+            sourceMap: true,
+            target: 1,
+            allowSyntheticDefaultImports: true
+        }),
+        rExt: '.js'
+    });
+});
+
 fis.match('**', {
     useHash: false,
     release: false
+});
+fis.match('**.js.map', {
+    release: '/static/$0'
 });
 fis.match('/*.html', {
     release: '/$0'
@@ -31,15 +47,15 @@ fis.match('/*.html', {
 fis.match('/pages/**/*.html', {
     release: '/$0'
 });
-fis.match('/*.js', {
+fis.match('/*.{ts,js}', {
     isMod: true,
     release: '/static/$0'
 });
-fis.match('/pages/**/*.js', {
+fis.match('/pages/**/*.{ts,js}', {
     isMod: true,
     release: '/static/$0'
 });
-fis.match('/{node_modules,components}/**/*.js', {
+fis.match('/{node_modules,components}/**/*.{ts,js}', {
     isMod: true, // 设置 comp 下都是一些组件，组件建议都是匿名方式 define
     release: '/static/$0'
 });
@@ -50,18 +66,18 @@ fis.match('/components/**/*.html', {
 fis.match('/{node_modules,components}/**/*.{css,eot,svg,ttf,woff,woff2,map}', {
     release: '/static/$0'
 });
-fis.match('/{services,events}/*.js', {
+fis.match('/services/*.{ts,js}', {
     isMod: true,
     release: '/static/$0'
 });
-fis.match('/services/*.js', {
+fis.match('/services/configService.{ts,js}', {
     postprocessor: function (content, file, settings) {
         return content
             .replace('__API_URL__', 'localhost:8080/api')
             .replace('__SPRING_API_URL__', 'localhost:8080/api');
     }
 });
-fis.match('/vendor/**/*.js', {
+fis.match('/vendor/**/*.{ts,js}', {
     isMod: true,
     release: '/static/$0'
 });

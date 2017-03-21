@@ -59,8 +59,8 @@ exports.open = function (cb) {
         dialogVm.record = {
             thumb: ''
         };
-        dialogVm.$post = function (package) {
-            cb(package.record[0]);
+        dialogVm.$post = function (payload) {
+            cb(payload.record[0]);
         }
     }
 }

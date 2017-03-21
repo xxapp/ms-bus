@@ -13,9 +13,9 @@ var item = avalon.define({
     '$data-box_config': {
         store: 'item',
         dialogId: 'dialog_item',
-        processData: function (package, post) {
-            // package包含一些状态数据和要提交要用到的数据
-            console.log(package.isEdit ? '修改' : '新增', package.record);
+        processData: function (payload, post) {
+            // payload包含一些状态数据和要提交要用到的数据
+            console.log(payload.isEdit ? '修改' : '新增', payload.record);
             post(function (r) {
                 console.log(r);
             });

@@ -97,26 +97,26 @@ avalon.component('ms:dataBox', {
                 }
                 return vm.$beforePost();
             }
-            dialogVm.$post = function (package) {
+            dialogVm.$post = function (payload) {
                 if (!dialogVm.$beforePost()) {
                     return false;
                 }
                 if (dialogVm.uploading) return false;
                 dialogVm.uploading = true;
                 if (vm.processData !== avalon.noop) {
-                    vm.processData(package, function (handleResult) {
-                        syncData.call(this, package, handleResult);
+                    vm.processData(payload, function (handleResult) {
+                        syncData.call(this, payload, handleResult);
                     });
                 } else {
-                    syncData(package, avalon.noop);
+                    syncData(payload, avalon.noop);
                 }
                 return false;
             }
         }
 
-        function syncData(package, handleResult) {
-            if (!package.isEdit) {
-                entityStore.insert(package.record).then(function (r) {
+        function syncData(payload, handleResult) {
+            if (!payload.isEdit) {
+                entityStore.insert(payload.record).then(function (r) {
                     if (r.code == '0') {
                         msg.success('添加成功');
                         vm.loadData();
@@ -126,7 +126,7 @@ avalon.component('ms:dataBox', {
                     setTimeout(function () { dialogVm.uploading = false; }, 1000);
                 });
             } else {
-                entityStore.update(package.record).then(function (r) {
+                entityStore.update(payload.record).then(function (r) {
                     if (r.code == '0') {
                         msg.success('修改成功');
                         vm.loadData();

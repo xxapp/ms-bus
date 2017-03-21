@@ -1,15 +1,22 @@
-global.jQuery = global.$ = require('jquery');
+declare var window, require;
+if (!window.Promise) {
+    require.async('es6-promise', function (m) {
+        m.polyfill();
+    });
+}
+
+import * as jQuery from 'jquery';
+window.$ = window.jQuery = jQuery;
 /**
  * @require ./node_modules/bootstrap/dist/css/bootstrap.css
  */
-require('bootstrap');
+import 'bootstrap';
 
-var avalon = require('avalon2');
-require('mmRouter');
-var beyond = require('/vendor/beyond');
+import * as avalon from 'avalon2';
+import 'mmRouter';
 
 // root vm
-var root = avalon.define({
+const root = avalon.define({
     $id: 'root',
     currentPath: '/',
     currentPage: '',
@@ -19,7 +26,7 @@ var root = avalon.define({
     $routeConfig: []
 });
 
-require('/services/routerService');
+import './services/routerService';
 avalon.history.start({
     fireAnchor: false
 });
