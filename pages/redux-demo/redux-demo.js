@@ -3,9 +3,10 @@ var avalon = require('avalon2');
 
 global.jQuery = global.$ = require('jquery');
 /**
- * @require ./node_modules/bootstrap/dist/css/bootstrap.css
+ * @require ../../node_modules/bootstrap/dist/css/bootstrap.css
  */
-require('/components/ms-control-text');
+require('/vendor/avx-component');
+var createForm = require('/components/ms-form/create-form');
 
 function counter(state, action) {
     if (typeof state === 'undefined') {
@@ -32,7 +33,13 @@ store.subscribe(render)
 var vm = avalon.define({
     $id: 'demo',
     value: 0,
-    title1: 'hello',
+    title: 'hello',
+    $form: createForm({
+        onFieldsChange: function (fields) {
+            console.log(fields);
+            console.log(this.record);
+        }
+    }),
     increment: function () {
         store.dispatch({ type: 'INCREMENT' });
     },

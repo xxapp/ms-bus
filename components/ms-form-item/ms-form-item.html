@@ -1,6 +1,6 @@
 <template>
     <div class="form-group">
         <label class="control-label">{{label}}</label>
-        <input type="text" class="form-control" :duplex="@value" :attr="{name: @col}">
+        <slot />
     </div>
 </template>

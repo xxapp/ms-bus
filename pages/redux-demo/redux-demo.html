@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Redux Demo</title>
+    <!--[if lt IE 9]>
+    <script src="../../static/polyfill/es5-shim.js"></script>
+    <![endif]-->
     <script src="../../static/mod.js"></script>
 </head>
 <body>
     <div ms-controller="demo">
-        <ms-control-text :widget="{label: '标题2', col: 'title', value: @title1}"></ms-control-text>
+        {{@title}}
+        <input type="text" :duplex="@title">
+        <ms-form :widget="{$form: @$form}">
+            <ms-form-item :widget="{label: '标题'}">
+                <ms-input :widget="{value: @title, col: 'title'}"></ms-input>
+            </ms-form-item>
+        </ms-form>
         <p>
         Clicked: <span >{{value}}</span> times
         <button ms-click="increment">+</button>
