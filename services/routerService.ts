@@ -1,7 +1,7 @@
 import * as avalon from 'avalon2';
 import 'mmRouter';
-import beyond from '/vendor/beyond';
-import menuService from '/services/menuService';
+import beyond from '../vendor/beyond/index';
+import menuService from './menuService';
 
 function getPage(component) {
     var html = `<xmp cached="true" is="${component}" :widget="{id:\'${component}\'}"></xmp>`;

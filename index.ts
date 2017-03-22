@@ -1,4 +1,4 @@
-/// <reference path="./typings/index.d.ts" />
+/// <reference path="typings/index.d.ts" />
 
 if (!global.Promise) {
     require.async('es6-promise', function (m) {
@@ -15,6 +15,7 @@ import 'bootstrap';
 
 import * as avalon from 'avalon2';
 import 'mmRouter';
+
 // root vm
 const root = avalon.define({
     $id: 'root',
@@ -30,7 +31,7 @@ import './services/routerService';
 avalon.history.start({
     fireAnchor: false
 });
-if (avalon.history.hash.replace(window.location.href, '') == '/') {
+if (avalon.history.hash.replace(global.location.href, '') == '/') {
     avalon.router.navigate('/', 2);
 }
 

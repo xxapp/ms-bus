@@ -5,7 +5,8 @@ fis.hook('commonjs', {
         'moment-locale': './node_modules/moment/locale/zh-cn.js',
         redux: './node_modules/redux/dist/redux.js',
         bootstrap: './node_modules/bootstrap/dist/js/bootstrap.js'
-    }
+    },
+    extList: ['.js', '.ts']
 });
 
 fis.set('project.ignore', ['node_modules/**', 'output/**', '.git/**', 'fis-conf.js', 
@@ -25,7 +26,7 @@ fis.hook('node_modules', {
     fis.match(blob, {
         parser: fis.plugin('typescript', {
             jsx: 1,
-            showNotices: true,
+            showNotices: false,
             sourceMap: true,
             target: 1,
             allowSyntheticDefaultImports: true
