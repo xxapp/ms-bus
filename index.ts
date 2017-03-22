@@ -1,10 +1,6 @@
 /// <reference path="typings/index.d.ts" />
 
-if (!global.Promise) {
-    require.async('es6-promise', function (m) {
-        m.polyfill();
-    });
-}
+import 'es6-promise/dist/es6-promise.auto';
 
 import * as jQuery from 'jquery';
 global.$ = global.jQuery = jQuery;

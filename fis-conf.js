@@ -28,7 +28,7 @@ fis.hook('node_modules', {
             jsx: 1,
             showNotices: false,
             sourceMap: true,
-            target: 1,
+            target: 0,
             allowSyntheticDefaultImports: true
         }),
         rExt: '.js'
