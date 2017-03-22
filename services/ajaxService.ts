@@ -1,20 +1,19 @@
-var avalon = require('avalon2');
-var $ = require('jquery');
-var bootbox = require('bootbox');
-var beyond = require('/vendor/beyond');
+import * as avalon from 'avalon2';
+import bootbox from 'bootbox';
+import beyond from '../vendor/beyond';
 
-var msg = require('/services/messageService.js');
+import msg from  './messageService';
 
 // 拦截ajax请求，检测是否超时，以重新登录
-$(document).ajaxComplete(function (event, xhr, settings) {
+$(document).ajaxComplete((event, xhr, settings) => {
     if (xhr.status == 200) {
-        if (settings.dataType == 'json' && xhr.responseJSON != void 0) {
-            var result = xhr.responseJSON;
+        if (settings.dataType == 'json' && (xhr as any).responseJSON != void 0) {
+            let result = (xhr as any).responseJSON;
             if (result.code === '20' || result.code === '21') {
                 beyond.hideLoading();
                 bootbox.confirm("Session已经失效，请重新登录", function (result) {
                      if (result) {
-                         location.href = "/login.html";
+                         global.location.href = "/login.html";
                      }
                 });
             } else if (result.error) {
@@ -30,8 +29,8 @@ $(document).ajaxComplete(function (event, xhr, settings) {
     }
 });
 
-module.exports = function (options) {
-    var defaultOptions = {
+export default function (options) {
+    const defaultOptions = {
         url: 'http://127.0.0.1:8081',
         data: {
         },
@@ -39,13 +38,12 @@ module.exports = function (options) {
         cache: false
     };
     options.data = processRequest(options.data);
-    options = $.extend(true, defaultOptions, options);
-    return $.ajax(options).then(processResponse);
+    return $.ajax({ ...defaultOptions, ...options }).then(processResponse);
 };
 
 // 标准化传给后台的参数
 function processRequest(r) {
-    var str = r || {};
+    const str = r || {};
     if (str.start || str.limit) {
         str.page = {
             start: str.start || 0,
@@ -61,7 +59,7 @@ function processRequest(r) {
 
 // 标准化后台相应数据格式
 function processResponse(r) {
-    var str = {};
+    let str: { code?: string, list?: any[], rows?: any[], data?: any, message?: string } = {};
     if (r.rows) {
         str = r;
         str.code = '0';

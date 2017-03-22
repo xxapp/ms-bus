@@ -1,6 +1,6 @@
-var ajax = require('/services/ajaxService');
+import ajax from './ajaxService';
 
-var menu = [{
+const menu = [{
     name: 'dashboard',
     stateName: 'root',
     title: '主页',
@@ -56,11 +56,11 @@ var menu = [{
 }];
 
 // 根据权限过滤菜单
-var menuPromise = new Promise(function (rs, rj) {
+const menuPromise = new Promise((rs, rj) => {
     ajax({
         url: '/api/loged',
         type: 'get'
-    }).then(function (result) {
+    }).then((result) => {
         if (result.code == '0') {
             $('#loadImg').css('display', 'none');
             $('.login-area').removeClass('hidden').addClass('animated flipInX');
@@ -77,9 +77,9 @@ function travelMenu(menulet, functions, allowedFunctions) {
     if (!menulet) {
         return ;
     }
-    for (var i = 0, item; item = menulet[i++]; ) {
-        var hasPermission = false;
-        for (var j = 0, func; func = functions[j++]; ) {
+    for (let i = 0, item; item = menulet[i++]; ) {
+        let hasPermission = false;
+        for (let j = 0, func; func = functions[j++]; ) {
             if (func.code === item.name && (allowedFunctions[func.code]) || allowedFunctions['all']) {
                 item.href = func.uri || item.href || 'javascript:;';
                 item.icon = func.icon_url || item.icon;
@@ -95,11 +95,9 @@ function travelMenu(menulet, functions, allowedFunctions) {
     }
 }
 
-function walkMenu(name, process, level, menuLet) {
-    var finded = false;
-    level = !level ? 1 : level;
-    menuLet = !menuLet ? menu.slice(0) : menuLet;
-    for (var i = 0, item; item = menuLet[i++]; ) {
+function walkMenu(name, process, level = 1, menuLet = menu.slice(0)) {
+    let finded = false;
+    for (let i = 0, item; item = menuLet[i++]; ) {
         if (item.name === name || item.stateName === name) {
             process && process(item, level);
             finded = true;
@@ -118,6 +116,7 @@ function walkMenu(name, process, level, menuLet) {
     }
     return finded;
 }
-
-exports.walkMenu = walkMenu;
-exports.menu = menuPromise;
+export {
+    walkMenu,
+    menuPromise as menu
+}

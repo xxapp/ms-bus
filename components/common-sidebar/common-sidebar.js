@@ -1,13 +1,13 @@
-var avalon = require('avalon2');
-var beyond = require('/vendor/beyond');
+import * as avalon from 'avalon2';
+import * as beyond from '../../vendor/beyond';
 
-var menuService = require('/services/menuService');
+import * as menuService from '../../services/menuService';
 
 avalon.effect('collapse', {
-    enter: function (elem, done) {
+    enter(elem, done) {
         $(elem).slideDown(200, done);
     },
-    leave: function (elem, done) {
+    leave(elem, done) {
         $(elem).slideUp(200, done);
     }
 });
@@ -19,7 +19,7 @@ avalon.component('common-sidebar', {
         actived: 'dashboard',
         opened: '',
         compact: false,
-        menuClick: function (item, parent) {
+        menuClick(item, parent) {
             if (!item.children || item.children.length === 0) {
                 this.actived = item.name;
                 if (parent) {
@@ -33,10 +33,10 @@ avalon.component('common-sidebar', {
                 }
             }
         },
-        search: function() {
+        search() {
             this.$fire('all!title', 'Demo');
         },
-        isChildActived: function (item) {
+        isChildActived(item) {
             // if (item.name === sidebar.actived) {
             //     return false;
             // }
@@ -45,7 +45,7 @@ avalon.component('common-sidebar', {
             // }
             if (!item.children) return;
             if (item.children.length === 0) return;
-            for (var i = 0, child; child = item.children[i++]; ) {
+            for (let i = 0, child; child = item.children[i++]; ) {
                 if (child.name === this.actived) {
                     //sidebar.opened = item.name;
                     return true;
@@ -53,13 +53,12 @@ avalon.component('common-sidebar', {
             }
             return false;
         },
-        onInit: function (event) {
-            var vm = event.vmodel;
-            menuService.menu.then(function (menu) {
-                vm.menu = menu;
+        onInit(event) {
+            menuService.menu.then((menu) => {
+                this.menu = menu;
             });
         },
-        onReady: function (event) {
+        onReady(event) {
             beyond.initSidebar();
         }
     }

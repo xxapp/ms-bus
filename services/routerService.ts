@@ -1,6 +1,6 @@
 import * as avalon from 'avalon2';
 import 'mmRouter';
-import beyond from '../vendor/beyond/index';
+import beyond from '../vendor/beyond';
 import menuService from './menuService';
 
 function getPage(component) {

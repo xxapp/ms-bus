@@ -1,4 +1,4 @@
-var avalon = require('avalon2');
+import * as avalon from 'avalon2';
 
 avalon.component('gf-dashboard', {
     template: __inline('./gf-dashboard.html'),
