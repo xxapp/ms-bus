@@ -1,10 +1,10 @@
-var avalon = require('avalon2');
+import * as avalon from 'avalon2';
 
-function createForm(options) {
+export function createForm(options) {
     return new Form(options);
 }
 
-var defaultOptions = {
+const defaultOptions = {
     record: null,
     onFieldsChange: avalon.noop
 };
@@ -14,21 +14,20 @@ function Form(options) {
 }
 
 Form.prototype.setFieldsValue = function (fields) {
-    var self = this;
-    Object.keys(fields).forEach(function (name) {
-        var props = name.split('.');
-        var field = fields[name];
+    Object.keys(fields).forEach((name) => {
+        const props = name.split('.');
+        const field = fields[name];
 
         if (props.length === 1) {
             // 没有复杂的路径，简单处理
-            setValue(self, props[0], field.value, field.key);
+            setValue(this, props[0], field.value, field.key);
         } else {
-            props.forEach(function (prop) {
-                setValue(self.record, prop, field.value, field.key);
+            props.forEach((prop) => {
+                setValue(this.record, prop, field.value, field.key);
             });
         }
     });
-    self.onFieldsChange(fields);
+    this.onFieldsChange(fields);
 }
 
 /**
@@ -39,8 +38,9 @@ Form.prototype.setFieldsValue = function (fields) {
  * @param {Number|String} key 额外的键值，一般用于数组赋值
  */
 function setValue(form, expr, val, key) {
-    var rArray = /(.*)\[\]$/;
-    var mirrorVal, valType = Object.prototype.toString.call(val);
+    const rArray = /(.*)\[\]$/;
+    const valType = Object.prototype.toString.call(val);
+    let mirrorVal;
     if (valType == '[object Array]') {
         mirrorVal = avalon.mix(true, {}, { t: val }).t;
     } else if (valType == '[object Object]') {
@@ -49,18 +49,16 @@ function setValue(form, expr, val, key) {
         mirrorVal = val;
     }
 
-    var matches = expr.match(rArray);
+    const matches = expr.match(rArray);
 
-    var obj = form.record = form.record || {};
+    const obj = form.record = form.record || {};
     if (matches) {
-        var prop = matches[1];
+        const prop = matches[1];
         obj[prop] = obj[prop] || [];
         obj[prop][key] = val;
     } else {
-        var prop = expr;
+        const prop = expr;
         obj[prop] = obj[prop] || {};
         obj[prop] = val;
     }
 }
-
-module.exports = createForm;

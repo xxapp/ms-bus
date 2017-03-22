@@ -10,7 +10,8 @@ declare var __inline
 interface MyWindow extends Window {
     Promise: Promise<any>,
     $,
-    jQuery
+    jQuery,
+    __REDUX_DEVTOOLS_EXTENSION__
 }
 
 declare var global: MyWindow

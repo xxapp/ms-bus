@@ -22,7 +22,7 @@ interface AvalonStatic {
     /**
      * 定义ViewModel，需要指定$id
      */
-    define(definition): object;
+    define(definition): any;
     /**
      * 定义avalon组件
      */
@@ -47,7 +47,11 @@ interface AvalonStatic {
      * 用于合并多个对象或深克隆,类似于jQuery.extend
      */
     mix(target: any, object1?: any, ...objectN: any[]): any;
-    mix(deep: boolean, target: any, object1?: any, ...objectN: any[]): any
+    mix(deep: boolean, target: any, object1?: any, ...objectN: any[]): any,
+    /**
+     * no operation
+     */
+    noop(): void
 }
 
 declare module 'avalon2' {

@@ -1,5 +1,5 @@
-var avalon = require('avalon2');
-var util = require('/vendor/avx-component/avx-util');
+import * as avalon from 'avalon2';
+import { findParentComponent } from '../../vendor/avx-component/avx-util';
 
 /**
  * 文本输入组件
@@ -20,8 +20,8 @@ avalon.component('ms-input', {
         col: '',
         key: '',
         onInit: function (event) {
-            this.$formItem = util.findParentComponent(this, 'ms-form-item');
-            this.$watch('value', function (v) {
+            this.$formItem = findParentComponent(this, 'ms-form-item');
+            this.$watch('value', (v) => {
                 this.$formItem.$fire('onFormChnage', {
                     name: this.col, value: v, key: this.key
                 });

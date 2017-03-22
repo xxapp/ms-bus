@@ -4,9 +4,9 @@
 // require('/components/ms-check-header');
 // require('/components/ms-pagination');
 // require('/components/ms-dialog');
-require('/components/ms-form/');
-require('/components/ms-form-item');
-require('/components/ms-input');
+import '../../components/ms-form/ms-form';
+import '../../components/ms-form-item/ms-form-item';
+import '../../components/ms-input/ms-input';
 // require('/components/ms-control-textarea');
 // require('/components/ms-control-select');
 // require('/components/ms-control-select2');

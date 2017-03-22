@@ -1,7 +1,7 @@
-var avalon = require('avalon2');
+import * as avalon from 'avalon2';
 
-exports.findParentComponent = function (vm, ctype) {
-    var parent = vm.$element.parentElement;
+export function findParentComponent(vm, ctype) {
+    let parent = vm.$element.parentElement;
     while (parent) {
         if (parent._vm_ && (!ctype || parent._ctype_ === ctype)) {
             return parent._vm_;

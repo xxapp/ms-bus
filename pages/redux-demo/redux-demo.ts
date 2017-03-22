@@ -1,17 +1,17 @@
-var Redux = require('redux');
-var avalon = require('avalon2');
+/// <reference path="../../typings/index.d.ts" />
 
-global.jQuery = global.$ = require('jquery');
+import { createStore } from 'redux';
+import * as avalon from 'avalon2';
+
+import * as jQuery from 'jquery';
+global.$ = global.jQuery = jQuery;
 /**
  * @require ../../node_modules/bootstrap/dist/css/bootstrap.css
  */
-require('/vendor/avx-component');
-var createForm = require('/components/ms-form/create-form');
+import '../../vendor/avx-component/avx-component';
+import { createForm } from '../../components/ms-form/create-form';
 
-function counter(state, action) {
-    if (typeof state === 'undefined') {
-        return 0
-    }
+function counter(state = 0, action) {
     switch (action.type) {
         case 'INCREMENT':
         return state + 1
@@ -21,38 +21,38 @@ function counter(state, action) {
         return state
     }
 }
-var store = Redux.createStore(
+const store = createStore(
     counter,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    global.__REDUX_DEVTOOLS_EXTENSION__ && global.__REDUX_DEVTOOLS_EXTENSION__()
 )
 function render() {
     vm.value = store.getState();
 }
 store.subscribe(render)
 
-var vm = avalon.define({
+const vm = avalon.define({
     $id: 'demo',
     value: 0,
     title: 'hello',
     $form: createForm({
-        onFieldsChange: function (fields) {
+        onFieldsChange(fields) {
             console.log(fields);
             console.log(this.record);
         }
     }),
-    increment: function () {
+    increment() {
         store.dispatch({ type: 'INCREMENT' });
     },
-    decrement: function () {
+    decrement() {
         store.dispatch({ type: 'DECREMENT' });
     },
-    incrementIfOdd: function () {
+    incrementIfOdd() {
         if (store.getState() % 2 !== 0) {
             store.dispatch({ type: 'INCREMENT' });
         }
     },
-    incrementAsync: function () {
-        setTimeout(function () {
+    incrementAsync() {
+        setTimeout(() => {
             store.dispatch({ type: 'INCREMENT' });
         }, 1000);
     }
