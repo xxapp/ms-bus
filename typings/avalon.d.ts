@@ -36,6 +36,10 @@ interface AvalonStatic {
      */
     vmodels: any;
     /**
+     * 过滤器列表
+     */
+    filters: any
+    /**
      * 用于合并多个对象或深克隆,类似于jQuery.extend
      */
     mix(target: any, object1?: any, ...objectN: any[]): any;

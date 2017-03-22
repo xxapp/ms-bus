@@ -1,20 +1,19 @@
-var beyond = require('/vendor/beyond');
-var Notify = beyond.Notify;
+import { Notify } from '../vendor/beyond';
 
-var position = 'top-right', timeout = 5000;
+const position = 'top-right', timeout = 5000;
 
-exports.info = function (message) {
+export function info(message) {
     Notify(message, position, timeout, 'info', 'fa-envelope', true);
 }
 
-exports.success = function (message) {
+export function success(message) {
     Notify(message, position, timeout, 'success', 'fa-check', true);
 }
 
-exports.error = function (message) {
+export function error(message) {
     Notify(message, position, timeout, 'danger', 'fa-bolt', true);
 }
 
-exports.warning = function (message) {
+export function warning(message) {
     Notify(message, position, timeout, 'warning', 'fa-warning', true);
 }

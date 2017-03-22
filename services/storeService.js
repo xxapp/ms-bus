@@ -1,7 +1,7 @@
-var ajax = require('/services/ajaxService.js');
-require('/vendor/jquery/ajaxfileupload');
+import ajax from './ajaxService.js';
+import '../vendor/jquery/ajaxfileupload';
 
-exports.demo = {
+export const demo = {
     key: 'region_id',
     initialData: function () {
         return {
@@ -47,7 +47,7 @@ exports.demo = {
     }
 };
 
-exports.category = {
+export const category = {
     key: 'id',
     initialData: function () {
         return {
@@ -90,7 +90,7 @@ exports.category = {
     }
 };
 
-exports.supplier = {
+export const supplier = {
     key: 'id',
     initialData: function () {
         return {
@@ -131,7 +131,7 @@ exports.supplier = {
     }
 };
 
-exports.item = {
+export const item = {
     key: 'id',
     initialData: function () {
         return {
@@ -196,7 +196,7 @@ exports.item = {
     }
 };
 
-exports.channel = {
+export const channel = {
     key: 'id',
     initialData: function () {
         return {
@@ -265,7 +265,7 @@ exports.channel = {
     }
 };
 
-exports.file = {
+export const file = {
     insert: function (params) {
         $.ajaxFileUpload({
             url: '/api/file/uploadFile',
@@ -277,7 +277,7 @@ exports.file = {
     }
 };
 
-exports.github = {
+export const github = {
     limit: 30,
     repository: function (params) {
         return ajax({
