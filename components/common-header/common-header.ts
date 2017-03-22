@@ -7,7 +7,7 @@ avalon.component('common-header', {
     defaults: {
         currentUserName: '',
         logout() {
-            global.sessionStorage.clear('adminSession');
+            global.sessionStorage.removeItem('adminSession');
             global.location.href = '/login.html';
         }
     }

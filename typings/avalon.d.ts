@@ -24,13 +24,17 @@ interface AvalonStatic {
      */
     define(definition): object;
     /**
-     * 定义组件
+     * 定义avalon组件
      */
-    component: avalonComponent;
+    component(name: string, component): any;
     /**
      * 扫描元素，与ViewModel绑定
      */
     scan(node: Element, vm?): any;
+    /**
+     * avalon动画
+     */
+    effect(name: string, opts?: any): any;
     /**
      * ViewModel 列表
      */

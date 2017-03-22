@@ -1,6 +1,11 @@
 /// <reference path="./avalon.d.ts" />
 /// <reference path="./mmRouter.d.ts" />
+/// <reference types="jquery" />
 
+// FIS3 inline syntax
+declare var __inline
+
+// runtime global
 
 interface MyWindow extends Window {
     Promise: Promise<any>,
@@ -17,3 +22,7 @@ declare var module: {
 }
 
 declare var exports: any
+
+interface JQueryStatic {
+    ajaxFileUpload
+}
