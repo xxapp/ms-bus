@@ -34,6 +34,7 @@ const vm = avalon.define({
     $id: 'demo',
     value: 0,
     title: 'hello',
+    show: false,
     $form: createForm({
         onFieldsChange(fields) {
             console.log(fields);

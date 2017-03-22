@@ -12,8 +12,11 @@
 </head>
 <body>
     <div ms-controller="demo">
-        {{@title}}
-        <input type="text" :duplex="@title">
+        <button type="button" :click="@show = !@show"></button>
+        <ms-dialog :widget="{show: @show}">
+            <span slot="header">title</span>
+            <span slot="body">Hello</span>
+        </ms-dialog>
         <ms-form :widget="{$form: @$form}">
             <ms-form-item :widget="{label: '标题'}">
                 <ms-input :widget="{value: @title, col: 'title'}"></ms-input>

@@ -4,6 +4,7 @@
 // require('/components/ms-check-header');
 // require('/components/ms-pagination');
 // require('/components/ms-dialog');
+import '../../components/ms-dialog/ms-dialog';
 import '../../components/ms-form/ms-form';
 import '../../components/ms-form-item/ms-form-item';
 import '../../components/ms-input/ms-input';
