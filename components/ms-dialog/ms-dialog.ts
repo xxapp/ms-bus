@@ -1,11 +1,12 @@
 import * as avalon from 'avalon2';
 import * as bootbox from 'bootbox';
+import { parseSlotToVModel } from '../../vendor/avx-component/avx-util';
 
 avalon.component('ms-dialog', {
-    template: '<div><slot name="body"/></div>',
+    template: '<div><div style="display: none"><slot name="header" /><slot name="body"/></div></div>',
     defaults: {
         header: '',
-        body: '',
+        body: 'blank',
         $parentVmId: '',
         $content: '',
         $dialog: null,
@@ -21,20 +22,20 @@ avalon.component('ms-dialog', {
         containerVmId: '',
         $post: avalon.noop,
         $beforePost: avalon.noop,
+        onCancel() {},
         onInit(event) {
             var vm = event.vmodel;
             vm.$watch('show', function (newV) {
-                var header = $(vm.header).children().text();
                 if (newV) {
                     vm.$dialog = bootbox.dialog({
-                        message: vm.$content,
-                        title: vm.title ? vm.title : header ? header : vm.isEdit ? '修改' : '新增',
+                        message: vm.body,
+                        title: vm.title ? vm.title : vm.header ? vm.header : vm.isEdit ? '修改' : '新增',
                         className: vm.isEdit ? 'modal-primary' : 'modal-success',
                         size: vm.size,
                         buttons: {
                             save: {
                                 label: '保存',
-                                className: "btn-blue",
+                                className: "btn-primary",
                                 callback: function () {
                                     return vm.$post({
                                         isEdit: vm.isEdit,
@@ -49,8 +50,9 @@ avalon.component('ms-dialog', {
                                 }
                             }
                         }
-                    }).on('hidden.bs.modal', function () { 
+                    }).on('hidden.bs.modal', function (e) { 
                         vm.show = false;
+                        vm.onCancel(e);
                         setTimeout(function () {
                             if ($('.modal.in').length) {
                                 $('body').addClass('modal-open');
@@ -95,10 +97,8 @@ avalon.component('ms-dialog', {
             });
         },
         onReady(event) {
-            console.log(this.header);
-            console.log(this.body);
-            var vm = event.vmodel;
-            vm.$content = $.trim($('<div>').append(vm.content).children().first().attr('ms-controller', vm.$id).parent().html());
+            if (!event) return;
+            parseSlotToVModel(this, this.$render.root.children);
         },
         onDispose(event) {
         }

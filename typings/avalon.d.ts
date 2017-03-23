@@ -51,7 +51,11 @@ interface AvalonStatic {
     /**
      * no operation
      */
-    noop(): void
+    noop(): void,
+    /**
+     * virtual dom
+     */
+    vdom(vnode: any, method: string): void
 }
 
 declare module 'avalon2' {

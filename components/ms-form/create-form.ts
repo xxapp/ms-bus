@@ -1,6 +1,6 @@
 import * as avalon from 'avalon2';
 
-export function createForm(options) {
+export function createForm(options?) {
     return new Form(options);
 }
 
