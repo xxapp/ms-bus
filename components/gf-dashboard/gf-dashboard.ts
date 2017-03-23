@@ -12,7 +12,6 @@ avalon.component('gf-dashboard', {
             this.show = false;
         },
         onInit(event) {
-            //this.handleCancel.bind(this);
         } 
     }
 });
