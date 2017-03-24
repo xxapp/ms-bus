@@ -1,6 +1,6 @@
 // require('/components/ms-data-box');
-// require('/components/ms-table');
-// require('/components/ms-table-header');
+import '../../components/ms-table/ms-table';
+import '../../components/ms-table-header/ms-table-header';
 // require('/components/ms-check-header');
 // require('/components/ms-pagination');
 // require('/components/ms-dialog');

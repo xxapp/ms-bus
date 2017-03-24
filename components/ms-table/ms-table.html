@@ -2,13 +2,14 @@
     <table>
         <thead>
             <tr>
-                <th ms-repeat="thead" style="vertical-align: middle;" ms-css-width="el.width">{{el.content|html}}</th>
+                <!--<th ms-repeat="thead" style="vertical-align: middle;" ms-css-width="el.width">{{el.content|html}}</th>-->
+                <slot />
             </tr>
         </thead>
         <tbody>
-            <tr ms-repeat-row="data">
+            <!--<tr ms-repeat-row="data">
                 <td ms-repeat-td="tbody" style="vertical-align: middle;">{{td|html}}</td>
-            </tr>
+            </tr>-->
         </tbody>
     </table>
 </template>
