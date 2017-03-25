@@ -1,5 +1,5 @@
 import * as avalon from 'avalon2';
-import { findParentComponent, parseSlotToVModel } from '../../vendor/avx-component/avx-util';
+import { findParentComponent, parseSlotToVModel, getChildTemplateDescriptor } from '../../vendor/avx-component/avx-util';
 
 var checkHeaderListener = avalon.noop;
 
@@ -8,7 +8,7 @@ avalon.component('ms-table', {
     template: __inline('./ms-table.html'),
     defaults: {
         header: '',
-        thead: [],
+        columns: [],
         $parentVmId: '',
         data: [],
         tbody: [],
@@ -18,7 +18,7 @@ avalon.component('ms-table', {
         onCheck: avalon.noop,
         selectionChange: avalon.noop,
         onInit(event) {
-            console.log(this.$render);
+            this.columns = getColumnConfig(getChildTemplateDescriptor(this));
             // vm.onCheck = function (row) {
             //     if (this.checked) {
             //         vm.selection.push(row);
@@ -58,48 +58,19 @@ avalon.component('ms-table', {
             // });
         },
         onReady(event) {
-            console.log(this.$render);
-            // 因为自定义标签内部写tr或th会被忽略，因此改用div表示th并做此处理让ms-repeat正常遍历
-            // var tmp = [], columnConfig = [];
-            // $(vm.$model.header).children().each(function (i, n) {
-            //     var $checker = $(n);
-            //     var type = $checker.get(0).tagName.toLowerCase().replace(/^ms:/, '');
-            //     var props = {
-            //         col: $checker.attr('col'),
-            //         inlineTemplate: $checker.attr('inline-template')
-            //     };
-            //     props.inlineTemplate = props.inlineTemplate != void 0;
-            //     var column = {};
-            //     // 由于框架原因，父组件内部动态生成的子组件不能放进$refs,因此将需要传递的值通过属性放入子组件
-            //     avxUtil.markPick(vm, n);
-            //     if (type == 'check-header') {
-            //         column = {
-            //             type: 'check',
-            //             content: '<ms:checkbox ms-cduplex="checked" change="onCheck(row)" ms-attr-value="row.' + props.col + '"></ms:checkbox>'
-            //             //content: '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-click="onCheck(row)" ms-attr-value="row.' + props.col + '"><span class="text"></span></label></div>'
-            //         };
-            //     } else if (type == 'table-header') {
-            //         column = {
-            //             type: 'normal',
-            //             content: props.inlineTemplate ? $checker.html() : ('{{row.' + props.col + '}}')
-            //         };
-            //     }
-            //     columnConfig.push(column);
-            //     tmp.push({
-            //         width: $checker.attr('width'),
-            //         content: $(n).prop('outerHTML')
-            //     });
-            // });
-            // vm.thead.clear();
-            // vm.thead.pushArray(tmp);
-
-            // // 根据表头配置生成表格内容模板
-            // vm.tbody = $.map(columnConfig, function (n) {
-            //     if (!n.content) return 'header 配置错误';
-            //     return n.content;
-            // });
         },
         onDispose(vm, el) {
         }
     }
 });
+
+function getColumnConfig(descriptor, level = 1) {
+    return descriptor.reduce((acc, column) => {
+        if (column.is != 'ms-table-header') return acc;
+        acc.push({
+            title: column.props.title,
+            template: column.props.dataIndex ? '{{record.' + column.props.dataIndex + '}}' : column.inlineTemplate
+        });
+        return acc.concat(getColumnConfig(column.children, level + 1));
+    }, []);
+}

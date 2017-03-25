@@ -1,15 +1,14 @@
 <template>
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <!--<th ms-repeat="thead" style="vertical-align: middle;" ms-css-width="el.width">{{el.content|html}}</th>-->
-                <slot />
+                <th :for="el in columns">{{el.title}}</th>
             </tr>
         </thead>
         <tbody>
-            <!--<tr ms-repeat-row="data">
-                <td ms-repeat-td="tbody" style="vertical-align: middle;">{{td|html}}</td>
-            </tr>-->
+            <tr :for="record in data">
+                <td :for="td in columns" :html="td.template"></td>
+            </tr>
         </tbody>
     </table>
 </template>

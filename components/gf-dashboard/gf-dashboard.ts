@@ -12,7 +12,10 @@ avalon.component('gf-dashboard', {
             this.show = false;
         },
         onInit(event) {
-        } 
+        },
+        list: [{
+            id: '1', name: '老狼', address: '深山', province: '老林'
+        }]
     }
 });
 

@@ -24,3 +24,17 @@ export function parseSlotToVModel(vmodel, vnodes: any[]): void {
         }
     });
 }
+
+export function getChildTemplateDescriptor(vmodel, render = vmodel.$render): void {
+    return render.directives.reduce((acc, action) => {
+        if (action.is) {
+            acc.push({
+                is: action.is,
+                props: action.value,
+                inlineTemplate: action.fragment,
+                children: getChildTemplateDescriptor(vmodel, action.innerRender)
+            });
+        }
+        return acc;
+    }, []);
+}

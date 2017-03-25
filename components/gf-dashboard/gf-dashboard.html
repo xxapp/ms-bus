@@ -14,10 +14,12 @@
                 </div>
             </div>
         </ms-dialog>
-        <ms-table>
-            <ms-table-header :widget="{col:'id'}"><button type="button">aaa</button></ms-table-header>
-            <ms-table-header :widget="{col:'name'}"></ms-table-header>
-            <ms-table-header :widget="{col:'age'}"></ms-table-header>
+        <ms-table :widget="{data:@list}">
+            <ms-table-header :widget="{title:'ID',dataIndex:'id'}"><button type="button">{{hell}}</button></ms-table-header>
+            <ms-table-header :widget="{title:'地址',dataIndex:'address'}">
+                <ms-table-header :widget="{title:'省份',dataIndex:'province'}"></ms-table-header>
+            </ms-table-header>
+            <ms-table-header :widget="{title:'名称',dataIndex:'name'}">{{message}}</ms-table-header>
         </ms-table>
     </div>
 </template>
