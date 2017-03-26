@@ -14,12 +14,15 @@
                 </div>
             </div>
         </ms-dialog>
-        <ms-table :widget="{data:@list}">
-            <ms-table-header :widget="{title:'ID',dataIndex:'id'}"><button type="button">{{hell}}</button></ms-table-header>
+        <ms-table :widget="{data:@list,action:@action}">
+            <ms-table-header :widget="{title:'ID',dataIndex:'id'}"></ms-table-header>
             <ms-table-header :widget="{title:'地址',dataIndex:'address'}">
                 <ms-table-header :widget="{title:'省份',dataIndex:'province'}"></ms-table-header>
             </ms-table-header>
-            <ms-table-header :widget="{title:'名称',dataIndex:'name'}">{{message}}</ms-table-header>
+            <ms-table-header :widget="{title:'名称'}"><span ms-skip="true">{{record.name}}</span></ms-table-header>
+            <ms-table-header :widget="{title:'操作',dataIndex:'name'}">
+                <button type="button" class="btn btn-danger btn-xs" :click="handle('delete')">删除</button>
+            </ms-table-header>
         </ms-table>
     </div>
 </template>

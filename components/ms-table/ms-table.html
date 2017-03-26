@@ -6,8 +6,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr :for="record in data">
-                <td :for="td in columns" :html="td.template"></td>
+            <tr :for="($index, record) in data">
+                <td :for="col in columns" :html="col.template"></td>
             </tr>
         </tbody>
     </table>

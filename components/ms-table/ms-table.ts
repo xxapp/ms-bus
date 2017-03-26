@@ -9,14 +9,17 @@ avalon.component('ms-table', {
     defaults: {
         header: '',
         columns: [],
-        $parentVmId: '',
         data: [],
-        tbody: [],
         checked: [],
         selection: [],
         isAllChecked: false,
         onCheck: avalon.noop,
         selectionChange: avalon.noop,
+        action() {},
+        handle(type, col, record, $index) {
+            let text = record[col.dataIndex].$model || record[col.dataIndex];
+            this.action(type, text, record.$model, $index);
+        },
         onInit(event) {
             this.columns = getColumnConfig(getChildTemplateDescriptor(this));
             // vm.onCheck = function (row) {
@@ -67,9 +70,14 @@ avalon.component('ms-table', {
 function getColumnConfig(descriptor, level = 1) {
     return descriptor.reduce((acc, column) => {
         if (column.is != 'ms-table-header') return acc;
+        let inlineTemplate = column.inlineTemplate;
+        inlineTemplate = inlineTemplate.replace(/(ms-|:)skip="[^"]*"/g, '');
+        inlineTemplate = inlineTemplate.replace(/<\s*ms-table-header[^>]*>.*<\/\s*ms-table-header\s*>/g, '');
+        inlineTemplate = inlineTemplate.replace(/(ms-|:)click="handle\(([^"]*)\)"/g, '$1click="handle($2, col, record, $index)"');
         acc.push({
             title: column.props.title,
-            template: column.props.dataIndex ? '{{record.' + column.props.dataIndex + '}}' : column.inlineTemplate
+            dataIndex: column.props.dataIndex || '',
+            template: /^\s*$/.test(inlineTemplate) ? '{{record.' + column.props.dataIndex + '}}' : inlineTemplate
         });
         return acc.concat(getColumnConfig(column.children, level + 1));
     }, []);
