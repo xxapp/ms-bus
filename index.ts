@@ -1,5 +1,6 @@
 /// <reference path="typings/index.d.ts" />
 
+import 'es5-shim'
 import 'es6-promise/dist/es6-promise.auto';
 
 import * as jQuery from 'jquery';

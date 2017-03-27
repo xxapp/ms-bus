@@ -61,7 +61,7 @@ avalon.component('ms-dialog', {
             });
         },
         onReady(event) {
-            parseSlotToVModel(this, this.$render.root.children);
+            parseSlotToVModel(this);
         },
         onDispose(event) {
         }

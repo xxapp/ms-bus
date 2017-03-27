@@ -13,8 +13,8 @@ import '../../components/ms-input/ms-input';
 // require('/components/ms-control-select2');
 // require('/components/ms-control-file');
 // require('/components/ms-control-datetimepicker');
-// require('/components/ms-checkbox');
-// require('/components/ms-control-checkbox-group');
+import '../../components/ms-checkbox/ms-checkbox';
+import '../../components/ms-checkbox/ms-checkbox-group';
 
 // require('./directive-cprop');
 // require('./directive-cduplex');

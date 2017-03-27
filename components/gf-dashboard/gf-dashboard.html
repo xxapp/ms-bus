@@ -16,13 +16,21 @@
         </ms-dialog>
         <ms-table :widget="{data:@list,action:@action}">
             <ms-table-header :widget="{title:'ID',dataIndex:'id'}"></ms-table-header>
-            <ms-table-header :widget="{title:'地址',dataIndex:'address'}">
-                <ms-table-header :widget="{title:'省份',dataIndex:'province'}"></ms-table-header>
-            </ms-table-header>
-            <ms-table-header :widget="{title:'名称'}"><span ms-skip="true">{{record.name}}</span></ms-table-header>
+            <ms-table-header :widget="{title:'地址',dataIndex:'address'}"></ms-table-header>
+            <ms-table-header :widget="{title:'省份',dataIndex:'province'}"></ms-table-header>
+            <ms-table-header :widget="{title:'名称'}"><span :skip>{{record.name}}</span></ms-table-header>
             <ms-table-header :widget="{title:'操作',dataIndex:'name'}">
                 <button type="button" class="btn btn-danger btn-xs" :click="handle('delete')">删除</button>
+                <!--<button type="button" class="btn btn-danger btn-xs" :click="action('delete', record[col.dataIndex].$model || record[col.dataIndex], record.$model, $index)">删除</button>-->
             </ms-table-header>
         </ms-table>
+        <ms-checkbox :widget="{checked:true,onChange:@handleChange}">同意</ms-checkbox>
+        <ms-checkbox :widget="{checked:false,onChange:@handleChange}">不同意</ms-checkbox>
+        <br>
+        <ms-form>
+            <ms-form-item>
+                <ms-checkbox-group :widget="{options:@options,onChange:@handleCheckGroupChange,disabled:true}"></ms-checkbox-group>
+            </ms-form-item>
+        </ms-form>
     </div>
 </template>

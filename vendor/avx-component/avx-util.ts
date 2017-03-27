@@ -11,9 +11,9 @@ export function findParentComponent(vm, ctype) {
     return null;
 }
 
-export function parseSlotToVModel(vmodel, vnodes: any[]): void {
+export function parseSlotToVModel(vmodel, vnodes: any[] = vmodel.$render.root.children): void {
     vnodes.forEach(vnode => {
-        if (!vnode) return true;
+        if (!vnode || vnode.isVoidTag === undefined) return true;
         let slotName = vnode.dom.getAttribute('slot');
         if (slotName) {
             delete vnode.props[':skip'];

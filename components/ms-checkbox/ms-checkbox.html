@@ -1,15 +1,21 @@
+<style>
+    .checkbox-wrapper {
+        display: inline;
+    }
+    .checkbox-wrapper label.checkbox-inner {
+        padding-left: 0;
+    }
+</style>
 <template>
-    <div ms-attr-class="wrapper" style="margin-top: 0; margin-bottom: 0;">
-        <label>
+    <div :class="@wrapper" class="checkbox-wrapper" style="margin-top: 0; margin-bottom: 0;">
+        <label class="checkbox-inner">
             <input type="checkbox"
-                ms-attr-id="helpId"
-                ms-duplex="duplex"
-                ms-change="change"
-                ms-change-1="innerChnage"
-                ms-attr-value="value"
+                :attr="{id:@helpId,disabled:@disabled}"
+                :duplex-checked="@checked"
+                :change="@handleChange"
                 />
             <span class="text"></span>
         </label>
-        <label ms-if="hasLabel" ms-attr-for="helpId" style="padding-left: 0;">{{ label | html }}</label>
+        <label :attr="{'for':@helpId}" style="padding-left: 0;"><slot /></label>
     </div>
 </template>

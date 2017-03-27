@@ -1,0 +1,6 @@
+<template>
+    <div class="checkbox-group">
+        <input type="hidden" class="form-control" ms-duplex="strValue" data-bv-excluded="false" ms-attr-name="col">
+        <ms-checkbox :widget="{checked:~@value.indexOf(option.value),onChange:function(){@toggleOption(option)},disabled:'disabled' in option?option.disabled:@disabled}" :for="option in options">{{option.label}}</ms-checkbox>
+    </div>
+</template>
