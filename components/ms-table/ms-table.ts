@@ -1,7 +1,6 @@
 import * as avalon from 'avalon2';
+import '../ms-checkbox/ms-checkbox';
 import { findParentComponent, parseSlotToVModel, getChildTemplateDescriptor } from '../../vendor/avx-component/avx-util';
-
-var checkHeaderListener = avalon.noop;
 
 avalon.component('ms-table', {
     soleSlot: 'header',
@@ -10,10 +9,34 @@ avalon.component('ms-table', {
         header: '',
         columns: [],
         data: [],
+        key: 'id',
         checked: [],
         selection: [],
         isAllChecked: false,
         onCheck: avalon.noop,
+        handleCheckAll(checked) {
+            console.log('all', checked, this.checked.toString());
+            if (checked) {
+                this.data.forEach(record => {
+                    this.checked.ensure(String(record[this.key]));
+                    this.selection.ensure(record);
+                });
+            } else {
+                this.checked.clear();
+                this.selection.clear();
+            }
+            this.selectionChange(this.selection.$model);
+        },
+        handleCheck(checked, record) {
+            if (checked) {
+                this.checked.ensure(String(record[this.key]));
+                this.selection.ensure(record);
+            } else {
+                this.checked.remove(String(record[this.key]));
+                this.selection.remove(record);
+            }
+            this.selectionChange(this.selection.$model);
+        },
         selectionChange: avalon.noop,
         action() {},
         handle(type, col, record, $index) {
@@ -22,43 +45,18 @@ avalon.component('ms-table', {
         },
         onInit(event) {
             this.columns = getColumnConfig(getChildTemplateDescriptor(this));
-            // vm.onCheck = function (row) {
-            //     if (this.checked) {
-            //         vm.selection.push(row);
-            //     } else {
-            //         vm.selection.remove(row);
-            //     }
-            //     vm.selectionChange(vm.selection.$model);
-            // }
-
-            // checkHeaderListener = function (data) {
-            //     if (!avxUtil.containChild(vm, data.id)) {
-            //         return ;
-            //     }
-            //     if (data.type === 'checked') {
-            //         avalon.each(vm.data, function(i, v){
-            //             vm.checked.ensure(String(v[data.key]));
-            //             vm.selection.ensure(v);
-            //         });
-            //     } else if (data.type === 'unchecked') {
-            //         vm.checked.clear();
-            //         vm.selection.clear();
-            //     }
-            //     vm.selectionChange(vm.selection.$model);
-            // }
-            // cEvent.on('checkHeader', checkHeaderListener);
-            // vm.$watch('checked.length', function (newV) {
-            //     if (newV == vm.data.size()) {
-            //         vm.isAllChecked = true;
-            //     } else {
-            //         vm.isAllChecked = false;
-            //     }
-            // });
-            // vm.$watch('*', function (v, oldV, path) {
-            //     if (path === 'data') {
-            //         vm.checked.clear();
-            //     }
-            // });
+            this.$watch('checked.length', (newV) => {
+                if (newV == this.data.length) {
+                    console.log('watch', this.isAllChecked);
+                    this.isAllChecked = true;
+                } else {
+                    console.log('watch', this.isAllChecked);
+                    this.isAllChecked = false;
+                }
+            });
+            this.$watch('data', () => {
+                this.checked.clear();
+            });
         },
         onReady(event) {
         },
