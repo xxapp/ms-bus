@@ -10,13 +10,13 @@ avalon.component('ms-checkbox', {
         checked: false,
         disabled: false,
         onChange: avalon.noop,
-        handleChange(e) {
-            this.onChange(e);
-        },
         flush: avalon.noop,
         helpId: '',
         onInit(event) {
             this.helpId = this.$id;
+            this.$watch('checked', v => {
+                this.onChange(v);
+            });
             // // inline在IE8下显示有问题，待解决
             // if (this.inline != void 0) {
             //     this.wrapper = 'checkbox-inline';
@@ -34,12 +34,6 @@ avalon.component('ms-checkbox', {
                 checkbox.style.marginTop = '6px';
 
                 mockCheckbox.style.display = 'none';
-
-                this.flush = function (e) {
-                    const el = e.target;
-                    el.blur();
-                    el.focus();
-                }
             }
         },
         onDispose(vm, el) {
