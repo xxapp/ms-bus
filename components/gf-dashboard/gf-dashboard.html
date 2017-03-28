@@ -6,11 +6,11 @@
             <span slot="header">Title</span>
             <div slot="body" ms-skip>
                 <div :important="dashboard_from">
-                    <ms-form :widget="{$form: @$form}">
+                    <xmp is="ms-form" :widget="{$form: @$form}">
                         <ms-form-item :widget="{label: '标题'}">
                             <ms-input :widget="{col: 'title'}"></ms-input>
                         </ms-form-item>
-                    </ms-form>
+                    </xmp>
                 </div>
             </div>
         </ms-dialog>
