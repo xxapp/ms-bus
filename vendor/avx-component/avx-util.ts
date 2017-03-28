@@ -25,7 +25,7 @@ export function parseSlotToVModel(vmodel, vnodes: any[] = vmodel.$render.root.ch
     });
 }
 
-export function getChildTemplateDescriptor(vmodel, render = vmodel.$render): void {
+export function getChildTemplateDescriptor(vmodel, render = vmodel.$render): any[] {
     return render.directives.reduce((acc, action) => {
         if (action.is) {
             acc.push({

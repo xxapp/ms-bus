@@ -14,12 +14,25 @@ avalon.component('gf-dashboard', {
         },
         list: [{
             id: '1', name: '老狼', address: '深山', province: '老林'
+        }, {
+            id: '2', name: '老狼', address: '深山', province: '老林'
+        }, {
+            id: '3', name: '老狼', address: '深山', province: '老林'
         }],
         action(type, text, record, index) {
             if (type == 'delete') {
                 console.log(text, record, index);
                 msg.success('删除成功');
             }
+        },
+        handleSelect(record, selected, selectedRows) {
+            console.log(record, selected, selectedRows);
+        },
+        handleSelectAll(selected, selectedRows, changeRows) {
+            console.log(selected, selectedRows, changeRows);
+        },
+        handleSelectionChange(selectedRowKeys, selectedRows) {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
         },
         handleChange(e) {
 

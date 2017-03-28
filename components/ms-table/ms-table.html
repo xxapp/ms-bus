@@ -2,13 +2,13 @@
     <table class="table">
         <thead>
             <tr>
-                <th><ms-checkbox :widget="{checked:@isAllChecked,onChange:@handleCheckAll}"></ms-checkbox></th>
+                <th :if="@needSelection"><ms-checkbox :widget="{id:'checkcheck',checked:@isAllChecked,onChange:@handleCheckAll}"></ms-checkbox></th>
                 <th :for="el in @columns">{{el.title}}</th>
             </tr>
         </thead>
         <tbody>
             <tr :for="($index, record) in @data">
-                <td><ms-checkbox :widget="{checked:@checked.indexOf(record[@key])!=-1,onChange:function(){@handleCheck(arguments[0],record)}}"></ms-checkbox></td>
+                <td :if="@needSelection"><ms-checkbox :widget="{checked:@checked.indexOf(record[@key])!=-1,onChange:function(){@handleCheck(arguments[0].target.checked,record)}}"></ms-checkbox></td>
                 <td :for="col in @columns" :html="col.template"></td>
             </tr>
         </tbody>

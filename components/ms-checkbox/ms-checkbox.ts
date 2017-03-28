@@ -9,14 +9,13 @@ avalon.component('ms-checkbox', {
         label: '',
         checked: false,
         disabled: false,
-        onChange: avalon.noop,
+        onChange(e) {
+            this.onChange(e);
+        },
         flush: avalon.noop,
         helpId: '',
         onInit(event) {
             this.helpId = this.$id;
-            this.$watch('checked', v => {
-                this.onChange(v);
-            });
             // // inline在IE8下显示有问题，待解决
             // if (this.inline != void 0) {
             //     this.wrapper = 'checkbox-inline';
