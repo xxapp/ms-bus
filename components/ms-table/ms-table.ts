@@ -10,6 +10,7 @@ avalon.component('ms-table', {
         columns: [],
         data: [],
         key: 'id',
+
         needSelection: false,
         checked: [],
         selection: [],
@@ -19,10 +20,14 @@ avalon.component('ms-table', {
         selectionChange: avalon.noop,
         handleCheckAll(e) {
             if (e.target.checked) {
-                this.data.forEach(record => {
-                    this.checked.ensure(String(record[this.key]));
-                    this.selection.ensure(record);
-                });
+                this.data.slice(
+                        this.pagination.pageSize * (this.pagination.current - 1),
+                        this.pagination.pageSize * this.pagination.current
+                    )
+                    .forEach(record => {
+                        this.checked.ensure(record[this.key]);
+                        this.selection.ensure(record);
+                    });
             } else {
                 this.checked.clear();
                 this.selection.clear();
@@ -32,20 +37,38 @@ avalon.component('ms-table', {
         },
         handleCheck(checked, record) {
             if (checked) {
-                this.checked.ensure(String(record[this.key]));
+                this.checked.ensure(record[this.key]);
                 this.selection.ensure(record);
             } else {
-                this.checked.remove(String(record[this.key]));
+                this.checked.remove(record[this.key]);
                 this.selection.remove(record);
             }
             this.selectionChange(this.checked, this.selection.$model);
             this.onSelect(record.$model, checked, this.selection.$model);
         },
+
         action() {},
         handle(type, col, record, $index) {
             let text = record[col.dataIndex].$model || record[col.dataIndex];
             this.action(type, text, record.$model, $index);
         },
+
+        pagination: {
+            current: 1,
+            pageSize: 10,
+            total: 0,
+            onChange: avalon.noop
+        },
+        handlePageChange(currentPage) {
+            this.pagination.onChange(currentPage);
+            this.pagination.current = currentPage;
+
+            this.$fire('checked.length', this.checked.length);
+            
+            this.onChange(this.pagination.$model);
+        },
+
+        onChange: avalon.noop,
         onInit(event) {
             const descriptor = getChildTemplateDescriptor(this);
             descriptor.forEach(column => {
@@ -57,15 +80,21 @@ avalon.component('ms-table', {
             });
             this.columns = getColumnConfig(descriptor);
             this.$watch('checked.length', (newV) => {
-                if (newV == this.data.length) {
-                    this.isAllChecked = true;
-                } else {
-                    this.isAllChecked = false;
-                }
+                const currentPageKeys = this.data
+                    .slice(
+                        this.pagination.pageSize * (this.pagination.current - 1),
+                        this.pagination.pageSize * this.pagination.current
+                    )
+                    .map(record => record[this.key]);
+                this.isAllChecked = currentPageKeys
+                    .filter(key => this.checked.contains(key))
+                    .length == currentPageKeys.length;
             });
-            this.$watch('data', () => {
+            this.$watch('data', (v) => {
                 this.checked.clear();
+                this.pagination.total = v.length;
             });
+            this.pagination.total = this.data.length;
         },
         onReady(event) {
         },

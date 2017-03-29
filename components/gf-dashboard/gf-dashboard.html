@@ -14,7 +14,7 @@
                 </div>
             </div>
         </ms-dialog>
-        <ms-table :widget="{data:@list,action:@action,onSelect:@handleSelect,onSelectAll:@handleSelectAll,selectionChange:@handleSelectionChange}">
+        <ms-table :widget="{data:@list,action:@action,pagination:@pagination,onSelect:@handleSelect,onSelectAll:@handleSelectAll,selectionChange:@handleSelectionChange}">
             <ms-table-header :widget="{dataIndex:'id',type:'selection'}"></ms-table-header>
             <ms-table-header :widget="{title:'地址',dataIndex:'address'}"></ms-table-header>
             <ms-table-header :widget="{title:'省份',dataIndex:'province'}"></ms-table-header>

@@ -56,6 +56,10 @@ interface AvalonStatic {
      * virtual dom
      */
     vdom(vnode: any, method: string): void
+    /**
+     * 生成指定长度数组
+     */
+    range(start: number, end?: number, step?: number): number[]
 }
 
 declare module 'avalon2' {
