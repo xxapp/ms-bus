@@ -29,16 +29,22 @@ var root = avalon.vmodels['root'];
 require('/components/common-header');
 require('/components/common-sidebar');
 require('/components/gf-dashboard');
-avalon.router.add('/', function () {
+avalon.router.add('/', () => {
     root.currentPage = getPage('gf-dashboard');
 });
 
 root.$routeConfig = [{ 
     path: '/aaa',
     name: 'gf-aaa',
-    component: function (resolve) {
-        require.async('/components/gf-aaa', resolve)
+    component(resolve) {
+        require.async('/components/gf-aaa', resolve);
     } 
+}, {
+    path: '/doc-ms-table',
+    name: 'doc-ms-table',
+    component(resolve) {
+        require.async('/components/doc-ms-table', resolve);
+    }
 }];
 
 applyRouteConfig(root.$routeConfig);

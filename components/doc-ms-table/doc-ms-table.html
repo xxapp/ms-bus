@@ -1,18 +1,32 @@
 <template>
-    <div class="row" ms-controller="doc-ms-table">
+    <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="widget">
                 <div class="widget-header bg-green">
                     <span class="widget-caption">Table组件</span>
                 </div>
                 <div class="widget-body">
-                    <ms:table class="table table-hover table-bordered" ms-cprop-data="tableData">
-                        <ms:check-header col="region_id" width="60"></ms:check-header>
-                        <ms:table-header text="#" inline-template>{{$outer.$index + 1}}</ms:table-header>
-                        <ms:table-header col="region_id" text="ID"></ms:table-header>
-                        <ms:table-header col="region_name" text="名称"></ms:table-header>
-                        <ms:table-header col="region_parent_id" text="PID"></ms:table-header>
-                    </ms:table>
+                    <div class="form-title">本地分页</div>
+                    <ms-table :widget="{data:@list,action:@action,onSelect:@handleSelect,onSelectAll:@handleSelectAll,selectionChange:@handleSelectionChange}">
+                        <ms-table-header :widget="{dataIndex:'id',type:'selection'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'地址',dataIndex:'address'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'省份',dataIndex:'province'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'名称'}"><span :skip>{{record.name}}</span></ms-table-header>
+                        <ms-table-header :widget="{title:'操作',dataIndex:'name'}">
+                            <button type="button" class="btn btn-danger btn-xs" :click="handle('delete')">删除</button>
+                            <!--<button type="button" class="btn btn-danger btn-xs" :click="action('delete', record[col.dataIndex].$model || record[col.dataIndex], record.$model, $index)">删除</button>-->
+                        </ms-table-header>
+                    </ms-table>
+                    
+                    <div class="form-title">远程数据分页</div>
+                    <ms-table :widget="{data:@remoteList,pagination:@pagination,onChange:@handleTableChange}">
+                        <ms-table-header :widget="{dataIndex:'region_id',type:'selection'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'地区',dataIndex:'region_name'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'PID',dataIndex:'region_parent_id'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'操作'}">
+                            <!--<button type="button" class="btn btn-danger btn-xs" :click="handle('delete')">删除</button>-->
+                        </ms-table-header>
+                    </ms-table>
                 </div>
             </div>
         </div>
