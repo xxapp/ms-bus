@@ -2,6 +2,10 @@ import * as avalon from 'avalon2';
 import '../ms-checkbox/ms-checkbox';
 import { findParentComponent, parseSlotToVModel, getChildTemplateDescriptor } from '../../vendor/avx-component/avx-util';
 
+const defaultPagination = {
+    current: 1, pageSize: 10, onChange: avalon.noop
+};
+
 avalon.component('ms-table', {
     soleSlot: 'header',
     template: __inline('./ms-table.html'),
@@ -19,18 +23,21 @@ avalon.component('ms-table', {
         onSelectAll: avalon.noop,
         selectionChange: avalon.noop,
         handleCheckAll(e) {
+            const data = this.getCurrentPageData();
             if (e.target.checked) {
-                this.data.slice(
-                        this.pagination.pageSize * (this.pagination.current - 1),
-                        this.pagination.pageSize * this.pagination.current
-                    )
-                    .forEach(record => {
-                        this.checked.ensure(record[this.key]);
-                        this.selection.ensure(record);
-                    });
+                data.forEach(record => {
+                    this.checked.ensure(record[this.key]);
+                    this.selection.ensure(record);
+                });
             } else {
-                this.checked.clear();
-                this.selection.clear();
+                if (this.pagination.total) {
+                    debugger;
+                    this.checked.clear();
+                    this.selection.clear();
+                } else {
+                    this.checked.removeAll(el => data.map(record => record[this.key]).indexOf(el) !== -1);
+                    this.selection.removeAll(el => data.indexOf(el) !== -1);
+                }
             }
             this.selectionChange(this.checked, this.selection.$model);
             this.onSelectAll(e.target.checked, this.selection.$model);
@@ -53,19 +60,24 @@ avalon.component('ms-table', {
             this.action(type, text, record.$model, $index);
         },
 
-        pagination: {
-            current: 1,
-            pageSize: 10,
-            total: 0,
-            onChange: avalon.noop
-        },
+        pagination: {},
         handlePageChange(currentPage) {
             this.pagination.onChange(currentPage);
             this.pagination.current = currentPage;
 
             this.$fire('checked.length', this.checked.length);
-            
             this.onChange(this.pagination.$model);
+        },
+        getCurrentPageData() {
+            return this.pagination.total ? this.data : this.data.slice(
+                this.pagination.pageSize * (this.pagination.current - 1),
+                this.pagination.pageSize * this.pagination.current
+            );
+        },
+        $computed: {
+            total() {
+                return this.pagination.total || this.data.length;
+            }
         },
 
         onChange: avalon.noop,
@@ -80,11 +92,7 @@ avalon.component('ms-table', {
             });
             this.columns = getColumnConfig(descriptor);
             this.$watch('checked.length', (newV) => {
-                const currentPageKeys = this.data
-                    .slice(
-                        this.pagination.pageSize * (this.pagination.current - 1),
-                        this.pagination.pageSize * this.pagination.current
-                    )
+                const currentPageKeys = this.getCurrentPageData()
                     .map(record => record[this.key]);
                 this.isAllChecked = currentPageKeys
                     .filter(key => this.checked.contains(key))
@@ -92,9 +100,16 @@ avalon.component('ms-table', {
             });
             this.$watch('data', (v) => {
                 this.checked.clear();
-                this.pagination.total = v.length;
+                this.selection.clear();
             });
-            this.pagination.total = this.data.length;
+            this.$watch('data.length', v => {
+                this.checked.clear();
+                this.selection.clear();
+            })
+            this.$watch('pagination', v => {
+                this.pagination = {...defaultPagination, ...v};
+            });
+            this.$fire('pagination', this.pagination.$model);
         },
         onReady(event) {
         },

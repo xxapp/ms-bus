@@ -9,13 +9,13 @@
             <thead>
                 <tr>
                     <th :if="@needSelection">
-                        <ms-checkbox :widget="{id:'checkcheck',checked:@isAllChecked,onChange:@handleCheckAll}"></ms-checkbox>
+                        <ms-checkbox :widget="{checked:@isAllChecked,onChange:@handleCheckAll}"></ms-checkbox>
                     </th>
                     <th :for="el in @columns">{{el.title}}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr :for="($index, record) in @data | limitBy(@pagination.pageSize, @pagination.pageSize * @pagination.current - @pagination.pageSize)">
+                <tr :for="($index, record) in @getCurrentPageData()">
                     <td :if="@needSelection">
                         <ms-checkbox :widget="{checked:@checked.indexOf(record[@key])!=-1,onChange:function(){@handleCheck(arguments[0].target.checked,record)}}"></ms-checkbox>
                     </td>
@@ -24,7 +24,7 @@
             </tbody>
         </table>
         <div class="table-pagination pull-right">
-            <ms-pagination :widget="{current:@pagination.current,pageSize:@pagination.pageSize,total:@pagination.total,onChange:@handlePageChange}"></ms-pagination>
+            <ms-pagination :widget="{current:@pagination.current,pageSize:@pagination.pageSize,total:@total,onChange:@handlePageChange}"></ms-pagination>
         </div>
         <div class="clearfix"></div>
     </div>
