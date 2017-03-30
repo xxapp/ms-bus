@@ -27,7 +27,7 @@ Form.prototype.setFieldsValue = function (fields) {
             });
         }
     });
-    this.onFieldsChange(fields);
+    this.onFieldsChange(fields, this.record);
 }
 
 /**

@@ -1,26 +1,18 @@
-var $ = require('jquery');
-var avalon = require('avalon');
-var beyond = require('/vendor/beyond');
-var bootbox = require('bootbox');
+import * as avalon from 'avalon2';
 
-var ajax = require('/services/ajaxService');
-var msg = require('/services/messageService');
+import ajax from '../../services/ajaxService';
+import * as msg from '../../services/messageService';
 
-require('/vendor/avx-component');
+import '../../components/ms-form';
+import { createForm } from '../../components/ms-form/create-form';
 
-var vm = avalon.define({
-    $id: 'doc-ms-form',
-    record: {
-        name: '',
-        gender: 'F',
-        masterpiece: ['xxapp/msBus'],
-        birthday: '2017-03-25T16:00:00Z',
-        hobby: ['code'],
-        avatar: '',
-        bio: ''
-    },
-    $form_config: {
-        rules: {
+avalon.component('doc-ms-form', {
+    template: __inline('./doc-ms-form.html'),
+    defaults: {
+        $form: createForm({
+            record: initialData()
+        }),
+        $rules: {
             fields: {
                 name: {
                     validators: {
@@ -65,27 +57,29 @@ var vm = avalon.define({
                     }
                 }
             }
+        },
+        json: '',
+        submit: function () {
+            // if (!avalon.vmodels['doc_form'].validate()) {
+            //     return false;
+            // }
+        },
+        onInit(event) {
+            this.$form.onFieldsChange = (fields, record) => {
+                this.json = JSON.stringify(record, null, 2);
+            }
         }
-    },
-    json: '',
-    submit: function () {
-        if (!avalon.vmodels['doc_form'].validate()) {
-            return false;
-        }
-        vm.json = JSON.stringify(vm.record.$model);
     }
 });
 
-// 导出模板
-exports.view = __inline('./doc-ms-form.html');
-// 导出逻辑
-exports.controller = avalon.controller(function($ctrl) {
-    $ctrl.$onRendered = function() {
-        beyond.hideLoading();
-    }
-    $ctrl.$onEnter = function(params, rs) {
-    }
-    $ctrl.$onBeforeUnload = function(oldState, newState) {
-    }
-    $ctrl.$vmodels = [];
-});
+function initialData() {
+    return {
+        name: '123',
+        gender: 'F',
+        masterpiece: ['xxapp/msBus'],
+        birthday: '2017-03-25T16:00:00Z',
+        hobby: ['code'],
+        avatar: '',
+        bio: ''
+    };
+}

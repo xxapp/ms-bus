@@ -45,6 +45,12 @@ root.$routeConfig = [{
     component(resolve) {
         require.async('/components/doc-ms-table', resolve);
     }
+}, {
+    path: '/doc-ms-form',
+    name: 'doc-ms-form',
+    component(resolve) {
+        require.async('/components/doc-ms-form', resolve);
+    }
 }];
 
 applyRouteConfig(root.$routeConfig);
