@@ -5,7 +5,7 @@ export function createForm(options?) {
 }
 
 const defaultOptions = {
-    record: null,
+    record: {},
     onFieldsChange: avalon.noop
 };
 
@@ -51,7 +51,7 @@ function setValue(form, expr, val, key) {
 
     const matches = expr.match(rArray);
 
-    const obj = form.record = form.record || {};
+    const obj = form.record;
     if (matches) {
         const prop = matches[1];
         obj[prop] = obj[prop] || [];

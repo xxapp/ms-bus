@@ -6,7 +6,7 @@ import '../../components/ms-pagination/ms-pagination';
 import '../../components/ms-dialog/ms-dialog';
 import '../../components/ms-form';
 import '../../components/ms-input/ms-input';
-// require('/components/ms-control-textarea');
+import '../../components/ms-textarea/ms-textarea';
 // require('/components/ms-control-select');
 // require('/components/ms-control-select2');
 // require('/components/ms-control-file');

@@ -29,8 +29,10 @@
                             multiple="true">
                         </ms:control-select2>
                         <ms:control-datepicker label="出生日期" col="birthday" ms-cduplex="record.birthday"></ms:control-datepicker>
-                        <ms:control-file label="头像" col="avatar" ms-cduplex="record.avatar"></ms:control-file>
-                        <ms:control-textarea label="个人简介" col="bio" ms-cduplex="record.bio" rows="5"></ms:control-textarea>-->
+                        <ms:control-file label="头像" col="avatar" ms-cduplex="record.avatar"></ms:control-file>-->
+                        <ms-form-item :widget="{label:'个人简介'}">
+                            <ms-textarea :widget="{value:@$form.record.bio,col:'bio',rows:5}"></ms-textarea>
+                        </ms-form-item>
                     </ms-form>
                     <pre>{{@json}}</pre>
                     <div class="row">
