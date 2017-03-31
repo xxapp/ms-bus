@@ -15,16 +15,24 @@ import { findParentComponent } from '../../vendor/avx-component/avx-util';
 avalon.component('ms-form-item', {
     template: __inline('./ms-form-item.html'),
     defaults: {
-        $form: null,
+        $formVm: null,
         label: '',
         control: '',
         onInit(event) {
             event.target._ctype_ = 'ms-form-item';
             event.target._vm_ = this;
-            this.$form = findParentComponent(this, 'ms-form');
-
+            this.$formVm = findParentComponent(this, 'ms-form');
+            
+            this.$watch('onFieldChange', (v) => {
+                this.$formVm.$form.addFields({
+                    [v.name]: { rules: v.rules }
+                });
+                this.$formVm.$form.on('error', v.name, (reasons) => {
+                    console.log(reasons);
+                });
+            });
             this.$watch('onFormChnage', (v) => {
-                this.$form.$fire('onFormChnage', v);
+                this.$formVm.$fire('onFormChnage', v);
             });
         }
     },

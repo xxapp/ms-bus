@@ -8,7 +8,7 @@
                 <div class="widget-body">
                     <ms-form :widget="{$form: @$form, $rules: @$rules}">
                         <ms-form-item :widget="{label:'姓名'}">
-                            <ms-input :widget="{value:@$form.record.name,col:'name'}"></ms-input>
+                            <ms-input :widget="{value:@$form.record.name,col:'name',$rules:{notEmpty:true}}"></ms-input>
                         </ms-form-item>
                         <ms-form-item :widget="{label:'兴趣'}">
                             <ms-checkbox-group

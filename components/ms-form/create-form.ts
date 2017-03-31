@@ -6,6 +6,7 @@ export function createForm(options?) {
 
 const defaultOptions = {
     record: {},
+    fields: {},
     onFieldsChange: avalon.noop
 };
 
@@ -26,8 +27,35 @@ Form.prototype.setFieldsValue = function (fields) {
                 setValue(this.record, prop, field.value, field.key);
             });
         }
+        // this.trigger('error', name, [{
+        //     message: '不能为空'
+        // }]);
     });
     this.onFieldsChange(fields, this.record);
+}
+
+Form.prototype.addFields = function (fields) {
+    Object.keys(fields).forEach(name => {
+        this.fields[name] = fields[name];
+    });
+}
+
+Form.prototype.on = function (type: string, fieldName: string|Function, listener = fieldName) {
+    const fields = typeof fieldName == 'function' ? this.fields : {[fieldName]:this.fields[fieldName]};
+    Object.keys(fields).forEach(name => {
+        if (fields[name].onError) {
+            fields[name].onError.push(listener);
+        } else {
+            fields[name].onError = [listener];
+        }
+    });
+}
+
+Form.prototype.trigger = function (type: string, fieldName: any, payload = fieldName) {
+    const types = arguments.length > 2 ? 
+        [this.fields[fieldName].onError] : 
+        Object.keys(this.fields).map(name => this.fields[name].onError);
+    types.forEach(fns => fns.forEach(fn => fn(payload)));
 }
 
 /**
