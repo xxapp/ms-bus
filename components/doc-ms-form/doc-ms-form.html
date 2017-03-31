@@ -10,11 +10,15 @@
                         <ms-form-item :widget="{label:'姓名'}">
                             <ms-input :widget="{value:@$form.record.name,col:'name'}"></ms-input>
                         </ms-form-item>
-                        <!--<ms:control-checkbox-group label="兴趣" col="hobby" ms-cduplex="record.hobby">
-                            <ms:checkbox value="code">编程</ms:checkbox>
-                            <ms:checkbox value="other">其他</ms:checkbox>
-                        </ms:control-checkbox-group>
-                        <ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
+                        <ms-form-item :widget="{label:'兴趣'}">
+                            <ms-checkbox-group
+                                :widget="{value:@$form.record.hobby,col:'hobby',options:[
+                                            { label: '编程', value: 'code' },
+                                            { label: '其他', value: 'other' }
+                                        ]}">
+                            </ms-checkbox-group>
+                        </ms-form-item>
+                        <!--<ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
                             <option value="M">男</option>
                             <option value="F">女</option>
                         </ms:control-select2>

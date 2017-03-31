@@ -11,14 +11,6 @@ avalon.component('gf-dashboard', {
         handleCancel(e) {
             //console.log(e);
             this.show = false;
-        },
-        options: [
-            { label: '苹果', value: 'Apple' },
-            { label: '梨', value: 'Pear' },
-            { label: '橘', value: 'Orange', disabled: false }
-        ],
-        handleCheckGroupChange(checkedValue) {
-            console.log('选择了:'+ checkedValue);
         }
     }
 });
