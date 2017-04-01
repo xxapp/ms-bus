@@ -21,17 +21,16 @@ avalon.component('ms-form', {
         items: '',
         $form: null,
         $rules: {},
+        onFormChange(meta) {
+            if (this.$form) {
+                this.$form.setFieldsValue({
+                    [meta.name]: { value: meta.value, key: meta.key }
+                });
+            }
+        },
         onInit(event) {
             event.target._ctype_ = 'ms-form';
             event.target._vm_ = this;
-
-            this.$watch('onFormChnage', (v) => {
-                if (this.$form) {
-                    this.$form.setFieldsValue({
-                        [v.name]: { value: v.value, key: v.key }
-                    });
-                }
-            });
         },
         onReady(event) {
         }

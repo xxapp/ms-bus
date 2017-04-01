@@ -1,6 +1,8 @@
 <template>
-    <div class="form-group">
-        <label class="control-label">{{label}}</label>
+    <div class="form-group has-feedback" :class="[(@hasRules && @dirty ? (@reasons.length ? 'has-error' : 'has-success') : '')]">
+        <label class="control-label">{{@label}}</label>
         <slot />
+        <i class="form-control-feedback" :if="@hasRules" :class="[(@dirty ? 'glyphicon' : ''), (@reasons.length ? 'glyphicon-remove' : 'glyphicon-ok')]" :visible="@dirty"></i>
+        <small class="help-block" :if="@hasRules && @reasons.length">{{@reasons[0].message}}</small>
     </div>
 </template>

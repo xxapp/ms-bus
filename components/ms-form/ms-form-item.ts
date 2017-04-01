@@ -18,22 +18,27 @@ avalon.component('ms-form-item', {
         $formVm: null,
         label: '',
         control: '',
+        dirty: false,
+        reasons: [],
+        hasRules: false,
+        onFieldChange(descriptor) {
+            if (!descriptor.rules) return ;
+            this.hasRules = true;
+            this.$formVm.$form.addFields({
+                [descriptor.name]: { rules: descriptor.rules }
+            });
+            this.$formVm.$form.on('error', descriptor.name, (reasons) => {
+                this.reasons = reasons;
+            });
+        },
+        onFormChange(meta) {
+            this.dirty = true;
+            this.$formVm.onFormChange(meta);
+        },
         onInit(event) {
             event.target._ctype_ = 'ms-form-item';
             event.target._vm_ = this;
             this.$formVm = findParentComponent(this, 'ms-form');
-            
-            this.$watch('onFieldChange', (v) => {
-                this.$formVm.$form.addFields({
-                    [v.name]: { rules: v.rules }
-                });
-                this.$formVm.$form.on('error', v.name, (reasons) => {
-                    console.log(reasons);
-                });
-            });
-            this.$watch('onFormChnage', (v) => {
-                this.$formVm.$fire('onFormChnage', v);
-            });
         }
     },
     soleSlot: 'control'

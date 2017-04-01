@@ -8,14 +8,14 @@
                 <div class="widget-body">
                     <ms-form :widget="{$form: @$form, $rules: @$rules}">
                         <ms-form-item :widget="{label:'姓名'}">
-                            <ms-input :widget="{value:@$form.record.name,col:'name',$rules:{notEmpty:true}}"></ms-input>
+                            <ms-input :widget="{value:@$form.record.name,col:'name',$rules:{required:true}}"></ms-input>
                         </ms-form-item>
                         <ms-form-item :widget="{label:'兴趣'}">
                             <ms-checkbox-group
                                 :widget="{value:@$form.record.hobby,col:'hobby',options:[
                                             { label: '编程', value: 'code' },
                                             { label: '其他', value: 'other' }
-                                        ]}">
+                                        ],$rules:{required:true,type:'array'}}">
                             </ms-checkbox-group>
                         </ms-form-item>
                         <!--<ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
@@ -35,7 +35,7 @@
                         <ms:control-datepicker label="出生日期" col="birthday" ms-cduplex="record.birthday"></ms:control-datepicker>
                         <ms:control-file label="头像" col="avatar" ms-cduplex="record.avatar"></ms:control-file>-->
                         <ms-form-item :widget="{label:'个人简介'}">
-                            <ms-textarea :widget="{value:@$form.record.bio,col:'bio',rows:5}"></ms-textarea>
+                            <ms-textarea :widget="{value:@$form.record.bio,col:'bio',rows:5,$rules:{required:true}}"></ms-textarea>
                         </ms-form-item>
                     </ms-form>
                     <pre>{{@json}}</pre>
