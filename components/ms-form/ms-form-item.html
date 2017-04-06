@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group has-feedback" :class="[(@hasRules && @dirty ? (@reasons.length ? 'has-error' : 'has-success') : '')]">
+    <div class="form-group has-feedback" :class="[(@hasRules && @dirty ? (@reasons.length ? 'has-error' : 'has-success') : ''),(inline ? 'form-inline' : '')]">
         <label class="control-label">{{@label}}</label>
         <slot />
         <i class="form-control-feedback" :if="@hasRules" :class="[(@dirty ? 'glyphicon' : ''), (@reasons.length ? 'glyphicon-remove' : 'glyphicon-ok')]" :visible="@dirty"></i>

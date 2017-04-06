@@ -1,9 +1,6 @@
 import * as avalon from 'avalon2';
 import { findParentComponent } from '../../vendor/avx-component/avx-util';
 
-require('../../vendor/bootstrapValidator');		
-require('../../vendor/bootstrapValidator/zh_CN');
-
 /**
  * Form组件
  * @prop $from 表单数据管理类
@@ -16,11 +13,12 @@ require('../../vendor/bootstrapValidator/zh_CN');
  * </ms-form>
  */
 avalon.component('ms-form', {
-    template: '<form role="form"><slot /></form>',
+    template: '<form role="form" :class="[(@horizontal ? \'form-horizontal\' : \'\')]"><slot /></form>',
     defaults: {
         items: '',
         $form: null,
         $rules: {},
+        horizontal: false,
         onFormChange(meta) {
             if (this.$form) {
                 this.$form.setFieldsValue({

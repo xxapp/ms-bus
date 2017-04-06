@@ -1,3 +1,6 @@
 <template>
-    <textarea class="form-control" :duplex="@value" :attr="{rows:@rows,name:@col}"></textarea>
+    <textarea class="form-control" 
+        :duplex="@value" 
+        :attr="{rows:@rows,name:@col}"
+        data-duplex-changed="@onChange"></textarea>
 </template>

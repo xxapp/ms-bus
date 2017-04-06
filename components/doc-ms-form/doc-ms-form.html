@@ -8,16 +8,21 @@
                 <div class="widget-body">
                     <ms-form :widget="{$form: @$form, $rules: @$rules}">
                         <ms-form-item :widget="{label:'姓名'}">
-                            <ms-input :widget="{value:@$form.record.name,col:'name',$rules:{required:true}}"></ms-input>
+                            <ms-input :widget="{value:@record.name,col:'name',$rules:{required:true,message:'请输入文字'}}"></ms-input>
                         </ms-form-item>
                         <ms-form-item :widget="{label:'兴趣'}">
                             <ms-checkbox-group
-                                :widget="{value:@$form.record.hobby,col:'hobby',options:[
+                                :widget="{value:@record.hobby,col:'hobby',options:[
                                             { label: '编程', value: 'code' },
                                             { label: '其他', value: 'other' }
                                         ],$rules:{required:true,type:'array'}}">
                             </ms-checkbox-group>
                         </ms-form-item>
+                        <div class="form-title">教育经历</div>
+                        <ms-form-item :widget="{label:'学校'+$index,inline:true}" :for="($index,school) in @record.education">
+                            <ms-input :widget="{value:school,col:'education[' + $index +']',placeholder:'学校',$rules:{required:true,message:'请输入文字'}}"></ms-input>
+                        </ms-form-item>
+                        <button type="button" class="btn btn-primary" :click="@record.education.push('')"><i class="fa fa-plus-circle"></i> 添加教育经历</button>
                         <!--<ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
                             <option value="M">男</option>
                             <option value="F">女</option>
@@ -35,7 +40,7 @@
                         <ms:control-datepicker label="出生日期" col="birthday" ms-cduplex="record.birthday"></ms:control-datepicker>
                         <ms:control-file label="头像" col="avatar" ms-cduplex="record.avatar"></ms:control-file>-->
                         <ms-form-item :widget="{label:'个人简介'}">
-                            <ms-textarea :widget="{value:@$form.record.bio,col:'bio',rows:5,$rules:{required:true}}"></ms-textarea>
+                            <ms-textarea :widget="{value:@record.bio,col:'bio',rows:5,$rules:{required:true}}"></ms-textarea>
                         </ms-form-item>
                     </ms-form>
                     <pre>{{@json}}</pre>

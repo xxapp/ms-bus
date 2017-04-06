@@ -1,3 +1,7 @@
 <template>
-    <input type="text" class="form-control" :duplex="@value" :attr="{name:@col}" :rules="{required:true}">
+    <input type="text" class="form-control" 
+        :duplex="@value" 
+        :attr="{name:@col,placeholder:@placeholder}" 
+        :rules="{required:true}"
+        data-duplex-changed="@onChange">
 </template>

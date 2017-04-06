@@ -4,7 +4,7 @@ import beyond from '../vendor/beyond';
 import * as menuService from './menuService';
 
 function getPage(component) {
-    var html = `<xmp cached="true" is="${component}" :widget="{id:\'${component}\'}"></xmp>`;
+    var html = `<xmp cached="true" is="${component}" :widget="{id:'${component}',expire:${Date.now()}}"></xmp>`;
     return html
 }
 

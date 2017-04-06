@@ -17,18 +17,12 @@ function Form(options) {
 
 Form.prototype.setFieldsValue = function (fields) {
     Object.keys(fields).forEach((name) => {
-        const props = name.split('.');
         const field = fields[name];
 
-        if (props.length === 1) {
-            // 没有复杂的路径，简单处理
-            setValue(this.record, props[0], field.value, field.key);
-        } else {
-            props.forEach((prop) => {
-                setValue(this.record, prop, field.value, field.key);
-            });
-        }
+        setValue(this.record, name, field.value);
+
         this.fields[name] && this.validateField(name, this.fields[name]).then(result => {
+            console.log(result.name, this.fields);
             if (result.isOk) {
                 this.trigger('error', result.name, []);
             } else {
@@ -92,15 +86,26 @@ Form.prototype.validateField = async function (fieldName, field, callback) {
     return result;
 }
 
+Form.prototype.validateFields = async function () {
+
+}
+
+Form.prototype.validateAll = function () {
+    console.log(this.fields);
+    console.log(this.record);
+    //this.validateFields(this.fields);
+}
+
 /**
  * 根据表达式构给对象赋值，属性路径中最多只允许存在一个数组
  * @param {*} record 数据对象
  * @param {String} expr 对象属性路径表达式
  * @param {*} val 值
- * @param {Number|String} key 额外的键值，一般用于数组赋值
  */
-function setValue(record, expr, val, key = 0) {
-    const rArray = /(.*)\[\]$/;
+function setValue(record, expr, val) {
+    const rSplit = /\.|\].|\[|\]/;
+    let temp = record, prop;
+    expr = expr.split(rSplit).filter(prop => !!prop);
     const valType = Object.prototype.toString.call(val);
     let mirrorVal;
     if (valType == '[object Array]') {
@@ -111,16 +116,12 @@ function setValue(record, expr, val, key = 0) {
         mirrorVal = val;
     }
 
-    const matches = expr.match(rArray);
-
-    if (matches) {
-        const prop = matches[1];
-        record[prop] = record[prop] || [];
-        record[prop][key] = val;
-    } else {
-        const prop = expr;
-        record[prop] = record[prop] || {};
-        record[prop] = val;
+    while (prop = expr.shift()) {
+        if (expr.length === 0) {
+            temp[prop] = mirrorVal;
+        } else {
+            temp = temp[prop] = temp[prop] || {};
+        }
     }
 }
 
@@ -128,36 +129,13 @@ function setValue(record, expr, val, key = 0) {
  * 根据表达式构从对象取值，属性路径中最多只允许存在一个数组
  * @param {*} record 数据对象
  * @param {String} expr 对象属性路径表达式
- * @param {Number|String} key 额外的键值，一般用于数组赋值，默认为0
  */
-function getValue(record, expr, key = 0) {
-    const rSplit = /\.|(\[\])\.|(\[\])/;
+function getValue(record, expr) {
+    const rSplit = /\.|\].|\[|\]/;
+    let temp = record, prop;
     expr = expr.split(rSplit).filter(prop => !!prop);
-    if (expr.length === 1) {
-        return record[expr[0]];
-    } else if (expr[1] === '[]') {
-        return record[expr[0]][key];
+    while (prop = expr.shift()) {
+        temp = temp[prop];
     }
-    return getValueFromSimpleProperty(record, expr, key);
-}
-
-/**
- * 根据表达式递归获取简单属性的值
- * @param {*} record 数据对象
- * @param {string[]} expr 对象属性路径表达式数组
- * @param {Number|String} key 额外的键值，一般用于数组赋值，默认为0
- */
-function getValueFromSimpleProperty(record, expr, key) {
-    let result;
-    if (expr[0] == '[]') {
-        result = record[key];
-    } else {
-        result = record[expr[0]];
-    }
-    if (expr.length === 1) {
-        return result;
-    } else {
-        expr.shift();
-        return getValueFromSimpleProperty(result, expr, key);
-    }
+    return temp;
 }

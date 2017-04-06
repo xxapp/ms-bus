@@ -18,6 +18,7 @@ avalon.component('ms-form-item', {
         $formVm: null,
         label: '',
         control: '',
+        inline: false,
         dirty: false,
         reasons: [],
         hasRules: false,

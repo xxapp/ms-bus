@@ -5,6 +5,10 @@ import * as msg from '../../services/messageService';
 
 import '../../components/ms-form';
 import { createForm } from '../../components/ms-form/create-form';
+import '../../components/ms-form/ms-form-item';
+import '../../components/ms-input/ms-input';
+import '../../components/ms-textarea/ms-textarea';
+import '../../components/ms-checkbox/ms-checkbox-group';
 
 avalon.component('doc-ms-form', {
     template: __inline('./doc-ms-form.html'),
@@ -12,62 +16,23 @@ avalon.component('doc-ms-form', {
         $form: createForm({
             record: initialData()
         }),
-        $rules: {
-            fields: {
-                name: {
-                    validators: {
-                        notEmpty: {
-                            message: '请填写姓名'
-                        }
-                    }
-                },
-                hobby: {
-                    validators: {
-                        notEmpty: {
-                            message: '请选择兴趣'
-                        }
-                    }
-                },
-                gender: {
-                    validators: {
-                        notEmpty: {
-                            message: '请选择性别'
-                        }
-                    }
-                },
-                birthday: {
-                    validators: {
-                        notEmpty: {
-                            message: '请选择出生日期'
-                        }
-                    }
-                },
-                avatar: {
-                    validators: {
-                        notEmpty: {
-                            message: '请选择头像图'
-                        }
-                    }
-                },
-                bio: {
-                    validators: {
-                        notEmpty: {
-                            message: '请填写个人简介'
-                        }
-                    }
-                }
-            }
-        },
+        record: initialData(),
         json: '',
+        expire: 0,
         submit: function () {
             // if (!avalon.vmodels['doc_form'].validate()) {
             //     return false;
             // }
+            this.$form.validateAll();
         },
         onInit(event) {
             this.$form.onFieldsChange = (fields, record) => {
+                avalon.mix(true, this.record, record);
                 this.json = JSON.stringify(record, null, 2);
             }
+            this.$watch('expire', v => {
+                console.log(v);
+            })
         }
     }
 });
@@ -80,6 +45,7 @@ function initialData() {
         birthday: '2017-03-25T16:00:00Z',
         hobby: ['code'],
         avatar: '',
+        education: ['成都信息工程大学'],
         bio: ''
     };
 }

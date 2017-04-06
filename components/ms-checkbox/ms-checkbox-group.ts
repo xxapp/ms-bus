@@ -11,7 +11,6 @@ controlComponent.extend({
         value: [],
         disabled: false,
         options: [],
-        onChange: avalon.noop,
         toggleOption(option) {
             const optionIndex = this.value.indexOf(option.value);
             if (optionIndex === -1 ) {
@@ -19,7 +18,10 @@ controlComponent.extend({
             } else {
                 this.value.remove(option.value);
             }
-            this.onChange(this.value.$model);
+            this.onChange({
+                target: { value: this.value.$model },
+                type: 'checkbox-group'
+            });
         },
         onInit(event) {
             emitToFormItem(this);
