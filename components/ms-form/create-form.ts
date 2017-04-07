@@ -8,7 +8,8 @@ export function createForm(options?) {
 const defaultOptions = {
     record: {},
     fields: {},
-    onFieldsChange: avalon.noop
+    onFieldsChange: avalon.noop,
+    all: {}
 };
 
 function Form(options) {
@@ -22,11 +23,10 @@ Form.prototype.setFieldsValue = function (fields) {
         setValue(this.record, name, field.value);
 
         this.fields[name] && this.validateField(name, this.fields[name]).then(result => {
-            console.log(result.name, this.fields);
             if (result.isOk) {
-                this.trigger('error', result.name, []);
+                this.trigger('error' + result.name, []);
             } else {
-                this.trigger('error', result.name, [{
+                this.trigger('error' + result.name, [{
                     message: result.message
                 }]);
             }
@@ -41,25 +41,12 @@ Form.prototype.addFields = function (fields) {
     });
 }
 
-Form.prototype.on = function (type: string, fieldName: string|Function, listener = fieldName) {
-    const fields = typeof fieldName == 'function' ? this.fields : {[fieldName]:this.fields[fieldName]};
-    Object.keys(fields).forEach(name => {
-        let listeners = fields[name]['on' + type];
-        if (listeners) {
-            listeners.push(listener);
-        } else {
-            fields[name]['on' + type] = [listener];
-        }
-    });
+Form.prototype.on = function (type: string, listener) {
+    (this.all[type] || (this.all[type] = [])).push(listener);
 }
 
-Form.prototype.trigger = function (type: string, fieldName: any, payload = fieldName) {
-    const types = arguments.length > 2 ? 
-        [this.fields[fieldName]['on' + type]] : 
-        Object.keys(this.fields).map(name => this.fields[name]['on' + type]);
-    types.forEach(fns => {
-        fns && fns.forEach(fn => fn(payload));
-    });
+Form.prototype.trigger = function (type: string, payload) {
+    (this.all[type] || []).map(handler => { handler(payload) });
 }
 
 Form.prototype.validateField = async function (fieldName, field, callback) {
@@ -86,14 +73,24 @@ Form.prototype.validateField = async function (fieldName, field, callback) {
     return result;
 }
 
-Form.prototype.validateFields = async function () {
-
-}
-
-Form.prototype.validateAll = function () {
-    console.log(this.fields);
-    console.log(this.record);
-    //this.validateFields(this.fields);
+Form.prototype.validateFields = function (fields = this.fields) {
+    const flatRecord = {}, ruleMap = {};
+    Object.keys(this.fields).map(name => {
+        ruleMap[name] = this.fields[name].rules;
+        flatRecord[name] = getValue(this.record, name);
+    });
+    const validator = new Schema(ruleMap);
+    validator.validate(flatRecord, (errors, fields) => {
+        console.log(errors, fields);
+        const errorFields = Object.keys(fields);
+        Object.keys(this.fields).map(name => {
+            if (~errorFields.indexOf(name)) {
+                this.trigger('error' + name, fields[name]);
+            } else {
+                this.trigger('error' + name, []);
+            }
+        });
+    })
 }
 
 /**

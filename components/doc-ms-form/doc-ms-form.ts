@@ -23,7 +23,7 @@ avalon.component('doc-ms-form', {
             // if (!avalon.vmodels['doc_form'].validate()) {
             //     return false;
             // }
-            this.$form.validateAll();
+            this.$form.validateFields();
         },
         onInit(event) {
             this.$form.onFieldsChange = (fields, record) => {
@@ -45,7 +45,7 @@ function initialData() {
         birthday: '2017-03-25T16:00:00Z',
         hobby: ['code'],
         avatar: '',
-        education: ['成都信息工程大学'],
+        education: ['常乐男子职业技术学院'],
         bio: ''
     };
 }
