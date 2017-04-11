@@ -2,7 +2,9 @@ import * as avalon from 'avalon2';
 import beyond from '../../vendor/beyond';
 import ajax from '../../services/ajaxService';
 
-avalon.component('common-header', {
+export const name = 'common-header';
+
+avalon.component(name, {
     template: __inline('./common-header.html'),
     defaults: {
         currentUserName: '',

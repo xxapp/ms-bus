@@ -10,7 +10,9 @@ import '../../components/ms-input/ms-input';
 import '../../components/ms-textarea/ms-textarea';
 import '../../components/ms-checkbox/ms-checkbox-group';
 
-avalon.component('doc-ms-form', {
+export const name = 'doc-ms-form';
+
+avalon.component(name, {
     template: __inline('./doc-ms-form.html'),
     defaults: {
         $form: createForm({

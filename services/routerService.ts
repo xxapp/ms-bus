@@ -4,41 +4,51 @@ import beyond from '../vendor/beyond';
 import * as menuService from './menuService';
 
 function getPage(component) {
-    var html = `<xmp cached="true" is="${component}" :widget="{id:'${component}',expire:${Date.now()}}"></xmp>`;
+    const html = `<xmp is="${component}" :widget="{id:'${component}',expire:${Date.now()}}"></xmp>`;
     return html
 }
 
-function applyRouteConfig(config) {
+function applyRouteConfig(config, parentRoute, accPath = '') {
     config.map(function (route) {
-        avalon.router.add(route.path, function () {
-            if (typeof route.component == 'function') {
-                route.component(function () {
-                    root.currentPage = getPage(route.name);
-                });
-            } else {
-                root.currentPage = getPage(route.name);
-            }
+        let components:any = {};
+        if (route.component) {
+            components.currentPage = route.component;
+        }
+        if (route.components) {
+            components = route.components;
+        }
+        avalon.router.add(accPath + route.path, function () {
+            Object.keys(components).map(viewName => {
+                let component = components[viewName];
+                if (typeof component == 'function') {
+                    component(function (m) {
+                        avalon.vmodels[parentRoute.name][viewName] = getPage(m.name);
+                    });
+                } else {
+                    avalon.vmodels[parentRoute.name][viewName] = getPage(component.name);
+                }
+            });
         });
-        return 
+        // TODO 支持嵌套路由
+        //route.children && applyRouteConfig(route.children, route, accPath + route.path);
     });
 }
 
-var root = avalon.vmodels['root'];
-
-// 默认首页为gf-dashboard
 require('/components/common-header');
 require('/components/common-sidebar');
-require('/components/gf-dashboard');
-avalon.router.add('/', () => {
-    root.currentPage = getPage('gf-dashboard');
-});
 
-root.$routeConfig = [{ 
+const routeConfig = [{
+    path: '/',
+    name: 'gf-dashboard',
+    component(resolve) {
+        require.async('/components/gf-dashboard', resolve);
+    }
+}, { 
     path: '/aaa',
     name: 'gf-aaa',
     component(resolve) {
         require.async('/components/gf-aaa', resolve);
-    } 
+    }
 }, {
     path: '/doc-ms-table',
     name: 'doc-ms-table',
@@ -53,7 +63,9 @@ root.$routeConfig = [{
     }
 }];
 
-applyRouteConfig(root.$routeConfig);
+applyRouteConfig(routeConfig, {
+    name: 'root'
+});
 
 // mmState全局配置
 // avalon.state.config({

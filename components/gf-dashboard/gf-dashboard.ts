@@ -3,7 +3,9 @@ import '../../vendor/avx-component/avx-component';
 import { createForm } from '../../components/ms-form/create-form';
 import * as msg from '../../services/messageService';
 
-avalon.component('gf-dashboard', {
+export const name = 'gf-dashboard';
+
+avalon.component(name, {
     template: __inline('./gf-dashboard.html'),
     defaults: {
         show: false,

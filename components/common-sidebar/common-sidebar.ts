@@ -12,7 +12,9 @@ avalon.effect('collapse', {
     }
 });
 
-avalon.component('common-sidebar', {
+export const name = 'common-sidebar';
+
+avalon.component(name, {
     template: __inline('./common-sidebar.html'),
     defaults: {
         menu: [],

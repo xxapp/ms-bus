@@ -1,6 +1,11 @@
 import * as avalon from 'avalon2';
 import '../ms-checkbox/ms-checkbox';
-import { findParentComponent, parseSlotToVModel, getChildTemplateDescriptor } from '../../vendor/avx-component/avx-util';
+import '../ms-pagination/ms-pagination';
+import {
+    findParentComponent,
+    parseSlotToVModel,
+    getChildTemplateDescriptor
+} from '../../vendor/avx-component/avx-util';
 
 const defaultPagination = {
     current: 1, pageSize: 10, onChange: avalon.noop
@@ -31,7 +36,6 @@ avalon.component('ms-table', {
                 });
             } else {
                 if (this.pagination.total) {
-                    debugger;
                     this.checked.clear();
                     this.selection.clear();
                 } else {

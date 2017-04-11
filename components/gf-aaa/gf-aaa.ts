@@ -1,6 +1,8 @@
 import * as avalon from 'avalon2';
 
-avalon.component('gf-aaa', {
+export const name = 'gf-aaa';
+
+avalon.component(name, {
     template: __inline('./gf-aaa.html'),
     defaults: {
         text: 'aaa'

@@ -32,7 +32,7 @@ export function getChildTemplateDescriptor(vmodel, render = vmodel.$render): any
                 is: action.is,
                 props: action.value,
                 inlineTemplate: action.fragment,
-                children: getChildTemplateDescriptor(vmodel, action.innerRender)
+                children: getChildTemplateDescriptor(vmodel, action.innerRender || { directives: [] })
             });
         }
         return acc;

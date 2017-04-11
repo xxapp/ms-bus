@@ -8,10 +8,12 @@ import * as msg from '../../services/messageService';
 import '../../components/ms-table';
 import '../../components/ms-table-header';
 
-avalon.component('doc-ms-table', {
+export const name = 'doc-ms-table';
+
+avalon.component(name, {
     template: __inline('./doc-ms-table.html'),
     defaults: {
-        list: avalon.range(25).map(n => ({
+        list: avalon.range(29).map(n => ({
             id: n, name: `老狼${n}`, address: '深山', province: '老林'
         })),
         remoteList: [],
