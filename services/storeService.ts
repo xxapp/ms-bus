@@ -1,4 +1,4 @@
-import ajax from './ajaxService.js';
+import ajax from './ajaxService';
 import '../vendor/jquery/ajaxfileupload';
 
 export const demo = {

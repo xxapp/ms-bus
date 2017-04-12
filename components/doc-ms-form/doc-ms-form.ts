@@ -29,7 +29,6 @@ avalon.component(name, {
         },
         onInit(event) {
             this.$form.onFieldsChange = (fields, record) => {
-                avalon.mix(true, this.record, record);
                 this.json = JSON.stringify(record, null, 2);
             }
             this.$watch('expire', v => {

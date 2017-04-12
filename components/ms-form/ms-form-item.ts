@@ -23,7 +23,12 @@ avalon.component('ms-form-item', {
         reasons: [],
         hasRules: false,
         className: '',
+        inlineFormGroupStyle: { verticalAlign: 'top' },
+        inlineMessageStyle: { marginBottom: 0 },
         onFieldChange(descriptor) {
+            this.$formVm.type !== 'search' && this.$formVm.$form.setFieldsValue({
+                [descriptor.name]: { value: descriptor.value, denyValidate: descriptor.denyValidate }
+            });
             if (!descriptor.rules) return ;
             this.hasRules = true;
             this.$formVm.$form.addFields({
@@ -32,6 +37,12 @@ avalon.component('ms-form-item', {
             this.$formVm.$form.on('error' + descriptor.name, (reasons) => {
                 this.dirty = true;
                 this.reasons = reasons;
+            });
+            this.$formVm.$form.on('reset', fields => {
+                if (~Object.keys(fields).indexOf(descriptor.name)) {
+                    this.dirty = false;
+                    this.reasons = [];
+                }
             });
         },
         onFormChange(meta) {
@@ -42,9 +53,12 @@ avalon.component('ms-form-item', {
             event.target._ctype_ = 'ms-form-item';
             event.target._vm_ = this;
             this.$formVm = findParentComponent(this, 'ms-form');
+            if (this.$formVm === null) {
+                throw 'ms-form-item 必须放在 ms-form 内';
+            }
+            this.inline = this.$formVm.inline;
         },
         onReady(event) {
-            event.target.id = this.$id;
         }
     },
     soleSlot: 'control'

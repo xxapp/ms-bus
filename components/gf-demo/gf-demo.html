@@ -1,59 +1,66 @@
 <template>
-    <div class="row" ms-controller="demo">
+    <div class="row">
         <div class="col-xs-12 col-md-12">
-            <ms:dialog $id="dialog_demo" ms-skip>
-                <div class="row">
-                    <div class="col-md-12" ms-controller="demo.form">
-                        <ms:form $id="form_demo" config="$form_config">
-                            <ms:control-text label="ID" col="region_id" ms-cduplex="record.region_id"></ms:control-text>
-                            <ms:control-text label="名称" col="region_name" ms-cduplex="record.region_name"></ms:control-text>
-                            <ms:control-text label="PID" col="region_parent_id" ms-cduplex="record.region_parent_id"></ms:control-text>
-                            <ms:control-text label="套餐" col="suites[].name" ms-repeat="record.suites" ms-cduplex="record.suites[$index].name"></ms:control-text>
-                        </ms:form>
+            <ms-dialog :widget="{show: @show, onOk: @handleOk, onCancel: function () { @show = false; }}">
+                <span slot="header">{{ @isEdit ? '修改' : '新增' }}</span>
+                <div slot="body" ms-skip>
+                    <div :important="demo_form">
+                        <xmp is="ms-form" :widget="{$form: @$form}">
+                            <ms-form-item :widget="{label: 'ID'}">
+                                <ms-input :widget="{value:@record.region_id,col: 'region_id', $rules: { required: true, message: '地区ID不能为空' }}"></ms-input>
+                            </ms-form-item>
+                            <ms-form-item :widget="{label: '名称'}">
+                                <ms-input :widget="{value:@record.region_name,col: 'region_name', $rules: { required: true, message: '地区名称不能为空' }}"></ms-input>
+                            </ms-form-item>
+                            <ms-form-item :widget="{label: 'PID'}">
+                                <ms-input :widget="{value:@record.region_parent_id,col: 'region_parent_id', $rules: { required: true, message: '地区PID不能为空' }}"></ms-input>
+                            </ms-form-item>
+                            <ms-form-item :widget="{label: '套餐'}" :for="($index, el) in @record.suites">
+                                <ms-input :widget="{value:el.name,col: 'suites[' + $index + '].name'}"></ms-input>
+                            </ms-form-item>
+                        </xmp>
                     </div>
                 </div>
-            </ms:dialog>
-            <ms:data-box $id="data-box_demo" on-init="dataBoxInit" config="$data-box_config">
-                <div slot="content" class="widget">
-                    <div class="widget-header bg-red">
-                        <span class="widget-caption">地区列表</span>
-                    </div>
-                    <div class="widget-body">
-                        <ms:form class="form-inline" config="$form_search_config">
-                            <ms:control-text label="ID" col="region_id" ms-cduplex="searchFields.region_id"></ms:control-text>
-                            <ms:control-text label="名称" col="region_name.firstName" ms-cduplex="searchFields.region_name.firstName"></ms:control-text>
-                            <ms:control-datepicker label="开始日期" col="startDate" ms-cduplex="searchFields.startDate"></ms:control-datepicker>
-                            <ms:control-datepicker label="结束日期" col="endDate" ms-cduplex="searchFields.endDate"></ms:control-datepicker>
-                            <button type="button" class="btn btn-info" ms-click="search">
-                                <span class="fa fa-search">
-                                </span>搜索
-                            </button>
-                        </ms:form>
-                        <div class="table-toolbar">
-                            <button class="btn btn-info" ms-if="user.allowed['demo.add']" ms-click="actions.add">
-                                <span class="fa fa-plus">
-                                </span>新增地区
-                            </button>
-                        </div>
-                        <ms:table class="table table-hover table-bordered" ms-cprop-data="list">
-                            <ms:check-header col="region_id" width="60"></ms:check-header>
-                            <ms:table-header text="#" inline-template>{{$outer.$index + 1}}</ms:table-header>
-                            <ms:table-header col="region_id" text="ID"></ms:table-header>
-                            <ms:table-header col="region_name" text="名称"></ms:table-header>
-                            <ms:table-header col="region_parent_id" text="PID"></ms:table-header>
-                            <ms:table-header text="操作" inline-template>
-                                <a href="javascript:;" class="btn btn-link btn-xs" ms-if="user.allowed['demo.edit']" ms-click="actions.edit(row)"><i class="fa fa-edit"></i> 编辑</a>
-                                <a href="javascript:;" class="btn btn-danger btn-xs" ms-if="user.allowed['demo.delete']" ms-click="actions.del(row)"><i class="fa fa-trash-o"></i> 删除</a>
-                            </ms:table-header>
-                        </ms:table>
-                        <ms:pagination
-                            ms-cprop-page-size="pageSize"
-                            ms-cprop-total="total" 
-                            ms-cprop-current-change="pageChange">
-                        </ms:pagination>
-                    </div>
+            </ms-dialog>
+            <div class="widget">
+                <div class="widget-header bg-red">
+                    <span class="widget-caption">地区列表</span>
                 </div>
-            </ms:data-box>
+                <div class="widget-body">
+                    <ms-form :widget="{$form:@$searchForm,type:'search',inline:true}">
+                        <ms-form-item :widget="{label: 'ID'}">
+                            <ms-input :widget="{col: 'region_id'}"></ms-input>
+                        </ms-form-item>
+                        <ms-form-item :widget="{label: '名称'}">
+                            <ms-input :widget="{col: 'region_name.firstName'}"></ms-input>
+                        </ms-form-item>
+                        <ms-form-item :widget="{label: '开始日期'}">
+                            <ms-input :widget="{col: 'startDate', $rules: { pattern: @pattern, message: '日期格式不正确' }}"></ms-input>
+                        </ms-form-item>
+                        <ms-form-item :widget="{label: '结束日期'}">
+                            <ms-input :widget="{col: 'endDate'}"></ms-input>
+                        </ms-form-item>
+                        <button type="button" class="btn btn-info" :click="@search">
+                            <span class="fa fa-search"></span>搜索
+                        </button>
+                    </ms-form>
+                    <div class="table-toolbar">
+                        <button class="btn btn-info" :click="actions('add')">
+                            <span class="fa fa-plus">
+                            </span>新增地区
+                        </button>
+                    </div>
+                    <ms-table :widget="{data:@list,action:@actions,pagination:@pagination,onChange:@handleTableChange}">
+                        <ms-table-header :widget="{dataIndex:'region_id',type:'selection'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'地区',dataIndex:'region_name'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'PID',dataIndex:'region_parent_id'}"></ms-table-header>
+                        <ms-table-header :widget="{title:'操作',dataIndex:'region_id'}">
+                            <button type="button" class="btn btn-primary btn-xs" :click="handle('edit')"><i class="fa fa-edit"></i> 编辑</button>
+                            <button type="button" class="btn btn-danger btn-xs" :click="handle('delete')"><i class="fa fa-trash-o"></i> 删除</button>
+                        </ms-table-header>
+                    </ms-table>
+                </div>
+            </div>
         </div>
     </div>
 </template>

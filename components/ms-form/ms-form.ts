@@ -4,6 +4,9 @@ import { findParentComponent } from '../../vendor/avx-component/avx-util';
 /**
  * Form组件
  * @prop $from 表单数据管理类
+ * @prop type 如果为 search，则只在表单项的值被用户手动修改时，才会加入到最后要提交的数据对象上，用于搜索表单
+ * @prop horizontal 是否添加 form-horizontal 到 class
+ * @prop inline 是否添加 form-inline 到 class
  * 
  * @example
  * <ms-form>
@@ -13,16 +16,17 @@ import { findParentComponent } from '../../vendor/avx-component/avx-util';
  * </ms-form>
  */
 avalon.component('ms-form', {
-    template: '<form role="form" :class="[(@horizontal ? \'form-horizontal\' : \'\')]"><slot /></form>',
+    template: `<form role="form" :class="[(@horizontal ? 'form-horizontal' : ''), (@inline ? 'form-inline' : '')]"><slot /></form>`,
     defaults: {
         items: '',
         $form: null,
-        $rules: {},
+        type: '',
         horizontal: false,
+        inline: false,
         onFormChange(meta) {
             if (this.$form) {
                 this.$form.setFieldsValue({
-                    [meta.name]: { value: meta.value, key: meta.key }
+                    [meta.name]: { value: meta.value }
                 });
             }
         },

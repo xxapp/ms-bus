@@ -29,7 +29,7 @@ export default avalon.component('ms-control', {
         onChange(e) {
             let v = e.target.value;
             this.$formItem.onFormChange({
-                name: this.col, value: v, key: this.key
+                name: this.col, value: v
             });
         }
     }

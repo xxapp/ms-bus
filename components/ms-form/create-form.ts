@@ -22,7 +22,7 @@ Form.prototype.setFieldsValue = function (fields) {
 
         setValue(this.record, name, field.value);
 
-        this.fields[name] && this.validateField(name, this.fields[name]).then(result => {
+        !field.denyValidate && this.fields[name] && this.validateField(name, this.fields[name]).then(result => {
             if (result.isOk) {
                 this.trigger('error' + result.name, []);
             } else {
@@ -49,7 +49,7 @@ Form.prototype.trigger = function (type: string, payload) {
     (this.all[type] || []).map(handler => { handler(payload) });
 }
 
-Form.prototype.validateField = async function (fieldName, field, callback) {
+Form.prototype.validateField = async function (fieldName, field) {
     const rules = field.rules;
     const value = getValue(this.record, fieldName);
     let result: any = { isOk: true, name: fieldName };
@@ -75,22 +75,31 @@ Form.prototype.validateField = async function (fieldName, field, callback) {
 
 Form.prototype.validateFields = function (fields = this.fields) {
     const flatRecord = {}, ruleMap = {};
-    Object.keys(this.fields).map(name => {
-        ruleMap[name] = this.fields[name].rules;
+    Object.keys(fields).map(name => {
+        ruleMap[name] = fields[name].rules;
         flatRecord[name] = getValue(this.record, name);
     });
     const validator = new Schema(ruleMap);
-    validator.validate(flatRecord, (errors, fields) => {
-        console.log(errors, fields);
-        const errorFields = Object.keys(fields);
-        Object.keys(this.fields).map(name => {
-            if (~errorFields.indexOf(name)) {
-                this.trigger('error' + name, fields[name]);
-            } else {
-                this.trigger('error' + name, []);
-            }
-        });
-    })
+    return new Promise((resolve, reject) => {
+        validator.validate(flatRecord, (errors, fields) => {
+            const errorFields = Object.keys(fields);
+            let isAllValid = true;
+            Object.keys(this.fields).map(name => {
+                if (~errorFields.indexOf(name)) {
+                    isAllValid = false;
+                    this.trigger('error' + name, fields[name]);
+                } else {
+                    this.trigger('error' + name, []);
+                }
+            });
+            resolve(isAllValid);
+        })
+    });
+}
+
+Form.prototype.resetFields = function (fields = this.fields) {
+    this.record = {};
+    this.trigger('reset', fields);
 }
 
 /**
@@ -131,7 +140,7 @@ function getValue(record, expr) {
     const rSplit = /\.|\].|\[|\]/;
     let temp = record, prop;
     expr = expr.split(rSplit).filter(prop => !!prop);
-    while (prop = expr.shift()) {
+    while ((prop = expr.shift()) && temp) {
         temp = temp[prop];
     }
     return temp;

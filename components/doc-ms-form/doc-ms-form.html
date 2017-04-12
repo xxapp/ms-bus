@@ -6,7 +6,7 @@
                     <span class="widget-caption">Form组件</span>
                 </div>
                 <div class="widget-body">
-                    <ms-form :widget="{$form: @$form, $rules: @$rules}">
+                    <ms-form :widget="{$form: @$form}">
                         <ms-form-item :widget="{label:'姓名'}">
                             <ms-input :widget="{value:@record.name,col:'name',$rules:{required:true,message:'请输入文字'}}"></ms-input>
                         </ms-form-item>

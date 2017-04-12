@@ -4,6 +4,15 @@ import beyond from '../vendor/beyond';
 
 import msg from  './messageService';
 
+interface ResponseData {
+    code?: string,
+    list?: any[],
+    rows?: any[],
+    data?: any,
+    message?: string,
+    total?: number
+}
+
 // 拦截ajax请求，检测是否超时，以重新登录
 $(document).ajaxComplete((event, xhr, settings) => {
     if (xhr.status == 200) {
@@ -59,7 +68,7 @@ function processRequest(r) {
 
 // 标准化后台相应数据格式
 function processResponse(r) {
-    let str: { code?: string, list?: any[], rows?: any[], data?: any, message?: string } = {};
+    let str: ResponseData = {};
     if (r.rows) {
         str = r;
         str.code = '0';

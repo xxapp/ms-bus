@@ -39,25 +39,26 @@ require('/components/common-sidebar');
 
 const routeConfig = [{
     path: '/',
-    name: 'gf-dashboard',
     component(resolve) {
         require.async('/components/gf-dashboard', resolve);
     }
 }, { 
     path: '/aaa',
-    name: 'gf-aaa',
     component(resolve) {
         require.async('/components/gf-aaa', resolve);
     }
 }, {
+    path: '/demo',
+    component(resolve) {
+        require.async('/components/gf-demo', resolve);
+    }
+}, {
     path: '/doc-ms-table',
-    name: 'doc-ms-table',
     component(resolve) {
         require.async('/components/doc-ms-table', resolve);
     }
 }, {
     path: '/doc-ms-form',
-    name: 'doc-ms-form',
     component(resolve) {
         require.async('/components/doc-ms-form', resolve);
     }
