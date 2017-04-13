@@ -19,6 +19,12 @@ const menu = [{
         href: '#!/demo',
         childStates: ['root.supplier']
     }, {
+        name: 'demo-redux',
+        stateName: 'root.demoRedux',
+        title: 'redux例子',
+        icon: 'glyphicon-home',
+        href: '#!/demo-redux'
+    }, {
         name: 'category',
         title: 'Category',
         stateName: 'root.category',

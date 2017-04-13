@@ -53,6 +53,11 @@ const routeConfig = [{
         require.async('/components/gf-demo', resolve);
     }
 }, {
+    path: '/demo-redux',
+    component(resolve) {
+        require.async('/components/gf-demo-redux', resolve);
+    }
+}, {
     path: '/doc-ms-table',
     component(resolve) {
         require.async('/components/doc-ms-table', resolve);

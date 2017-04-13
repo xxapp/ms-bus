@@ -11,7 +11,10 @@ export function findParentComponent(vm, ctype) {
     return null;
 }
 
-export function parseSlotToVModel(vmodel, vnodes: any[] = vmodel.$render.root.children): void {
+export function parseSlotToVModel(vmodel, vnodes?: any[]): void {
+    if (vnodes === undefined) {
+        vnodes = vmodel.$render.root ? vmodel.$render.root.children : [];
+    }
     vnodes.forEach(vnode => {
         if (!vnode || vnode.isVoidTag === undefined) return true;
         let slotName = vnode.dom.getAttribute('slot');
