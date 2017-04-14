@@ -33,6 +33,7 @@ function insert(params) {
     return (dispatch, getState) => {
         const { page } = getState().region;
         demoStore.insert(params).then(data => {
+            dispatch({ type: 'region/closeDialog' });
             dispatch(fetch({ page }));
         });
     }
@@ -81,10 +82,11 @@ const region = function regionReducer(state: Region, action) {
         };
     }
     switch (action.type) {
-        case 'opendialog': 
+        case 'region/closeDialog': 
+            console.trace(21)
             state = {
                 ...state,
-                show: true
+                show: false
             };
             break;
         case 'region/fetch':
@@ -93,19 +95,31 @@ const region = function regionReducer(state: Region, action) {
                 ...action.payload
             };
             break;
-        case 'next':
+        case 'region/readyForAdd':
             state = {
                 ...state,
-                page: 2
+                isEdit: false,
+                show: true
+            };
+            break;
+        case 'region/readyForEdit':
+            state = {
+                ...state,
+                isEdit: true,
+                show: true
             };
             break;
     }
 
     return state;
 }
-const store = createStore<All>(combineReducers<All>({
-    region, 
-}), applyMiddleware(thunk));
+const store = createStore<All>(
+    combineReducers<All>({
+        region
+    }), 
+    global.__REDUX_DEVTOOLS_EXTENSION__ && global.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(thunk)
+);
 
 avalon.component(name, {
     template: __inline('./gf-demo-redux.html'),
@@ -126,13 +140,11 @@ avalon.component(name, {
         },
         actions(type, text, record, index) {
             if (type === 'add') {
-                this.isEdit = false;
                 form.record = demoStore.initialData();
-                this.show = true;
+                store.dispatch({ type: 'region/readyForAdd' });
             } else if (type === 'edit') {
-                this.isEdit = true;
                 form.record = record;
-                this.show = true;
+                store.dispatch({ type: 'region/readyForEdit' });
             } else if (type === 'delete') {
                 store.dispatch(del(record.region_id));
             }
@@ -145,12 +157,14 @@ avalon.component(name, {
                     } else {
                         store.dispatch(insert(form.$form.record));
                     }
-                    this.show = false;
+                    store.dispatch({ type: 'region/closeDialog' });
                 }
             })
         },
+        handleCancel() {
+            store.dispatch({ type: 'region/closeDialog' });
+        },
         handleTableChange(pagination) {
-            this.pagination.current = pagination.current;
             this.fetch({ page: pagination.current });
         },
         mapStateToVm() {

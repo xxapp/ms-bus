@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-xs-12 col-md-12">
-            <ms-dialog :widget="{show: @show, onOk: @handleOk, onCancel: function () { @show = false; }}">
+            <ms-dialog :widget="{show: @show, onOk: @handleOk, onCancel: handleCancel}">
                 <span slot="header">{{ @isEdit ? '修改' : '新增' }}</span>
                 <div slot="body" ms-skip>
                     <div :important="demo_redux_form">

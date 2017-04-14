@@ -39,8 +39,7 @@ avalon.component('ms-dialog', {
                                 }
                             }
                         }
-                    }).on('hidden.bs.modal', (e) => { 
-                        vm.onCancel(e);
+                    }).on('hidden.bs.modal', (e) => {
                         setTimeout(() => {
                             if ($('.modal.in').length) {
                                 $('body').addClass('modal-open');
