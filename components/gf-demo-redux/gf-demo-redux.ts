@@ -57,7 +57,19 @@ function del(params) {
     }
 }
 
-const region = function regionReducer(state, action) {
+interface Region {
+    show: boolean,
+    isEdit: boolean,
+    list: any[],
+    total: number,
+    page: number,
+    pageSize: number
+}
+interface All {
+    region: Region
+}
+
+const region = function regionReducer(state: Region, action) {
     if (state === undefined) {
         state = {
             show: false,
@@ -91,10 +103,9 @@ const region = function regionReducer(state, action) {
 
     return state;
 }
-const store = createStore(combineReducers({
+const store = createStore<All>(combineReducers<All>({
     region, 
 }), applyMiddleware(thunk));
-window.mystore = store;
 
 avalon.component(name, {
     template: __inline('./gf-demo-redux.html'),
