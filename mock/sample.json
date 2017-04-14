@@ -11,7 +11,6 @@
             "region_id": "10",
             "region_parent_id": "1",
             "region_name": "河北",
-            "region_nick": "",
             "region_type": "2",
             "region_enble": 1,
             "suites": [{
@@ -26,7 +25,6 @@
             "region_id": "635",
             "region_parent_id": "67",
             "region_name": "永昌县",
-            "region_nick": null,
             "region_type": "2",
             "region_enble": 1,
             "suites": [{
@@ -37,7 +35,6 @@
             "region_id": "636",
             "region_parent_id": "68",
             "region_name": "肃州区",
-            "region_nick": null,
             "region_type": "2",
             "region_enble": 1,
             "suites": [{
@@ -48,7 +45,6 @@
             "region_id": "637",
             "region_parent_id": "68",
             "region_name": "玉门市",
-            "region_nick": null,
             "region_type": "2",
             "region_enble": 1,
             "suites": [{
@@ -59,7 +55,6 @@
             "region_id": "638",
             "region_parent_id": "68",
             "region_name": "敦煌市",
-            "region_nick": null,
             "region_type": "2",
             "region_enble": 1,
             "suites": [{
@@ -70,7 +65,6 @@
             "region_id": "639",
             "region_parent_id": "68",
             "region_name": "金塔县",
-            "region_nick": null,
             "region_type": "2",
             "region_enble": 1,
             "suites": [{

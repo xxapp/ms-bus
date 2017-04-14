@@ -35,7 +35,7 @@ avalon.component('ms-table', {
                     this.selection.ensure(record);
                 });
             } else {
-                if (this.pagination.total) {
+                if (this.pagination.total !== NaN) {
                     this.checked.clear();
                     this.selection.clear();
                 } else {
@@ -64,7 +64,7 @@ avalon.component('ms-table', {
             this.action(type, text, record.$model, $index);
         },
 
-        pagination: {},
+        pagination: { current: 1, pageSize: 10, total: NaN, onChange: avalon.noop },
         handlePageChange(currentPage) {
             this.pagination.onChange(currentPage);
             this.pagination.current = currentPage;
@@ -73,14 +73,14 @@ avalon.component('ms-table', {
             this.onChange(this.pagination.$model);
         },
         getCurrentPageData() {
-            return this.pagination.total ? this.data : this.data.slice(
+            return this.pagination.total !== NaN ? this.data : this.data.slice(
                 this.pagination.pageSize * (this.pagination.current - 1),
                 this.pagination.pageSize * this.pagination.current
             );
         },
         $computed: {
             total() {
-                return this.pagination.total || this.data.length;
+                return this.pagination.total !== NaN ? this.pagination.total : this.data.length;
             }
         },
 
@@ -109,9 +109,9 @@ avalon.component('ms-table', {
             this.$watch('data.length', v => {
                 this.checked.clear();
                 this.selection.clear();
-            })
+            });
             this.$watch('pagination', v => {
-                this.pagination = {...defaultPagination, ...v};
+                avalon.mix(this.pagination, {...defaultPagination, ...v});
             });
             this.$fire('pagination', this.pagination.$model);
         },
