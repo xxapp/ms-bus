@@ -82,36 +82,31 @@ const region = function regionReducer(state: Region, action) {
         };
     }
     switch (action.type) {
-        case 'region/closeDialog': 
-            console.trace(21)
-            state = {
+        case 'region/closeDialog':
+            return {
                 ...state,
                 show: false
             };
-            break;
         case 'region/fetch':
-            state = {
+            return {
                 ...state,
                 ...action.payload
             };
-            break;
         case 'region/readyForAdd':
-            state = {
+            return {
                 ...state,
                 isEdit: false,
                 show: true
             };
-            break;
         case 'region/readyForEdit':
-            state = {
+            return {
                 ...state,
                 isEdit: true,
                 show: true
             };
-            break;
+        default:
+            return state;
     }
-
-    return state;
 }
 const store = createStore<All>(
     combineReducers<All>({
