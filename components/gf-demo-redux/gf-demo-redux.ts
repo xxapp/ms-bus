@@ -13,8 +13,9 @@ export const name = 'gf-demo-redux';
 
 function fetch(params) {
     return (dispatch, getState) => {
-        const { page, pageSize } = getState().region;
+        const { page, pageSize, search } = getState().region;
         demoStore.list({
+            ...search,
             start: pageSize * (params.page - 1),
             limit: pageSize
         }).then(data => {
@@ -29,19 +30,19 @@ function fetch(params) {
         });
     }
 }
-function insert(params) {
+function insert(params?) {
     return (dispatch, getState) => {
-        const { page } = getState().region;
-        demoStore.insert(params).then(data => {
+        const { page, record } = getState().region;
+        demoStore.insert(record).then(data => {
             dispatch({ type: 'region/closeDialog' });
             dispatch(fetch({ page }));
         });
     }
 }
-function update(params) {
+function update(params?) {
     return (dispatch, getState) => {
-        const { page } = getState().region;
-        demoStore.update(params).then(data => {
+        const { page, record } = getState().region;
+        demoStore.update(record).then(data => {
             dispatch(fetch({ page }));
         });
     }
@@ -58,19 +59,37 @@ function del(params) {
     }
 }
 
+interface RegionEntity {
+    region_id: string,
+    region_name: string,
+    region_parent_id: string,
+    suites: {
+        name: string
+    }[]
+}
+
 interface Region {
     show: boolean,
     isEdit: boolean,
-    list: any[],
+    list: RegionEntity[],
     total: number,
     page: number,
-    pageSize: number
+    pageSize: number,
+    search: {
+        region_id: string,
+        region_name: {
+            firstName: string
+        },
+        startDate: string,
+        endDate: string
+    },
+    record: RegionEntity
 }
 interface All {
     region: Region
 }
 
-const region = function regionReducer(state: Region, action) {
+const region = function regionReducer(state: Region, action): Region {
     if (state === undefined) {
         state = {
             show: false,
@@ -78,7 +97,9 @@ const region = function regionReducer(state: Region, action) {
             list: [],
             total: 0,
             page: 1,
-            pageSize: 6
+            pageSize: 6,
+            search: null,
+            record: null
         };
     }
     switch (action.type) {
@@ -104,6 +125,16 @@ const region = function regionReducer(state: Region, action) {
                 isEdit: true,
                 show: true
             };
+        case 'region/changeSearch':
+            return {
+                ...state,
+                search: action.payload
+            }
+        case 'region/changeRecord':
+            return {
+                ...state,
+                record: action.payload
+            }
         default:
             return state;
     }
@@ -122,13 +153,17 @@ avalon.component(name, {
         show: false,
         isEdit: false,
         list: [],
-        $searchForm: createForm(),
+        $searchForm: createForm({
+            onFieldsChange(fields, record) {
+                store.dispatch({ type: 'region/changeSearch', payload: record });
+            }
+        }),
         pagination: {
             current: 1, total: 0, pageSize: 6
         },
         pattern: /^\d+-\d+-\d+( \d+:\d+:\d+)?$/,
         search() {
-            this.fetch(this.$searchForm.record);
+            this.fetch();
         },
         fetch(params = {}) {
             store.dispatch(fetch(params));
@@ -148,9 +183,9 @@ avalon.component(name, {
             form.$form.validateFields().then(isAllValid => {
                 if (isAllValid) {
                     if (this.isEdit) {
-                        store.dispatch(insert(form.$form.record));
+                        store.dispatch(update());
                     } else {
-                        store.dispatch(insert(form.$form.record));
+                        store.dispatch(insert());
                     }
                     store.dispatch({ type: 'region/closeDialog' });
                 }
@@ -164,7 +199,7 @@ avalon.component(name, {
         },
         mapStateToVm() {
             const {
-                show, isEdit, list, total, page, pageSize
+                show, isEdit, list, total, page, pageSize, search, record
             } = store.getState().region;
             this.list = list;
             this.pagination.total = total;
@@ -190,6 +225,7 @@ const form = avalon.define({
         record: demoStore.initialData(),
         onFieldsChange(fields, record) {
             //avalon.mix(form.record, record);
+            store.dispatch({ type: 'region/changeRecord', payload: record });
         }
     }),
     record: demoStore.initialData()
