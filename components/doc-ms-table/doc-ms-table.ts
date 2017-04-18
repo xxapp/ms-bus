@@ -30,11 +30,14 @@ avalon.component(name, {
                 type: 'json'
             }).then(data => {
                 this.pagination.total = data.total;
+                data.rows[0].region_parent_id = Date.now();
                 this.remoteList = data.rows;
             });
         },
         handleTableChange(pagination) {
-            this.pagination.current = pagination.current;
+            if (this.pagination.hasOwnProperty('current')) {
+                this.pagination.current = pagination.current;
+            }
             this.fetch({
                 start: pagination.pageSize * (pagination.current - 1),
                 limit: pagination.pageSize

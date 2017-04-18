@@ -5,7 +5,6 @@ import * as msg from '../../services/messageService';
 
 import '../../components/ms-form';
 import { createForm } from '../../components/ms-form/create-form';
-import '../../components/ms-form/ms-form-item';
 import '../../components/ms-input/ms-input';
 import '../../components/ms-textarea/ms-textarea';
 import '../../components/ms-checkbox/ms-checkbox-group';

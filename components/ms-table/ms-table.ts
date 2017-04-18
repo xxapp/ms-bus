@@ -7,8 +7,10 @@ import {
     getChildTemplateDescriptor
 } from '../../vendor/avx-component/avx-util';
 
-const defaultPagination = {
-    current: 1, pageSize: 10, onChange: avalon.noop
+const defaultPagination = function () {
+    return {
+        current: 1, pageSize: 10, total: NaN, onChange: avalon.noop
+    };
 };
 
 avalon.component('ms-table', {
@@ -35,7 +37,7 @@ avalon.component('ms-table', {
                     this.selection.ensure(record);
                 });
             } else {
-                if (!isNaN(this.pagination.total)) {
+                if (!isNaN(this.paginationConfig.total)) {
                     this.checked.clear();
                     this.selection.clear();
                 } else {
@@ -64,23 +66,24 @@ avalon.component('ms-table', {
             this.action(type, text, record.$model, $index);
         },
 
-        pagination: { current: 1, pageSize: 10, total: NaN, onChange: avalon.noop },
+        pagination: defaultPagination(),
+        paginationConfig: defaultPagination(),
         handlePageChange(currentPage) {
-            this.pagination.onChange(currentPage);
-            this.pagination.current = currentPage;
+            this.paginationConfig.onChange(currentPage);
+            this.paginationConfig.current = currentPage;
 
             this.$fire('checked.length', this.checked.length);
-            this.onChange(this.pagination.$model);
+            this.onChange(this.paginationConfig.$model);
         },
         getCurrentPageData() {
-            return !isNaN(this.pagination.total) ? this.data : this.data.slice(
-                this.pagination.pageSize * (this.pagination.current - 1),
-                this.pagination.pageSize * this.pagination.current
+            return !isNaN(this.paginationConfig.total) ? this.data : this.data.slice(
+                this.paginationConfig.pageSize * (this.paginationConfig.current - 1),
+                this.paginationConfig.pageSize * this.paginationConfig.current
             );
         },
         $computed: {
             total() {
-                return !isNaN(this.pagination.total) ? this.pagination.total : this.data.length;
+                return !isNaN(this.paginationConfig.total) ? this.paginationConfig.total : this.data.length;
             }
         },
 
@@ -103,15 +106,29 @@ avalon.component('ms-table', {
                     .length == currentPageKeys.length;
             });
             this.$watch('data', (v) => {
+                this.isAllChecked = false;
                 this.checked.clear();
                 this.selection.clear();
             });
             this.$watch('data.length', v => {
+                this.isAllChecked = false;
                 this.checked.clear();
                 this.selection.clear();
             });
             this.$watch('pagination', v => {
-                avalon.mix(this.pagination, {...defaultPagination, ...v});
+                avalon.mix(this.paginationConfig, v);
+            });
+            this.$watch('pagination.current', v => {
+                this.paginationConfig.current = v;
+            });
+            this.$watch('pagination.pageSize', v => {
+                this.paginationConfig.pageSize = v;
+            });
+            this.$watch('pagination.total', v => {
+                this.paginationConfig.total = v;
+            });
+            this.$watch('pagination.onChange', v => {
+                this.paginationConfig.onChange = v;
             });
             this.$fire('pagination', this.pagination.$model);
         },

@@ -12,6 +12,11 @@ import 'bootstrap';
 
 import * as avalon from 'avalon2';
 import 'mmRouter';
+if (avalon.msie === 8) {
+    Object.defineProperty = function (obj, property, meta) {
+        obj[property] = meta.value;
+    }
+}
 
 // root vm
 const root = avalon.define({

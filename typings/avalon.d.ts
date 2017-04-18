@@ -60,6 +60,10 @@ interface AvalonStatic {
      * 生成指定长度数组
      */
     range(start: number, end?: number, step?: number): number[]
+    /**
+     * IE版本
+     */
+    msie: number
 }
 
 declare module 'avalon2' {
