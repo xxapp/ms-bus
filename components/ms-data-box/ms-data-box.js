@@ -4,7 +4,6 @@ var bootbox = require('bootbox');
 
 var store = require('/services/storeService.js');
 var msg = require('/services/messageService.js');
-var cEvent = require('../../events/componentEvent');
 var avxUtil = require('/vendor/avx-component/avx-util');
 
 var pageSize = 10;

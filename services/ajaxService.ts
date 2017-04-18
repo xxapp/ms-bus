@@ -1,6 +1,6 @@
 import * as avalon from 'avalon2';
-import bootbox from 'bootbox';
-import beyond from '../vendor/beyond';
+import * as bootbox from 'bootbox';
+import * as beyond from '../vendor/beyond';
 
 import msg from  './messageService';
 

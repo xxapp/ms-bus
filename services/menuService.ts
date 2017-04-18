@@ -24,25 +24,7 @@ const menu = [{
         title: 'redux例子',
         icon: 'glyphicon-home',
         href: '#!/demo-redux'
-    }, {
-        name: 'category',
-        title: 'Category',
-        stateName: 'root.category',
-        icon: 'glyphicon-category',
-        href: '#!/category'
     }]
-}, {
-    name: 'item',
-    title: 'item',
-    stateName: 'root.item',
-    icon: 'glyphicon-circle',
-    href: '#!/aaa'
-}, {
-    name: 'channel',
-    title: 'channel',
-    stateName: 'root.channel',
-    icon: 'glyphicon-category',
-    href: '#!/channel'
 }, {
     name: 'doc-ms',
     title: '组件文档',

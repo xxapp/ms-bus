@@ -35,7 +35,7 @@ avalon.component('ms-table', {
                     this.selection.ensure(record);
                 });
             } else {
-                if (this.pagination.total !== NaN) {
+                if (!isNaN(this.pagination.total)) {
                     this.checked.clear();
                     this.selection.clear();
                 } else {
@@ -73,14 +73,14 @@ avalon.component('ms-table', {
             this.onChange(this.pagination.$model);
         },
         getCurrentPageData() {
-            return this.pagination.total !== NaN ? this.data : this.data.slice(
+            return !isNaN(this.pagination.total) ? this.data : this.data.slice(
                 this.pagination.pageSize * (this.pagination.current - 1),
                 this.pagination.pageSize * this.pagination.current
             );
         },
         $computed: {
             total() {
-                return this.pagination.total !== NaN ? this.pagination.total : this.data.length;
+                return !isNaN(this.pagination.total) ? this.pagination.total : this.data.length;
             }
         },
 
