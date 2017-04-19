@@ -1,6 +1,32 @@
 import * as avalon from 'avalon2';
 import { parseSlotToVModel } from '../../vendor/avx-component/avx-util';
 
+if (avalon.msie <= 8) {
+    const doc = document;
+    const head = doc.getElementsByTagName('head')[0];
+    const style: any = doc.createElement('style');
+    const cssStr = `
+        .checkbox-inner-ie input {
+            left: 0;
+            position: static !important;
+            margin-left: 0 !important;
+            margin-top: 6px !important;
+        }
+        .checkbox-inner-ie span {
+            display: none !important;
+        }
+    `;
+    style.setAttribute('type', 'text/css');
+
+    if (style.styleSheet) {
+        style.styleSheet.cssText = cssStr;
+    } else {
+        style.appendChild(doc.createTextNode(cssStr));
+    }
+
+    head.appendChild(style);
+}
+
 avalon.component('ms-checkbox', {
     soleSlot: 'label',
     template: __inline('./ms-checkbox.html'),
@@ -22,18 +48,7 @@ avalon.component('ms-checkbox', {
             // }
         },
         onReady(event) {
-            const el = event.target;
             parseSlotToVModel(this);
-            if (~window.navigator.userAgent.indexOf('MSIE 8.0')) {
-                // 在IE8下降级为原生的checkbox
-                var checkbox = el.children[0].children[0], mockCheckbox = el.children[0].children[1];
-                checkbox.style.left = 0;
-                checkbox.style.position = 'static';
-                checkbox.style.marginLeft = '0';
-                checkbox.style.marginTop = '6px';
-
-                mockCheckbox.style.display = 'none';
-            }
         },
         onDispose(vm, el) {
         }
