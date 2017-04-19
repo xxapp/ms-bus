@@ -7,30 +7,41 @@ export function createForm(options?) {
 
 const defaultOptions = {
     record: {},
-    fields: {},
-    onFieldsChange: avalon.noop,
-    all: {}
+    autoAsyncChange: true,
+    onFieldsChange: avalon.noop
 };
 
 function Form(options) {
+    this.cachedRecord = {};
+    this.fields = {};
+    this.all = {};
     avalon.mix(this, defaultOptions, options)
 }
 
 Form.prototype.setFieldsValue = function (fields) {
+    if (!this.autoAsyncChange) {
+        Object.keys(fields).forEach((name) => {
+            setValue(this.cachedRecord, name, fields[name].value);
+        });
+        return ;
+    }
+
     Object.keys(fields).forEach((name) => {
         const field = fields[name];
 
         setValue(this.record, name, field.value);
 
-        !field.denyValidate && this.fields[name] && this.validateField(name, this.fields[name]).then(result => {
-            if (result.isOk) {
-                this.trigger('error' + result.name, []);
-            } else {
-                this.trigger('error' + result.name, [{
-                    message: result.message
-                }]);
-            }
-        });
+        if (!field.denyValidate && this.fields[name]) {
+            this.validateField(name, this.fields[name]).then(result => {
+                if (result.isOk) {
+                    this.trigger('error' + result.name, []);
+                } else {
+                    this.trigger('error' + result.name, [{
+                        message: result.message
+                    }]);
+                }
+            });
+        }
     });
     this.onFieldsChange(fields, this.record);
 }
@@ -75,6 +86,9 @@ Form.prototype.validateField = async function (fieldName, field) {
 
 Form.prototype.validateFields = function (fields = this.fields) {
     const flatRecord = {}, ruleMap = {};
+    if (!this.autoAsyncChange) {
+        this.record = avalon.mix(true, {}, this.record, this.cachedRecord);
+    }
     Object.keys(fields).map(name => {
         ruleMap[name] = fields[name].rules;
         flatRecord[name] = getValue(this.record, name);

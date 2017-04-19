@@ -15,16 +15,24 @@ avalon.component(name, {
         show: false,
         isEdit: false,
         list: [],
-        $searchForm: createForm(),
+        $searchForm: createForm({ autoAsyncChange: false }),
         pagination: {
-            pageSize: 6, total: 0
+            current: 1, pageSize: 6, total: 0
         },
         pattern: /^\d+-\d+-\d+( \d+:\d+:\d+)?$/,
         search() {
-            this.fetch(this.$searchForm.record);
+            this.$searchForm.validateFields().then(isAllValid => {
+                if (isAllValid) {
+                    this.fetch();
+                }
+            });
         },
-        fetch(params = {}) {
-            demoStore.list(params).then(data => {
+        fetch() {
+            const page = {
+                start: this.pagination.pageSize * (this.pagination.current - 1),
+                limit: this.pagination.pageSize
+            };
+            demoStore.list({...this.$searchForm.record, ...page}).then(data => {
                 this.pagination.total = data.total;
                 this.list = data.list;
             });
@@ -50,9 +58,13 @@ avalon.component(name, {
             form.$form.validateFields().then(isAllValid => {
                 if (isAllValid) {
                     if (this.isEdit) {
-                        demoStore.update(form.$form.record);
+                        demoStore.update(form.$form.record).then(result => {
+                            this.fetch();
+                        });
                     } else {
-                        demoStore.insert(form.$form.record);
+                        demoStore.insert(form.$form.record).then(result => {
+                            this.fetch();
+                        });
                     }
                     this.show = false;
                 }
@@ -60,10 +72,7 @@ avalon.component(name, {
         },
         handleTableChange(pagination) {
             this.pagination.current = pagination.current;
-            this.fetch({
-                start: pagination.pageSize * (pagination.current - 1),
-                limit: pagination.pageSize
-            });
+            this.fetch();
         },
         onInit(event) {
             this.fetch();
