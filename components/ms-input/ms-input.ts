@@ -7,7 +7,6 @@ import { findParentComponent } from '../../vendor/avx-component/avx-util';
  * 文本输入组件
  * @prop value 组件值(inherit)
  * @prop col 字段路径(inherit)
- * @prop key 键值，只有当组件处于循环中需要用到(inherit)
  * 
  * @example
  * ``` html
