@@ -20,7 +20,13 @@ avalon.component(name, {
         record: initialData(),
         json: '',
         expire: 0,
-        submit: function () {
+        addEducation() {
+            this.record.education.push('');
+        },
+        removeEducation(school) {
+            this.record.education.remove(school);
+        },
+        submit() {
             // if (!avalon.vmodels['doc_form'].validate()) {
             //     return false;
             // }

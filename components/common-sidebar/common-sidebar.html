@@ -4,7 +4,7 @@
         <li :visible="item.show" 
             :class="[((@actived===item.name || @isChildActived(item)) ? 'active' : ''), ((@opened === item.name && !@compact) ? 'open' : '')]" 
             :for="item in @menu">
-            <a :attr="{href: item.href}" 
+            <a :attr="{href: item.href, target: item.target}" 
                 :class="[((item.children && item.children.length > 0) ? 'menu-dropdown' : '')]"  
                 :click="@menuClick(item)">
                 <i :class="['menu-icon', 'glyphicon', item.icon]"></i>
@@ -13,7 +13,7 @@
             </a>
             <ul class="submenu" :effect="{is:'collapse',action:@opened == item.name?'enter':'leave'}">
                 <li :visible="sub.show" :class="[(actived===sub.name ? 'active' : '')]" :for="sub in item.children || []">
-                    <a :attr="{href: sub.href}" :click="@menuClick(sub, item)">
+                    <a :attr="{href: sub.href, target: sub.target}" :click="@menuClick(sub, item)">
                         <span class="menu-text">{{ sub.title }}</span>
                     </a>
                 </li>

@@ -41,6 +41,12 @@ const menu = [{
         title: 'Form',
         href: '#!/doc-ms-form'
     }]
+}, {
+    name: 'rxjs-demo-page',
+    title: 'RxJS Demo Page',
+    icon: 'glyphicon-page',
+    href: '/pages/rxjs-demo/rxjs-demo.html',
+    target: '_blank'
 }];
 
 // 根据权限过滤菜单
@@ -71,6 +77,7 @@ function travelMenu(menulet, functions, allowedFunctions) {
             if (func.code === item.name && (allowedFunctions[func.code]) || allowedFunctions['all']) {
                 item.href = func.uri || item.href || 'javascript:;';
                 item.icon = func.icon_url || item.icon;
+                item.target = item.target || '_self';
                 item.children = item.children || [];
                 item.opened = false;
                 hasPermission = true;

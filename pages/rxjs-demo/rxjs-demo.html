@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RxJS Demo</title>
     <script src="../../static/mod.js"></script>
+    <script src="../../static/uilog.js"></script>
 </head>
-<body>
-    <button>Click Me</button>
+<body :controller="demo">
+    <button :click="click">{{text}}</button>
     <script>
         require(['./rxjs-demo']);
     </script>

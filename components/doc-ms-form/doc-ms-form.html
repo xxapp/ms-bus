@@ -23,11 +23,11 @@
                         <div style="width: 500px;">
                             <ms-form-item>
                                 <ms-input :widget="{value:school,col:'education[' + $index +']',placeholder:'学校',$rules:{required:true,message:'请输入文字'}}"></ms-input>
-                                <button type="button" class="btn btn-danger" style="position: absolute;top: 1px;right: -55px;" :click="@record.education.remove(school)">删除</button>
+                                <button type="button" class="btn btn-danger" style="position: absolute;top: 1px;right: -55px;" :click="@removeEducation(school)">删除</button>
                             </ms-form-item>
                         </div>
                         <!--ms-for-end:-->
-                        <button type="button" class="btn btn-primary" :click="@record.education.push('')"><i class="fa fa-plus-circle"></i> 添加教育经历</button>
+                        <button type="button" class="btn btn-primary" :click="@addEducation"><i class="fa fa-plus-circle"></i> 添加教育经历</button>
                         <!--<ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
                             <option value="M">男</option>
                             <option value="F">女</option>
