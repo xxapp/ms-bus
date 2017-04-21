@@ -46,7 +46,9 @@ avalon.component('ms-form-item', {
             });
         },
         onFormChange(meta) {
-            this.dirty = true;
+            if (this.$formVm.$form.autoAsyncChange) {
+                this.dirty = true;
+            }
             this.$formVm.onFormChange(meta);
         },
         onInit(event) {
