@@ -2,7 +2,9 @@ import * as avalon from 'avalon2';
 
 avalon.filters.showPrices = function (priceList) {
     let prices = '';
-    if (!priceList) return prices;
+    if (!priceList) {
+        return prices;
+    }
     for (let i = 0; i < priceList.length; i++) {
         if (i !== 0) {
             prices += '，';

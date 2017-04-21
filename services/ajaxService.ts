@@ -15,8 +15,8 @@ interface ResponseData {
 
 // 拦截ajax请求，检测是否超时，以重新登录
 $(document).ajaxComplete((event, xhr, settings) => {
-    if (xhr.status == 200) {
-        if (settings.dataType == 'json' && (xhr as any).responseJSON != void 0) {
+    if (xhr.status === 200) {
+        if (settings.dataType === 'json' && (xhr as any).responseJSON !== void 0) {
             let result = (xhr as any).responseJSON;
             if (result.code === '20' || result.code === '21') {
                 beyond.hideLoading();
@@ -30,7 +30,7 @@ $(document).ajaxComplete((event, xhr, settings) => {
                 msg.success(result.error.message);
             }
         }
-    } else if (xhr.status == undefined) {
+    } else if (xhr.status === undefined) {
     	beyond.hideLoading();
     } else {
         beyond.hideLoading();

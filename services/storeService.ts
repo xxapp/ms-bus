@@ -15,14 +15,14 @@ export const demo = {
             }]
         };
     },
-    list: function (params) {
+    fetch: function (params) {
         return ajax({
             url: '/api/demo',
             type: 'get',
             data: params
         });
     },
-    insert: function (params) {
+    create: function (params) {
         return ajax({
             url: '/api/demo/update',
             type: 'post',
@@ -36,7 +36,7 @@ export const demo = {
             data: params
         });
     },
-    del: function (id) {
+    remove: function (id) {
         return ajax({
             url: '/api/demo/update',
             type: 'post',
@@ -75,8 +75,8 @@ export const github = {
             limit: this.limit
         };
     },
-    processResponse: function (data, params) {
-        var data = data.data;
+    processResponse: function (data) {
+        data = data.data;
         data.rows = data.items;
         data.total = data.total_count;
         return data;

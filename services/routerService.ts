@@ -1,7 +1,6 @@
 import * as avalon from 'avalon2';
 import 'mmRouter';
-import beyond from '../vendor/beyond';
-import * as menuService from './menuService';
+// import * as menuService from './menuService';
 
 function getPage(component) {
     const html = `<xmp is="${component}" :widget="{id:'${component}',expire:${Date.now()}}"></xmp>`;
@@ -20,7 +19,7 @@ function applyRouteConfig(config, parentRoute, accPath = '') {
         avalon.router.add(accPath + route.path, function () {
             Object.keys(components).map(viewName => {
                 let component = components[viewName];
-                if (typeof component == 'function') {
+                if (typeof component === 'function') {
                     component(function (m) {
                         avalon.vmodels[parentRoute.name][viewName] = getPage(m.name);
                     });

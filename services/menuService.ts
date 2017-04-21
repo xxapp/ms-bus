@@ -1,3 +1,4 @@
+import * as avalon from  'avalon2';
 import ajax from './ajaxService';
 
 const menu = [{
@@ -55,7 +56,7 @@ const menuPromise = new Promise((rs, rj) => {
         url: '/api/loged',
         type: 'get'
     }).then((result) => {
-        if (result.code == '0') {
+        if (result.code === '0') {
             $('#loadImg').css('display', 'none');
             $('.login-area').removeClass('hidden').addClass('animated flipInX');
             travelMenu(menu, result.data.t.functions, result.data.t.allowedFunctions);
@@ -84,7 +85,7 @@ function travelMenu(menulet, functions, allowedFunctions) {
                 break;
             }
         }
-        item.show = hasPermission == true;
+        item.show = hasPermission === true;
 
         travelMenu(item.children, functions, allowedFunctions);
     }
