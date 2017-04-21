@@ -70,7 +70,6 @@ export default avalon.component('common-curd', {
         },
         onInit(event) {
             this.fetch();
-            console.log(event);
             if (this.$form === null) {
                 this.$form = avalon.define({
                     $id: this.$id + '_form',
