@@ -25,6 +25,12 @@ const menu = [{
         title: 'redux例子',
         icon: 'glyphicon-home',
         href: '#!/demo-redux'
+    }, {
+        name: 'demo-fast',
+        stateName: 'root.demoFast',
+        title: '快速CURD例子',
+        icon: 'glyphicon-home',
+        href: '#!/demo-fast'
     }]
 }, {
     name: 'doc-ms',

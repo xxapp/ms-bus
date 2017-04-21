@@ -63,7 +63,15 @@ interface AvalonStatic {
     /**
      * IE版本
      */
-    msie: number
+    msie: number,
+    /**
+     * 打印日志
+     */
+    log(message?: any, ...optionalParams: any[]): void;
+    /**
+     * 打印错误信息
+     */
+    error(message?: any, ...optionalParams: any[]): void;
 }
 
 declare module 'avalon2' {

@@ -3,7 +3,7 @@ import 'mmRouter';
 // import * as menuService from './menuService';
 
 function getPage(component) {
-    const html = `<xmp is="${component}" :widget="{id:'${component}',expire:${Date.now()}}"></xmp>`;
+    const html = `<xmp is="${component}" :widget="{id:'${component.replace(/\-/g, '_')}',expire:${Date.now()}}"></xmp>`;
     return html
 }
 
@@ -55,6 +55,11 @@ const routeConfig = [{
     path: '/demo-redux',
     component(resolve) {
         require.async('/components/gf-demo-redux', resolve);
+    }
+}, {
+    path: '/demo-fast',
+    component(resolve) {
+        require.async('/components/gf-demo-fast', resolve);
     }
 }, {
     path: '/doc-ms-table',

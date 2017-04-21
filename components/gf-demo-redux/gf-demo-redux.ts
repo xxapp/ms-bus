@@ -14,7 +14,7 @@ export const name = 'gf-demo-redux';
 function fetch(params) {
     return (dispatch, getState) => {
         const { page, pageSize, search } = getState().region;
-        demoStore.list({
+        demoStore.fetch({
             ...search,
             start: pageSize * (params.page - 1),
             limit: pageSize
@@ -33,7 +33,7 @@ function fetch(params) {
 function insert(params?) {
     return (dispatch, getState) => {
         const { page, record } = getState().region;
-        demoStore.insert(record).then(data => {
+        demoStore.create(record).then(data => {
             dispatch({ type: 'region/closeDialog' });
             dispatch(fetch({ page }));
         });
@@ -50,7 +50,7 @@ function update(params?) {
 function del(params) {
     return (dispatch, getState) => {
         const { page } = getState().region;
-        demoStore.del(params).then(result => {
+        demoStore.remove(params).then(result => {
             if (result.code === '0') {
                 msg.success('删除成功');
             }
