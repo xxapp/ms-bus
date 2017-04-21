@@ -82,6 +82,9 @@ export default avalon.component('common-curd', {
                     record: this.$store.initialData()
                 });
             }
+        },
+        onDispose(event) {
+            delete avalon.vmodels[this.$form.$id];
         }
     }
 });
