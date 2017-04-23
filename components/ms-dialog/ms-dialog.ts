@@ -5,7 +5,6 @@ import { parseSlotToVModel } from '../../vendor/avx-component/avx-util';
 avalon.component('ms-dialog', {
     template: '<div style="display: none"><slot name="header" /><slot name="body"/></div>',
     defaults: {
-        header: '',
         body: 'blank',
         $dialog: null,
         show: false,
@@ -20,7 +19,7 @@ avalon.component('ms-dialog', {
                 if (newV) {
                     vm.$dialog = bootbox.dialog({
                         message: vm.body,
-                        title: vm.title ? vm.title : vm.header,
+                        title: vm.title,
                         size: vm.size,
                         buttons: {
                             save: {
