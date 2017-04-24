@@ -9,8 +9,8 @@ avalon.component('ms-dialog', {
         $dialog: null,
         show: false,
         size: '',
-        title: '',
         uploading: false,
+        $innerVm: '',
         onOk() {},
         onCancel() {},
         onInit(event) {
@@ -19,12 +19,12 @@ avalon.component('ms-dialog', {
                 if (newV) {
                     vm.$dialog = bootbox.dialog({
                         message: vm.body,
-                        title: vm.title,
+                        title: '{{title}}',
                         size: vm.size,
                         buttons: {
                             save: {
                                 label: '保存',
-                                className: "btn-primary",
+                                className: 'btn-primary',
                                 callback() {
                                     vm.onOk();
                                     return false;
@@ -32,7 +32,7 @@ avalon.component('ms-dialog', {
                             },
                             cancel: {
                                 label: '取消',
-                                className: "btn-default",
+                                className: 'btn-default',
                                 callback() {
                                     vm.onCancel();
                                 }
@@ -50,6 +50,7 @@ avalon.component('ms-dialog', {
                     .on('shown.bs.modal', () => {
                         
                     });
+                    vm.$dialog.find('.modal-content').attr(':controller', this.$innerVm);
                     avalon.scan(vm.$dialog.get(0));
                 } else {
                     if (vm.$dialog) {

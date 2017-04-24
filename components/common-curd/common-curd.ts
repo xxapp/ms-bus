@@ -7,13 +7,14 @@ export default avalon.component('common-curd', {
     template: '&nbsp;',
     defaults: {
         show: false,
-        isEdit: false,
         list: [],
         $searchForm: createForm({ autoAsyncChange: false }),
         pagination: {
             current: 1, pageSize: 6, total: 0
         },
-        $form: null,
+        $dialogs: {
+            main: null
+        },
         search() {
             this.$searchForm.validateFields().then(isAllValid => {
                 if (isAllValid) {
@@ -33,12 +34,14 @@ export default avalon.component('common-curd', {
         },
         actions(type, text, record, index) {
             if (type === 'add') {
-                this.isEdit = false;
-                this.$form.record = this.$store.initialData();
+                this.$dialogs.main.isEdit = false;
+                this.$dialogs.main.title = '新增';
+                this.$dialogs.main.record = this.$store.initialData();
                 this.show = true;
             } else if (type === 'edit') {
-                this.isEdit = true;
-                this.$form.record = record;
+                this.$dialogs.main.isEdit = true;
+                this.$dialogs.main.title = '修改';
+                this.$dialogs.main.record = record;
                 this.show = true;
             } else if (type === 'delete') {
                 this.$store.remove(record.region_id).then(result => {
@@ -49,20 +52,20 @@ export default avalon.component('common-curd', {
             }
         },
         handleOk() {
-            this.$form.$form.validateFields().then(isAllValid => {
-                if (isAllValid) {
-                    if (this.isEdit) {
-                        this.$store.update(this.$form.$form.record).then(result => {
-                            this.fetch();
-                        });
-                    } else {
-                        this.$store.create(this.$form.$form.record).then(result => {
-                            this.fetch();
-                        });
-                    }
+            this.$dialogs.main.submit().then(([isEdit, record]) => {
+                if (typeof isEdit === 'boolean') {
                     this.show = false;
+                    if (isEdit) {
+                        return this.$store.update(record);
+                    } else {
+                        return this.$store.create(record);
+                    }
                 }
-            })
+            }).then(result => {
+                if (result !== undefined && result.code === '0') {
+                    this.fetch();
+                }
+            });
         },
         handleTableChange(pagination) {
             this.pagination.current = pagination.current;
@@ -70,21 +73,33 @@ export default avalon.component('common-curd', {
         },
         onInit(event) {
             this.fetch();
-            if (this.$form === null) {
-                this.$form = avalon.define({
-                    $id: this.$id + '_form',
+            if (this.$dialogs.main === null) {
+                this.$dialogs.main = avalon.define({
+                    $id: this.$id + '_dialog_main',
+                    title: '新增',
+                    isEdit: false,
                     $form: createForm({
                         record: this.$store.initialData(),
                         onFieldsChange(fields, record) {
                             //avalon.mix(form.record, record);
                         }
                     }),
-                    record: this.$store.initialData()
+                    record: this.$store.initialData(),
+                    submit() {
+                        return this.$form.validateFields().then(isAllValid => {
+                            if (isAllValid) {
+                                return [this.isEdit, this.$form.record];
+                            }
+                        })
+                    }
                 });
             }
         },
         onDispose(event) {
-            delete avalon.vmodels[this.$form.$id];
+            Object.keys(this.$dialogs).map(name => {
+                let dialog = this.$dialogs[name];
+                dialog && delete avalon.vmodels[dialog.$id];
+            });
         }
     }
 });
