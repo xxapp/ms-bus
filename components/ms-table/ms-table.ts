@@ -61,9 +61,9 @@ avalon.component('ms-table', {
         },
 
         action() {},
-        handle(type, col, record, $index) {
+        handle(type, col, record, $index, ...extra) {
             let text = record[col.dataIndex].$model || record[col.dataIndex];
-            this.action(type, text, record.$model, $index);
+            this.action(type, text, record.$model, $index, ...extra);
         },
 
         pagination: defaultPagination(),
@@ -148,7 +148,7 @@ function getColumnConfig(descriptor, level = 1) {
         let inlineTemplate = column.inlineTemplate;
         inlineTemplate = inlineTemplate.replace(/(ms-|:)skip="[^"]*"/g, '');
         inlineTemplate = inlineTemplate.replace(/<\s*ms-table-header[^>]*>.*<\/\s*ms-table-header\s*>/g, '');
-        inlineTemplate = inlineTemplate.replace(/(ms-|:)click="handle\(([^"]*)\)"/g, '$1click="handle($2, col, record, $index)"');
+        inlineTemplate = inlineTemplate.replace(/(ms-|:)click="handle\(([^,]*)([^"]*)\)"/g, '$1click="handle($2, col, record, $index$3)"');
         acc.push({
             title: column.props.title,
             dataIndex: column.props.dataIndex || '',
