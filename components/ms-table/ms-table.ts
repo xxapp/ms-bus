@@ -60,10 +60,10 @@ avalon.component('ms-table', {
             this.onSelect(record.$model, checked, this.selection.$model);
         },
 
-        action() {},
+        actions: {},
         handle(type, col, record, $index, ...extra) {
             let text = record[col.dataIndex].$model || record[col.dataIndex];
-            this.action(type, text, record.$model, $index, ...extra);
+            this.actions(type, text, record.$model, $index, ...extra);
         },
 
         pagination: defaultPagination(),
@@ -148,7 +148,9 @@ function getColumnConfig(descriptor, level = 1) {
         let inlineTemplate = column.inlineTemplate;
         inlineTemplate = inlineTemplate.replace(/(ms-|:)skip="[^"]*"/g, '');
         inlineTemplate = inlineTemplate.replace(/<\s*ms-table-header[^>]*>.*<\/\s*ms-table-header\s*>/g, '');
-        inlineTemplate = inlineTemplate.replace(/(ms-|:)click="handle\(([^,]*)([^"]*)\)"/g, '$1click="handle($2, col, record, $index$3)"');
+        inlineTemplate = inlineTemplate.replace(/(ms-|:)click="handle\(([^"]*)\)"/g, ($0, $1, $2, $3) => {
+            return `${$1}click="handle(${$2},)"`.replace(/,/, ', col, record, $index,').replace(/,\)/, ')');
+        });
         acc.push({
             title: column.props.title,
             dataIndex: column.props.dataIndex || '',

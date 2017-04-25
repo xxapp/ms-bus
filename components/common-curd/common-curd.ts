@@ -32,24 +32,30 @@ export default avalon.component('common-curd', {
                 this.list = data.list;
             });
         },
-        actions(type, text, record, index) {
-            if (type === 'add') {
-                this.$dialogs.main.isEdit = false;
-                this.$dialogs.main.title = '新增';
-                this.$dialogs.main.record = this.$store.initialData();
+        handleTableChange(pagination) {
+            this.pagination.current = pagination.current;
+            this.fetch();
+        },
+        handle: {},
+        _handle: {
+            add(text, record, index) {
+                this.$dialogs.main.beginCreate(this.$store.initialData());
                 this.show = true;
-            } else if (type === 'edit') {
-                this.$dialogs.main.isEdit = true;
-                this.$dialogs.main.title = '修改';
-                this.$dialogs.main.record = record;
+            },
+            edit(text, record, index) {
+                this.$dialogs.main.beginUpdate(record);
                 this.show = true;
-            } else if (type === 'delete') {
+            },
+            del(text, record, index) {
                 this.$store.remove(record.region_id).then(result => {
                     if (result.code === '0') {
                         msg.success('删除成功');
                     }
                 });
-            }
+            },
+        },
+        actions(type, ...args) {
+            this.handle[type] && this.handle[type].apply(this, args);
         },
         handleOk() {
             this.$dialogs.main.submit().then(([isEdit, record]) => {
@@ -67,24 +73,26 @@ export default avalon.component('common-curd', {
                 }
             });
         },
-        handleTableChange(pagination) {
-            this.pagination.current = pagination.current;
-            this.fetch();
-        },
-        onInit(event) {
-            this.fetch();
+        _initMainDialog() {
             if (this.$dialogs.main === null) {
                 this.$dialogs.main = avalon.define({
                     $id: this.$id + '_dialog_main',
                     title: '新增',
                     isEdit: false,
                     $form: createForm({
-                        record: this.$store.initialData(),
-                        onFieldsChange(fields, record) {
-                            //avalon.mix(form.record, record);
-                        }
+                        record: this.$store.initialData()
                     }),
                     record: this.$store.initialData(),
+                    beginCreate(record) {
+                        this.isEdit = false;
+                        this.title = '新增';
+                        this.record = record;
+                    },
+                    beginUpdate(record) {
+                        this.isEdit = true;
+                        this.title = '修改';
+                        this.record = record;
+                    },
                     submit() {
                         return this.$form.validateFields().then(isAllValid => {
                             if (isAllValid) {
@@ -95,11 +103,19 @@ export default avalon.component('common-curd', {
                 });
             }
         },
-        onDispose(event) {
+        _disposeDialogs() {
             Object.keys(this.$dialogs).map(name => {
                 let dialog = this.$dialogs[name];
                 dialog && delete avalon.vmodels[dialog.$id];
             });
+        },
+        onInit(event) {
+            this.fetch();
+            this._initMainDialog();
+            this.handle = avalon.mix(this._handle, this.handle);
+        },
+        onDispose(event) {
+            this._disposeDialogs();
         }
     }
 });

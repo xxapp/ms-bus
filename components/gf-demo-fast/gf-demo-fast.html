@@ -47,13 +47,13 @@
                             </span>新增地区
                         </button>
                     </div>
-                    <ms-table :widget="{data:@list,action:@actions,pagination:@pagination,onChange:@handleTableChange}">
+                    <ms-table :widget="{data:@list,actions:@actions,pagination:@pagination,onChange:@handleTableChange}">
                         <ms-table-header :widget="{dataIndex:'region_id',type:'selection'}"></ms-table-header>
                         <ms-table-header :widget="{title:'地区',dataIndex:'region_name'}"></ms-table-header>
                         <ms-table-header :widget="{title:'PID',dataIndex:'region_parent_id'}"></ms-table-header>
                         <ms-table-header :widget="{title:'操作',dataIndex:'region_id'}">
                             <button type="button" class="btn btn-link btn-xs" :click="handle('edit')"><i class="fa fa-edit"></i> 编辑</button>
-                            <button type="button" class="btn btn-link btn-xs" :click="handle('delete')"><i class="fa fa-trash-o"></i> 删除</button>
+                            <button type="button" class="btn btn-link btn-xs" :click="handle('del')"><i class="fa fa-trash-o"></i> 删除</button>
                         </ms-table-header>
                     </ms-table>
                 </div>

@@ -17,6 +17,7 @@ if (avalon.msie === 8) {
         obj[property] = meta.value;
     }
 }
+import 'es5-shim/es5-sham';
 
 // root vm
 const root = avalon.define({

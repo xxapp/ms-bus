@@ -96,7 +96,7 @@ Form.prototype.validateFields = function (fields = this.fields) {
     const validator = new Schema(ruleMap);
     return new Promise((resolve, reject) => {
         validator.validate(flatRecord, (errors, fields) => {
-            const errorFields = Object.keys(fields);
+            const errorFields = Object.keys(fields || {});
             let isAllValid = true;
             Object.keys(this.fields).map(name => {
                 if (~errorFields.indexOf(name)) {
