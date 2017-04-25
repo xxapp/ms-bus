@@ -19,6 +19,7 @@ avalon.component(name, {
 
 avalon.define({
     $id: 'dashboard_from',
+    title: 'Title',
     $form: createForm({
         onFieldsChange(fields) {
             console.log(this.record);

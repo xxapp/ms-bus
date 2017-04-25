@@ -170,9 +170,11 @@ avalon.component(name, {
         },
         actions(type, text, record, index) {
             if (type === 'add') {
+                form.title = '新增';
                 form.record = demoStore.initialData();
                 store.dispatch({ type: 'region/readyForAdd' });
             } else if (type === 'edit') {
+                form.title = '修改';
                 form.record = record;
                 store.dispatch({ type: 'region/readyForEdit' });
             } else if (type === 'delete') {
@@ -221,6 +223,7 @@ avalon.component(name, {
 });
 const form = avalon.define({
     $id: 'demo_redux_form',
+    title: '',
     $form: createForm({
         record: demoStore.initialData(),
         onFieldsChange(fields, record) {

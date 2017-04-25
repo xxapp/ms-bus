@@ -13,7 +13,6 @@ avalon.component(name, {
     template: __inline('./gf-demo.html'),
     defaults: {
         show: false,
-        isEdit: false,
         list: [],
         $searchForm: createForm({ autoAsyncChange: false }),
         pagination: {
@@ -39,11 +38,13 @@ avalon.component(name, {
         },
         actions(type, text, record, index) {
             if (type === 'add') {
-                this.isEdit = false;
+                form.isEdit = false;
+                form.title = '新增';
                 form.record = demoStore.initialData();
                 this.show = true;
             } else if (type === 'edit') {
-                this.isEdit = true;
+                form.isEdit = true;
+                form.title = '修改';
                 form.record = record;
                 this.show = true;
             } else if (type === 'delete') {
@@ -57,7 +58,7 @@ avalon.component(name, {
         handleOk() {
             form.$form.validateFields().then(isAllValid => {
                 if (isAllValid) {
-                    if (this.isEdit) {
+                    if (form.isEdit) {
                         demoStore.update(form.$form.record).then(result => {
                             this.fetch();
                         });
@@ -81,6 +82,8 @@ avalon.component(name, {
 });
 var form = avalon.define({
     $id: 'demo_form',
+    title: '',
+    isEdit: false,
     $form: createForm({
         record: demoStore.initialData(),
         onFieldsChange(fields, record) {

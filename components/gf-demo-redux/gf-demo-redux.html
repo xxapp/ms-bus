@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-xs-12 col-md-12">
-            <ms-dialog :widget="{show: @show, onOk: @handleOk, title: @isEdit ? '修改' : '新增', onCancel: handleCancel}">
+            <ms-dialog :widget="{$innerVm: 'demo_redux_form', show: @show, onOk: @handleOk, title: @isEdit ? '修改' : '新增', onCancel: handleCancel}">
                 <div slot="body" ms-skip>
                     <div :important="demo_redux_form">
                         <xmp is="ms-form" :widget="{$form: @$form}">
