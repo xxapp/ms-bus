@@ -81,9 +81,11 @@ export function error({ message, title, ...options }: notificationArgs): void {
     toastr.error(message, title, options);
 }
 
-export function warn({ message, title, ...options }: notificationArgs): void {
+export function warning({ message, title, ...options }: notificationArgs): void {
     toastr.warn(message, title, options);
 }
+
+export const warn = warning;
 
 export function config(options: notificationArgs): void {
     toastr.options = options;
