@@ -5,9 +5,7 @@ import * as avalon from 'avalon2';
 
 import * as jQuery from 'jquery';
 global.$ = global.jQuery = jQuery;
-/**
- * @require ../../node_modules/bootstrap/dist/css/bootstrap.css
- */
+import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 import '../../vendor/avx-component/avx-component';
 import { createForm } from '../../components/ms-form/create-form';

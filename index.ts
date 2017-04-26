@@ -5,9 +5,7 @@ import 'es6-promise/dist/es6-promise.auto';
 
 import * as jQuery from 'jquery';
 global.$ = global.jQuery = jQuery;
-/**
- * @require ./node_modules/bootstrap/dist/css/bootstrap.css
- */
+import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 
 import * as avalon from 'avalon2';
