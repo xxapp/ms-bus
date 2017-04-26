@@ -3,7 +3,7 @@ import * as beyond from '../../vendor/beyond';
 import * as bootbox from 'bootbox';
 
 import ajax from '../../services/ajaxService';
-import * as notification from '../ms-notification/ms-notification';
+import message from '../ms-message';
 
 import '../../components/ms-table';
 import '../../components/ms-table-header';
@@ -43,11 +43,11 @@ avalon.component(name, {
                 limit: pagination.pageSize
             });
         },
-        action(type, text, record, index) {
+        actions(type, text, record, index) {
             if (type == 'delete') {
                 this.list.removeAll(el => el.id == record.id );
-                notification.success({
-                    message: '删除成功'
+                message.success({
+                    content: '删除成功'
                 });
             }
         },

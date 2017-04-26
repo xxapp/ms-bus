@@ -30,12 +30,12 @@
     "lightbox2": "^2.9.0",
     "mmRouter": "^0.9.6",
     "moment": "^2.17.1",
+    "noty": "^2.4.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "rx": "^4.1.0",
     "select2": "^4.0.3",
-    "select2-bootstrap-theme": "0.1.0-beta.9",
-    "toastr": "^2.1.2"
+    "select2-bootstrap-theme": "0.1.0-beta.9"
   },
   "devDependencies": {
     "fis3-hook-commonjs": "^0.1.25",

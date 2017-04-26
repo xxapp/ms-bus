@@ -27,7 +27,9 @@ $(document).ajaxComplete((event, xhr, settings) => {
                 });
             } else if (result.error) {
                 beyond.hideLoading();
-                notification.success(result.error.message);
+                notification.error({
+                    message: result.error.message
+                });
             }
         }
     } else if (xhr.status === undefined) {

@@ -5,7 +5,7 @@ import { createForm } from "../ms-form/create-form";
 import '/vendor/avx-component';
 
 import { demo as demoStore } from '../../services/storeService';
-import * as notification from '../ms-notification/ms-notification';
+import message from '../ms-message';
 
 export const name = 'gf-demo';
 
@@ -50,8 +50,8 @@ avalon.component(name, {
             } else if (type === 'delete') {
                 demoStore.remove(record.region_id).then(result => {
                     if (result.code === '0') {
-                        notification.success({
-                            message: '删除成功'
+                        message.success({
+                            content: '删除成功'
                         });
                     }
                 });

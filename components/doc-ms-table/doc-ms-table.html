@@ -7,7 +7,7 @@
                 </div>
                 <div class="widget-body">
                     <div class="form-title">本地分页</div>
-                    <ms-table :widget="{data:@list,action:@action,onSelect:@handleSelect,onSelectAll:@handleSelectAll,selectionChange:@handleSelectionChange}">
+                    <ms-table :widget="{data:@list,actions:@actions,onSelect:@handleSelect,onSelectAll:@handleSelectAll,selectionChange:@handleSelectionChange}">
                         <ms-table-header :widget="{dataIndex:'id',type:'selection'}"></ms-table-header>
                         <ms-table-header :widget="{title:'地址',dataIndex:'address'}"></ms-table-header>
                         <ms-table-header :widget="{title:'省份',dataIndex:'province'}"></ms-table-header>
