@@ -1,7 +1,7 @@
 import * as avalon from 'avalon2';
 
 import { createForm } from '../ms-form/create-form';
-import * as msg from '../../services/messageService';
+import * as notification from '../ms-notification/ms-notification';
 
 export default avalon.component('common-curd', {
     template: '&nbsp;',
@@ -49,7 +49,10 @@ export default avalon.component('common-curd', {
             del(text, record, index) {
                 this.$store.remove(record.region_id).then(result => {
                     if (result.code === '0') {
-                        msg.success('删除成功');
+                        notification.success({
+                            message: '删除成功',
+                            title: '那么'
+                        });
                     }
                 });
             },

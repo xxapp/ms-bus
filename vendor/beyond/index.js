@@ -1,6 +1,5 @@
 ﻿var $ = require('jquery');
 var avalon = require('avalon2');
-var toastr = require('/vendor/toastr');
 var bootbox = require('bootbox');
 bootbox.setDefaults('locale', 'zh_CN');
 
@@ -79,14 +78,6 @@ function scrollTo(n, t) {
     jQuery("html,body").animate({
         scrollTop: i + (t ? t : 0)
     }, "slow")
-}
-function Notify(n, t, i, r, u, f) {
-    toastr.options.positionClass = "toast-" + t;
-    toastr.options.extendedTimeOut = 0;
-    toastr.options.timeOut = i;
-    toastr.options.closeButton = f;
-    toastr.options.iconClass = u + " toast-" + r;
-    toastr.custom(n)
 }
 function InitiateSettings() {
     readCookie("navbar-fixed-top") != null && readCookie("navbar-fixed-top") == "true" && ($("#checkbox_fixednavbar").prop("checked", !0),
@@ -258,5 +249,3 @@ exports.showLoading = function () {
 exports.hideLoading = function () {
     $(".loading-container").addClass("loading-inactive");
 }
-
-exports.Notify = Notify;

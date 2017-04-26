@@ -2,7 +2,7 @@ import * as avalon from 'avalon2';
 import * as bootbox from 'bootbox';
 import * as beyond from '../vendor/beyond';
 
-import msg from  './messageService';
+import * as notification from '../components/ms-notification/ms-notification';
 
 interface ResponseData {
     code?: string,
@@ -27,14 +27,16 @@ $(document).ajaxComplete((event, xhr, settings) => {
                 });
             } else if (result.error) {
                 beyond.hideLoading();
-                msg.success(result.error.message);
+                notification.success(result.error.message);
             }
         }
     } else if (xhr.status === undefined) {
     	beyond.hideLoading();
     } else {
         beyond.hideLoading();
-        msg.error('请求错误，请联系管理员');
+        notification.error({
+            message: '请求错误，请联系管理员'
+        });
     }
 });
 

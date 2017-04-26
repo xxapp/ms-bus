@@ -3,7 +3,7 @@ import * as beyond from '../../vendor/beyond';
 import * as bootbox from 'bootbox';
 
 import ajax from '../../services/ajaxService';
-import * as msg from '../../services/messageService';
+import * as notification from '../ms-notification/ms-notification';
 
 import '../../components/ms-table';
 import '../../components/ms-table-header';
@@ -46,7 +46,9 @@ avalon.component(name, {
         action(type, text, record, index) {
             if (type == 'delete') {
                 this.list.removeAll(el => el.id == record.id );
-                msg.success('删除成功');
+                notification.success({
+                    message: '删除成功'
+                });
             }
         },
         handleSelect(record, selected, selectedRows) {

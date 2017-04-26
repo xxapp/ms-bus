@@ -1,7 +1,7 @@
 import * as avalon from 'avalon2';
 
 import ajax from '../../services/ajaxService';
-import * as msg from '../../services/messageService';
+import * as notification from '../ms-notification/ms-notification';
 
 import '../../components/ms-form';
 import { createForm } from '../../components/ms-form/create-form';

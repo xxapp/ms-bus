@@ -3,7 +3,7 @@ import * as beyond from '../../vendor/beyond';
 import * as bootbox from 'bootbox';
 
 import * as store from '../../services/storeService.js';
-import * as msg from '../../services/messageService.js';
+import * as notification from '../ms-notification/ms-notification';
 
 import { pageSize } from "../../services/configService";
 

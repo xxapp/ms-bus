@@ -24,6 +24,7 @@ fis.hook('node_modules', {
 // 默认情况下不添加hash
 ['/{pages,components,services,vendor}/**.{ts,js}', '/*.{ts,js}'].forEach(function (blob) {
     fis.match(blob, {
+        preprocessor: fis.plugin('js-require-css'),
         parser: fis.plugin('typescript', {
             jsx: 1,
             showNotices: false,

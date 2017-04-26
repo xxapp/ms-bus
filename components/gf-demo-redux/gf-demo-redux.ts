@@ -7,7 +7,7 @@ import { createForm } from "../ms-form/create-form";
 import '/vendor/avx-component';
 
 import { demo as demoStore } from '../../services/storeService';
-import * as msg from '../../services/messageService';
+import * as notification from '../ms-notification/ms-notification';
 
 export const name = 'gf-demo-redux';
 
@@ -52,7 +52,9 @@ function del(params) {
         const { page } = getState().region;
         demoStore.remove(params).then(result => {
             if (result.code === '0') {
-                msg.success('删除成功');
+                notification.success({
+                    message: '删除成功'
+                });
             }
             dispatch(fetch({ page }));
         });
