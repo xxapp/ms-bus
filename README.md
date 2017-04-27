@@ -1,7 +1,7 @@
 <h1 align="center">:oncoming_bus:ms-bus:oncoming_bus:</h1>
 
 <div align="center">
-  <strong>基于 AvalonJs 的组件库 beta</strong>
+  <strong>基于 <a href="https://github.com/RubyLouvre/avalon">AvalonJS 2</a> 的组件库 beta</strong>
 </div>
 
 ## For developer
