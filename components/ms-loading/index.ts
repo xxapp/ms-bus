@@ -1,1 +1,1 @@
-import './ms-loading-directive';
+export { Loading } from  './ms-loading-directive';

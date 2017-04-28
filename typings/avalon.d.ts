@@ -36,6 +36,10 @@ interface AvalonStatic {
      */
     directive(name: string, options): any;
     /**
+     * 指令集合
+     */
+    directives: any[];
+    /**
      * avalon动画
      */
     effect(name: string, opts?: any): any;
@@ -81,6 +85,10 @@ interface AvalonStatic {
      * 打印错误信息
      */
     error(message?: any, ...optionalParams: any[]): void;
+    /**
+     * 注册文档加载完成事件
+     */
+    ready(fn): void;
 }
 
 declare module 'avalon2' {

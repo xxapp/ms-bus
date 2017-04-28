@@ -1,6 +1,14 @@
 import * as avalon from 'avalon2';
 import './ms-loading.css';
 
+/**
+ * loading 指令
+ * 
+ * @example
+ * ``` html
+ * <table :loading="true">...</table>
+ * ```
+ */
 avalon.directive('loading', {
     init() {
         this.instance = null;
@@ -80,3 +88,47 @@ avalon.directive('loading', {
         this.instance !== null && dom.removeChild(this.instance);
     }
 });
+
+/**
+ * 全局 loading 方法
+ * 
+ * @example
+ * ``` js
+ * import { Loading } from './components/ms-loading';
+ * Loading.show();
+ * setTimeout(() => {
+ *   Loading.hide();
+ * }, 5000)
+ * ```
+ */
+const loadingDirective = avalon.directives['loading'];
+const globalLoadingContext: {
+    node: { dom: HTMLElement },
+    instance?: HTMLDivElement
+} = {
+    node: { dom: document.body }
+};
+
+export const Loading = {
+    show() {
+        if (globalLoadingContext.instance === undefined) {
+            loadingDirective.init.call(globalLoadingContext);
+            avalon.ready(() => {
+                loadingDirective.update.call(globalLoadingContext, {
+                    dom: globalLoadingContext.node.dom
+                }, true);
+            });
+        } else {
+            loadingDirective.update.call(globalLoadingContext, {
+                dom: globalLoadingContext.node.dom
+            }, true);
+        }
+    },
+    hide() {
+        if (globalLoadingContext.instance !== undefined) {
+            loadingDirective.update.call(globalLoadingContext, {
+                dom: globalLoadingContext.node.dom
+            }, false);
+        }
+    }
+};
