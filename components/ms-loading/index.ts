@@ -1,0 +1,1 @@
+import './ms-loading-directive';
