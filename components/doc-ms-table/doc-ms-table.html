@@ -19,7 +19,7 @@
                     </ms-table>
                     
                     <div class="form-title">远程数据分页</div>
-                    <ms-table :widget="{data:@remoteList,pagination:@pagination,onChange:@handleTableChange}">
+                    <ms-table :widget="{data:@remoteList,loading:@loading,pagination:@pagination,onChange:@handleTableChange}">
                         <ms-table-header :widget="{dataIndex:'region_id',type:'selection'}"></ms-table-header>
                         <ms-table-header :widget="{title:'地区',dataIndex:'region_name'}"></ms-table-header>
                         <ms-table-header :widget="{title:'PID',dataIndex:'region_parent_id'}"></ms-table-header>

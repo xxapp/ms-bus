@@ -17,10 +17,12 @@ avalon.component(name, {
             id: n, name: `老狼${n}`, address: '深山', province: '老林'
         })),
         remoteList: [],
+        loading: false,
         pagination: {
             pageSize: 6, total: 0
         },
         fetch(params = {}) {
+            this.loading = true;
             $.ajax({
                 url: '/api/demo',
                 method: 'get',
@@ -32,6 +34,7 @@ avalon.component(name, {
                 this.pagination.total = data.total;
                 data.rows[0].region_parent_id = Date.now();
                 this.remoteList = data.rows;
+                this.loading = false;
             });
         },
         handleTableChange(pagination) {

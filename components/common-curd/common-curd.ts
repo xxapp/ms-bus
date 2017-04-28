@@ -8,6 +8,7 @@ export default avalon.component('common-curd', {
     template: '&nbsp;',
     defaults: {
         show: false,
+        loading: false,
         list: [],
         $searchForm: createForm({ autoAsyncChange: false }),
         pagination: {
@@ -28,9 +29,14 @@ export default avalon.component('common-curd', {
                 start: this.pagination.pageSize * (this.pagination.current - 1),
                 limit: this.pagination.pageSize
             };
+            this.loading = true;
             this.$store.fetch({...this.$searchForm.record, ...page}).then(data => {
                 this.pagination.total = data.total;
                 this.list = data.list;
+                console.log('数据加载完成，即将关闭mask');
+                this.loading = false;
+            }, () => {
+                this.loading = false;
             });
         },
         handleTableChange(pagination) {
