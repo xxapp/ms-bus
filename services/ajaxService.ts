@@ -2,7 +2,7 @@ import * as avalon from 'avalon2';
 import * as bootbox from 'bootbox';
 import * as beyond from '../vendor/beyond';
 
-import * as notification from '../components/ms-notification/ms-notification';
+import notification from '../components/ms-notification';
 
 interface ResponseData {
     code?: string,

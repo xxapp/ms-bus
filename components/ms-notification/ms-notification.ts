@@ -19,45 +19,44 @@ let defaultOptions = {
     timeout: 3000
 };
 
-export function info({ message, title, timeout }: notificationArgs): void {
-    noty({
-        text: template(title, message, 'fa fa-info-circle'),
-        type: 'information',
-        timeout: timeout || defaultOptions.timeout
-    });
-}
-
-export function success({ message, title, timeout }: notificationArgs): void {
-    noty({
-        text: template(title, message, 'fa fa-check-circle'),
-        type: 'success',
-        timeout: timeout || defaultOptions.timeout
-    });
-}
-
-export function error({ message, title, timeout }: notificationArgs): void {
-    noty({
-        text: template(title, message, 'fa fa-times-circle'),
-        type: 'error',
-        timeout: timeout || defaultOptions.timeout
-    });
-}
-
-export function warning({ message, title, timeout }: notificationArgs): void {
-    noty({
-        text: template(title, message, 'fa fa-warning'),
-        type: 'warning',
-        timeout: timeout || defaultOptions.timeout
-    });
-}
-
-export const warn = warning;
-
-export function config(options: notificationArgs): void {
-    if (options.timeout !== undefined) {
-        defaultOptions.timeout = options.timeout;
+export default {
+    info({ message, title, timeout }: notificationArgs): void {
+        noty({
+            text: template(title, message, 'fa fa-info-circle'),
+            type: 'information',
+            timeout: timeout || defaultOptions.timeout
+        });
+    },
+    success({ message, title, timeout }: notificationArgs): void {
+        noty({
+            text: template(title, message, 'fa fa-check-circle'),
+            type: 'success',
+            timeout: timeout || defaultOptions.timeout
+        });
+    },
+    error({ message, title, timeout }: notificationArgs): void {
+        noty({
+            text: template(title, message, 'fa fa-times-circle'),
+            type: 'error',
+            timeout: timeout || defaultOptions.timeout
+        });
+    },
+    warning({ message, title, timeout }: notificationArgs): void {
+        noty({
+            text: template(title, message, 'fa fa-warning'),
+            type: 'warning',
+            timeout: timeout || defaultOptions.timeout
+        });
+    },
+    warn({ message, title, timeout }: notificationArgs): void {
+        this.warning({ message, title, timeout });
+    },
+    config(options: notificationArgs): void {
+        if (options.timeout !== undefined) {
+            defaultOptions.timeout = options.timeout;
+        }
     }
-}
+};
 
 function template(title: string, message: string, icon: string): string {
     title = title ? `<strong>${title}</strong><br>` : '';
