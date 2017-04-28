@@ -1,7 +1,5 @@
 ﻿var $ = require('jquery');
 var avalon = require('avalon2');
-var bootbox = require('bootbox');
-bootbox.setDefaults('locale', 'zh_CN');
 
 function getThemeColorFromCss(n) {
     var t = $("<span><\/span>").hide().appendTo("body"), i;
@@ -240,12 +238,4 @@ exports.initSidebar = function () {
     // }
     // ));
     InitiateSideMenu();
-}
-
-exports.showLoading = function () {
-    $(".loading-container").removeClass("loading-inactive");
-}
-
-exports.hideLoading = function () {
-    $(".loading-container").addClass("loading-inactive");
 }

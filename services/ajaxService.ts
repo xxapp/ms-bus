@@ -19,23 +19,19 @@ $(document).ajaxComplete((event, xhr, settings) => {
         if (settings.dataType === 'json' && (xhr as any).responseJSON !== void 0) {
             let result = (xhr as any).responseJSON;
             if (result.code === '20' || result.code === '21') {
-                beyond.hideLoading();
                 bootbox.confirm("Session已经失效，请重新登录", function (result) {
                      if (result) {
                          global.location.href = "/login.html";
                      }
                 });
             } else if (result.error) {
-                beyond.hideLoading();
                 notification.error({
                     message: result.error.message
                 });
             }
         }
     } else if (xhr.status === undefined) {
-    	beyond.hideLoading();
     } else {
-        beyond.hideLoading();
         notification.error({
             message: '请求错误，请联系管理员'
         });
