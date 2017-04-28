@@ -30,11 +30,20 @@ interface AvalonStatic {
     /**
      * 扫描元素，与ViewModel绑定
      */
-    scan(node: Element, vm?): any;
+    scan(node: Element|string, vm?, beforeReady?: () => void): any;
+    /**
+     * 定义指令
+     */
+    directive(name: string, options): any;
     /**
      * avalon动画
      */
     effect(name: string, opts?: any): any;
+    /**
+     * 判断一个元素是否包含另一个元素
+     */
+    contains(root: Element, el: Element): boolean
+    root: HTMLElement;
     /**
      * ViewModel 列表
      */
