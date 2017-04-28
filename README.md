@@ -1,4 +1,8 @@
-# msBus 基于 AvalonJs 的组件库 beta
+<h1 align="center">:oncoming_bus:ms-bus:oncoming_bus:</h1>
+
+<div align="center">
+  <strong>基于 <a href="https://github.com/RubyLouvre/avalon">AvalonJS 2</a> 的组件库 beta</strong>
+</div>
 
 ## For developer
 
@@ -10,9 +14,9 @@
   ```
 3. 克隆项目到本地，并安装依赖模块
   ``` bash
-  git clone https://github.com/xxapp/msBus.git
+  git clone https://github.com/xxapp/ms-bus.git
   
-  cd msBus
+  cd ms-bus
   
   npm install
   ```
