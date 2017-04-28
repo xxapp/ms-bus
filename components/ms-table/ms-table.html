@@ -5,7 +5,7 @@
 </style>
 <template>
     <div>
-        <table class="table">
+        <table class="table" :loading="!window.isNaN(@paginationConfig.total) && @loading">
             <thead>
                 <tr>
                     <th :if="@needSelection">

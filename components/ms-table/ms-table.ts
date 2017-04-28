@@ -6,6 +6,7 @@ import {
     parseSlotToVModel,
     getChildTemplateDescriptor
 } from '../../vendor/avx-component/avx-util';
+import '../ms-loading';
 
 const defaultPagination = function () {
     return {
@@ -22,6 +23,7 @@ avalon.component('ms-table', {
         data: [],
         key: 'id',
 
+        loading: false,
         needSelection: false,
         checked: [],
         selection: [],
