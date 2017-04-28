@@ -16,6 +16,6 @@
                 />
             <span class="text"></span>
         </label>
-        <label :attr="{'for':@helpId}" style="padding-left: 0;"><slot /></label>
+        <label :attr="{'for':@helpId}" style="padding-left: 0;" :css="{marginRight:@group?8:0}"><slot /></label>
     </div>
 </template>
