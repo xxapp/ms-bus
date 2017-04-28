@@ -13,6 +13,7 @@ import '../../components/ms-textarea/ms-textarea';
 // require('/components/ms-control-datetimepicker');
 import '../../components/ms-checkbox/ms-checkbox';
 import '../../components/ms-checkbox/ms-checkbox-group';
+import '../../components/ms-radio';
 
 // require('./directive-cprop');
 // require('./directive-cduplex');

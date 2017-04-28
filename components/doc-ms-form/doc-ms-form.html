@@ -28,6 +28,14 @@
                         </div>
                         <!--ms-for-end:-->
                         <button type="button" class="btn btn-primary" :click="@addEducation"><i class="fa fa-plus-circle"></i> 添加教育经历</button>
+                        <ms-form-item :widget="{label:'性别'}">
+                            <ms-radio-group
+                                :widget="{value:@record.gender,col:'gender',options:[
+                                            { label: '男', value: 'M' },
+                                            { label: '女', value: 'F' }
+                                        ],$rules:{required:true}}">
+                            </ms-radio-group>
+                        </ms-form-item>
                         <!--<ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
                             <option value="M">男</option>
                             <option value="F">女</option>

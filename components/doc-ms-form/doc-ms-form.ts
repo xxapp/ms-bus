@@ -8,6 +8,7 @@ import { createForm } from '../../components/ms-form/create-form';
 import '../../components/ms-input/ms-input';
 import '../../components/ms-textarea/ms-textarea';
 import '../../components/ms-checkbox/ms-checkbox-group';
+import '../ms-radio';
 
 export const name = 'doc-ms-form';
 
