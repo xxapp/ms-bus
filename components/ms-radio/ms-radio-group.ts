@@ -14,7 +14,7 @@ controlComponent.extend({
         toggleOption(e, option) {
             this.value = option.value;
             this.onChange({
-                target: { value: this.value },
+                target: { value: this.value.$model || this.value },
                 type: 'radio-group'
             });
         },

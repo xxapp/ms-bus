@@ -19,7 +19,7 @@ controlComponent.extend({
                 this.value.remove(option.value);
             }
             this.onChange({
-                target: { value: this.value.$model },
+                target: { value: this.value.$model || this.value },
                 type: 'checkbox-group'
             });
         },
