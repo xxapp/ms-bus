@@ -16,7 +16,7 @@ export function parseSlotToVModel(vmodel, vnodes?: any[]): void {
         vnodes = vmodel.$render.root ? vmodel.$render.root.children : [];
     }
     vnodes.forEach(vnode => {
-        if (!vnode || vnode.isVoidTag === undefined) return true;
+        if (!vnode || !vnode.nodeName || vnode.dom.nodeType !== 1) return true;
         let slotName = vnode.dom.getAttribute('slot');
         if (slotName) {
             delete vnode.props[':skip'];

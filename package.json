@@ -19,7 +19,7 @@
     "@types/rx": "^4.1.1",
     "addeventlistener-with-dispatch": "^1.0.2",
     "async-validator": "^1.6.8",
-    "avalon2": "^2.2.5",
+    "avalon2": "2.2.5",
     "bootbox": "^4.4.0",
     "bootstrap": "^3.2.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
