@@ -9,7 +9,7 @@ import '../../components/ms-input/ms-input';
 import '../../components/ms-textarea/ms-textarea';
 // require('/components/ms-control-select');
 // require('/components/ms-control-select2');
-// require('/components/ms-control-file');
+import '../../components/ms-upload/ms-upload';
 // require('/components/ms-control-datetimepicker');
 import '../../components/ms-checkbox/ms-checkbox';
 import '../../components/ms-checkbox/ms-checkbox-group';

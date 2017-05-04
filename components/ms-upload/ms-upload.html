@@ -1,0 +1,16 @@
+<style>
+    .control-file input {
+        position: absolute;
+        clip: rect(0 0 0 0);
+        outline: none;
+    }
+</style>
+<template>
+    <div class="control-file">
+        <label class="btn btn-default" :attr="{'for':@helpId}"><slot /></label>
+        <form><input type="file" :attr="{id:@helpId}"></form>
+        <ol>
+            <li :for="($index, file) in @fileList">{{file.name}}</li>
+        </ol>
+    </div>
+</template>
