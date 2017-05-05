@@ -1,6 +1,8 @@
 import * as avalon from 'avalon2';
 import controlComponent from '../ms-form/ms-control';
 import { emitToFormItem } from '../ms-form/utils';
+import './ms-upload.css';
+import './ms-upload-list';
 import Uploader from 'up-loader';
 
 /**
@@ -24,7 +26,23 @@ controlComponent.extend({
         trigger: '',
         value: [],
         fileList: [],
+        listType: 'text-list',
         $uploader: null,
+        handleRemove(file) {
+            // this.fileList.forEach((f, i) => {
+            //     if (f.uid === file.uid) {
+            //         this.fileList.removeAt(i);
+            //         return false;
+            //     }
+            // });
+            // this.fileList.push({
+            //     uid: -2,
+            //     name: 'doge.jpg',
+            //     url: 'http://www.baidu.com',
+            //     status: 'done'
+            // });
+            this.fileList.removeAll(f => f.uid === file.uid);
+        },
         onInit(event) {
             emitToFormItem(this);
             this.helpId = this.$id;
@@ -32,14 +50,15 @@ controlComponent.extend({
                 this.fileList.push({
                     uid: -(i + 1),
                     name: url.replace(/.*\/([^\/]+)\/?/, '$1'),
-                    url: url
+                    url: url,
+                    status: 'done'
                 });
             });
         },
         onReady(event) {
             this.$uploader = Uploader.init({
                 url: '/api/file/uploadFile',
-                fileInput: event.target.children[1],
+                fileInput: event.target.getElementsByTagName('input').file,
                 onSelect: (files) => {
                     console.log('selected: ', files);
                     files.map(file => {

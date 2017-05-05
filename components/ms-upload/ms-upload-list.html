@@ -1,0 +1,16 @@
+<template>
+    <div>
+        <div class="bus-upload-card" :if="@listType==='picture-card'" :for="($index, file) in @fileList">
+            {{file.name}}
+        </div>
+        <ul class="bus-upload-list" :if="@listType!=='picture-card'">
+            <li :for="($index, file) in @fileList"
+                :class="[@getTextClass(file)]">
+                <i class="fa fa-file-o text-muted"></i>
+                <span>{{file.name}}</span>
+                <i class="fa fa-times bus-upload-btn-close" :click="del(file)"></i>
+                <i class="fa fa-check-circle text-success" :visible="file.status === 'done'"></i>
+            </li>
+        </ul>
+    </div>
+</template>
