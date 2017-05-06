@@ -24,11 +24,16 @@ export default avalon.component('ms-control', {
         value: '',
         col: '',
         placeholder: '',
-        onChange(e) {
+        onChange: avalon.noop,
+        emitValue(e) {
             let v = e.target.value;
             this.$formItem.onFormChange({
                 name: this.col, value: v
             });
+        },
+        handleChange(e) {
+            this.emitValue(e);
+            this.onChange(e);
         }
     }
 });

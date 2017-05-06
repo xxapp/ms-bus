@@ -18,7 +18,7 @@ controlComponent.extend({
             } else {
                 this.value.remove(option.value);
             }
-            this.onChange({
+            this.handleChange({
                 target: { value: this.value.$model || this.value },
                 type: 'checkbox-group'
             });

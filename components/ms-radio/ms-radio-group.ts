@@ -13,7 +13,7 @@ controlComponent.extend({
         options: [],
         toggleOption(e, option) {
             this.value = option.value;
-            this.onChange({
+            this.handleChange({
                 target: { value: this.value.$model || this.value },
                 type: 'radio-group'
             });
