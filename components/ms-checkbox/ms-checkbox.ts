@@ -36,9 +36,7 @@ avalon.component('ms-checkbox', {
         checked: false,
         group: false,
         disabled: false,
-        onChange(e) {
-            this.onChange(e);
-        },
+        onChange: avalon.noop,
         flush: avalon.noop,
         helpId: '',
         onInit(event) {
