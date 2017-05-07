@@ -11,21 +11,30 @@
 }
 
 .bus-upload-list li {
-    margin: 5px 0;
+    margin: 8px 0;
     line-height: 24px;
+    position: relative;
+    width: 500px;
 }
 
 .bus-upload-list li i {
-    vertical-align: middle;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 24px;
 }
 
 .bus-upload-list li span {
-    margin: 0 4px;
+    display: inline-block;
 }
 
 .bus-upload-list .bus-upload-btn-close {
     cursor: pointer;
     display: none;
+}
+
+.bus-upload-list li.text-danger .bus-upload-btn-close {
+    display: inline-block;
 }
 
 .bus-upload-list li:hover i.bus-upload-btn-close {
@@ -34,4 +43,36 @@
 
 .bus-upload-list li:hover i.text-success {
     display: none;
+}
+
+.bus-upload-list-info {
+    display: inline-block;
+}
+
+.bus-upload-list-info i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 24px;
+}
+
+.bus-upload-list-info span {
+    position: absolute;
+    left:18px;
+    top: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 350px;
+}
+
+.bus-upload-list .bus-upload-list-progress {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+}
+
+.bus-upload-list li:hover .bus-upload-list-progress {
+    right: 10px;
 }

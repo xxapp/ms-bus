@@ -1,11 +1,8 @@
 <template>
     <div class="bus-upload-container">
-        <div :if="@listType==='picture-card'">
-            <ms-upload-list :widget="{listType: @listType, fileList: @fileList}"></ms-upload-list>
-        </div>
         <label class="btn btn-default" :attr="{'for':@helpId}"><slot /></label>
         <form><input type="file" name="file" :attr="{id:@helpId}"></form>
-        <div :if="@listType!=='picture-card'">
+        <div>
             <ms-upload-list :widget="{listType: @listType, fileList: @fileList, onRemove: @handleRemove}"></ms-upload-list>
         </div>
     </div>
