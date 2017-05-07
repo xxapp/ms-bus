@@ -1,11 +1,9 @@
 import * as avalon from 'avalon2';
 import * as beyond from '../../vendor/beyond';
-import { createForm } from "../ms-form/create-form";
 
-import '/vendor/avx-component';
+import { createForm, message } from "ane";
 
 import { demo as demoStore } from '../../services/storeService';
-import message from '../ms-message';
 
 export const name = 'gf-demo';
 

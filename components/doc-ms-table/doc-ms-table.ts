@@ -3,10 +3,7 @@ import * as beyond from '../../vendor/beyond';
 import * as bootbox from 'bootbox';
 
 import ajax from '../../services/ajaxService';
-import message from '../ms-message';
-
-import '../../components/ms-table';
-import '../../components/ms-table-header';
+import { message } from "ane";
 
 export const name = 'doc-ms-table';
 

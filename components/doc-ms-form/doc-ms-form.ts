@@ -1,15 +1,7 @@
 import * as avalon from 'avalon2';
 
 import ajax from '../../services/ajaxService';
-import notification from '../ms-notification';
-
-import '../../components/ms-form';
-import { createForm } from '../../components/ms-form/create-form';
-import '../../components/ms-input/ms-input';
-import '../../components/ms-textarea/ms-textarea';
-import '../../components/ms-checkbox/ms-checkbox-group';
-import '../ms-radio';
-import '../ms-upload/ms-upload';
+import { createForm, notification } from "ane";
 
 export const name = 'doc-ms-form';
 

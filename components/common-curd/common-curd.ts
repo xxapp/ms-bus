@@ -1,8 +1,6 @@
 import * as avalon from 'avalon2';
 
-import { createForm } from '../ms-form/create-form';
-import notification from '../ms-notification';
-import message from '../ms-message';
+import { createForm, notification, message } from "ane";
 
 export default avalon.component('common-curd', {
     template: '&nbsp;',

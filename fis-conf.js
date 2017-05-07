@@ -6,6 +6,11 @@ fis.hook('commonjs', {
         redux: './node_modules/redux/dist/redux.js',
         bootstrap: './node_modules/bootstrap/dist/js/bootstrap.js'
     },
+    packages: [{
+        name: 'ane',
+        location: './vendor/ane-component',
+        main: 'index'
+    }],
     extList: ['.js', '.ts']
 });
 
@@ -65,6 +70,10 @@ fis.match('/components/**/*.html', {
     postprocessor: fis.plugin('component-view', { }),
     release: false
 });
+fis.match('/vendor/ane-component/components/**/*.html', {
+    postprocessor: fis.plugin('component-view', { }),
+    release: false
+});
 fis.match('/{node_modules,components}/**/*.{css,eot,svg,ttf,woff,woff2,map}', {
     release: '/static/$0'
 });
@@ -81,6 +90,9 @@ fis.match('/services/configService.{ts,js}', {
 });
 fis.match('/vendor/**/*.{ts,js}', {
     isMod: true,
+    release: '/static/$0'
+});
+fis.match('/vendor/ane-component/components/**/*.css', {
     release: '/static/$0'
 });
 fis.match('/static/**', {

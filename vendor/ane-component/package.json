@@ -1,0 +1,15 @@
+{
+  "name": "ane",
+  "version": "0.0.1",
+  "description": "avalonjs components package",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "avalonjs",
+    "component"
+  ],
+  "author": "xxapp",
+  "license": "MIT"
+}

@@ -1,6 +1,6 @@
 import * as avalon from 'avalon2';
 
-import '../../vendor/avx-component';
+import 'ane';
 import curdComponent from '../common-curd/common-curd';
 import { demo as demoStore } from '../../services/storeService';
 

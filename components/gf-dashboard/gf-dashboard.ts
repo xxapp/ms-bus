@@ -1,7 +1,5 @@
 import * as avalon from 'avalon2';
-import '../../vendor/avx-component/avx-component';
-import { createForm } from '../../components/ms-form/create-form';
-import notification from '../ms-notification';
+import { createForm, notification } from 'ane';
 
 export const name = 'gf-dashboard';
 
