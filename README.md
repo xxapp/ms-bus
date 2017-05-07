@@ -19,6 +19,9 @@
   cd ms-bus
   
   npm install
+  
+  # 组件库 ane 正式发布到 npm 之前先用此命令代替
+  npm i ./vendor/ane-component --save
   ```
 4. 日常运行项目
   ``` bash
