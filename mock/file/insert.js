@@ -3,7 +3,7 @@ module.exports = function(req, res, next) {
     // res.setStatus('404');
     setTimeout(function () {
         res.json({
-            "url": "http://www.androidpolice.com/wp-content/uploads/2014/07/nexusae0_OnePlus_logo_thumb.png"
+            "url": "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
         });    
-    }, 2000);
+    }, 500);
 };

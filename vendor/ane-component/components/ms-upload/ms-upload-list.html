@@ -1,19 +1,14 @@
 <template>
-    <div>
-        <div class="bus-upload-card" :if="@listType==='picture-card'" :for="($index, file) in @fileList">
-            {{file.name}}
-        </div>
-        <ul class="bus-upload-list" :if="@listType!=='picture-card'">
-            <li :for="($index, file) in @fileList"
-                :class="[@getTextClass(file)]">
-                <div class="bus-upload-list-info">
-                    <i class="fa fa-file-o text-muted"></i>
-                    <span :attr="{title:file.name}">{{file.name}}</span>
-                </div>
-                <i class="fa fa-times bus-upload-btn-close" :click="del(file)"></i>
-                <span class="bus-upload-list-progress" :visible="file.status === 'uploading'">上传中 {{file.progress}}%</span>
-                <i class="fa fa-check-circle text-success" :class="[(file.status === 'done' ? '' : 'hide')]"></i>
-            </li>
-        </ul>
-    </div>
+    <ul class="bus-upload-list">
+        <li :for="($index, file) in @fileList"
+            :class="[@getTextClass(file)]">
+            <div class="bus-upload-list-info">
+                <i class="fa fa-file-o text-muted"></i>
+                <span :attr="{title:file.name}">{{file.name}}</span>
+            </div>
+            <i class="fa fa-times bus-upload-btn-close" :click="del(file)"></i>
+            <span class="bus-upload-list-progress" :visible="file.status === 'uploading'">上传中 {{file.progress}}%</span>
+            <i class="fa fa-check-circle text-success" :class="[(file.status === 'done' ? '' : 'hide')]"></i>
+        </li>
+    </ul>
 </template>

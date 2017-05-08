@@ -47,6 +47,6 @@ function initialData() {
         avatar: '',
         education: ['常乐男子职业技术学院'],
         bio: '',
-        attachment: ['http://www.androidpolice.com/wp-content/uploads/2014/07/nexusae0_OnePlus_logo_thumb.png']
+        attachment: ['https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png']
     };
 }

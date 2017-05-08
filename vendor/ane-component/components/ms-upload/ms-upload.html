@@ -1,9 +1,12 @@
 <template>
     <div class="bus-upload-container">
-        <label class="btn btn-default" :attr="{'for':@helpId}"><slot /></label>
+        <div class="bus-upload-card-wall" :if="@listType==='picture-card'">
+            <ms-upload-card :widget="{fileList: @fileList, onRemove: @handleRemove}"></ms-upload-card>
+        </div>
+        <label :class="[(@listType==='picture-card'?@cardClass:@btnClass)]" :attr="{'for':@helpId}"><slot /></label>
         <form><input type="file" name="file" :attr="{id:@helpId}"></form>
-        <div>
-            <ms-upload-list :widget="{listType: @listType, fileList: @fileList, onRemove: @handleRemove}"></ms-upload-list>
+        <div :if="@listType!=='picture-card'">
+            <ms-upload-list :widget="{fileList: @fileList, onRemove: @handleRemove}"></ms-upload-list>
         </div>
     </div>
 </template>

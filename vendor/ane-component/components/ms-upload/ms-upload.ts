@@ -3,6 +3,7 @@ import controlComponent from '../ms-form/ms-control';
 import { emitToFormItem } from '../ms-form/utils';
 import './ms-upload.css';
 import './ms-upload-list';
+import './ms-upload-card';
 import Uploader from 'up-loader';
 
 /**
@@ -28,6 +29,9 @@ controlComponent.extend({
         fileList: [],
         action: '',
         listType: 'text-list',
+        showList: true,
+        btnClass: 'btn btn-default',
+        cardClass: 'bus-upload-select-card bus-upload-card-item',
         $uploader: null,
         handleRemove(file) {
             this.fileList.removeAll(f => f.uid === file.uid);
@@ -61,7 +65,8 @@ controlComponent.extend({
                                 uid: file.index,
                                 name: file.name,
                                 status: 'uploading',
-                                progress: 0
+                                progress: 0,
+                                url: 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
                             });
                         } else {
                             updateFileObj(this.fileList, file.index, f => {
@@ -84,7 +89,10 @@ controlComponent.extend({
                     this.value.push(response.url);
                 },
                 onFailure: (file, err) => {
-                    updateFileObj(this.fileList, file.index, f => f.status = 'error')
+                    updateFileObj(this.fileList, file.index, f => {
+                        f.status = 'error';
+                        f.url = 'data:image/gif;base64,MA==';
+                    })
                     throw err;
                 },
                 onComplete: () => {
