@@ -19,7 +19,6 @@
     "@types/jquery": "^2.0.41",
     "@types/rx": "^4.1.1",
     "addeventlistener-with-dispatch": "^1.0.2",
-    "ane": "file:vendor\\ane-component",
     "async-validator": "^1.6.8",
     "avalon2": "2.2.5",
     "bootbox": "^4.4.0",
