@@ -52,7 +52,7 @@
                         </ms:control-select2>
                         <ms:control-datepicker label="出生日期" col="birthday" ms-cduplex="record.birthday"></ms:control-datepicker>-->
                         <ms-form-item :widget="{label:'头像'}">
-                            <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: '/api/file/uploadFile',listType:'picture-card',showUploadList:false,$rules:{required:true,message:'请选择头像'}}">
+                            <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: '/api/file/uploadFile',listType:'picture-card',showUploadList:false,beforeUpload:@handleBeforeUpload,$rules:{required:true,message:'请选择头像'}}">
                                 <i class="fa fa-plus"></i>选择图片
                             </ms-upload>
                         </ms-form-item>

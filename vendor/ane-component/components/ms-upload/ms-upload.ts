@@ -34,6 +34,9 @@ controlComponent.extend({
         cardClass: 'bus-upload-select-card bus-upload-card-item',
         blankImg: 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
         $uploader: null,
+        beforeUpload() {
+            return true;
+        },
         handleRemove(file) {
             let value;
             this.fileList.removeAll(f => f.uid === file.uid);
@@ -77,6 +80,10 @@ controlComponent.extend({
             this.$uploader = Uploader.init({
                 url: this.action,
                 fileInput: event.target.getElementsByTagName('input').file,
+                filter: (files) => {
+                    // 如果不支持图片信息的预览，则不进行过滤和限制
+                    return files.filter(file => !file.size || this.beforeUpload(file));
+                },
                 onSelect: (files, allFiles) => {
                     allFiles.map(file => {
                         if (!this.showUploadList) {
@@ -87,7 +94,9 @@ controlComponent.extend({
                                 progress: 0,
                                 url: this.blankImg
                             });
-                        } else if (this.fileList.every(f => f.uid !== file.index)) {
+                            return;
+                        }
+                        if (this.fileList.every(f => f.uid !== file.index)) {
                             this.fileList.push({
                                 uid: file.index,
                                 name: file.name,

@@ -1,7 +1,7 @@
 import * as avalon from 'avalon2';
 
 import ajax from '../../services/ajaxService';
-import { createForm, notification } from "ane";
+import { createForm, message } from "ane";
 
 export const name = 'doc-ms-form';
 
@@ -19,6 +19,21 @@ avalon.component(name, {
         },
         removeEducation(school) {
             this.record.education.remove(school);
+        },
+        handleBeforeUpload(file) {
+            if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+                message.error({
+                    content: '只能选择jpg或者png类型的图片！'
+                });
+                return false;
+            }
+            if (file.size / 1024 / 1024 > 1) {
+                message.error({
+                    content: '选择的图片必须小于1MB！'
+                });
+                return false;
+            }
+            return true;
         },
         submit() {
             // if (!avalon.vmodels['doc_form'].validate()) {
