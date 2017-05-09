@@ -19,6 +19,13 @@ controlComponent.extend({
     defaults: {
         onInit: function (event) {
             emitToFormItem(this);
+            this.$watch('value', v => {
+                this.handleChange({
+                    target: { value: v },
+                    denyValidate: true,
+                    type: 'changed'
+                });
+            });
         }
     }
 });

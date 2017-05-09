@@ -25,6 +25,13 @@ controlComponent.extend({
         },
         onInit(event) {
             emitToFormItem(this);
+            this.$watch('value', v => {
+                this.handleChange({
+                    target: { value: v.$model || v },
+                    denyValidate: true,
+                    type: 'checkbox-group'
+                });
+            });
         },
         onReady(event) {
             //vm.elHiddenInput = $(el).find('input:hidden');

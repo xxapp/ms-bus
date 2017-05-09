@@ -22,6 +22,13 @@ controlComponent.extend({
         onInit(event) {
             this.helpId = this.$id;
             emitToFormItem(this);
+            this.$watch('value', v => {
+                this.handleChange({
+                    target: { value: v.$model || v },
+                    denyValidate: true,
+                    type: 'radio-group'
+                });
+            });
         },
         onReady(event) {
         },

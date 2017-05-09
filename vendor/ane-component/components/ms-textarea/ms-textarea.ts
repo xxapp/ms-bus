@@ -21,6 +21,13 @@ controlComponent.extend({
         rows: '',
         onInit(event) {
             emitToFormItem(this);
+            this.$watch('value', v => {
+                this.handleChange({
+                    target: { value: v },
+                    denyValidate: true,
+                    type: 'changed'
+                });
+            });
         }
     }
 });
