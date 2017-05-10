@@ -8,6 +8,7 @@ export { createForm } from './components/ms-form/create-form';
 export { default as input } from './components/ms-input/ms-input';
 export { default as textarea } from './components/ms-textarea/ms-textarea';
 // require('/components/ms-control-select');
+export { default as select } from './components/ms-select';
 // require('/components/ms-control-select2');
 export { default as upload } from './components/ms-upload/ms-upload';
 // require('/components/ms-control-datetimepicker');

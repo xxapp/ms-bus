@@ -34,8 +34,8 @@ import './services/routerService';
 avalon.history.start({
     fireAnchor: false
 });
-if (avalon.history.hash.replace(global.location.href, '') == '/') {
-    avalon.router.navigate('/', 2);
+if (!/#!/.test(global.location.hash)) {
+    avalon.router.navigate('/', 1);
 }
 
 avalon.scan(document.body);
