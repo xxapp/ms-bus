@@ -27,7 +27,7 @@ export default avalon.component('ms-control', {
         onChange: avalon.noop,
         emitValue(e) {
             let v = e.target.value;
-            this.$formItem.onFormChange({
+            this.$formItem && this.$formItem.onFormChange({
                 name: this.col, value: v, denyValidate: e.denyValidate
             });
         },
