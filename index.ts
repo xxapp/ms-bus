@@ -35,7 +35,7 @@ avalon.history.start({
     fireAnchor: false
 });
 if (!/#!/.test(global.location.hash)) {
-    avalon.router.navigate('/', 1);
+    avalon.router.navigate('/', 2);
 }
 
 avalon.scan(document.body);
