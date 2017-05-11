@@ -15,7 +15,10 @@
         <ms-checkbox :widget="{checked:true,onChange:@handleChange}">同意</ms-checkbox>
         <ms-checkbox :widget="{checked:false,onChange:@handleChange}">不同意</ms-checkbox>
 
-        <ms-select></ms-select>
+        <ms-select :widget="{
+            options: [{ label: 'a1', value: 'a1' }, { label: 'a2', value: 'a2' }, { label: 'a3', value: 'a3' },
+                    { label: 'a4', value: 'a4' }, { label: 'a5', value: 'a5' }, { label: 'a6', value: 'a6' }]
+        }"></ms-select>
         <select class="form-control">
             <option value="F">女</option>
             <option value="M">男</option>

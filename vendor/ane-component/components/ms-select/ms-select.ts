@@ -7,14 +7,18 @@ avalon.component('ms-select', {
     defaults: {
         width: 0,
         value: '',
+        options: [],
+        displayValue: '',
         panelVmId: '',
         panelVisible: false,
         panelClass: 'bus-select-dropdown',
-        panelTemplate: `<ul class="bus-select-dropdown-menu">
-                            <li class="bus-select-dropdown-menu-item"
-                                :class="[(option === @selected ? 'bus-select-dropdown-menu-item-selected' : '')]"
-                                :for="option in @options" :click="handleOptionClick($event, option)">{{option}}</li>
-                        </ul>`,
+        panelTemplate: `<div style="overflow: auto">
+                            <ul class="bus-select-dropdown-menu">
+                                <li class="bus-select-dropdown-menu-item"
+                                    :class="[(option.value === @selected ? 'bus-select-dropdown-menu-item-selected' : '')]"
+                                    :for="option in @options" :click="handleOptionClick($event, option)">{{option.label}}</li>
+                            </ul>
+                        </div>`,
         handleClick(e) {
             this.width = e.target.offsetWidth;
             this.panelVisible = true;
@@ -34,10 +38,10 @@ avalon.component('ms-select', {
             avalon.define({
                 $id: this.panelVmId,
                 selected: '',
-                options: ['1', '2', '3', '4'],
+                options: this.options.$model,
                 handleOptionClick(e, option) {
-                    this.selected = option;
-                    self.value = option;
+                    this.selected = self.value = option.value;
+                    self.displayValue = option.label;
                     self.panelVisible = false;
                 }
             });
