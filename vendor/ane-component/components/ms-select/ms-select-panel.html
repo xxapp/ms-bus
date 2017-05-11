@@ -1,0 +1,12 @@
+<template>
+    <div style="overflow: auto">
+        <ul class="bus-select-dropdown-menu">
+            <li class="bus-select-dropdown-menu-item"
+                :class="[
+                    (option.value === @selected ? 'bus-select-dropdown-menu-item-selected' : ''),
+                    (option.disabled ? 'bus-select-dropdown-menu-item-disabled' : '')
+                ]"
+                :for="option in @options" :click="handleOptionClick($event, option)">{{option.label}}</li>
+        </ul>
+    </div>
+</template>

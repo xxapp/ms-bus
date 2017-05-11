@@ -23,19 +23,23 @@
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
+    user-select: none;
 }
 
 .bus-select-dropdown-menu-item:hover {
     background: #ecf6fd;
 }
 
-.bus-select-dropdown-menu-item-selected, .bus-select-dropdown-menu-item-selected:hover {
+.bus-select-dropdown-menu-item-selected,
+.bus-select-dropdown-menu-item-selected:hover {
     background-color: #eee;
     font-weight: 700;
     color: rgba(0,0,0,.65);
 }
 
-.bus-select-dropdown-menu-item-disabled {
+.bus-select-dropdown-menu-item-disabled,
+.bus-select-dropdown-menu-item-disabled:hover {
+    background-color: inherit;
     color: rgba(0,0,0,.25);
     cursor: not-allowed;
 }
