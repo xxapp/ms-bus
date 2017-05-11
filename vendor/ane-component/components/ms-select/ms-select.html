@@ -1,6 +1,18 @@
 <template>
     <div>
-        <input type="text" :click="handleClick" />
-        <ms-trigger :widget="{left:@left,top:@top,width:@width,height:@height,visible:@visible,withInBox:@withInBox,onHide:@onHide}"></ms-trigger>
+        <input class="form-control" type="text" :duplex="@value" :click="handleClick" />
+        <ms-trigger :widget="{
+            left: @left,
+            top: @top,
+            width: @width,
+            height: @height,
+            visible: @panelVisible,
+            innerVmId: @panelVmId,
+            innerClass: @panelClass,
+            innerTemplate: @panelTemplate,
+            withInBox: @withInBox,
+            getTarget: @getTarget,
+            onHide: @handlePanelHide}">
+        </ms-trigger>
     </div>
 </template>

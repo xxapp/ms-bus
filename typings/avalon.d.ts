@@ -18,6 +18,21 @@ interface avalonComponent {
     }): any
 }
 
+interface avalonInstance {
+    /**
+     * 用于获取或修改样式,自动修正厂商前缀及加px,与jQuery的css方法一样智能
+     */
+    css(name: string, value: string | number): number | avalonInstance,
+    /**
+     * 取得目标的高,不带单位,如果目标为window,则取得窗口的高,为document取得页面的高
+     */
+    height(value?: string | number) : number,
+    /**
+     * 取得元素的位置, 如 {top:111, left: 222}
+     */
+    offset(): { top: number, left: number }
+}
+
 interface AvalonStatic {
     /**
      * 定义ViewModel，需要指定$id
@@ -47,6 +62,14 @@ interface AvalonStatic {
      * 判断一个元素是否包含另一个元素
      */
     contains(root: Element, el: Element): boolean
+    /**
+     * 给元素绑定事件
+     */
+    bind(elem: Node, type: string, fn: (e) => boolean | void)
+    /**
+     * 移除一个元素的事件
+     */
+    unbind(elem: Node, type?: string, fn?: (e) => boolean | void)
     root: HTMLElement;
     /**
      * ViewModel 列表
@@ -89,6 +112,10 @@ interface AvalonStatic {
      * 注册文档加载完成事件
      */
     ready(fn): void;
+    /**
+     * 构造avalon实例
+     */
+    (el: Node): avalonInstance
 }
 
 declare module 'avalon2' {

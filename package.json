@@ -24,6 +24,7 @@
     "avalon2": "^2.2.7",
     "bootbox": "^4.4.0",
     "bootstrap": "^3.2.0",
+    "dom-align": "^1.5.3",
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "es5-shim": "^4.5.9",
     "es6-promise": "^4.1.0",

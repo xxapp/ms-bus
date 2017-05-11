@@ -1,29 +1,49 @@
 import * as avalon from 'avalon2';
 import '../ms-trigger';
+import './ms-select.css';
 
 avalon.component('ms-select', {
     template: __inline('./ms-select.html'),
     defaults: {
-        left: -9999,
-        top: -9999,
         width: 0,
-        height: 0,
-        visible: false,
+        value: '',
+        panelVmId: '',
+        panelVisible: false,
+        panelClass: 'bus-select-dropdown',
+        panelTemplate: `<ul class="bus-select-dropdown-menu">
+                            <li class="bus-select-dropdown-menu-item"
+                                :class="[(option === @selected ? 'bus-select-dropdown-menu-item-selected' : '')]"
+                                :for="option in @options" :click="handleOptionClick($event, option)">{{option}}</li>
+                        </ul>`,
         handleClick(e) {
-            const { left, top } = e.target.getBoundingClientRect();
-            this.left = left;
-            this.top = top;
             this.width = e.target.offsetWidth;
-            this.height = e.target.offsetHeight;
-            this.visible = true;
+            this.panelVisible = true;
         },
         withInBox(el) {
             return avalon.contains(this.$element, el);
         },
-        onHide() {
-            this.visible = false;
+        getTarget() {
+            return this.$element.children[0];
+        },
+        handlePanelHide() {
+            this.panelVisible = false;
         },
         onInit(event) {
+            var self = this;
+            this.panelVmId = this.$id + '_panel';
+            avalon.define({
+                $id: this.panelVmId,
+                selected: '',
+                options: ['1', '2', '3', '4'],
+                handleOptionClick(e, option) {
+                    this.selected = option;
+                    self.value = option;
+                    self.panelVisible = false;
+                }
+            });
+        },
+        onDispose() {
+            delete avalon.vmodels[this.panelVmId];
         }
     }
 });

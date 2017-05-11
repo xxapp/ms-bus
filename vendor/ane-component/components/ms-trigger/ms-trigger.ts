@@ -1,44 +1,57 @@
 import * as avalon from 'avalon2';
+import * as domAlign from 'dom-align';
 
 avalon.component('ms-trigger', {
     template: '&nbsp;',
     defaults: {
-        left: -9999,
-        top: -9999,
         width: 0,
-        height: 0,
         visible: false,
+        innerVmId: '',
+        innerClass: '',
+        innerTemplate: '',
         withInBox() { return true; },
+        getTarget: avalon.noop,
         onHide: avalon.noop,
+        hide(panel) {
+            panel.style.top = '-9999px';
+            panel.style.left = '-9999px';
+            this.onHide();
+        },
         onInit(event) {
             const DOC = document, body = DOC.body;
             const medium = DOC.createElement('div');
             const panel = DOC.createElement('div');
             medium.setAttribute('id', this.$id);
             medium.setAttribute('style', 'position: absolute; top: 0px; left: 0px; width: 100%;');
-            panel.setAttribute('style', `position: absolute; left: ${this.left}px; top: ${this.top}px; width: ${this.width}px; height: 400px; background: #f5f5f5;`);
+            panel.setAttribute('class', this.innerClass);
+            panel.setAttribute(':important', this.innerVmId);
+            panel.innerHTML = this.innerTemplate;
             medium.appendChild(panel);
             body.appendChild(medium);
 
+            avalon.scan(panel, avalon.vmodels[this.innerVmId]);
+
             avalon.bind(body, 'click', e => {
-                if (this.visible && !avalon.contains(event.target, e.target) &&  !this.withInBox(e.target)) {
-                    medium.style.display = 'none';
-                    this.onHide();
+                if (this.visible && panel !== e.target && !avalon.contains(panel, e.target) &&  !this.withInBox(e.target)) {
+                    this.hide(panel);
                 }
             });
             this.$watch('visible', v => {
                 if (v) {
-                    medium.style.display = 'block';
+                    panel.style.width = this.width + 'px';
+                    panel.scrollTop = 0;
+                    domAlign(panel, this.getTarget(), {
+                        points: ['tl', 'bl'],
+                        offset: [0, 1],
+                        //targetOffset: ['0%','100%']
+                        overflow: {
+                            adjustY: true
+                        }
+                    })
+                } else {
+                    this.hide(panel);
                 }
             });
-        },
-        onViewChange(event) {
-            const DOC = document;
-            const medium = DOC.getElementById(this.$id);
-            const panel = medium.children[0];
-            (panel as HTMLDivElement).style.left = this.left + 'px';
-            (panel as HTMLDivElement).style.top = this.top + this.height + 'px';
-            (panel as HTMLDivElement).style.width = this.width + 'px';
         },
         onDispose(event) {
             const DOC = document, body = DOC.body;
