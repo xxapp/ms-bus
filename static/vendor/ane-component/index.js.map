@@ -1,0 +1,1 @@
+{"version":3,"sources":["/vendor/ane-component/index.ts"],"names":[],"mappings":";;;;;;AAAA,qCAA+B","file":"index.js","sourcesContent":["export * from './ane-component'"]}

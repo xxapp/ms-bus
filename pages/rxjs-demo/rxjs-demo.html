@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RxJS Demo</title>
+    
+</head>
+<body :controller="demo">
+    <button :click="click">{{text}}</button>
+<script src="/static/static/mod.js"></script>
+<script>/*resourcemap*/
+require.resourceMap({
+  "res": {
+    "node_modules/es5-shim/es5-shim": {
+      "url": "/static/node_modules/es5-shim/es5-shim.js",
+      "type": "js"
+    },
+    "node_modules/es6-promise/dist/es6-promise.auto": {
+      "url": "/static/node_modules/es6-promise/dist/es6-promise.auto.js",
+      "type": "js"
+    },
+    "node_modules/addeventlistener-with-dispatch/src/addeventlistener-with-dispatch": {
+      "url": "/static/node_modules/addeventlistener-with-dispatch/src/addeventlistener-with-dispatch.js",
+      "type": "js"
+    },
+    "node_modules/avalon2/dist/avalon": {
+      "url": "/static/node_modules/avalon2/dist/avalon.js",
+      "type": "js"
+    },
+    "node_modules/rx/dist/rx.all": {
+      "url": "/static/node_modules/rx/dist/rx.all.js",
+      "type": "js"
+    },
+    "pages/rxjs-demo/rxjs-demo.ts": {
+      "url": "/static/pages/rxjs-demo/rxjs-demo.js",
+      "type": "js",
+      "deps": [
+        "node_modules/es5-shim/es5-shim",
+        "node_modules/es6-promise/dist/es6-promise.auto",
+        "node_modules/addeventlistener-with-dispatch/src/addeventlistener-with-dispatch",
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/rx/dist/rx.all"
+      ]
+    }
+  },
+  "pkg": {}
+});</script>
+<script src="/static/static/uilog.js"></script>
+<script>
+        require(['pages/rxjs-demo/rxjs-demo.ts']);
+    </script>
+</body>
+</html>

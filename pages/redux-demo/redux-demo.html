@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redux Demo</title>
+    <!--[if lt IE 9]>
+    <script src="/static/static/polyfill/es5-shim.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/static/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/static/vendor/ane-component/components/ms-checkbox/ms-checkbox.css" />
+    <link rel="stylesheet" type="text/css" href="/static/vendor/ane-component/components/ms-loading/ms-loading.css" />
+    <link rel="stylesheet" type="text/css" href="/static/vendor/ane-component/components/ms-table/ms-table.css" />
+    <link rel="stylesheet" type="text/css" href="/static/vendor/ane-component/components/ms-select/ms-select.css" />
+    <link rel="stylesheet" type="text/css" href="/static/vendor/ane-component/components/ms-upload/ms-upload.css" />
+    <link rel="stylesheet" type="text/css" href="/static/vendor/ane-component/components/ms-radio/ms-radio.css" />
+</head>
+<body>
+    <div ms-controller="demo">
+        <button type="button" :click="@show = !@show"></button>
+        <ms-dialog :widget="{show: @show}">
+            <span slot="header">title</span>
+            <span slot="body">Hello</span>
+        </ms-dialog>
+        <!--<ms-form :widget="{$form: @$form}">
+            <ms-form-item :widget="{label: '标题'}">
+                <ms-input :widget="{value: @title, col: 'title'}"></ms-input>
+            </ms-form-item>
+        </ms-form>-->
+        <p>
+        Clicked: <span >{{value}}</span> times
+        <button ms-click="increment">+</button>
+        <button ms-click="decrement">-</button>
+        <button ms-click="incrementIfOdd">Increment if odd</button>
+        <button ms-click="incrementAsync">Increment async</button>
+        </p>
+    </div>
+<script src="/static/static/mod.js"></script>
+<script>/*resourcemap*/
+require.resourceMap({
+  "res": {
+    "node_modules/redux/dist/redux": {
+      "url": "/static/node_modules/redux/dist/redux.js",
+      "type": "js"
+    },
+    "node_modules/avalon2/dist/avalon": {
+      "url": "/static/node_modules/avalon2/dist/avalon.js",
+      "type": "js"
+    },
+    "node_modules/jquery/dist/jquery": {
+      "url": "/static/node_modules/jquery/dist/jquery.js",
+      "type": "js"
+    },
+    "node_modules/bootstrap/dist/js/bootstrap": {
+      "url": "/static/node_modules/bootstrap/dist/js/bootstrap.js",
+      "type": "js"
+    },
+    "vendor/ane-component/ane-util.ts": {
+      "url": "/static/vendor/ane-component/ane-util.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "vendor/ane-component/components/ms-checkbox/ms-checkbox.ts": {
+      "url": "/static/vendor/ane-component/components/ms-checkbox/ms-checkbox.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "vendor/ane-component/ane-util.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-pagination/ms-pagination.ts": {
+      "url": "/static/vendor/ane-component/components/ms-pagination/ms-pagination.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "vendor/ane-component/components/ms-loading/ms-loading-directive.ts": {
+      "url": "/static/vendor/ane-component/components/ms-loading/ms-loading-directive.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "vendor/ane-component/components/ms-loading/index.ts": {
+      "url": "/static/vendor/ane-component/components/ms-loading/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-loading/ms-loading-directive.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-table/ms-table.ts": {
+      "url": "/static/vendor/ane-component/components/ms-table/ms-table.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "vendor/ane-component/components/ms-checkbox/ms-checkbox.ts",
+        "vendor/ane-component/components/ms-pagination/ms-pagination.ts",
+        "vendor/ane-component/ane-util.ts",
+        "vendor/ane-component/components/ms-loading/index.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-table-header/ms-table-header.ts": {
+      "url": "/static/vendor/ane-component/components/ms-table-header/ms-table-header.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "node_modules/bootbox/bootbox": {
+      "url": "/static/node_modules/bootbox/bootbox.js",
+      "type": "js",
+      "deps": [
+        "node_modules/jquery/dist/jquery"
+      ]
+    },
+    "vendor/ane-component/components/ms-dialog/ms-dialog.ts": {
+      "url": "/static/vendor/ane-component/components/ms-dialog/ms-dialog.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/bootbox/bootbox",
+        "vendor/ane-component/ane-util.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-form/ms-form.ts": {
+      "url": "/static/vendor/ane-component/components/ms-form/ms-form.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "vendor/ane-component/components/ms-form/ms-form-item.ts": {
+      "url": "/static/vendor/ane-component/components/ms-form/ms-form-item.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "vendor/ane-component/ane-util.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-form/index.ts": {
+      "url": "/static/vendor/ane-component/components/ms-form/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-form/ms-form.ts",
+        "vendor/ane-component/components/ms-form/ms-form-item.ts"
+      ]
+    },
+    "node_modules/async-validator/lib/util": {
+      "url": "/static/node_modules/async-validator/lib/util.js",
+      "type": "js"
+    },
+    "node_modules/async-validator/lib/rule/required": {
+      "url": "/static/node_modules/async-validator/lib/rule/required.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/rule/whitespace": {
+      "url": "/static/node_modules/async-validator/lib/rule/whitespace.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/rule/type": {
+      "url": "/static/node_modules/async-validator/lib/rule/type.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/util",
+        "node_modules/async-validator/lib/rule/required"
+      ]
+    },
+    "node_modules/async-validator/lib/rule/range": {
+      "url": "/static/node_modules/async-validator/lib/rule/range.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/rule/enum": {
+      "url": "/static/node_modules/async-validator/lib/rule/enum.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/rule/pattern": {
+      "url": "/static/node_modules/async-validator/lib/rule/pattern.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/rule/index": {
+      "url": "/static/node_modules/async-validator/lib/rule/index.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/required",
+        "node_modules/async-validator/lib/rule/whitespace",
+        "node_modules/async-validator/lib/rule/type",
+        "node_modules/async-validator/lib/rule/range",
+        "node_modules/async-validator/lib/rule/enum",
+        "node_modules/async-validator/lib/rule/pattern"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/string": {
+      "url": "/static/node_modules/async-validator/lib/validator/string.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/method": {
+      "url": "/static/node_modules/async-validator/lib/validator/method.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/number": {
+      "url": "/static/node_modules/async-validator/lib/validator/number.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/boolean": {
+      "url": "/static/node_modules/async-validator/lib/validator/boolean.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/util",
+        "node_modules/async-validator/lib/rule/index"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/regexp": {
+      "url": "/static/node_modules/async-validator/lib/validator/regexp.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/integer": {
+      "url": "/static/node_modules/async-validator/lib/validator/integer.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/float": {
+      "url": "/static/node_modules/async-validator/lib/validator/float.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/array": {
+      "url": "/static/node_modules/async-validator/lib/validator/array.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/object": {
+      "url": "/static/node_modules/async-validator/lib/validator/object.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/enum": {
+      "url": "/static/node_modules/async-validator/lib/validator/enum.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/pattern": {
+      "url": "/static/node_modules/async-validator/lib/validator/pattern.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/type": {
+      "url": "/static/node_modules/async-validator/lib/validator/type.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/date": {
+      "url": "/static/node_modules/async-validator/lib/validator/date.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index",
+        "node_modules/async-validator/lib/util"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/required": {
+      "url": "/static/node_modules/async-validator/lib/validator/required.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/rule/index"
+      ]
+    },
+    "node_modules/async-validator/lib/validator/index": {
+      "url": "/static/node_modules/async-validator/lib/validator/index.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/validator/string",
+        "node_modules/async-validator/lib/validator/method",
+        "node_modules/async-validator/lib/validator/number",
+        "node_modules/async-validator/lib/validator/boolean",
+        "node_modules/async-validator/lib/validator/regexp",
+        "node_modules/async-validator/lib/validator/integer",
+        "node_modules/async-validator/lib/validator/float",
+        "node_modules/async-validator/lib/validator/array",
+        "node_modules/async-validator/lib/validator/object",
+        "node_modules/async-validator/lib/validator/enum",
+        "node_modules/async-validator/lib/validator/pattern",
+        "node_modules/async-validator/lib/validator/type",
+        "node_modules/async-validator/lib/validator/date",
+        "node_modules/async-validator/lib/validator/required"
+      ]
+    },
+    "node_modules/async-validator/lib/messages": {
+      "url": "/static/node_modules/async-validator/lib/messages.js",
+      "type": "js"
+    },
+    "node_modules/async-validator/lib/index": {
+      "url": "/static/node_modules/async-validator/lib/index.js",
+      "type": "js",
+      "deps": [
+        "node_modules/async-validator/lib/util",
+        "node_modules/async-validator/lib/validator/index",
+        "node_modules/async-validator/lib/messages",
+        "node_modules/async-validator/lib/rule/index"
+      ]
+    },
+    "vendor/ane-component/components/ms-form/create-form.ts": {
+      "url": "/static/vendor/ane-component/components/ms-form/create-form.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/async-validator/lib/index"
+      ]
+    },
+    "vendor/ane-component/components/ms-form/ms-control.ts": {
+      "url": "/static/vendor/ane-component/components/ms-form/ms-control.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "vendor/ane-component/components/ms-form/utils.ts": {
+      "url": "/static/vendor/ane-component/components/ms-form/utils.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/ane-util.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-input/ms-input.ts": {
+      "url": "/static/vendor/ane-component/components/ms-input/ms-input.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-form/ms-control.ts",
+        "vendor/ane-component/components/ms-form/utils.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-textarea/ms-textarea.ts": {
+      "url": "/static/vendor/ane-component/components/ms-textarea/ms-textarea.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-form/ms-control.ts",
+        "vendor/ane-component/components/ms-form/utils.ts"
+      ]
+    },
+    "node_modules/dom-align/lib/propertyUtils": {
+      "url": "/static/node_modules/dom-align/lib/propertyUtils.js",
+      "type": "js"
+    },
+    "node_modules/dom-align/lib/utils": {
+      "url": "/static/node_modules/dom-align/lib/utils.js",
+      "type": "js",
+      "deps": [
+        "node_modules/dom-align/lib/propertyUtils"
+      ]
+    },
+    "node_modules/dom-align/lib/getOffsetParent": {
+      "url": "/static/node_modules/dom-align/lib/getOffsetParent.js",
+      "type": "js",
+      "deps": [
+        "node_modules/dom-align/lib/utils"
+      ]
+    },
+    "node_modules/dom-align/lib/getVisibleRectForElement": {
+      "url": "/static/node_modules/dom-align/lib/getVisibleRectForElement.js",
+      "type": "js",
+      "deps": [
+        "node_modules/dom-align/lib/utils",
+        "node_modules/dom-align/lib/getOffsetParent"
+      ]
+    },
+    "node_modules/dom-align/lib/adjustForViewport": {
+      "url": "/static/node_modules/dom-align/lib/adjustForViewport.js",
+      "type": "js",
+      "deps": [
+        "node_modules/dom-align/lib/utils"
+      ]
+    },
+    "node_modules/dom-align/lib/getRegion": {
+      "url": "/static/node_modules/dom-align/lib/getRegion.js",
+      "type": "js",
+      "deps": [
+        "node_modules/dom-align/lib/utils"
+      ]
+    },
+    "node_modules/dom-align/lib/getAlignOffset": {
+      "url": "/static/node_modules/dom-align/lib/getAlignOffset.js",
+      "type": "js"
+    },
+    "node_modules/dom-align/lib/getElFuturePos": {
+      "url": "/static/node_modules/dom-align/lib/getElFuturePos.js",
+      "type": "js",
+      "deps": [
+        "node_modules/dom-align/lib/getAlignOffset"
+      ]
+    },
+    "node_modules/dom-align/lib/index": {
+      "url": "/static/node_modules/dom-align/lib/index.js",
+      "type": "js",
+      "deps": [
+        "node_modules/dom-align/lib/utils",
+        "node_modules/dom-align/lib/getOffsetParent",
+        "node_modules/dom-align/lib/getVisibleRectForElement",
+        "node_modules/dom-align/lib/adjustForViewport",
+        "node_modules/dom-align/lib/getRegion",
+        "node_modules/dom-align/lib/getElFuturePos"
+      ]
+    },
+    "vendor/ane-component/components/ms-trigger/ms-trigger.ts": {
+      "url": "/static/vendor/ane-component/components/ms-trigger/ms-trigger.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/dom-align/lib/index"
+      ]
+    },
+    "vendor/ane-component/components/ms-trigger/index.ts": {
+      "url": "/static/vendor/ane-component/components/ms-trigger/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-trigger/ms-trigger.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-select/ms-select.ts": {
+      "url": "/static/vendor/ane-component/components/ms-select/ms-select.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "vendor/ane-component/components/ms-form/ms-control.ts",
+        "vendor/ane-component/components/ms-trigger/index.ts",
+        "vendor/ane-component/ane-util.ts",
+        "vendor/ane-component/components/ms-form/utils.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-select/ms-select-option.ts": {
+      "url": "/static/vendor/ane-component/components/ms-select/ms-select-option.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "vendor/ane-component/components/ms-select/index.ts": {
+      "url": "/static/vendor/ane-component/components/ms-select/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-select/ms-select.ts",
+        "vendor/ane-component/components/ms-select/ms-select-option.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-upload/ms-upload-list.ts": {
+      "url": "/static/vendor/ane-component/components/ms-upload/ms-upload-list.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "vendor/ane-component/components/ms-upload/ms-upload-card.ts": {
+      "url": "/static/vendor/ane-component/components/ms-upload/ms-upload-card.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ]
+    },
+    "node_modules/up-loader/dist/up-loader": {
+      "url": "/static/node_modules/up-loader/dist/up-loader.js",
+      "type": "js"
+    },
+    "vendor/ane-component/components/ms-upload/ms-upload.ts": {
+      "url": "/static/vendor/ane-component/components/ms-upload/ms-upload.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-form/ms-control.ts",
+        "vendor/ane-component/components/ms-form/utils.ts",
+        "vendor/ane-component/components/ms-upload/ms-upload-list.ts",
+        "vendor/ane-component/components/ms-upload/ms-upload-card.ts",
+        "node_modules/up-loader/dist/up-loader"
+      ]
+    },
+    "vendor/ane-component/components/ms-checkbox/ms-checkbox-group.ts": {
+      "url": "/static/vendor/ane-component/components/ms-checkbox/ms-checkbox-group.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-form/ms-control.ts",
+        "vendor/ane-component/components/ms-form/utils.ts",
+        "vendor/ane-component/components/ms-checkbox/ms-checkbox.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-radio/ms-radio.ts": {
+      "url": "/static/vendor/ane-component/components/ms-radio/ms-radio.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "vendor/ane-component/ane-util.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-radio/ms-radio-group.ts": {
+      "url": "/static/vendor/ane-component/components/ms-radio/ms-radio-group.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-form/ms-control.ts",
+        "vendor/ane-component/components/ms-form/utils.ts",
+        "vendor/ane-component/components/ms-radio/ms-radio.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-radio/index.ts": {
+      "url": "/static/vendor/ane-component/components/ms-radio/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-radio/ms-radio.ts",
+        "vendor/ane-component/components/ms-radio/ms-radio-group.ts"
+      ]
+    },
+    "node_modules/noty/js/noty/packaged/jquery.noty.packaged": {
+      "url": "/static/node_modules/noty/js/noty/packaged/jquery.noty.packaged.js",
+      "type": "js",
+      "deps": [
+        "node_modules/jquery/dist/jquery"
+      ]
+    },
+    "vendor/ane-component/components/ms-notification/ms-notification.ts": {
+      "url": "/static/vendor/ane-component/components/ms-notification/ms-notification.js",
+      "type": "js",
+      "deps": [
+        "node_modules/noty/js/noty/packaged/jquery.noty.packaged"
+      ]
+    },
+    "vendor/ane-component/components/ms-notification/index.ts": {
+      "url": "/static/vendor/ane-component/components/ms-notification/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-notification/ms-notification.ts"
+      ]
+    },
+    "vendor/ane-component/components/ms-message/ms-message.ts": {
+      "url": "/static/vendor/ane-component/components/ms-message/ms-message.js",
+      "type": "js",
+      "deps": [
+        "node_modules/noty/js/noty/packaged/jquery.noty.packaged"
+      ]
+    },
+    "vendor/ane-component/components/ms-message/index.ts": {
+      "url": "/static/vendor/ane-component/components/ms-message/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-message/ms-message.ts"
+      ]
+    },
+    "vendor/ane-component/ane-component.ts": {
+      "url": "/static/vendor/ane-component/ane-component.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/components/ms-table/ms-table.ts",
+        "vendor/ane-component/components/ms-table-header/ms-table-header.ts",
+        "vendor/ane-component/components/ms-pagination/ms-pagination.ts",
+        "vendor/ane-component/components/ms-dialog/ms-dialog.ts",
+        "vendor/ane-component/components/ms-form/index.ts",
+        "vendor/ane-component/components/ms-form/create-form.ts",
+        "vendor/ane-component/components/ms-input/ms-input.ts",
+        "vendor/ane-component/components/ms-textarea/ms-textarea.ts",
+        "vendor/ane-component/components/ms-select/index.ts",
+        "vendor/ane-component/components/ms-upload/ms-upload.ts",
+        "vendor/ane-component/components/ms-checkbox/ms-checkbox.ts",
+        "vendor/ane-component/components/ms-checkbox/ms-checkbox-group.ts",
+        "vendor/ane-component/components/ms-radio/index.ts",
+        "vendor/ane-component/components/ms-notification/index.ts",
+        "vendor/ane-component/components/ms-message/index.ts"
+      ]
+    },
+    "vendor/ane-component/index.ts": {
+      "url": "/static/vendor/ane-component/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane-component/ane-component.ts"
+      ]
+    },
+    "pages/redux-demo/redux-demo.ts": {
+      "url": "/static/pages/redux-demo/redux-demo.js",
+      "type": "js",
+      "deps": [
+        "node_modules/redux/dist/redux",
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/jquery/dist/jquery",
+        "node_modules/bootstrap/dist/js/bootstrap",
+        "vendor/ane-component/index.ts"
+      ]
+    }
+  },
+  "pkg": {}
+});
+
+        require(['pages/redux-demo/redux-demo.ts']);
+    </script>
+</body>
+</html>

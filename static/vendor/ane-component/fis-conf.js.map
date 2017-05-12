@@ -1,0 +1,1 @@
+{"version":3,"sources":["/vendor/ane-component/fis-conf.js"],"names":[],"mappings":";;;AAAA,GAAG,CAAC,KAAK,CAAC,IAAI,EAAE;IACZ,OAAO,EAAE,KAAK;CACjB,CAAC,CAAC","file":"fis-conf.js","sourcesContent":["fis.match('**', {\n    release: '/$0'\n});"]}
