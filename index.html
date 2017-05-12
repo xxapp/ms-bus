@@ -739,12 +739,17 @@ require.resourceMap({
         "node_modules/avalon2/dist/avalon"
       ]
     },
+    "services/configService.ts": {
+      "url": "/ms-bus/static/services/configService.js",
+      "type": "js"
+    },
     "services/ajaxService.ts": {
       "url": "/ms-bus/static/services/ajaxService.js",
       "type": "js",
       "deps": [
         "node_modules/bootbox/bootbox",
-        "vendor/ane-component/index.ts"
+        "vendor/ane-component/index.ts",
+        "services/configService.ts"
       ]
     },
     "vendor/jquery/ajaxfileupload": {

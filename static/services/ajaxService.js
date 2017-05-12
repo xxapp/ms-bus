@@ -12,6 +12,7 @@ define('services/ajaxService.ts', function(require, exports, module) {
   };
   var bootbox = require("node_modules/bootbox/bootbox");
   var ane_1 = require("vendor/ane-component/index.ts");
+  var configService_1 = require("services/configService.ts");
   // 拦截ajax请求，检测是否超时，以重新登录
   $(document).ajaxComplete(function (event, xhr, settings) {
       if (xhr.status === 200) {
@@ -41,12 +42,11 @@ define('services/ajaxService.ts', function(require, exports, module) {
   });
   function default_1(options) {
       var defaultOptions = {
-          url: 'http://127.0.0.1:8081',
-          data: {},
           dataType: 'json',
           cache: false
       };
       options.data = processRequest(options.data);
+      options.url = configService_1.serviceUrl + options.url;
       return $.ajax(__assign({}, defaultOptions, options)).then(processResponse);
   }
   exports.__esModule = true;
