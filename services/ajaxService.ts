@@ -3,6 +3,7 @@ import * as bootbox from 'bootbox';
 import * as beyond from '../vendor/beyond';
 
 import { notification } from 'ane';
+import { serviceUrl } from './configService';
 
 interface ResponseData {
     code?: string,
@@ -40,13 +41,11 @@ $(document).ajaxComplete((event, xhr, settings) => {
 
 export default function (options) {
     const defaultOptions = {
-        url: 'http://127.0.0.1:8081',
-        data: {
-        },
         dataType: 'json',
         cache: false
     };
     options.data = processRequest(options.data);
+    options.url = serviceUrl + options.url;
     return $.ajax({ ...defaultOptions, ...options }).then(processResponse);
 };
 

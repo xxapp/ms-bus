@@ -84,8 +84,8 @@ fis.match('/services/*.{ts,js}', {
 fis.media('dev').match('/services/configService.{ts,js}', {
     postprocessor: function (content, file, settings) {
         return content
-            .replace('__API_URL__', 'localhost:8080/api')
-            .replace('__SPRING_API_URL__', 'localhost:8080/api');
+            .replace('__DOMAIN__', '')
+            .replace('__SERVICE_URL__', '');
     }
 });
 fis.match('/vendor/**/*.{ts,js}', {
@@ -120,7 +120,7 @@ fis.media('gh-pages')
     postprocessor: function (content, file, settings) {
         return content
             .replace('__DOMAIN__', '/ms-bus')
-            .replace('__SPRING_API_URL__', 'localhost:8080/api');
+            .replace('__SERVICE_URL__', 'https://www.easy-mock.com/mock/58ff1b7c5e43ae5dbea5eff3');
     }
 })
 .match('/mock/**', {
