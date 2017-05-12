@@ -6,6 +6,19 @@ import './ms-select.css';
 import { getChildTemplateDescriptor } from '../../ane-util';
 import { emitToFormItem } from '../ms-form/utils';
 
+/**
+ * 选择组件
+ * @prop value 组件值(inherit)
+ * @prop col 字段路径(inherit)
+ * @prop options 下拉选项
+ * @prop showSearch 是否显示搜索框
+ * 
+ * @example
+ *  <ms-select :widget="{showSearch:true}">
+ *      <ms-select-option :widget="{value:'M'}">男</ms-select-option>
+ *      <ms-select-option :widget="{value:'F', disabled:false}">女</ms-select-option>
+ *  </ms-select>
+ */
 controlComponent.extend({
     displayName: 'ms-select',
     template: __inline('./ms-select.html'),

@@ -113,6 +113,10 @@ interface AvalonStatic {
      */
     ready(fn): void;
     /**
+     * 将字符串安全格式化为正则表达式的源码
+     */
+    escapeRegExp(target): string;
+    /**
      * 构造avalon实例
      */
     (el: Node): avalonInstance
