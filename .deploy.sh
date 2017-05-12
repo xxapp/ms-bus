@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 使用fis进行构建
-fis3 release -d ./output
+fis3 release gh-pages -d ./output
 
 if [ -d output ]; then
     # 提交代码至gh-pages分支

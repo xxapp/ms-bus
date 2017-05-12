@@ -41,12 +41,6 @@ fis.hook('node_modules', {
     });
 });
 
-if (process.env.GH_PAGES_DEPLOY) {
-    fis.match('**', {
-        domain: '/ms-bus'
-    });
-}
-
 fis.match('**', {
     useHash: false,
     release: false
@@ -87,7 +81,7 @@ fis.match('/services/*.{ts,js}', {
     isMod: true,
     release: '/static/$0'
 });
-fis.match('/services/configService.{ts,js}', {
+fis.media('dev').match('/services/configService.{ts,js}', {
     postprocessor: function (content, file, settings) {
         return content
             .replace('__API_URL__', 'localhost:8080/api')
@@ -105,7 +99,7 @@ fis.match('/static/**', {
     release: '/static/$0'
 });
 // mock假数据
-fis.match('/mock/**', {
+fis.media('dev').match('/mock/**', {
     release: '/$0'
 });
 
@@ -117,3 +111,18 @@ fis.match('::package', {
         useInlineMap: true
     })
 })
+
+fis.media('gh-pages')
+.match('**', {
+    domain: '/ms-bus'
+})
+.match('/services/configService.{ts,js}', {
+    postprocessor: function (content, file, settings) {
+        return content
+            .replace('__DOMAIN__', '/ms-bus')
+            .replace('__SPRING_API_URL__', 'localhost:8080/api');
+    }
+})
+.match('/mock/**', {
+    release: '/$0'
+});

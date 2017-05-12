@@ -3,3 +3,5 @@ export const springApi = {
 };
 
 export const pageSize = 10;
+
+export const domain = '__DOMAIN__';
