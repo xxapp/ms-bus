@@ -14,19 +14,23 @@ controlComponent.extend({
         value: [],
         options: [],
         displayValue: '',
+        showSearch: false,
+        searchValue: '',
         panelVmId: '',
         panelVisible: false,
         panelClass: 'bus-select-dropdown',
         panelTemplate: __inline('./ms-select-panel.html'),
         handleClick(e) {
-            this.width = e.target.offsetWidth;
+            this.searchValue = '';
+            this.width = this.$element.offsetWidth;
             this.panelVisible = true;
+            this.$element.children[1].focus();
         },
         withInBox(el) {
-            return avalon.contains(this.$element, el);
+            return this.$element === el || avalon.contains(this.$element, el);
         },
         getTarget() {
-            return this.$element.children[0];
+            return this.$element;
         },
         handlePanelHide() {
             this.panelVisible = false;
@@ -47,10 +51,18 @@ controlComponent.extend({
             });
 
             this.panelVmId = this.$id + '_panel';
-            avalon.define({
+            const innerVm = avalon.define({
                 $id: this.panelVmId,
                 selected: '',
-                options: this.options.$model,
+                options: this.options.toJSON(),
+                searchValue: '',
+                getFilteredOptions() {
+                    return this.options.filter(this.filterFn);
+                },
+                filterFn: (el) => {
+                    const reg = new RegExp(avalon.escapeRegExp(this.searchValue), 'i');
+                    return reg.test(el.label) || reg.test(el.value);
+                },
                 handleOptionClick(e, option) {
                     if (option.disabled) {
                         return false;
@@ -64,6 +76,9 @@ controlComponent.extend({
                     self.displayValue = option.label;
                     self.panelVisible = false;
                 }
+            });
+            this.$watch('searchValue', v => {
+                innerVm.searchValue = v;
             });
         },
         onDispose() {

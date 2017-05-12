@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <input class="form-control" type="text" :duplex="@displayValue" :click="handleClick" />
+    <div class="bus-select form-control" :click="handleClick">
+        <span class="bus-select-selected" :visible="!@showSearch || !@panelVisible">{{@displayValue}}</span>
+        <input class="bus-select-search" type="text" :duplex="@searchValue" :visible="@showSearch && @panelVisible" />
         <ms-trigger :widget="{
             left: @left,
             top: @top,
