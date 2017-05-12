@@ -5,7 +5,7 @@ define('vendor/ane-component/index.ts', function(require, exports, module) {
       for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
   }
   __export(require("vendor/ane-component/ane-component.ts"));
-  //# sourceMappingURL=/static/vendor/ane-component/index.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/index.js.map
   
 
 });

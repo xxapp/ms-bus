@@ -127,7 +127,7 @@ define('vendor/ane-component/components/ms-loading/ms-loading-directive.ts', fun
           }
       }
   };
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-loading/ms-loading-directive.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-loading/ms-loading-directive.js.map
   
 
 });

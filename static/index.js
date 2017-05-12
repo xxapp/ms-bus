@@ -37,7 +37,7 @@ define('index.ts', function(require, exports, module) {
       avalon.router.navigate('/', 2);
   }
   avalon.scan(document.body);
-  //# sourceMappingURL=/static/index.js.map
+  //# sourceMappingURL=/ms-bus/static/index.js.map
   
 
 });

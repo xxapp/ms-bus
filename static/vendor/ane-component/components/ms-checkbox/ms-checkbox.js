@@ -43,7 +43,7 @@ define('vendor/ane-component/components/ms-checkbox/ms-checkbox.ts', function(re
           }
       }
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-checkbox/ms-checkbox.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-checkbox/ms-checkbox.js.map
   
 
 });

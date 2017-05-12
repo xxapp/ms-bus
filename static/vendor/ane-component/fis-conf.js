@@ -4,7 +4,7 @@ define('vendor/ane-component/fis-conf', function(require, exports, module) {
   fis.match('**', {
       release: '/$0'
   });
-  //# sourceMappingURL=/static/vendor/ane-component/fis-conf.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/fis-conf.js.map
   
 
 });

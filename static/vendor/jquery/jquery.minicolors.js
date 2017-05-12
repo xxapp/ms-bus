@@ -738,7 +738,7 @@ define('vendor/jquery/jquery.minicolors', function(require, exports, module) {
               }, 1);
           });
       })(jQuery);
-  //# sourceMappingURL=/static/vendor/jquery/jquery.minicolors.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/jquery/jquery.minicolors.js.map
   
 
 });

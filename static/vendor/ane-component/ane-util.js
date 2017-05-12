@@ -47,7 +47,7 @@ define('vendor/ane-component/ane-util.ts', function(require, exports, module) {
       }, []);
   }
   exports.getChildTemplateDescriptor = getChildTemplateDescriptor;
-  //# sourceMappingURL=/static/vendor/ane-component/ane-util.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/ane-util.js.map
   
 
 });

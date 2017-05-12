@@ -95,7 +95,7 @@ define('services/routerService.ts', function(require, exports, module) {
   //         }
   //     }
   // })
-  //# sourceMappingURL=/static/services/routerService.js.map
+  //# sourceMappingURL=/ms-bus/static/services/routerService.js.map
   
 
 });

@@ -20,7 +20,7 @@ define('vendor/ane-component/components/ms-upload/ms-upload-list.ts', function(r
           }
       }
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-upload/ms-upload-list.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-upload/ms-upload-list.js.map
   
 
 });

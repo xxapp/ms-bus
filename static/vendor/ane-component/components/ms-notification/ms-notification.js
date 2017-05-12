@@ -53,7 +53,7 @@ define('vendor/ane-component/components/ms-notification/ms-notification.ts', fun
       title = title ? "<strong>" + title + "</strong><br>" : '';
       return "<div>\n                <i class=\"" + icon + " pull-left\" style=\"font-size: 38px;min-width: 38px;text-align: center;\"></i>\n                " + title + "\n                " + message + "\n            </div>";
   }
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-notification/ms-notification.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-notification/ms-notification.js.map
   
 
 });

@@ -88,7 +88,7 @@ define('services/ajaxService.ts', function(require, exports, module) {
       }
       return str;
   }
-  //# sourceMappingURL=/static/services/ajaxService.js.map
+  //# sourceMappingURL=/ms-bus/static/services/ajaxService.js.map
   
 
 });

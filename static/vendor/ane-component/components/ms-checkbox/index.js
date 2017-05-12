@@ -3,7 +3,7 @@ define('vendor/ane-component/components/ms-checkbox/index.ts', function(require,
   "use strict";
   require("vendor/ane-component/components/ms-checkbox/ms-checkbox.ts");
   require("vendor/ane-component/components/ms-checkbox/ms-checkbox-group.ts");
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-checkbox/index.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-checkbox/index.js.map
   
 
 });

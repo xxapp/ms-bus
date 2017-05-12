@@ -178,7 +178,7 @@ define('vendor/ane-component/components/ms-control-select2/ms-control-select2', 
       options: [],
       multiple: false
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-control-select2/ms-control-select2.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-control-select2/ms-control-select2.js.map
   
 
 });

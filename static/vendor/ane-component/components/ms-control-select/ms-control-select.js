@@ -66,7 +66,7 @@ define('vendor/ane-component/components/ms-control-select/ms-control-select', fu
       colVal: 'name',
       options: []
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-control-select/ms-control-select.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-control-select/ms-control-select.js.map
   
 
 });

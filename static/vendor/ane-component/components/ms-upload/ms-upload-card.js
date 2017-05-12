@@ -20,7 +20,7 @@ define('vendor/ane-component/components/ms-upload/ms-upload-card.ts', function(r
           }
       }
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-upload/ms-upload-card.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-upload/ms-upload-card.js.map
   
 
 });

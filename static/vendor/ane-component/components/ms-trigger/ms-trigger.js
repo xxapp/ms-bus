@@ -62,7 +62,7 @@ define('vendor/ane-component/components/ms-trigger/ms-trigger.ts', function(requ
           }
       }
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-trigger/ms-trigger.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-trigger/ms-trigger.js.map
   
 
 });

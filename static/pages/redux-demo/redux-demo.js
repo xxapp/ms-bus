@@ -54,7 +54,7 @@ define('pages/redux-demo/redux-demo.ts', function(require, exports, module) {
           }, 1000);
       }
   });
-  //# sourceMappingURL=/static/pages/redux-demo/redux-demo.js.map
+  //# sourceMappingURL=/ms-bus/static/pages/redux-demo/redux-demo.js.map
   
 
 });

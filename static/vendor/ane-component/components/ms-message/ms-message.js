@@ -53,7 +53,7 @@ define('vendor/ane-component/components/ms-message/ms-message.ts', function(requ
           }
       }
   };
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-message/ms-message.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-message/ms-message.js.map
   
 
 });

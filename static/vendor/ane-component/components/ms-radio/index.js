@@ -3,7 +3,7 @@ define('vendor/ane-component/components/ms-radio/index.ts', function(require, ex
   "use strict";
   require("vendor/ane-component/components/ms-radio/ms-radio.ts");
   require("vendor/ane-component/components/ms-radio/ms-radio-group.ts");
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-radio/index.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-radio/index.js.map
   
 
 });

@@ -82,7 +82,7 @@ define('services/storeService.ts', function(require, exports, module) {
           return data;
       }
   };
-  //# sourceMappingURL=/static/services/storeService.js.map
+  //# sourceMappingURL=/ms-bus/static/services/storeService.js.map
   
 
 });

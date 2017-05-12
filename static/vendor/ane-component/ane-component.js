@@ -35,7 +35,7 @@ define('vendor/ane-component/ane-component.ts', function(require, exports, modul
   exports.notification = ms_notification_1["default"];
   var ms_message_1 = require("vendor/ane-component/components/ms-message/index.ts");
   exports.message = ms_message_1["default"];
-  //# sourceMappingURL=/static/vendor/ane-component/ane-component.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/ane-component.js.map
   
 
 });

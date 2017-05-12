@@ -160,7 +160,7 @@ define('vendor/ane-component/components/ms-table/ms-table.ts', function(require,
           return acc.concat(getColumnConfig(column.children, level + 1));
       }, []);
   }
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-table/ms-table.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-table/ms-table.js.map
   
 
 });

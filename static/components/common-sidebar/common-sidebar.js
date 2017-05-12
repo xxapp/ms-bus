@@ -69,7 +69,7 @@ define('components/common-sidebar/common-sidebar.ts', function(require, exports,
           }
       }
   });
-  //# sourceMappingURL=/static/components/common-sidebar/common-sidebar.js.map
+  //# sourceMappingURL=/ms-bus/static/components/common-sidebar/common-sidebar.js.map
   
 
 });

@@ -13,7 +13,7 @@ define('components/gf-demo-fast/gf-demo-fast.ts', function(require, exports, mod
           pattern: /^\d+-\d+-\d+( \d+:\d+:\d+)?$/
       }
   });
-  //# sourceMappingURL=/static/components/gf-demo-fast/gf-demo-fast.js.map
+  //# sourceMappingURL=/ms-bus/static/components/gf-demo-fast/gf-demo-fast.js.map
   
 
 });

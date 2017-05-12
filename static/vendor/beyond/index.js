@@ -229,7 +229,7 @@ define('vendor/beyond/index', function(require, exports, module) {
       // ));
       InitiateSideMenu();
   };
-  //# sourceMappingURL=/static/vendor/beyond/index.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/beyond/index.js.map
   
 
 });

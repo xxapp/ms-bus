@@ -147,7 +147,7 @@ define('components/common-curd/common-curd.ts', function(require, exports, modul
           }
       }
   });
-  //# sourceMappingURL=/static/components/common-curd/common-curd.js.map
+  //# sourceMappingURL=/ms-bus/static/components/common-curd/common-curd.js.map
   
 
 });

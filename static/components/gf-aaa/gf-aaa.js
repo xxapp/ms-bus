@@ -9,7 +9,7 @@ define('components/gf-aaa/gf-aaa.ts', function(require, exports, module) {
           text: 'aaa'
       }
   });
-  //# sourceMappingURL=/static/components/gf-aaa/gf-aaa.js.map
+  //# sourceMappingURL=/ms-bus/static/components/gf-aaa/gf-aaa.js.map
   
 
 });

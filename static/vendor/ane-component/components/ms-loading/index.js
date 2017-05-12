@@ -3,7 +3,7 @@ define('vendor/ane-component/components/ms-loading/index.ts', function(require, 
   "use strict";
   var ms_loading_directive_1 = require("vendor/ane-component/components/ms-loading/ms-loading-directive.ts");
   exports.Loading = ms_loading_directive_1.Loading;
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-loading/index.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-loading/index.js.map
   
 
 });

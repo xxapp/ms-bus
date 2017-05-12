@@ -44,7 +44,7 @@ define('pages/rxjs-demo/rxjs-demo.ts', function(require, exports, module) {
       .bufferWithCount(10, 1)
       .filter(isKonamiCode)
       .subscribeOnNext(function () { return console.log('KONAMI!'); });
-  //# sourceMappingURL=/static/pages/rxjs-demo/rxjs-demo.js.map
+  //# sourceMappingURL=/ms-bus/static/pages/rxjs-demo/rxjs-demo.js.map
   
 
 });

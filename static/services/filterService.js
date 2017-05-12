@@ -18,7 +18,7 @@ define('services/filterService.ts', function(require, exports, module) {
   avalon.filters.decodeHTML = function (str) {
       return decodeURIComponent(str);
   };
-  //# sourceMappingURL=/static/services/filterService.js.map
+  //# sourceMappingURL=/ms-bus/static/services/filterService.js.map
   
 
 });

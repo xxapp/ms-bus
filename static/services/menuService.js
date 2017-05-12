@@ -121,7 +121,7 @@ define('services/menuService.ts', function(require, exports, module) {
       return finded;
   }
   exports.walkMenu = walkMenu;
-  //# sourceMappingURL=/static/services/menuService.js.map
+  //# sourceMappingURL=/ms-bus/static/services/menuService.js.map
   
 
 });

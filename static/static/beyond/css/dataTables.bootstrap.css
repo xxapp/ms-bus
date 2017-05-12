@@ -88,23 +88,23 @@ table.table {
     }
 
     table.table thead .sorting {
-        background: url('/static/static/beyond/img/sort_both.png') no-repeat center right;
+        background: url('/ms-bus/static/static/beyond/img/sort_both.png') no-repeat center right;
     }
 
     table.table thead .sorting_asc {
-        background: url('/static/static/beyond/img/sort_asc.png') no-repeat center right;
+        background: url('/ms-bus/static/static/beyond/img/sort_asc.png') no-repeat center right;
     }
 
     table.table thead .sorting_desc {
-        background: url('/static/static/beyond/img/sort_desc.png') no-repeat center right;
+        background: url('/ms-bus/static/static/beyond/img/sort_desc.png') no-repeat center right;
     }
 
     table.table thead .sorting_asc_disabled {
-        background: url('/static/static/beyond/img/sort_asc_disabled.png') no-repeat center right;
+        background: url('/ms-bus/static/static/beyond/img/sort_asc_disabled.png') no-repeat center right;
     }
 
     table.table thead .sorting_desc_disabled {
-        background: url('/static/static/beyond/img/sort_desc_disabled.png') no-repeat center right;
+        background: url('/ms-bus/static/static/beyond/img/sort_desc_disabled.png') no-repeat center right;
     }
 
 table.dataTable th:active {

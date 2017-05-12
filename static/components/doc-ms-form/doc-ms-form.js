@@ -64,7 +64,7 @@ define('components/doc-ms-form/doc-ms-form.ts', function(require, exports, modul
           attachment: ['https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png']
       };
   }
-  //# sourceMappingURL=/static/components/doc-ms-form/doc-ms-form.js.map
+  //# sourceMappingURL=/ms-bus/static/components/doc-ms-form/doc-ms-form.js.map
   
 
 });

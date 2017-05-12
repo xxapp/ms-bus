@@ -24,7 +24,7 @@ define('components/gf-dashboard/gf-dashboard.ts', function(require, exports, mod
           }
       })
   });
-  //# sourceMappingURL=/static/components/gf-dashboard/gf-dashboard.js.map
+  //# sourceMappingURL=/ms-bus/static/components/gf-dashboard/gf-dashboard.js.map
   
 
 });

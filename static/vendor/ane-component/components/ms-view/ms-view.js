@@ -41,7 +41,7 @@ define('vendor/ane-component/components/ms-view/ms-view', function(require, expo
           state.vm = result[1];
       });
   };
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-view/ms-view.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-view/ms-view.js.map
   
 
 });

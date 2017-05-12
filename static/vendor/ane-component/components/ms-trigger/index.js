@@ -2,7 +2,7 @@ define('vendor/ane-component/components/ms-trigger/index.ts', function(require, 
 
   "use strict";
   require("vendor/ane-component/components/ms-trigger/ms-trigger.ts");
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-trigger/index.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-trigger/index.js.map
   
 
 });

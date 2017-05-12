@@ -11,7 +11,7 @@ define('vendor/ane-component/components/ms-select/ms-select-option.ts', function
           disabled: false
       }
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-select/ms-select-option.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-select/ms-select-option.js.map
   
 
 });

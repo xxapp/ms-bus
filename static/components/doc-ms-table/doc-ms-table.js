@@ -72,7 +72,7 @@ define('components/doc-ms-table/doc-ms-table.ts', function(require, exports, mod
           }
       }
   });
-  //# sourceMappingURL=/static/components/doc-ms-table/doc-ms-table.js.map
+  //# sourceMappingURL=/ms-bus/static/components/doc-ms-table/doc-ms-table.js.map
   
 
 });

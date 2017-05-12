@@ -104,7 +104,7 @@ define('components/gf-demo/gf-demo.ts', function(require, exports, module) {
       }),
       record: storeService_1.demo.initialData()
   });
-  //# sourceMappingURL=/static/components/gf-demo/gf-demo.js.map
+  //# sourceMappingURL=/ms-bus/static/components/gf-demo/gf-demo.js.map
   
 
 });

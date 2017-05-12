@@ -41,7 +41,7 @@ define('vendor/ane-component/components/ms-pagination/ms-pagination.ts', functio
           }
       }
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-pagination/ms-pagination.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-pagination/ms-pagination.js.map
   
 
 });

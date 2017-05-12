@@ -184,7 +184,7 @@ define('components/gf-demo-redux/gf-demo-redux.ts', function(require, exports, m
       }),
       record: storeService_1.demo.initialData()
   });
-  //# sourceMappingURL=/static/components/gf-demo-redux/gf-demo-redux.js.map
+  //# sourceMappingURL=/ms-bus/static/components/gf-demo-redux/gf-demo-redux.js.map
   
 
 });

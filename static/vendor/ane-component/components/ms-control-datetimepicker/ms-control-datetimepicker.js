@@ -6,7 +6,7 @@ define('vendor/ane-component/components/ms-control-datetimepicker/ms-control-dat
   require('node_modules/moment/locale/zh-cn');
   moment.locale('zh-cn');
   require.loadCss({
-      url: '/static/node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
+      url: '/ms-bus/static/node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
   });
   require('node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker');
   var avxUtil = require('vendor/ane-component/ane-util.ts');
@@ -97,7 +97,7 @@ define('vendor/ane-component/components/ms-control-datetimepicker/ms-control-dat
       format: 'YYYY-MM-DD HH:mm:ss',
       $datepickerId: ''
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-control-datetimepicker/ms-control-datetimepicker.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-control-datetimepicker/ms-control-datetimepicker.js.map
   
 
 });

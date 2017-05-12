@@ -10,7 +10,7 @@ define('vendor/ane-component/components/ms-table-header/ms-table-header.ts', fun
           col: ''
       }
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-table-header/ms-table-header.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-table-header/ms-table-header.js.map
   
 
 });

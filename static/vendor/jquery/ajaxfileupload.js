@@ -172,7 +172,7 @@ define('vendor/jquery/ajaxfileupload', function(require, exports, module) {
           (s.context ? jQuery(s.context) : jQuery.event).trigger("ajaxError", [xhr, s, e]);
       }
   }
-  //# sourceMappingURL=/static/vendor/jquery/ajaxfileupload.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/jquery/ajaxfileupload.js.map
   
 
 });

@@ -112,7 +112,7 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
           return acc;
       }, []);
   }
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-select/ms-select.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-select/ms-select.js.map
   
 
 });

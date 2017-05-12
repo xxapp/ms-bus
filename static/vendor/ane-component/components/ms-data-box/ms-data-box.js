@@ -6,7 +6,7 @@ define('vendor/ane-component/components/ms-data-box/ms-data-box.ts', function(re
       template: "\n<div></div>\n",
       defaults: {}
   });
-  //# sourceMappingURL=/static/vendor/ane-component/components/ms-data-box/ms-data-box.js.map
+  //# sourceMappingURL=/ms-bus/static/vendor/ane-component/components/ms-data-box/ms-data-box.js.map
   
 
 });
