@@ -2,7 +2,7 @@ import * as avalon from 'avalon2';
 import * as domAlign from 'dom-align';
 
 avalon.component('ms-trigger', {
-    template: '&nbsp;',
+    template: '<span style="display:none;"></span>',
     defaults: {
         width: 0,
         visible: false,
