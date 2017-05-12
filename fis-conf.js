@@ -41,6 +41,12 @@ fis.hook('node_modules', {
     });
 });
 
+if (process.env.GH_PAGES_DEPLOY) {
+    fis.match('**', {
+        domain: '/ms-bus'
+    });
+}
+
 fis.match('**', {
     useHash: false,
     release: false
