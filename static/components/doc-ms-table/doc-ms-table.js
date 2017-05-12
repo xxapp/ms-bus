@@ -10,6 +10,7 @@ define('components/doc-ms-table/doc-ms-table.ts', function(require, exports, mod
       return t;
   };
   var avalon = require("node_modules/avalon2/dist/avalon");
+  var ajaxService_1 = require("services/ajaxService.ts");
   var ane_1 = require("vendor/ane-component/index.ts");
   exports.name = 'doc-ms-table';
   avalon.component(exports.name, {
@@ -27,11 +28,10 @@ define('components/doc-ms-table/doc-ms-table.ts', function(require, exports, mod
               var _this = this;
               if (params === void 0) { params = {}; }
               this.loading = true;
-              $.ajax({
+              ajaxService_1["default"]({
                   url: '/api/demo',
                   method: 'get',
-                  data: __assign({}, params),
-                  type: 'json'
+                  data: __assign({}, params)
               }).then(function (data) {
                   _this.pagination.total = data.total;
                   data.rows[0].region_parent_id = Date.now();
