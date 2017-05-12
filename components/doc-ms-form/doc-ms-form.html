@@ -52,7 +52,7 @@
                         </ms:control-select2>
                         <ms:control-datepicker label="出生日期" col="birthday" ms-cduplex="record.birthday"></ms:control-datepicker>-->
                         <ms-form-item :widget="{label:'头像'}">
-                            <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: '/api/file/uploadFile',listType:'picture-card',showUploadList:false,beforeUpload:@handleBeforeUpload,$rules:{required:true,message:'请选择头像'}}">
+                            <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: @fileUploadUrl,listType:'picture-card',showUploadList:false,beforeUpload:@handleBeforeUpload,$rules:{required:true,message:'请选择头像'}}">
                                 <i class="fa fa-plus"></i>选择图片
                             </ms-upload>
                         </ms-form-item>
@@ -60,7 +60,7 @@
                             <ms-textarea :widget="{value:@record.bio,col:'bio',rows:5,$rules:{required:true}}"></ms-textarea>
                         </ms-form-item>
                         <ms-form-item :widget="{label:'附件'}">
-                            <ms-upload :widget="{value:@record.attachment,col:'attachment',action: '/api/file/uploadFile',listType:'text-list',$rules:{required:true,type:'array'}}">
+                            <ms-upload :widget="{value:@record.attachment,col:'attachment',action: @fileUploadUrl,listType:'text-list',$rules:{required:true,type:'array'}}">
                                 <i class="fa fa-upload"></i>选择文件
                             </ms-upload>
                         </ms-form-item>

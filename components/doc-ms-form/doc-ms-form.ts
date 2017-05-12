@@ -1,6 +1,7 @@
 import * as avalon from 'avalon2';
 
 import ajax from '../../services/ajaxService';
+import { serviceUrl } from "../../services/configService";
 import { createForm, message } from "ane";
 
 export const name = 'doc-ms-form';
@@ -14,6 +15,7 @@ avalon.component(name, {
         record: initialData(),
         json: '',
         expire: 0,
+        fileUploadUrl: serviceUrl + '/api/file/uploadFile',
         addEducation() {
             this.record.education.push('');
         },

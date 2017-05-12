@@ -20,13 +20,12 @@ avalon.component(name, {
         },
         fetch(params = {}) {
             this.loading = true;
-            $.ajax({
+            ajax({
                 url: '/api/demo',
                 method: 'get',
                 data: {
                     ...params
-                },
-                type: 'json'
+                }
             }).then(data => {
                 this.pagination.total = data.total;
                 data.rows[0].region_parent_id = Date.now();
