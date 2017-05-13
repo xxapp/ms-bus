@@ -49,6 +49,7 @@
     user-select: none;
 }
 
+.bus-select-dropdown-menu-item:focus,
 .bus-select-dropdown-menu-item:hover {
     background: #ecf6fd;
 }
