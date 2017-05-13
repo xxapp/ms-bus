@@ -1,7 +1,12 @@
 <template>
-    <div class="bus-select form-control" :click="handleClick">
+    <div class="bus-select form-control"
+        :click="handleClick"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-haspopup="true"
+        :attr="{'aria-expanded': @panelVisible + ''}">
         <span class="bus-select-selected" :visible="!@showSearch || !@panelVisible">{{@displayValue}}</span>
-        <input class="bus-select-search" type="text" :duplex="@searchValue" :visible="@showSearch && @panelVisible" />
+        <input class="bus-select-search" type="text" :duplex="@searchValue" :visible="@showSearch && @panelVisible" :attr="{placeholder: @displayValue}" />
         <ms-trigger :widget="{
             left: @left,
             top: @top,

@@ -1,12 +1,14 @@
 <template>
     <div style="overflow: auto">
-        <ul class="bus-select-dropdown-menu">
+        <ul class="bus-select-dropdown-menu" role="menu">
             <li class="bus-select-dropdown-menu-item"
                 :class="[
                     (option.value === @selected ? 'bus-select-dropdown-menu-item-selected' : ''),
                     (option.disabled ? 'bus-select-dropdown-menu-item-disabled' : '')
                 ]"
-                :for="option in @getFilteredOptions()" :click="handleOptionClick($event, option)">{{option.label}}</li>
+                :for="option in @getFilteredOptions()"
+                :click="handleOptionClick($event, option)"
+                role="menuitem" tabindex="-1">{{option.label}}</li>
             <li class="bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled"
                 :visible="@getFilteredOptions().length <= 0">未找到匹配项</li>
         </ul>
