@@ -28,8 +28,8 @@ avalon.component(name, {
                 }
             }).then(data => {
                 this.pagination.total = data.total;
-                data.rows[0].region_parent_id = Date.now();
-                this.remoteList = data.rows;
+                data.list[0].region_parent_id = Date.now();
+                this.remoteList = data.list;
                 this.loading = false;
             });
         },
