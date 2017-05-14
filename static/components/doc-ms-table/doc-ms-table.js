@@ -34,8 +34,8 @@ define('components/doc-ms-table/doc-ms-table.ts', function(require, exports, mod
                   data: __assign({}, params)
               }).then(function (data) {
                   _this.pagination.total = data.total;
-                  data.rows[0].region_parent_id = Date.now();
-                  _this.remoteList = data.rows;
+                  data.list[0].region_parent_id = Date.now();
+                  _this.remoteList = data.list;
                   _this.loading = false;
               });
           },
