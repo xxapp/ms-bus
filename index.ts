@@ -5,7 +5,6 @@ import 'es6-promise/dist/es6-promise.auto';
 
 import * as jQuery from 'jquery';
 global.$ = global.jQuery = jQuery;
-import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 import * as bootbox from 'bootbox';
 bootbox.setLocale('zh_CN');
