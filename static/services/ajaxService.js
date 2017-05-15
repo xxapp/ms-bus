@@ -46,7 +46,7 @@ define('services/ajaxService.ts', function(require, exports, module) {
           cache: false
       };
       options.data = processRequest(options.data);
-      options.url = configService_1.serviceUrl + options.url;
+      options.url = /^\w+:\/\//.test(options.url) ? options.url : configService_1.serviceUrl + options.url;
       return $.ajax(__assign({}, defaultOptions, options)).then(processResponse);
   }
   exports.__esModule = true;
