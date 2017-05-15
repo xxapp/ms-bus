@@ -10,7 +10,9 @@
                 :click="handleOptionClick($event, option)"
                 role="menuitem" tabindex="-1">{{option.label}}</li>
             <li class="bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled"
-                :visible="@getFilteredOptions().length <= 0">未找到匹配项</li>
+                :visible="@getFilteredOptions().length <= 0 && @searchValue && !@loading">无数据</li>
+            <li class="bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled"
+                :visible="@loading">加载中</li>
         </ul>
     </div>
 </template>

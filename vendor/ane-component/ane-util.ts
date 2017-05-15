@@ -41,3 +41,18 @@ export function getChildTemplateDescriptor(vmodel, render = vmodel.$render): any
         return acc;
     }, []);
 }
+
+export function debounce(func, wait: number = 300, immediate: boolean = false) {
+	let timeout;
+	return function(...args) {
+		let context = this;
+		let later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		let callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+}

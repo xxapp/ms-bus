@@ -11,6 +11,20 @@ avalon.component(name, {
         handleCancel(e) {
             //console.log(e);
             this.show = false;
+        },
+        fetchOptions(query) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (query === 'wasd') {
+                        resolve([]);
+                    } else {
+                        resolve(avalon.range(10).map(n => ({
+                            label: query + '-label' + n,
+                            value: query + '-value' + n
+                        })));
+                    }
+                }, 2000);
+            });
         }
     }
 });

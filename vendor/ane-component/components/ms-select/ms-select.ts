@@ -3,7 +3,7 @@ import controlComponent from "../ms-form/ms-control";
 import '../ms-trigger';
 import './ms-select.css';
 
-import { getChildTemplateDescriptor } from '../../ane-util';
+import { getChildTemplateDescriptor, debounce } from '../../ane-util';
 import { emitToFormItem } from '../ms-form/utils';
 
 /**
@@ -12,6 +12,8 @@ import { emitToFormItem } from '../ms-form/utils';
  * @prop col 字段路径(inherit)
  * @prop options 下拉选项
  * @prop showSearch 是否显示搜索框
+ * @prop remote 是否为远程搜索
+ * @prop remoteMethod 当remote为true时调用，包含远程搜索要执行的请求，返回一个Promise<options>
  * 
  * @example
  *  <ms-select :widget="{showSearch:true}">
@@ -26,28 +28,35 @@ controlComponent.extend({
         width: 0,
         value: [],
         options: [],
+        remote: false,
+        remoteMethod: avalon.noop,
+
+        // 下拉框展示和操作部分
         displayValue: '',
         showSearch: false,
         searchValue: '',
-        panelVmId: '',
-        panelVisible: false,
-        panelClass: 'bus-select-dropdown',
-        panelTemplate: __inline('./ms-select-panel.html'),
-        handleClick(e) {
-            this.searchValue = '';
-            this.width = this.$element.offsetWidth;
-            this.panelVisible = true;
-            this.$element.children[1].focus();
-        },
         withInBox(el) {
             return this.$element === el || avalon.contains(this.$element, el);
         },
         getTarget() {
             return this.$element;
         },
+        handleClick(e) {
+            this.searchValue = '';
+            this.width = this.$element.offsetWidth;
+            this.panelVisible = true;
+            this.$element.children[1].focus();
+        },
+
+        // 下拉框下拉列表部分
+        panelVmId: '',
+        panelVisible: false,
+        panelClass: 'bus-select-dropdown',
+        panelTemplate: __inline('./ms-select-panel.html'),
         handlePanelHide() {
             this.panelVisible = false;
         },
+        
         onInit(event) {
             var self = this;
             const descriptor = getChildTemplateDescriptor(this);
@@ -67,12 +76,16 @@ controlComponent.extend({
             const innerVm = avalon.define({
                 $id: this.panelVmId,
                 selected: '',
+                loading: false,
                 options: this.options.toJSON(),
                 searchValue: '',
                 getFilteredOptions() {
                     return this.options.filter(this.filterFn);
                 },
-                filterFn: (el) => {
+                filterFn(el) {
+                    if (self.remote && !this.loading) {
+                        return true;
+                    }
                     const reg = new RegExp(avalon.escapeRegExp(this.searchValue), 'i');
                     return reg.test(el.label) || reg.test(el.value);
                 },
@@ -90,9 +103,16 @@ controlComponent.extend({
                     self.panelVisible = false;
                 }
             });
-            this.$watch('searchValue', v => {
+            this.$watch('searchValue', debounce(v => {
                 innerVm.searchValue = v;
-            });
+                if (this.remote && !!v) {
+                    innerVm.loading = true;
+                    this.remoteMethod(v).then(options => {
+                        innerVm.loading = false
+                        innerVm.options = options;
+                    });
+                }
+            }));
         },
         onDispose() {
             delete avalon.vmodels[this.panelVmId];
