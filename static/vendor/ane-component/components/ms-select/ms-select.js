@@ -30,16 +30,23 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
    * }
    * -->
    * <ms-select :widget="{mode:'combobox',showSearch:true,remote:true,remoteMethod:@fetchOptions}"></ms-select>
+   *
+   * <ms-select :widget="{showSearch:true,mode:'multiple'}">
+   *     <ms-select-option :widget="{value:'ane'}">Ane</ms-select-option>
+   *     <ms-select-option :widget="{value:'ms-bus'}">ms-bus</ms-select-option>
+   *     <ms-select-option :widget="{value:'up-loader'}">up-loader</ms-select-option>
+   * </ms-select>
    * ```
    */
   ms_control_1["default"].extend({
       displayName: 'ms-select',
-      template: "\n<div class=\"bus-select form-control \"\n    :click=\"handleClick\"\n    role=\"combobox\"\n    aria-autocomplete=\"list\"\n    aria-haspopup=\"true\"\n    :attr=\"{'aria-expanded': @panelVisible + ''}\">\n    <span class=\"bus-select-selected \" :visible=\"!@showSearch || !@panelVisible\">{{@displayValue}}</span>\n    <input class=\"bus-select-search \" type=\"text\" :duplex=\"@searchValue\" :visible=\"@showSearch && @panelVisible\" :attr=\"{placeholder: @displayValue}\" />\n    <i class=\"fa bus-select-arrow \"\n        :class=\"[(@panelVisible ? 'fa-caret-up' : 'fa-caret-down')] \"\n        :visible=\"@mode === ''\"></i>\n    <ms-trigger :widget=\"{\n        width: @width,\n        visible: @panelVisible,\n        innerVmId: @panelVmId,\n        innerClass: @panelClass,\n        innerTemplate: @panelTemplate,\n        withInBox: @withInBox,\n        getTarget: @getTarget,\n        onHide: @handlePanelHide}\">\n    </ms-trigger>\n</div>\n",
+      template: "\n<div class=\"bus-select form-control \"\n    :click=\"handleClick\"\n    role=\"combobox\"\n    aria-autocomplete=\"list\"\n    aria-haspopup=\"true\"\n    :attr=\"{'aria-expanded': @panelVisible + ''}\">\n    <ul class=\"bus-select-selection \" :class=\"[((@mode === 'multiple' || @mode === 'tags') ? 'bus-select-tags' : '')] \">\n        <li class=\"bus-select-selected \" :visible=\"!(@mode === 'multiple' || @mode === 'tags') && (!@showSearch || !@panelVisible)\">{{@displayValue}}</li>\n        <li class=\"bus-select-choice \" :for=\"choice in @selection\">\n            <span>{{choice.label}}</span>\n            <i class=\"fa fa-times \" :click=\"removeSelection(choice)\"></i>\n        </li>\n        <li class=\"bus-select-search \">\n            <input class=\"bus-select-search-field \" type=\"text\" :duplex=\"@searchValue\" :visible=\"@showSearch && @panelVisible\" />\n        </li>\n    </ul>\n    <i class=\"fa bus-select-arrow \"\n        :class=\"[(@panelVisible ? 'fa-caret-up' : 'fa-caret-down')] \"\n        :visible=\"@mode === ''\"></i>\n    <ms-trigger :widget=\"{\n        width: @width,\n        visible: @panelVisible,\n        innerVmId: @panelVmId,\n        innerClass: @panelClass,\n        innerTemplate: @panelTemplate,\n        withInBox: @withInBox,\n        getTarget: @getTarget,\n        onHide: @handlePanelHide}\">\n    </ms-trigger>\n</div>\n",
       defaults: {
           width: 0,
           value: [],
           mode: '',
           options: [],
+          selection: [],
           remote: false,
           remoteMethod: avalon.noop,
           // 下拉框展示和操作部分
@@ -57,17 +64,28 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
                   this.searchValue = '';
                   this.width = this.$element.offsetWidth;
                   this.panelVisible = true;
-                  this.$element.children[1].focus();
+                  this.$element.getElementsByClassName('bus-select-search-field')[0].focus();
               }
               else {
                   this.panelVisible = false;
               }
           },
+          removeSelection: function (option) {
+              var isMultiple = this.mode === 'multiple' || this.mode === 'tags';
+              var value = this.value.toJSON();
+              this.selection.removeAll(function (o) { return o.value === option.value; });
+              this.value.remove(option.value);
+              avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+              this.handleChange({
+                  target: { value: isMultiple ? value : value[0] || '' },
+                  type: 'select'
+              });
+          },
           // 下拉框下拉列表部分
           panelVmId: '',
           panelVisible: false,
           panelClass: 'bus-select-dropdown',
-          panelTemplate: "\n<div style=\"overflow: auto\">\n    <ul class=\"bus-select-dropdown-menu \" role=\"menu\">\n        <li class=\"bus-select-dropdown-menu-item \"\n            :class=\"[ (option.value === @selected ? 'bus-select-dropdown-menu-item-selected' : ''), (option.disabled ? 'bus-select-dropdown-menu-item-disabled' : '') ] \"\n            :for=\"option in @getFilteredOptions()\"\n            :click=\"handleOptionClick($event, option)\"\n            role=\"menuitem\" tabindex=\"-1\">{{option.label}}</li>\n        <li class=\"bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled \"\n            :visible=\"@getFilteredOptions().length <= 0 && @searchValue && !@loading\">无数据</li>\n        <li class=\"bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled \"\n            :visible=\"@loading\">加载中</li>\n    </ul>\n</div>\n",
+          panelTemplate: "\n<div style=\"overflow: auto\">\n    <ul class=\"bus-select-dropdown-menu \" role=\"menu\">\n        <li class=\"bus-select-dropdown-menu-item \"\n            :class=\"[ (@selection.some(function(){return arguments[0].value===option.value}) ? 'bus-select-dropdown-menu-item-selected' : ''), (option.disabled ? 'bus-select-dropdown-menu-item-disabled' : '') ] \"\n            :for=\"option in @getFilteredOptions()\"\n            :click=\"handleOptionClick($event, option)\"\n            role=\"menuitem\">{{option.label}}</li>\n        <li class=\"bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled \"\n            :visible=\"@getFilteredOptions().length <= 0 && @searchValue && !@loading\">无数据</li>\n        <li class=\"bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled \"\n            :visible=\"@loading\">加载中</li>\n    </ul>\n</div>\n",
           handlePanelHide: function () {
               this.panelVisible = false;
           },
@@ -78,9 +96,10 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
               this.options = getOptions(descriptor);
               utils_1.emitToFormItem(this);
               this.$watch('value', function (v) {
-                  var value = v.$model || v || [''];
+                  var isMultiple = _this.mode === 'multiple' || _this.mode === 'tags';
+                  var value = v.toJSON();
                   _this.handleChange({
-                      target: { value: value[0] },
+                      target: { value: isMultiple ? value : value[0] || '' },
                       denyValidate: true,
                       type: 'select'
                   });
@@ -88,7 +107,7 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
               this.panelVmId = this.$id + '_panel';
               var innerVm = avalon.define({
                   $id: this.panelVmId,
-                  selected: '',
+                  selection: [],
                   loading: false,
                   options: this.options.toJSON(),
                   searchValue: '',
@@ -103,17 +122,33 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
                       return reg.test(el.label) || reg.test(el.value);
                   },
                   handleOptionClick: function (e, option) {
+                      var isMultiple = false;
                       if (option.disabled) {
                           return false;
                       }
-                      this.selected = option.value;
-                      self.value.push(option.value);
+                      if (self.mode === 'multiple' || self.mode === 'tags') {
+                          isMultiple = true;
+                          if (this.selection.some(function (o) { return o.value === option.value; })) {
+                              this.selection.removeAll(function (o) { return o.value === option.value; });
+                              self.value.remove(option.value);
+                          }
+                          else {
+                              this.selection.push(option);
+                              self.value.push(option.value);
+                          }
+                      }
+                      else {
+                          this.selection = [option];
+                          self.value = [option.value];
+                          self.panelVisible = false;
+                      }
+                      var value = self.value.toJSON();
                       self.handleChange({
-                          target: { value: option.value },
+                          target: { value: isMultiple ? value : value[0] || '' },
                           type: 'select'
                       });
                       self.displayValue = option.label;
-                      self.panelVisible = false;
+                      self.selection = this.selection.toJSON();
                   }
               });
               this.$watch('searchValue', ane_util_1.debounce(function (v) {
