@@ -29,6 +29,12 @@ import { emitToFormItem } from '../ms-form/utils';
  * }
  * -->
  * <ms-select :widget="{mode:'combobox',showSearch:true,remote:true,remoteMethod:@fetchOptions}"></ms-select>
+ * 
+ * <ms-select :widget="{showSearch:true,mode:'multiple'}">
+ *     <ms-select-option :widget="{value:'ane'}">Ane</ms-select-option>
+ *     <ms-select-option :widget="{value:'ms-bus'}">ms-bus</ms-select-option>
+ *     <ms-select-option :widget="{value:'up-loader'}">up-loader</ms-select-option>
+ * </ms-select>
  * ```
  */
 controlComponent.extend({
@@ -39,6 +45,7 @@ controlComponent.extend({
         value: [],
         mode: '',
         options: [],
+        selection: [],
         remote: false,
         remoteMethod: avalon.noop,
 
@@ -57,10 +64,21 @@ controlComponent.extend({
                 this.searchValue = '';
                 this.width = this.$element.offsetWidth;
                 this.panelVisible = true;
-                this.$element.children[1].focus();
+                this.$element.getElementsByClassName('bus-select-search-field')[0].focus();
             } else {
                 this.panelVisible = false;
             }
+        },
+        removeSelection(option) {
+            const isMultiple = this.mode === 'multiple' || this.mode === 'tags';
+            const value = this.value.toJSON();
+            this.selection.removeAll(o => o.value === option.value);
+            this.value.remove(option.value);
+            avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+            this.handleChange({
+                target: { value: isMultiple ? value : value[0] || '' },
+                type: 'select'
+            });
         },
 
         // 下拉框下拉列表部分
@@ -79,9 +97,10 @@ controlComponent.extend({
             
             emitToFormItem(this);
             this.$watch('value', v => {
-                let value = v.$model || v || [''];
+                const isMultiple = this.mode === 'multiple' || this.mode === 'tags';
+                const value = v.toJSON();
                 this.handleChange({
-                    target: { value: value[0] },
+                    target: { value: isMultiple ? value : value[0] || '' },
                     denyValidate: true,
                     type: 'select'
                 });
@@ -90,7 +109,7 @@ controlComponent.extend({
             this.panelVmId = this.$id + '_panel';
             const innerVm = avalon.define({
                 $id: this.panelVmId,
-                selected: '',
+                selection: [],
                 loading: false,
                 options: this.options.toJSON(),
                 searchValue: '',
@@ -105,17 +124,31 @@ controlComponent.extend({
                     return reg.test(el.label) || reg.test(el.value);
                 },
                 handleOptionClick(e, option) {
+                    let isMultiple = false;
                     if (option.disabled) {
                         return false;
                     }
-                    this.selected = option.value;
-                    self.value.push(option.value);
+                    if (self.mode === 'multiple' || self.mode === 'tags') {
+                        isMultiple = true;
+                        if (this.selection.some(o => o.value === option.value)) {
+                            this.selection.removeAll(o => o.value === option.value);
+                            self.value.remove(option.value);
+                        } else {
+                            this.selection.push(option);
+                            self.value.push(option.value);
+                        }
+                    } else {
+                        this.selection = [option];
+                        self.value = [option.value];
+                        self.panelVisible = false;
+                    }
+                    const value = self.value.toJSON();
                     self.handleChange({
-                        target: { value: option.value },
+                        target: { value: isMultiple ? value : value[0] || '' },
                         type: 'select'
                     });
                     self.displayValue = option.label;
-                    self.panelVisible = false;
+                    self.selection = this.selection.toJSON();
                 }
             });
             this.$watch('searchValue', debounce(v => {
