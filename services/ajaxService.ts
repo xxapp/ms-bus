@@ -45,7 +45,7 @@ export default function (options) {
         cache: false
     };
     options.data = processRequest(options.data);
-    options.url = serviceUrl + options.url;
+    options.url = /^\w+:\/\//.test(options.url) ? options.url : serviceUrl + options.url;
     return $.ajax({ ...defaultOptions, ...options }).then(processResponse);
 };
 
