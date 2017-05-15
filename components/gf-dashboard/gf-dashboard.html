@@ -15,7 +15,11 @@
         <ms-checkbox :widget="{checked:true,onChange:@handleChange}">同意</ms-checkbox>
         <ms-checkbox :widget="{checked:false,onChange:@handleChange}">不同意</ms-checkbox>
 
-        <ms-select :widget="{showSearch:true,remote:true,remoteMethod:@fetchOptions}"></ms-select>
+        <ms-select :widget="{showSearch:true}">
+            <ms-select-option :widget="{value:'M'}">男</ms-select-option>
+            <ms-select-option :widget="{value:'F', disabled:false}">女</ms-select-option>
+        </ms-select>
+        <ms-select :widget="{mode:'combobox',showSearch:true,remote:true,remoteMethod:@fetchOptions}"></ms-select>
         <input type="text" class="form-control"/>
     </div>
 </template>

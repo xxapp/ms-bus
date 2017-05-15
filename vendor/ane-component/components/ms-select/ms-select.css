@@ -21,6 +21,12 @@
     outline: none;
 }
 
+.bus-select-arrow {
+    position: absolute;
+    right: 8px;
+    line-height: 20px;
+}
+
 .bus-select-dropdown {
     background-color: #fff;
     box-shadow: 0 1px 6px rgba(0,0,0,.2);
@@ -42,7 +48,7 @@
 
 .bus-select-dropdown-menu-item {
     display: block;
-    padding: 7px 8px;
+    padding: 7px 13px;
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;

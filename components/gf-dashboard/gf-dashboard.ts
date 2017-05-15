@@ -1,5 +1,6 @@
 import * as avalon from 'avalon2';
 import { createForm, notification } from 'ane';
+import ajax from '../../services/ajaxService'
 
 export const name = 'gf-dashboard';
 
@@ -13,17 +14,13 @@ avalon.component(name, {
             this.show = false;
         },
         fetchOptions(query) {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    if (query === 'wasd') {
-                        resolve([]);
-                    } else {
-                        resolve(avalon.range(10).map(n => ({
-                            label: query + '-label' + n,
-                            value: query + '-value' + n
-                        })));
-                    }
-                }, 2000);
+            return ajax({
+                url: 'https://randomuser.me/api/?results=5',
+            }).then(body => {
+                return body.data.results.map(user => ({
+                    label: `${user.name.first}${user.name.last}`,
+                    value: user.login.username
+                }));
             });
         }
     }

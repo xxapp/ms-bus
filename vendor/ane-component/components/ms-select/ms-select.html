@@ -7,11 +7,11 @@
         :attr="{'aria-expanded': @panelVisible + ''}">
         <span class="bus-select-selected" :visible="!@showSearch || !@panelVisible">{{@displayValue}}</span>
         <input class="bus-select-search" type="text" :duplex="@searchValue" :visible="@showSearch && @panelVisible" :attr="{placeholder: @displayValue}" />
+        <i class="fa bus-select-arrow"
+            :class="[(@panelVisible ? 'fa-caret-up' : 'fa-caret-down')]"
+            :visible="@mode === ''"></i>
         <ms-trigger :widget="{
-            left: @left,
-            top: @top,
             width: @width,
-            height: @height,
             visible: @panelVisible,
             innerVmId: @panelVmId,
             innerClass: @panelClass,
