@@ -24,36 +24,37 @@ Purchase: http://wrapbootstrap.com
     <![endif]-->
 
     <!--Basic Styles-->
+    <link href="/ms-bus/static/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link id="bootstrap-rtl-link" rel="stylesheet" />
+    <link href="/ms-bus/static/static/beyond/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/ms-bus/static/static/beyond/css/weather-icons.min.css" rel="stylesheet" />
 
     <!--Fonts-->
     <!--<link href="http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">-->
 
     <!--Beyond styles-->
+    <link id="beyond-link" href="/ms-bus/static/static/beyond/css/beyond.min.css" rel="stylesheet" type="text/css" />
+    <link href="/ms-bus/static/static/beyond/css/demo.min.css" rel="stylesheet" />
+    <link href="/ms-bus/static/static/beyond/css/typicons.min.css" rel="stylesheet" />
+    <link href="/ms-bus/static/static/beyond/css/animate.min.css" rel="stylesheet" />
+    <link id="skin-link" href="/ms-bus/static/static/beyond/css/skins/teal.min.css" rel="stylesheet" type="text/css" />
+
     <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
     <!--<script src="./static/beyond/js/skins.min.js"></script>-->
 
     <!--Custom styles-->
-    
-    <link rel="stylesheet" type="text/css" href="/ms-bus/static/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <style>
+        .ms-controller {
+            visibility: hidden;
+        }
+    </style>
+
     <link rel="stylesheet" type="text/css" href="/ms-bus/static/vendor/ane-component/components/ms-checkbox/ms-checkbox.css" />
     <link rel="stylesheet" type="text/css" href="/ms-bus/static/vendor/ane-component/components/ms-loading/ms-loading.css" />
     <link rel="stylesheet" type="text/css" href="/ms-bus/static/vendor/ane-component/components/ms-table/ms-table.css" />
     <link rel="stylesheet" type="text/css" href="/ms-bus/static/vendor/ane-component/components/ms-select/ms-select.css" />
     <link rel="stylesheet" type="text/css" href="/ms-bus/static/vendor/ane-component/components/ms-upload/ms-upload.css" />
     <link rel="stylesheet" type="text/css" href="/ms-bus/static/vendor/ane-component/components/ms-radio/ms-radio.css" />
-    <link rel="stylesheet" href="/ms-bus/static/static/beyond/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/ms-bus/static/static/beyond/css/weather-icons.min.css" />
-    <link id="beyond-link" rel="stylesheet" type="text/css" href="/ms-bus/static/static/beyond/css/beyond.min.css" />
-    <link rel="stylesheet" href="/ms-bus/static/static/beyond/css/demo.min.css" />
-    <link rel="stylesheet" href="/ms-bus/static/static/beyond/css/typicons.min.css" />
-    <link rel="stylesheet" href="/ms-bus/static/static/beyond/css/animate.min.css" />
-    <link id="skin-link" rel="stylesheet" type="text/css" href="/ms-bus/static/static/beyond/css/skins/teal.min.css" />
-    <style>
-        .ms-controller {
-            visibility: hidden;
-        }
-    </style>
 </head>
 <!-- /Head -->
 <!-- Body -->
@@ -724,21 +725,6 @@ require.resourceMap({
         "vendor/ane-component/ane-component.ts"
       ]
     },
-    "components/gf-dashboard/gf-dashboard.ts": {
-      "url": "/ms-bus/static/components/gf-dashboard/gf-dashboard.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "vendor/ane-component/index.ts"
-      ]
-    },
-    "components/gf-aaa/gf-aaa.ts": {
-      "url": "/ms-bus/static/components/gf-aaa/gf-aaa.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ]
-    },
     "services/configService.ts": {
       "url": "/ms-bus/static/services/configService.js",
       "type": "js"
@@ -750,6 +736,22 @@ require.resourceMap({
         "node_modules/bootbox/bootbox",
         "vendor/ane-component/index.ts",
         "services/configService.ts"
+      ]
+    },
+    "components/gf-dashboard/gf-dashboard.ts": {
+      "url": "/ms-bus/static/components/gf-dashboard/gf-dashboard.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "vendor/ane-component/index.ts",
+        "services/ajaxService.ts"
+      ]
+    },
+    "components/gf-aaa/gf-aaa.ts": {
+      "url": "/ms-bus/static/components/gf-aaa/gf-aaa.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
       ]
     },
     "vendor/jquery/ajaxfileupload": {

@@ -12,22 +12,33 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
    * @prop value 组件值(inherit)
    * @prop col 字段路径(inherit)
    * @prop options 下拉选项
+   * @prop mode 模式 'combobox' | 'multiple' | 'tags' 默认为 ''
    * @prop showSearch 是否显示搜索框
    * @prop remote 是否为远程搜索
    * @prop remoteMethod 当remote为true时调用，包含远程搜索要执行的请求，返回一个Promise<options>
    *
    * @example
-   *  <ms-select :widget="{showSearch:true}">
-   *      <ms-select-option :widget="{value:'M'}">男</ms-select-option>
-   *      <ms-select-option :widget="{value:'F', disabled:false}">女</ms-select-option>
-   *  </ms-select>
+   * ``` html
+   * <ms-select :widget="{showSearch:true}">
+   *     <ms-select-option :widget="{value:'M'}">男</ms-select-option>
+   *     <ms-select-option :widget="{value:'F', disabled:false}">女</ms-select-option>
+   * </ms-select>
+   *
+   * <!--
+   * fetchOptions(query) {
+   *     return ajax({ url, data: { query } });
+   * }
+   * -->
+   * <ms-select :widget="{mode:'combobox',showSearch:true,remote:true,remoteMethod:@fetchOptions}"></ms-select>
+   * ```
    */
   ms_control_1["default"].extend({
       displayName: 'ms-select',
-      template: "\n<div class=\"bus-select form-control \"\n    :click=\"handleClick\"\n    role=\"combobox\"\n    aria-autocomplete=\"list\"\n    aria-haspopup=\"true\"\n    :attr=\"{'aria-expanded': @panelVisible + ''}\">\n    <span class=\"bus-select-selected \" :visible=\"!@showSearch || !@panelVisible\">{{@displayValue}}</span>\n    <input class=\"bus-select-search \" type=\"text\" :duplex=\"@searchValue\" :visible=\"@showSearch && @panelVisible\" :attr=\"{placeholder: @displayValue}\" />\n    <ms-trigger :widget=\"{\n        left: @left,\n        top: @top,\n        width: @width,\n        height: @height,\n        visible: @panelVisible,\n        innerVmId: @panelVmId,\n        innerClass: @panelClass,\n        innerTemplate: @panelTemplate,\n        withInBox: @withInBox,\n        getTarget: @getTarget,\n        onHide: @handlePanelHide}\">\n    </ms-trigger>\n</div>\n",
+      template: "\n<div class=\"bus-select form-control \"\n    :click=\"handleClick\"\n    role=\"combobox\"\n    aria-autocomplete=\"list\"\n    aria-haspopup=\"true\"\n    :attr=\"{'aria-expanded': @panelVisible + ''}\">\n    <span class=\"bus-select-selected \" :visible=\"!@showSearch || !@panelVisible\">{{@displayValue}}</span>\n    <input class=\"bus-select-search \" type=\"text\" :duplex=\"@searchValue\" :visible=\"@showSearch && @panelVisible\" :attr=\"{placeholder: @displayValue}\" />\n    <i class=\"fa bus-select-arrow \"\n        :class=\"[(@panelVisible ? 'fa-caret-up' : 'fa-caret-down')] \"\n        :visible=\"@mode === ''\"></i>\n    <ms-trigger :widget=\"{\n        width: @width,\n        visible: @panelVisible,\n        innerVmId: @panelVmId,\n        innerClass: @panelClass,\n        innerTemplate: @panelTemplate,\n        withInBox: @withInBox,\n        getTarget: @getTarget,\n        onHide: @handlePanelHide}\">\n    </ms-trigger>\n</div>\n",
       defaults: {
           width: 0,
           value: [],
+          mode: '',
           options: [],
           remote: false,
           remoteMethod: avalon.noop,
@@ -42,10 +53,15 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
               return this.$element;
           },
           handleClick: function (e) {
-              this.searchValue = '';
-              this.width = this.$element.offsetWidth;
-              this.panelVisible = true;
-              this.$element.children[1].focus();
+              if (!this.panelVisible) {
+                  this.searchValue = '';
+                  this.width = this.$element.offsetWidth;
+                  this.panelVisible = true;
+                  this.$element.children[1].focus();
+              }
+              else {
+                  this.panelVisible = false;
+              }
           },
           // 下拉框下拉列表部分
           panelVmId: '',

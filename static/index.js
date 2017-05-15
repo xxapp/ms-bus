@@ -7,7 +7,6 @@ define('index.ts', function(require, exports, module) {
   require("node_modules/es6-promise/dist/es6-promise.auto");
   var jQuery = require("node_modules/jquery/dist/jquery");
   global.$ = global.jQuery = jQuery;
-  '';
   require("node_modules/bootstrap/dist/js/bootstrap");
   var bootbox = require("node_modules/bootbox/bootbox");
   bootbox.setLocale('zh_CN');

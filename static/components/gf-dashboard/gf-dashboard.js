@@ -3,9 +3,10 @@ define('components/gf-dashboard/gf-dashboard.ts', function(require, exports, mod
   "use strict";
   var avalon = require("node_modules/avalon2/dist/avalon");
   var ane_1 = require("vendor/ane-component/index.ts");
+  var ajaxService_1 = require("services/ajaxService.ts");
   exports.name = 'gf-dashboard';
   avalon.component(exports.name, {
-      template: "\n<div>\n    <h3>{{@message}}</h3>\n    <button type=\"button\" :click=\"@show = true\">show dialog</button>\n    <ms-dialog :widget=\"{$innerVm: 'dashboard_from', show: @show, onCancel: @handleCancel}\">\n        <div slot=\"body\" ms-skip>\n            <xmp is=\"ms-form\" :widget=\"{$form: @$form}\">\n                <ms-form-item :widget=\"{label: '标题'}\">\n                    <ms-input :widget=\"{col: 'title'}\"></ms-input>\n                </ms-form-item>\n            </xmp>\n        </div>\n    </ms-dialog>\n    <br>\n    <ms-checkbox :widget=\"{checked:true,onChange:@handleChange}\">同意</ms-checkbox>\n    <ms-checkbox :widget=\"{checked:false,onChange:@handleChange}\">不同意</ms-checkbox>\n\n    <ms-select :widget=\"{showSearch:true,remote:true,remoteMethod:@fetchOptions}\"></ms-select>\n    <input type=\"text\" class=\"form-control \"/>\n</div>\n",
+      template: "\n<div>\n    <h3>{{@message}}</h3>\n    <button type=\"button\" :click=\"@show = true\">show dialog</button>\n    <ms-dialog :widget=\"{$innerVm: 'dashboard_from', show: @show, onCancel: @handleCancel}\">\n        <div slot=\"body\" ms-skip>\n            <xmp is=\"ms-form\" :widget=\"{$form: @$form}\">\n                <ms-form-item :widget=\"{label: '标题'}\">\n                    <ms-input :widget=\"{col: 'title'}\"></ms-input>\n                </ms-form-item>\n            </xmp>\n        </div>\n    </ms-dialog>\n    <br>\n    <ms-checkbox :widget=\"{checked:true,onChange:@handleChange}\">同意</ms-checkbox>\n    <ms-checkbox :widget=\"{checked:false,onChange:@handleChange}\">不同意</ms-checkbox>\n\n    <ms-select :widget=\"{showSearch:true}\">\n        <ms-select-option :widget=\"{value:'M'}\">男</ms-select-option>\n        <ms-select-option :widget=\"{value:'F', disabled:false}\">女</ms-select-option>\n    </ms-select>\n    <ms-select :widget=\"{mode:'combobox',showSearch:true,remote:true,remoteMethod:@fetchOptions}\"></ms-select>\n    <input type=\"text\" class=\"form-control \"/>\n</div>\n",
       defaults: {
           show: false,
           message: '欢迎',
@@ -14,18 +15,13 @@ define('components/gf-dashboard/gf-dashboard.ts', function(require, exports, mod
               this.show = false;
           },
           fetchOptions: function (query) {
-              return new Promise(function (resolve, reject) {
-                  setTimeout(function () {
-                      if (query === 'wasd') {
-                          resolve([]);
-                      }
-                      else {
-                          resolve(avalon.range(10).map(function (n) { return ({
-                              label: query + '-label' + n,
-                              value: query + '-value' + n
-                          }); }));
-                      }
-                  }, 2000);
+              return ajaxService_1["default"]({
+                  url: 'https://randomuser.me/api/?results=5'
+              }).then(function (body) {
+                  return body.data.results.map(function (user) { return ({
+                      label: "" + user.name.first + user.name.last,
+                      value: user.login.username
+                  }); });
               });
           }
       }
