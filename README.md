@@ -25,3 +25,7 @@
   
   npm run dev
   ```
+
+## 鸣谢
+
+[活儿好又性感的在线 Mock 平台 - Easy Mock](https://www.easy-mock.com/) 提供模拟数据支持
