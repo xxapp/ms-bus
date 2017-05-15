@@ -47,6 +47,29 @@ define('vendor/ane-component/ane-util.ts', function(require, exports, module) {
       }, []);
   }
   exports.getChildTemplateDescriptor = getChildTemplateDescriptor;
+  function debounce(func, wait, immediate) {
+      if (wait === void 0) { wait = 300; }
+      if (immediate === void 0) { immediate = false; }
+      var timeout;
+      return function () {
+          var args = [];
+          for (var _i = 0; _i < arguments.length; _i++) {
+              args[_i] = arguments[_i];
+          }
+          var context = this;
+          var later = function () {
+              timeout = null;
+              if (!immediate)
+                  func.apply(context, args);
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow)
+              func.apply(context, args);
+      };
+  }
+  exports.debounce = debounce;
   //# sourceMappingURL=/ms-bus/static/vendor/ane-component/ane-util.js.map
   
 
