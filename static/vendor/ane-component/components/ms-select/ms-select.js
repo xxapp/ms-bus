@@ -40,7 +40,7 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
    */
   ms_control_1["default"].extend({
       displayName: 'ms-select',
-      template: "\n<div class=\"bus-select form-control \"\n    :class=\"[(@isMultiple ? 'bus-select-multiple' : '')] \"\n    :click=\"handleClick\"\n    role=\"combobox\"\n    aria-autocomplete=\"list\"\n    aria-haspopup=\"true\"\n    :attr=\"{'aria-expanded': @panelVisible + ''}\">\n    <ul class=\"bus-select-selection \" :class=\"[(@isMultiple ? 'bus-select-tags' : '')] \">\n        <li class=\"bus-select-selected \" :visible=\"!@isMultiple && (!@showSearch || !@panelVisible)\">{{@displayValue}}</li>\n        <li class=\"bus-select-choice \" :for=\"choice in @selection\">\n            <span>{{choice.label}}</span>\n            <i class=\"fa fa-times \" :click=\"removeSelection($event, choice) | stop\"></i>\n        </li>\n        <li class=\"bus-select-search \">\n            <input class=\"bus-select-search-field \" name=\"search\" type=\"text\" :duplex=\"@searchValue\" :visible=\"@showSearch && @panelVisible\" />\n        </li>\n    </ul>\n    <i class=\"fa bus-select-arrow \"\n        :class=\"[(@panelVisible ? 'fa-caret-up' : 'fa-caret-down')] \"\n        :visible=\"@mode === ''\"></i>\n    <ms-trigger :widget=\"{\n        width: @width,\n        visible: @panelVisible,\n        innerVmId: @panelVmId,\n        innerClass: @panelClass,\n        innerTemplate: @panelTemplate,\n        withInBox: @withInBox,\n        getTarget: @getTarget,\n        onHide: @handlePanelHide}\">\n    </ms-trigger>\n</div>\n",
+      template: "\n<div class=\"bus-select form-control \"\n    :class=\"[(@isMultiple ? 'bus-select-multiple' : '')] \"\n    :click=\"@handleClick\"\n    role=\"combobox\"\n    aria-autocomplete=\"list\"\n    aria-haspopup=\"true\"\n    :attr=\"{'aria-expanded': @panelVisible + ''}\">\n    <ul class=\"bus-select-selection \" :class=\"[(@isMultiple ? 'bus-select-tags' : '')] \">\n        <li class=\"bus-select-selected \" :visible=\"!@isMultiple && (!@showSearch || !@panelVisible)\">{{@displayValue}}</li>\n        <li class=\"bus-select-choice \" :for=\"choice in @selection\">\n            <span>{{choice.label}}</span>\n            <i class=\"fa fa-times \" :click=\"@removeSelection($event, choice) | stop\"></i>\n        </li>\n        <li class=\"bus-select-search \">\n            <input class=\"bus-select-search-field \"\n                name=\"search\"\n                type=\"text\"\n                autocomplete=\"off\"\n                :duplex=\"@searchValue\"\n                :visible=\"@showSearch && @panelVisible\"\n                :keydown=\"@handleDelete\" />\n        </li>\n    </ul>\n    <i class=\"fa bus-select-arrow \"\n        :class=\"[(@panelVisible ? 'fa-caret-up' : 'fa-caret-down')] \"\n        :visible=\"@mode === ''\"></i>\n    <ms-trigger :widget=\"{\n        width: @width,\n        visible: @panelVisible,\n        innerVmId: @panelVmId,\n        innerClass: @panelClass,\n        innerTemplate: @panelTemplate,\n        withInBox: @withInBox,\n        getTarget: @getTarget,\n        onHide: @handlePanelHide}\">\n    </ms-trigger>\n</div>\n",
       defaults: {
           width: 0,
           value: [],
@@ -73,6 +73,18 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
                   this.panelVisible = false;
               }
           },
+          handleDelete: function (e) {
+              if ((e.which === 8 || e.which === 46) && this.searchValue === '') {
+                  var value = this.value.toJSON();
+                  this.selection.removeAt(this.selection.length - 1);
+                  this.value.remove(this.value.length - 1);
+                  avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+                  this.handleChange({
+                      target: { value: this.isMultiple ? value : value[0] || '' },
+                      type: 'select'
+                  });
+              }
+          },
           removeSelection: function (e, option) {
               var value = this.value.toJSON();
               this.selection.removeAll(function (o) { return o.value === option.value; });
@@ -88,7 +100,7 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
           panelVmId: '',
           panelVisible: false,
           panelClass: 'bus-select-dropdown',
-          panelTemplate: "\n<div style=\"overflow: auto\">\n    <ul class=\"bus-select-dropdown-menu \" role=\"menu\">\n        <li class=\"bus-select-dropdown-menu-item \"\n            :class=\"[ (@selection.some(function(){return arguments[0].value===option.value}) ? 'bus-select-dropdown-menu-item-selected' : ''), (option.disabled ? 'bus-select-dropdown-menu-item-disabled' : '') ] \"\n            :for=\"option in @getFilteredOptions()\"\n            :click=\"handleOptionClick($event, option)\"\n            role=\"menuitem\">\n            {{option.label}}\n            <i class=\"fa fa-check \" :visible=\"@isMultiple\"></i>\n        </li>\n        <li class=\"bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled \"\n            :visible=\"@getFilteredOptions().length <= 0 && @searchValue && !@loading\">无数据</li>\n        <li class=\"bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled \"\n            :visible=\"@loading\">加载中</li>\n    </ul>\n</div>\n",
+          panelTemplate: "\n<div style=\"overflow: auto\">\n    <ul class=\"bus-select-dropdown-menu \" role=\"menu\">\n        <li class=\"bus-select-dropdown-menu-item \"\n            :class=\"[ (@selection.some(function(){return arguments[0].value===option.value}) ? 'bus-select-dropdown-menu-item-selected' : ''), (option.disabled ? 'bus-select-dropdown-menu-item-disabled' : '') ] \"\n            :for=\"option in @getFilteredOptions()\"\n            :click=\"@handleOptionClick($event, option)\"\n            role=\"menuitem\">\n            {{option.label}}\n            <i class=\"fa fa-check \" :visible=\"@isMultiple\"></i>\n        </li>\n        <li class=\"bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled \"\n            :visible=\"@getFilteredOptions().length <= 0 && @searchValue && !@loading\">无数据</li>\n        <li class=\"bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled \"\n            :visible=\"@loading\">加载中</li>\n    </ul>\n</div>\n",
           handlePanelHide: function () {
               this.panelVisible = false;
           },
