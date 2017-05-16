@@ -7,7 +7,7 @@
                     (option.disabled ? 'bus-select-dropdown-menu-item-disabled' : '')
                 ]"
                 :for="option in @getFilteredOptions()"
-                :click="handleOptionClick($event, option)"
+                :click="@handleOptionClick($event, option)"
                 role="menuitem">
                 {{option.label}}
                 <i class="fa fa-check" :visible="@isMultiple"></i>

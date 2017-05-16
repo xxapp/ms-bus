@@ -72,6 +72,18 @@ controlComponent.extend({
                 this.panelVisible = false;
             }
         },
+        handleDelete(e) {
+            if ((e.which === 8 || e.which === 46) && this.searchValue === '') {
+                const value = this.value.toJSON();
+                this.selection.removeAt(this.selection.length - 1);
+                this.value.remove(this.value.length - 1);
+                avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+                this.handleChange({
+                    target: { value: this.isMultiple ? value : value[0] || '' },
+                    type: 'select'
+                });
+            }
+        },
         removeSelection(e, option) {
             const value = this.value.toJSON();
             this.selection.removeAll(o => o.value === option.value);
