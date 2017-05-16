@@ -75,10 +75,10 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
           },
           handleDelete: function (e) {
               if ((e.which === 8 || e.which === 46) && this.searchValue === '') {
-                  var value = this.value.toJSON();
                   this.selection.removeAt(this.selection.length - 1);
-                  this.value.remove(this.value.length - 1);
-                  avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+                  var selection = this.selection.toJSON();
+                  var value = selection.map(function (s) { return s.value; });
+                  avalon.vmodels[this.panelVmId].selection = selection;
                   this.handleChange({
                       target: { value: this.isMultiple ? value : value[0] || '' },
                       type: 'select'
@@ -86,10 +86,10 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
               }
           },
           removeSelection: function (e, option) {
-              var value = this.value.toJSON();
               this.selection.removeAll(function (o) { return o.value === option.value; });
-              this.value.remove(option.value);
-              avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+              var selection = this.selection.toJSON();
+              var value = selection.map(function (s) { return s.value; });
+              avalon.vmodels[this.panelVmId].selection = selection;
               this.focusSearch();
               this.handleChange({
                   target: { value: this.isMultiple ? value : value[0] || '' },
@@ -153,26 +153,24 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
                       if (self.isMultiple) {
                           if (this.selection.some(function (o) { return o.value === option.value; })) {
                               this.selection.removeAll(function (o) { return o.value === option.value; });
-                              self.value.remove(option.value);
                           }
                           else {
                               this.selection.push(option);
-                              self.value.push(option.value);
                           }
                           self.focusSearch();
                       }
                       else {
                           this.selection = [option];
-                          self.value = [option.value];
                           self.panelVisible = false;
                       }
-                      var value = self.value.toJSON();
+                      var selection = this.selection.toJSON();
+                      var value = selection.map(function (s) { return s.value; });
                       self.handleChange({
                           target: { value: self.isMultiple ? value : value[0] || '' },
                           type: 'select'
                       });
                       self.displayValue = option.label;
-                      self.selection = this.selection.toJSON();
+                      self.selection = selection;
                   }
               });
               this.$watch('searchValue', ane_util_1.debounce(function (v) {
