@@ -13,6 +13,9 @@ avalon.component(name, {
             //console.log(e);
             this.show = false;
         },
+        handleSelectChange(e) {
+            console.log(e.target.value);
+        },
         fetchOptions(query) {
             return ajax({
                 url: 'https://randomuser.me/api/?results=5',

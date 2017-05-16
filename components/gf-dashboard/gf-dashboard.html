@@ -15,7 +15,7 @@
         <ms-checkbox :widget="{checked:true,onChange:@handleChange}">同意</ms-checkbox>
         <ms-checkbox :widget="{checked:false,onChange:@handleChange}">不同意</ms-checkbox>
 
-        <ms-select :widget="{showSearch:true,mode:'multiple'}">
+        <ms-select :widget="{showSearch:true,mode:'multiple',onChange:@handleSelectChange}">
             <ms-select-option :widget="{value:'ane'}">Ane</ms-select-option>
             <ms-select-option :widget="{value:'ms-bus'}">ms-bus</ms-select-option>
             <ms-select-option :widget="{value:'up-loader'}">up-loader</ms-select-option>

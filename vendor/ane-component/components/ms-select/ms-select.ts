@@ -74,10 +74,10 @@ controlComponent.extend({
         },
         handleDelete(e) {
             if ((e.which === 8 || e.which === 46) && this.searchValue === '') {
-                const value = this.value.toJSON();
                 this.selection.removeAt(this.selection.length - 1);
-                this.value.remove(this.value.length - 1);
-                avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+                const selection = this.selection.toJSON();
+                const value = selection.map(s => s.value);
+                avalon.vmodels[this.panelVmId].selection = selection;
                 this.handleChange({
                     target: { value: this.isMultiple ? value : value[0] || '' },
                     type: 'select'
@@ -85,10 +85,10 @@ controlComponent.extend({
             }
         },
         removeSelection(e, option) {
-            const value = this.value.toJSON();
             this.selection.removeAll(o => o.value === option.value);
-            this.value.remove(option.value);
-            avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+            const selection = this.selection.toJSON();
+            const value = selection.map(s => s.value);
+            avalon.vmodels[this.panelVmId].selection = selection;
             this.focusSearch();
             this.handleChange({
                 target: { value: this.isMultiple ? value : value[0] || '' },
@@ -156,24 +156,22 @@ controlComponent.extend({
                     if (self.isMultiple) {
                         if (this.selection.some(o => o.value === option.value)) {
                             this.selection.removeAll(o => o.value === option.value);
-                            self.value.remove(option.value);
                         } else {
                             this.selection.push(option);
-                            self.value.push(option.value);
                         }
                         self.focusSearch();
                     } else {
                         this.selection = [option];
-                        self.value = [option.value];
                         self.panelVisible = false;
                     }
-                    const value = self.value.toJSON();
+                    const selection = this.selection.toJSON();
+                    const value = selection.map(s => s.value);
                     self.handleChange({
                         target: { value: self.isMultiple ? value : value[0] || '' },
                         type: 'select'
                     });
                     self.displayValue = option.label;
-                    self.selection = this.selection.toJSON();
+                    self.selection = selection;
                 }
             });
             this.$watch('searchValue', debounce(v => {
