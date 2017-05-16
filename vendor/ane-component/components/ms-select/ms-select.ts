@@ -53,6 +53,9 @@ controlComponent.extend({
         displayValue: '',
         showSearch: false,
         searchValue: '',
+        focusSearch() {
+            this.$element.getElementsByTagName('input').search.focus();
+        },
         withInBox(el) {
             return this.$element === el || avalon.contains(this.$element, el);
         },
@@ -64,19 +67,19 @@ controlComponent.extend({
                 this.searchValue = '';
                 this.width = this.$element.offsetWidth;
                 this.panelVisible = true;
-                this.$element.getElementsByClassName('bus-select-search-field')[0].focus();
-            } else {
+                this.focusSearch();
+            } else if (!this.isMultiple) {
                 this.panelVisible = false;
             }
         },
-        removeSelection(option) {
-            const isMultiple = this.mode === 'multiple' || this.mode === 'tags';
+        removeSelection(e, option) {
             const value = this.value.toJSON();
             this.selection.removeAll(o => o.value === option.value);
             this.value.remove(option.value);
             avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+            this.focusSearch();
             this.handleChange({
-                target: { value: isMultiple ? value : value[0] || '' },
+                target: { value: this.isMultiple ? value : value[0] || '' },
                 type: 'select'
             });
         },
@@ -89,6 +92,14 @@ controlComponent.extend({
         handlePanelHide() {
             this.panelVisible = false;
         },
+
+        $computed: {
+            isMultiple: {
+                get() {
+                    return this.mode === 'multiple' || this.mode === 'tags';
+                }
+            }
+        },
         
         onInit(event) {
             var self = this;
@@ -97,10 +108,9 @@ controlComponent.extend({
             
             emitToFormItem(this);
             this.$watch('value', v => {
-                const isMultiple = this.mode === 'multiple' || this.mode === 'tags';
                 const value = v.toJSON();
                 this.handleChange({
-                    target: { value: isMultiple ? value : value[0] || '' },
+                    target: { value: this.isMultiple ? value : value[0] || '' },
                     denyValidate: true,
                     type: 'select'
                 });
@@ -111,25 +121,27 @@ controlComponent.extend({
                 $id: this.panelVmId,
                 selection: [],
                 loading: false,
+                isMultiple: this.isMultiple,
                 options: this.options.toJSON(),
                 searchValue: '',
                 getFilteredOptions() {
                     return this.options.filter(this.filterFn);
                 },
                 filterFn(el) {
-                    if (self.remote && !this.loading) {
+                    if (this.loading) {
+                        return false;
+                    }
+                    if (self.remote) {
                         return true;
                     }
                     const reg = new RegExp(avalon.escapeRegExp(this.searchValue), 'i');
                     return reg.test(el.label) || reg.test(el.value);
                 },
                 handleOptionClick(e, option) {
-                    let isMultiple = false;
                     if (option.disabled) {
                         return false;
                     }
-                    if (self.mode === 'multiple' || self.mode === 'tags') {
-                        isMultiple = true;
+                    if (self.isMultiple) {
                         if (this.selection.some(o => o.value === option.value)) {
                             this.selection.removeAll(o => o.value === option.value);
                             self.value.remove(option.value);
@@ -137,6 +149,7 @@ controlComponent.extend({
                             this.selection.push(option);
                             self.value.push(option.value);
                         }
+                        self.focusSearch();
                     } else {
                         this.selection = [option];
                         self.value = [option.value];
@@ -144,7 +157,7 @@ controlComponent.extend({
                     }
                     const value = self.value.toJSON();
                     self.handleChange({
-                        target: { value: isMultiple ? value : value[0] || '' },
+                        target: { value: self.isMultiple ? value : value[0] || '' },
                         type: 'select'
                     });
                     self.displayValue = option.label;
@@ -161,6 +174,9 @@ controlComponent.extend({
                     });
                 }
             }));
+            this.$watch('isMultiple', v => {
+                innerVm.isMultiple = v;
+            });
         },
         onDispose() {
             delete avalon.vmodels[this.panelVmId];

@@ -8,7 +8,10 @@
                 ]"
                 :for="option in @getFilteredOptions()"
                 :click="handleOptionClick($event, option)"
-                role="menuitem">{{option.label}}</li>
+                role="menuitem">
+                {{option.label}}
+                <i class="fa fa-check" :visible="@isMultiple"></i>
+            </li>
             <li class="bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled"
                 :visible="@getFilteredOptions().length <= 0 && @searchValue && !@loading">无数据</li>
             <li class="bus-select-dropdown-menu-item bus-select-dropdown-menu-item-disabled"
