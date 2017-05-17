@@ -2,7 +2,7 @@
     <div class="checkbox-group">
         <ms-checkbox 
             :widget="{
-                checked:@value.indexOf(option.value)!=-1,
+                checked:@selection.indexOf(option.value)!=-1,
                 group:true,
                 onChange:function(){
                     @toggleOption(option)

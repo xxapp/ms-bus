@@ -19,15 +19,21 @@ controlComponent.extend({
     template: __inline('./ms-textarea.html'),
     defaults: {
         rows: '',
+        text: '',
+        mapValueToText(value) {
+            this.text = value;
+        },
         onInit(event) {
             emitToFormItem(this);
             this.$watch('value', v => {
+                this.mapValueToText(v);
                 this.handleChange({
                     target: { value: v },
                     denyValidate: true,
                     type: 'changed'
                 });
             });
+            this.mapValueToText(this.value);
         }
     }
 });

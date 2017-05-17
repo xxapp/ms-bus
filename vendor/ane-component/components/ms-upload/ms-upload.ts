@@ -38,10 +38,8 @@ controlComponent.extend({
             return true;
         },
         handleRemove(file) {
-            let value;
             this.fileList.removeAll(f => f.uid === file.uid);
-            this.value.remove(file.url);
-            value = this.value.$model || this.value || [''];
+            const value = this.fileList.filter(f => f.status === 'done').map(f => f.url);
             this.handleChange({
                 target: { value: this.showUploadList ? value : value[0] },
                 type: 'file-upload'
@@ -66,7 +64,7 @@ controlComponent.extend({
             this.helpId = this.$id;
             this.mapValueToFileList(this.value);
             this.$watch('value', v => {
-                let value = v.$model || v || [''];
+                let value = v.toJSON();
                 this.fileList.clear();
                 this.mapValueToFileList(value);
                 this.handleChange({
@@ -122,11 +120,6 @@ controlComponent.extend({
                         f.progress = 100;
                         f.url = response.url;
                     });
-                    if (!this.showUploadList) {
-                        this.value = [response.url];
-                    } else {
-                        this.value.push(response.url);
-                    }
                 },
                 onFailure: (file, err) => {
                     updateFileObj(this.fileList, file.index, f => {
@@ -136,7 +129,7 @@ controlComponent.extend({
                     throw err;
                 },
                 onComplete: () => {
-                    let value = this.value.$model || this.value || [''];
+                    const value = this.fileList.filter(f => f.status === 'done').map(f => f.url);
                     this.handleChange({
                         target: { value: this.showUploadList ? value : value[0] },
                         type: 'file-upload'

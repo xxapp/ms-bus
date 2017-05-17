@@ -17,15 +17,21 @@ controlComponent.extend({
     displayName: 'ms-input',
     template: __inline('./ms-input.html'),
     defaults: {
+        text: '',
+        mapValueToText(value) {
+            this.text = value;
+        },
         onInit: function (event) {
             emitToFormItem(this);
             this.$watch('value', v => {
+                this.mapValueToText(v);
                 this.handleChange({
                     target: { value: v },
                     denyValidate: true,
                     type: 'changed'
                 });
             });
+            this.mapValueToText(this.value);
         }
     }
 });

@@ -8,14 +8,14 @@
                 <div class="widget-body">
                     <ms-form :widget="{$form: @$form}">
                         <ms-form-item :widget="{label:'姓名'}">
-                            <ms-input :widget="{value:@record.name,col:'name',$rules:{required:true,message:'请输入文字'}}"></ms-input>
+                            <ms-input :widget="{value:@record.name,col:'name',$rules:{required:true,message:'请输入文字'}, onChange:@handleChange}"></ms-input>
                         </ms-form-item>
                         <ms-form-item :widget="{label:'兴趣'}">
                             <ms-checkbox-group
                                 :widget="{value:@record.hobby,col:'hobby',options:[
                                             { label: '编程', value: 'code' },
                                             { label: '其他', value: 'other' }
-                                        ],$rules:{required:true,type:'array'}}">
+                                        ],$rules:{required:true,type:'array'}, onChange:@handleChange}">
                             </ms-checkbox-group>
                         </ms-form-item>
                         <div class="form-title">教育经历</div>
@@ -33,7 +33,7 @@
                                 :widget="{value:@record.gender,col:'gender',options:[
                                             { label: '男', value: 'M' },
                                             { label: '女', value: 'F' }
-                                        ],$rules:{required:true}}">
+                                        ],$rules:{required:true}, onChange:@handleChange}">
                             </ms-radio-group>
                         </ms-form-item>
                         <!--<ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
@@ -52,15 +52,15 @@
                         </ms:control-select2>
                         <ms:control-datepicker label="出生日期" col="birthday" ms-cduplex="record.birthday"></ms:control-datepicker>-->
                         <ms-form-item :widget="{label:'头像'}">
-                            <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: @fileUploadUrl,listType:'picture-card',showUploadList:false,beforeUpload:@handleBeforeUpload,$rules:{required:true,message:'请选择头像'}}">
+                            <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: @fileUploadUrl,listType:'picture-card',showUploadList:false,beforeUpload:@handleBeforeUpload,$rules:{required:true,message:'请选择头像'}, onChange:@handleChange}">
                                 <i class="fa fa-plus"></i>选择图片
                             </ms-upload>
                         </ms-form-item>
                         <ms-form-item :widget="{label:'个人简介'}">
-                            <ms-textarea :widget="{value:@record.bio,col:'bio',rows:5,$rules:{required:true}}"></ms-textarea>
+                            <ms-textarea :widget="{value:@record.bio,col:'bio',rows:5,$rules:{required:true}, onChange:@handleChange}"></ms-textarea>
                         </ms-form-item>
                         <ms-form-item :widget="{label:'附件'}">
-                            <ms-upload :widget="{value:@record.attachment,col:'attachment',action: @fileUploadUrl,listType:'text-list',$rules:{required:true,type:'array'}}">
+                            <ms-upload :widget="{value:@record.attachment,col:'attachment',action: @fileUploadUrl,listType:'text-list',$rules:{required:true,type:'array'}, onChange:@handleChange}">
                                 <i class="fa fa-upload"></i>选择文件
                             </ms-upload>
                         </ms-form-item>

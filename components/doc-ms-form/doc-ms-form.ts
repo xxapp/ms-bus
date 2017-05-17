@@ -37,6 +37,9 @@ avalon.component(name, {
             }
             return true;
         },
+        handleChange(e) {
+            console.log(e.target.value);
+        },
         submit() {
             // if (!avalon.vmodels['doc_form'].validate()) {
             //     return false;

@@ -11,27 +11,33 @@ controlComponent.extend({
         value: [],
         disabled: false,
         options: [],
+        selection: [],
         toggleOption(option) {
-            const optionIndex = this.value.indexOf(option.value);
+            const optionIndex = this.selection.indexOf(option.value);
             if (optionIndex === -1 ) {
-                this.value.push(option.value);
+                this.selection.push(option.value);
             } else {
-                this.value.remove(option.value);
+                this.selection.remove(option.value);
             }
             this.handleChange({
-                target: { value: this.value.$model || this.value },
+                target: { value: this.selection.toJSON() },
                 type: 'checkbox-group'
             });
+        },
+        mapValueToSelection(value) {
+            this.selection = this.options.filter(o => value.contains(o.value)).map(o => o.value);
         },
         onInit(event) {
             emitToFormItem(this);
             this.$watch('value', v => {
+                this.mapValueToSelection(v);
                 this.handleChange({
-                    target: { value: v.$model || v },
+                    target: { value: v.toJSON() },
                     denyValidate: true,
                     type: 'checkbox-group'
                 });
             });
+            this.mapValueToSelection(this.value);
         },
         onReady(event) {
             //vm.elHiddenInput = $(el).find('input:hidden');

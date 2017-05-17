@@ -11,24 +11,30 @@ controlComponent.extend({
         value: '',
         disabled: false,
         options: [],
+        selected: '',
         toggleOption(e, option) {
-            this.value = option.value;
+            this.selected = option.value;
             this.handleChange({
-                target: { value: this.value.$model || this.value },
+                target: { value: this.selected },
                 type: 'radio-group'
             });
         },
         helpId: '',
+        mapValueToSelected(value) {
+            this.selected = value;
+        },
         onInit(event) {
             this.helpId = this.$id;
             emitToFormItem(this);
             this.$watch('value', v => {
+                this.mapValueToSelected(v);
                 this.handleChange({
-                    target: { value: v.$model || v },
+                    target: { value: v },
                     denyValidate: true,
                     type: 'radio-group'
                 });
             });
+            this.mapValueToSelected(this.value);
         },
         onReady(event) {
         },
