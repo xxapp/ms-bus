@@ -43,10 +43,16 @@ define('services/ajaxService.ts', function(require, exports, module) {
   function default_1(options) {
       var defaultOptions = {
           dataType: 'json',
-          cache: false
+          cache: false,
+          jsonp: 'callback',
+          jsonpCallback: 'success'
       };
       options.data = processRequest(options.data);
       options.url = /^\w+:\/\//.test(options.url) ? options.url : configService_1.serviceUrl + options.url;
+      if (configService_1.serviceUrl) {
+          defaultOptions.dataType = 'jsonp';
+          options.data.jsonp_param_name = 'callback';
+      }
       return $.ajax(__assign({}, defaultOptions, options)).then(processResponse);
   }
   exports.__esModule = true;
