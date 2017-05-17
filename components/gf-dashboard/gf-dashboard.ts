@@ -9,6 +9,7 @@ avalon.component(name, {
     defaults: {
         show: false,
         message: '欢迎',
+        masterpiece: ['ane', 'ms-bus'],
         handleCancel(e) {
             //console.log(e);
             this.show = false;

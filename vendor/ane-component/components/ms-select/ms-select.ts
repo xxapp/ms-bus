@@ -113,14 +113,22 @@ controlComponent.extend({
             }
         },
         
+        // 声明周期
+        mapValueToSelection(value) {
+            this.selection = this.options.filter(o => value.contains(o.value));
+            avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+        },
         onInit(event) {
-            var self = this;
-            const descriptor = getChildTemplateDescriptor(this);
-            this.options = getOptions(descriptor);
+            const self = this;
+            if (this.options.length === 0) {
+                const descriptor = getChildTemplateDescriptor(this);
+                this.options = getOptions(descriptor);
+            }
             
             emitToFormItem(this);
             this.$watch('value', v => {
                 const value = v.toJSON();
+                this.mapValueToSelection(v);
                 this.handleChange({
                     target: { value: this.isMultiple ? value : value[0] || '' },
                     denyValidate: true,
@@ -187,6 +195,7 @@ controlComponent.extend({
             this.$watch('isMultiple', v => {
                 innerVm.isMultiple = v;
             });
+            this.mapValueToSelection(this.value);
         },
         onDispose() {
             delete avalon.vmodels[this.panelVmId];
