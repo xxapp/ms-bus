@@ -15,7 +15,7 @@ define('vendor/ane-component/components/ms-input/ms-input.ts', function(require,
    */
   ms_control_1["default"].extend({
       displayName: 'ms-input',
-      template: "\n<input type=\"text\" class=\"form-control \" \n    :duplex=\"@value\" \n    :attr=\"{name:@col,placeholder:@placeholder}\" \n    :rules=\"{required:true}\"\n    data-duplex-changed=\"@handleChange\">\n",
+      template: "\n<input type=\"text\" class=\"form-control \" \n    :duplex=\"@text\" \n    :attr=\"{name:@col,placeholder:@placeholder}\" \n    :rules=\"{required:true}\"\n    data-duplex-changed=\"@handleChange\">\n",
       defaults: {
           text: '',
           mapValueToText: function (value) {
