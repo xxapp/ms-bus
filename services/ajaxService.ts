@@ -42,10 +42,18 @@ $(document).ajaxComplete((event, xhr, settings) => {
 export default function (options) {
     const defaultOptions = {
         dataType: 'json',
-        cache: false
+        cache: false,
+        jsonp: 'callback',
+        jsonpCallback: 'success'
     };
     options.data = processRequest(options.data);
     options.url = /^\w+:\/\//.test(options.url) ? options.url : serviceUrl + options.url;
+    
+    if (serviceUrl) {
+        defaultOptions.dataType = 'jsonp';
+        options.data.jsonp_param_name = 'callback';
+    }
+    
     return $.ajax({ ...defaultOptions, ...options }).then(processResponse);
 };
 
