@@ -16,19 +16,25 @@ define('vendor/ane-component/components/ms-textarea/ms-textarea.ts', function(re
    */
   ms_control_1["default"].extend({
       displayName: 'ms-textarea',
-      template: "\n<textarea class=\"form-control \" \n    :duplex=\"@value\" \n    :attr=\"{rows:@rows,name:@col}\"\n    data-duplex-changed=\"@handleChange\"></textarea>\n",
+      template: "\n<textarea class=\"form-control \" \n    :duplex=\"@text\" \n    :attr=\"{rows:@rows,name:@col}\"\n    data-duplex-changed=\"@handleChange\"></textarea>\n",
       defaults: {
           rows: '',
+          text: '',
+          mapValueToText: function (value) {
+              this.text = value;
+          },
           onInit: function (event) {
               var _this = this;
               utils_1.emitToFormItem(this);
               this.$watch('value', function (v) {
+                  _this.mapValueToText(v);
                   _this.handleChange({
                       target: { value: v },
                       denyValidate: true,
                       type: 'changed'
                   });
               });
+              this.mapValueToText(this.value);
           }
       }
   });

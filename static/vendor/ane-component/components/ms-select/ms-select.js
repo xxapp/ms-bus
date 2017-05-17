@@ -111,14 +111,22 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
                   }
               }
           },
+          // 声明周期
+          mapValueToSelection: function (value) {
+              this.selection = this.options.filter(function (o) { return value.contains(o.value); });
+              avalon.vmodels[this.panelVmId].selection = this.selection.toJSON();
+          },
           onInit: function (event) {
               var _this = this;
               var self = this;
-              var descriptor = ane_util_1.getChildTemplateDescriptor(this);
-              this.options = getOptions(descriptor);
+              if (this.options.length === 0) {
+                  var descriptor = ane_util_1.getChildTemplateDescriptor(this);
+                  this.options = getOptions(descriptor);
+              }
               utils_1.emitToFormItem(this);
               this.$watch('value', function (v) {
                   var value = v.toJSON();
+                  _this.mapValueToSelection(v);
                   _this.handleChange({
                       target: { value: _this.isMultiple ? value : value[0] || '' },
                       denyValidate: true,
@@ -186,6 +194,7 @@ define('vendor/ane-component/components/ms-select/ms-select.ts', function(requir
               this.$watch('isMultiple', function (v) {
                   innerVm.isMultiple = v;
               });
+              this.mapValueToSelection(this.value);
           },
           onDispose: function () {
               delete avalon.vmodels[this.panelVmId];

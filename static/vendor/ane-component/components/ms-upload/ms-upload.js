@@ -39,10 +39,8 @@ define('vendor/ane-component/components/ms-upload/ms-upload.ts', function(requir
               return true;
           },
           handleRemove: function (file) {
-              var value;
               this.fileList.removeAll(function (f) { return f.uid === file.uid; });
-              this.value.remove(file.url);
-              value = this.value.$model || this.value || [''];
+              var value = this.fileList.filter(function (f) { return f.status === 'done'; }).map(function (f) { return f.url; });
               this.handleChange({
                   target: { value: this.showUploadList ? value : value[0] },
                   type: 'file-upload'
@@ -69,7 +67,7 @@ define('vendor/ane-component/components/ms-upload/ms-upload.ts', function(requir
               this.helpId = this.$id;
               this.mapValueToFileList(this.value);
               this.$watch('value', function (v) {
-                  var value = v.$model || v || [''];
+                  var value = v.toJSON();
                   _this.fileList.clear();
                   _this.mapValueToFileList(value);
                   _this.handleChange({
@@ -127,12 +125,6 @@ define('vendor/ane-component/components/ms-upload/ms-upload.ts', function(requir
                           f.progress = 100;
                           f.url = response.url;
                       });
-                      if (!_this.showUploadList) {
-                          _this.value = [response.url];
-                      }
-                      else {
-                          _this.value.push(response.url);
-                      }
                   },
                   onFailure: function (file, err) {
                       updateFileObj(_this.fileList, file.index, function (f) {
@@ -142,7 +134,7 @@ define('vendor/ane-component/components/ms-upload/ms-upload.ts', function(requir
                       throw err;
                   },
                   onComplete: function () {
-                      var value = _this.value.$model || _this.value || [''];
+                      var value = _this.fileList.filter(function (f) { return f.status === 'done'; }).map(function (f) { return f.url; });
                       _this.handleChange({
                           target: { value: _this.showUploadList ? value : value[0] },
                           type: 'file-upload'

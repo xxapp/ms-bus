@@ -17,16 +17,22 @@ define('vendor/ane-component/components/ms-input/ms-input.ts', function(require,
       displayName: 'ms-input',
       template: "\n<input type=\"text\" class=\"form-control \" \n    :duplex=\"@value\" \n    :attr=\"{name:@col,placeholder:@placeholder}\" \n    :rules=\"{required:true}\"\n    data-duplex-changed=\"@handleChange\">\n",
       defaults: {
+          text: '',
+          mapValueToText: function (value) {
+              this.text = value;
+          },
           onInit: function (event) {
               var _this = this;
               utils_1.emitToFormItem(this);
               this.$watch('value', function (v) {
+                  _this.mapValueToText(v);
                   _this.handleChange({
                       target: { value: v },
                       denyValidate: true,
                       type: 'changed'
                   });
               });
+              this.mapValueToText(this.value);
           }
       }
   });
