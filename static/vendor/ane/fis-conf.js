@@ -14,16 +14,7 @@ define('vendor/ane/fis-conf', function(require, exports, module) {
       shimProcess: false,
       shutup: true
   });
-  fis.media('dev').match('**', {
-      release: '/$0'
-  });
-  fis.match('::package', {
-      postpackager: fis.plugin('loader', {
-          useInlineMap: true
-      })
-  });
-  fis.media('qa')
-      .match('**', {
+  fis.match('**', {
       release: false,
       useHash: false
   })
@@ -59,6 +50,9 @@ define('vendor/ane/fis-conf', function(require, exports, module) {
       .match('/tests/index.js', {
       release: '/$0'
   })
+      .match('ane.js', {
+      release: '/$0'
+  })
       .match('ane-test.js', {
       release: '/$0'
   })
@@ -67,7 +61,23 @@ define('vendor/ane/fis-conf', function(require, exports, module) {
           'ane-test.js': [
               '/tests/index.js',
               '/tests/index.js:deps'
+          ],
+          'ane.js': [
+              'index.ts',
+              'index.ts:deps',
+              '!node_modules/async-validator/lib/index.js',
+              '!node_modules/async-validator/lib/index.js:deps',
+              '!node_modules/bootstrap/dist/js/bootstrap.js',
+              '!node_modules/bootbox/bootbox.js',
+              '!node_modules/noty/js/noty/packaged/jquery.noty.packaged.js',
+              '!node_modules/dom-align/lib/index.js',
+              '!node_modules/dom-align/lib/index.js:deps',
+              '!node_modules/moment/moment.js',
+              '!node_modules/up-loader/dist/up-loader.js'
           ]
+      }),
+      postpackager: fis.plugin('loader', {
+          useInlineMap: false
       })
   });
   //# sourceMappingURL=/ms-bus/static/vendor/ane/fis-conf.js.map
