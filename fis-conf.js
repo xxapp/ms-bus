@@ -14,7 +14,7 @@ fis.hook('commonjs', {
     extList: ['.js', '.ts']
 });
 
-fis.set('project.ignore', ['node_modules/**', 'output/**', '.git/**', 'fis-conf.js', 
+fis.set('project.ignore', ['vendor/ane/node_modules/**', 'vendor/ane/output/**', 'node_modules/**', 'output/**', '.git/**', 'fis-conf.js', 
                             'README.md', 'readme.txt', 'cmd.cmd', 'package.json', 'LICENSE']);
 fis.set('baseurl', '');
 
