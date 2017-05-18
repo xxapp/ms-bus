@@ -10,7 +10,7 @@ define('components/gf-demo/gf-demo.ts', function(require, exports, module) {
       return t;
   };
   var avalon = require("node_modules/avalon2/dist/avalon");
-  var ane_1 = require("vendor/ane-component/index.ts");
+  var ane_1 = require("vendor/ane/index.ts");
   var storeService_1 = require("services/storeService.ts");
   exports.name = 'gf-demo';
   avalon.component(exports.name, {

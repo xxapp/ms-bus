@@ -11,7 +11,7 @@ define('services/ajaxService.ts', function(require, exports, module) {
       return t;
   };
   var bootbox = require("node_modules/bootbox/bootbox");
-  var ane_1 = require("vendor/ane-component/index.ts");
+  var ane_1 = require("vendor/ane/index.ts");
   var configService_1 = require("services/configService.ts");
   // 拦截ajax请求，检测是否超时，以重新登录
   $(document).ajaxComplete(function (event, xhr, settings) {

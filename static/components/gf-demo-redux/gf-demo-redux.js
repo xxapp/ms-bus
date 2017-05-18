@@ -13,7 +13,7 @@ define('components/gf-demo-redux/gf-demo-redux.ts', function(require, exports, m
   var avalon = require("node_modules/avalon2/dist/avalon");
   var redux_1 = require("node_modules/redux/dist/redux");
   var redux_thunk_1 = require("node_modules/redux-thunk/lib/index");
-  var ane_1 = require("vendor/ane-component/index.ts");
+  var ane_1 = require("vendor/ane/index.ts");
   var storeService_1 = require("services/storeService.ts");
   exports.name = 'gf-demo-redux';
   function fetch(params) {

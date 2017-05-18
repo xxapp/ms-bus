@@ -1,1 +1,0 @@
-{"version":3,"sources":["/vendor/ane-component/components/ms-notification/index.ts"],"names":[],"mappings":";;;AAAA,qDAA6C;;AAC7C,qBAAe,4BAAY,CAAC","file":"index.js","sourcesContent":["import notification from './ms-notification';\nexport default notification;"]}

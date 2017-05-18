@@ -1,7 +1,7 @@
 define('components/gf-demo-fast/gf-demo-fast.ts', function(require, exports, module) {
 
   "use strict";
-  require("vendor/ane-component/index.ts");
+  require("vendor/ane/index.ts");
   var common_curd_1 = require("components/common-curd/common-curd.ts");
   var storeService_1 = require("services/storeService.ts");
   exports.name = 'gf-demo-fast';

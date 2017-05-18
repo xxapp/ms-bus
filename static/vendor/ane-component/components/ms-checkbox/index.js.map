@@ -1,1 +1,0 @@
-{"version":3,"sources":["/vendor/ane-component/components/ms-checkbox/index.ts"],"names":[],"mappings":";;;AAAA,yBAAuB;AACvB,+BAA6B","file":"index.js","sourcesContent":["import './ms-checkbox';\nimport './ms-checkbox-group';"]}

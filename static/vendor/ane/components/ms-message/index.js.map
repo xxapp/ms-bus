@@ -1,0 +1,1 @@
+{"version":3,"sources":["/vendor/ane/components/ms-message/index.ts"],"names":[],"mappings":";;;AAAA,2CAAmC;;AACnC,qBAAe,uBAAO,CAAC","file":"index.js","sourcesContent":["import message from './ms-message';\nexport default message;"]}

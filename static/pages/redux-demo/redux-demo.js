@@ -9,7 +9,7 @@ define('pages/redux-demo/redux-demo.ts', function(require, exports, module) {
   global.$ = global.jQuery = jQuery;
   '';
   require("node_modules/bootstrap/dist/js/bootstrap");
-  var ane_1 = require("vendor/ane-component/index.ts");
+  var ane_1 = require("vendor/ane/index.ts");
   function counter(state, action) {
       if (state === void 0) { state = 0; }
       switch (action.type) {

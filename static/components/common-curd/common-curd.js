@@ -10,7 +10,7 @@ define('components/common-curd/common-curd.ts', function(require, exports, modul
       return t;
   };
   var avalon = require("node_modules/avalon2/dist/avalon");
-  var ane_1 = require("vendor/ane-component/index.ts");
+  var ane_1 = require("vendor/ane/index.ts");
   exports.__esModule = true;
   exports["default"] = avalon.component('common-curd', {
       template: '&nbsp;',

@@ -2,7 +2,7 @@ define('components/gf-dashboard/gf-dashboard.ts', function(require, exports, mod
 
   "use strict";
   var avalon = require("node_modules/avalon2/dist/avalon");
-  var ane_1 = require("vendor/ane-component/index.ts");
+  var ane_1 = require("vendor/ane/index.ts");
   var ajaxService_1 = require("services/ajaxService.ts");
   exports.name = 'gf-dashboard';
   avalon.component(exports.name, {
