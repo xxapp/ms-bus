@@ -8,7 +8,7 @@ fis.hook('commonjs', {
     },
     packages: [{
         name: 'ane',
-        location: './vendor/ane-component',
+        location: './vendor/ane',
         main: 'index'
     }],
     extList: ['.js', '.ts']
@@ -70,7 +70,7 @@ fis.match('/components/**/*.html', {
     postprocessor: fis.plugin('component-view', { }),
     release: false
 });
-fis.match('/vendor/ane-component/components/**/*.html', {
+fis.match('/vendor/ane/components/**/*.html', {
     postprocessor: fis.plugin('component-view', { }),
     release: false
 });
@@ -92,7 +92,7 @@ fis.match('/vendor/**/*.{ts,js}', {
     isMod: true,
     release: '/static/$0'
 });
-fis.match('/vendor/ane-component/components/**/*.css', {
+fis.match('/vendor/ane/components/**/*.css', {
     release: '/static/$0'
 });
 fis.match('/static/**', {
