@@ -14,7 +14,7 @@
   ```
 3. 克隆项目到本地，并安装依赖模块
   ``` bash
-  git clone https://github.com/xxapp/ms-bus.git
+  git clone --recursive https://github.com/xxapp/ms-bus.git
   
   cd ms-bus
   
