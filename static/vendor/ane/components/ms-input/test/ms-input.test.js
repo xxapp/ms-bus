@@ -11,6 +11,7 @@ define('vendor/ane/components/ms-input/test/ms-input.test', function(require, ex
       'form and validate': function (browser) {
           browser
               .assert.containsText('pre', '{"name":"123"}')
+              .click('input')
               .setValue('input', '4')
               .assert.containsText('pre', '{"name":"1234"}')
               .keys([1, 2, 3, 4].map(function (n) { return browser.Keys.BACK_SPACE; }))
