@@ -6,8 +6,6 @@ import 'es6-promise/dist/es6-promise.auto';
 import * as jQuery from 'jquery';
 global.$ = global.jQuery = jQuery;
 import 'bootstrap';
-import * as bootbox from 'bootbox';
-bootbox.setLocale('zh_CN');
 
 import * as avalon from 'avalon2';
 import 'mmRouter';

@@ -40,7 +40,14 @@ fis.hook('node_modules', {
         rExt: '.js'
     });
 });
-
+fis.match('/vendor/ane/node_modules/**', {
+    parser: undefined
+});
+fis.match('**.scss', {
+    parser: fis.plugin('node-sass', {
+    }),
+    rExt: '.css'
+})
 fis.match('**', {
     useHash: false,
     release: false
@@ -74,7 +81,7 @@ fis.match('/vendor/ane/components/**/*.html', {
     postprocessor: fis.plugin('component-view', { }),
     release: false
 });
-fis.match('/{node_modules,components}/**/*.{css,eot,svg,ttf,woff,woff2,map}', {
+fis.match('/{node_modules,components}/**/*.{css,scss,eot,svg,ttf,woff,woff2,map}', {
     release: '/static/$0'
 });
 fis.match('/services/*.{ts,js}', {
@@ -92,7 +99,7 @@ fis.match('/vendor/**/*.{ts,js}', {
     isMod: true,
     release: '/static/$0'
 });
-fis.match('/vendor/ane/components/**/*.css', {
+fis.match('/vendor/ane/components/**/*.{css,scss}', {
     release: '/static/$0'
 });
 fis.match('/static/**', {
@@ -124,6 +131,53 @@ fis.media('gh-pages')
             .replace('__SERVICE_URL__', 'https://www.easy-mock.com/mock/58ff1b7c5e43ae5dbea5eff3');
     }
 })
-.match('/mock/**', {
+.match('ane.js', {
     release: '/$0'
+})
+.match('ane.css', {
+    release: '/$0'
+})
+.match('app.js', {
+    release: '/$0'
+})
+.match('vendor.js', {
+    release: '/$0'
+})
+.match('app.css', {
+    release: '/$0'
+})
+.match('::package', {
+    packager: fis.plugin('deps-pack', {
+        'ane.js': [
+            'vendor/ane/index.ts',
+            'vendor/ane/index.ts:deps',
+            '!vendor/ane/node_modules/**',
+            '!vendor/ane/node_modules/**:deps',
+            '!node_modules/**',
+            '!node_modules/**:deps'
+        ],
+        'ane.css': [
+            'vendor/ane/components/**.{css,scss}',
+            'vendor/ane/components/**.{css,scss}:deps'
+        ],
+        'app.js': [
+            'index.ts',
+            'index.ts:deps',
+            '!node_modules/**',
+            '!node_modules/**:deps'
+        ],
+        'vendor.js': [
+            'index.ts',
+            'index.ts:deps',
+            'vendor/ane/index.ts',
+            'vendor/ane/index.ts:deps'
+        ],
+        'app.css': [
+            'index.ts:deps',
+            'vendor/ane/index.ts:deps',
+        ]
+    }),
 });
+// .match('/mock/**', {
+//     release: '/$0'
+// });

@@ -1,5 +1,4 @@
 import * as avalon from 'avalon2';
-import * as bootbox from 'bootbox';
 import * as beyond from '../vendor/beyond';
 
 import { notification } from 'ane';
@@ -20,11 +19,9 @@ $(document).ajaxComplete((event, xhr, settings) => {
         if (settings.dataType === 'json' && (xhr as any).responseJSON !== void 0) {
             let result = (xhr as any).responseJSON;
             if (result.code === '20' || result.code === '21') {
-                bootbox.confirm("Session已经失效，请重新登录", function (result) {
-                     if (result) {
-                         global.location.href = "/login.html";
-                     }
-                });
+                if (prompt("Session已经失效，请重新登录")) {
+                    global.location.href = "/login.html";
+                };
             } else if (result.error) {
                 notification.error({
                     message: result.error.message
@@ -42,9 +39,8 @@ $(document).ajaxComplete((event, xhr, settings) => {
 export default function (options) {
     const defaultOptions = {
         dataType: 'json',
-        cache: false,
-        jsonp: 'callback',
-        jsonpCallback: 'success'
+        cache: true,
+        jsonp: 'callback'
     };
     options.data = processRequest(options.data);
     options.url = /^\w+:\/\//.test(options.url) ? options.url : serviceUrl + options.url;
