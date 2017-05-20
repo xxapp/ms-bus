@@ -131,6 +131,12 @@ fis.media('gh-pages')
             .replace('__SERVICE_URL__', 'https://www.easy-mock.com/mock/58ff1b7c5e43ae5dbea5eff3');
     }
 })
+.match('*.{js,ts}', {
+    optimizer: fis.plugin('uglify-js')
+})
+.match('*.{css,scss}', {
+  optimizer: fis.plugin('clean-css')
+})
 .match('ane.js', {
     release: '/$0'
 })
@@ -148,6 +154,7 @@ fis.media('gh-pages')
 })
 .match('::package', {
     packager: fis.plugin('deps-pack', {
+        useTrack: false,
         'ane.js': [
             'vendor/ane/index.ts',
             'vendor/ane/index.ts:deps',
