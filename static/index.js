@@ -8,8 +8,6 @@ define('index.ts', function(require, exports, module) {
   var jQuery = require("node_modules/jquery/dist/jquery");
   global.$ = global.jQuery = jQuery;
   require("node_modules/bootstrap/dist/js/bootstrap");
-  var bootbox = require("node_modules/bootbox/bootbox");
-  bootbox.setLocale('zh_CN');
   var avalon = require("node_modules/avalon2/dist/avalon");
   require("node_modules/mmRouter/dist/mmRouter");
   if (avalon.msie === 8) {

@@ -39,7 +39,7 @@ define('vendor/ane/components/ms-loading/ms-loading-directive.ts', function(requ
                           return;
                       }
                       var maskElement = global.document.createElement('div');
-                      maskElement.className = 'bus-loading-mask';
+                      maskElement.className = 'ane-loading-mask';
                       maskElement.innerText = '加载中...';
                       maskElement.style.left = 0 - (borderLeftWidth === 'medium' ? 0 : parseFloat(borderLeftWidth)) + 'px';
                       maskElement.style.top = 0 - (borderTopWidth === 'medium' ? 0 : parseFloat(borderTopWidth)) + 'px';

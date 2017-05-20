@@ -10,7 +10,6 @@ define('services/ajaxService.ts', function(require, exports, module) {
       }
       return t;
   };
-  var bootbox = require("node_modules/bootbox/bootbox");
   var ane_1 = require("vendor/ane/index.ts");
   var configService_1 = require("services/configService.ts");
   // 拦截ajax请求，检测是否超时，以重新登录
@@ -19,11 +18,10 @@ define('services/ajaxService.ts', function(require, exports, module) {
           if (settings.dataType === 'json' && xhr.responseJSON !== void 0) {
               var result = xhr.responseJSON;
               if (result.code === '20' || result.code === '21') {
-                  bootbox.confirm("Session已经失效，请重新登录", function (result) {
-                      if (result) {
-                          global.location.href = "/login.html";
-                      }
-                  });
+                  if (prompt("Session已经失效，请重新登录")) {
+                      global.location.href = "/login.html";
+                  }
+                  ;
               }
               else if (result.error) {
                   ane_1.notification.error({
@@ -43,9 +41,8 @@ define('services/ajaxService.ts', function(require, exports, module) {
   function default_1(options) {
       var defaultOptions = {
           dataType: 'json',
-          cache: false,
-          jsonp: 'callback',
-          jsonpCallback: 'success'
+          cache: true,
+          jsonp: 'callback'
       };
       options.data = processRequest(options.data);
       options.url = /^\w+:\/\//.test(options.url) ? options.url : configService_1.serviceUrl + options.url;
