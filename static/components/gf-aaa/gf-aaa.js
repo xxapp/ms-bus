@@ -1,15 +1,1 @@
-define('components/gf-aaa/gf-aaa.ts', function(require, exports, module) {
-
-  "use strict";
-  var avalon = require("node_modules/avalon2/dist/avalon");
-  exports.name = 'gf-aaa';
-  avalon.component(exports.name, {
-      template: "\n<div>\n    <h1>{{@text}}</h1>\n</div>\n",
-      defaults: {
-          text: 'aaa'
-      }
-  });
-  //# sourceMappingURL=/ms-bus/static/components/gf-aaa/gf-aaa.js.map
-  
-
-});
+define("components/gf-aaa/gf-aaa.ts",function(a,n){"use strict";var e=a("node_modules/avalon2/dist/avalon");n.name="gf-aaa",e.component(n.name,{template:"\n<div>\n    <h1>{{@text}}</h1>\n</div>\n",defaults:{text:"aaa"}})});

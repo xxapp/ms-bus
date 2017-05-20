@@ -1,13 +1,1 @@
-define('vendor/ane/nightwatch.conf', function(require, exports, module) {
-
-  "use strict";
-  module.exports = (function (settings) {
-      if (process.platform === 'win32') {
-          settings.selenium.cli_args['webdriver.chrome.driver'] += '.exe';
-      }
-      return settings;
-  })(require('vendor/ane/nightwatch.json'));
-  //# sourceMappingURL=/ms-bus/static/vendor/ane/nightwatch.conf.js.map
-  
-
-});
+define("vendor/ane/nightwatch.conf",function(e,n,r){"use strict";r.exports=function(e){return"win32"===process.platform&&(e.selenium.cli_args["webdriver.chrome.driver"]+=".exe"),e}(e("vendor/ane/nightwatch.json"))});

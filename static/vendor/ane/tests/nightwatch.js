@@ -1,8 +1,1 @@
-define('vendor/ane/tests/nightwatch', function(require, exports, module) {
-
-  "use strict";
-  exports.input = require('vendor/ane/components/ms-input/test/ms-input.test');
-  //# sourceMappingURL=/ms-bus/static/vendor/ane/tests/nightwatch.js.map
-  
-
-});
+define("vendor/ane/tests/nightwatch",function(t,n){"use strict";n.input=t("vendor/ane/components/ms-input/test/ms-input.test")});

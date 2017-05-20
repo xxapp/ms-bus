@@ -1,17 +1,1 @@
-define('vendor/ane/components/ms-select/ms-select-option.ts', function(require, exports, module) {
-
-  "use strict";
-  var avalon = require("node_modules/avalon2/dist/avalon");
-  avalon.component('ms-select-option', {
-      template: '&nbsp;',
-      soleSlot: 'label',
-      defaults: {
-          label: '',
-          value: '',
-          disabled: false
-      }
-  });
-  //# sourceMappingURL=/ms-bus/static/vendor/ane/components/ms-select/ms-select-option.js.map
-  
-
-});
+define("vendor/ane/components/ms-select/ms-select-option.ts",function(e){"use strict";var l=e("node_modules/avalon2/dist/avalon");l.component("ms-select-option",{template:"&nbsp;",soleSlot:"label",defaults:{label:"",value:"",disabled:!1}})});
