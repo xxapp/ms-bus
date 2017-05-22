@@ -43,7 +43,7 @@ fis.hook('node_modules', {
 fis.match('/vendor/ane/node_modules/**', {
     parser: undefined
 });
-fis.match('**.scss', {
+fis.match('{**.scss,*.html:scss}', {
     parser: fis.plugin('node-sass', {
     }),
     rExt: '.css'
@@ -77,6 +77,9 @@ fis.match('/components/**/*.html', {
     postprocessor: fis.plugin('component-view', { }),
     release: false
 });
+fis.match('/components/**/*.scss', {
+    release: '/$0'
+})
 fis.match('/vendor/ane/components/**/*.html', {
     postprocessor: fis.plugin('component-view', { }),
     release: false
