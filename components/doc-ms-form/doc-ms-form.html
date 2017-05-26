@@ -36,21 +36,39 @@
                                         ],$rules:{required:true}, onChange:@handleChange}">
                             </ms-radio-group>
                         </ms-form-item>
-                        <!--<ms:control-select2 label="性别" col="gender" ms-cduplex="record.gender">
-                            <option value="M">男</option>
-                            <option value="F">女</option>
-                        </ms:control-select2>
-                        <ms:control-select2 
-                            label="代表作" 
-                            col="masterpiece" 
-                            ms-cprop-value-list="record.masterpiece" 
-                            store="github" 
-                            action="repository" 
-                            col-key="full_name" 
-                            col-val="full_name"
-                            multiple="true">
-                        </ms:control-select2>
-                        <ms:control-datepicker label="出生日期" col="birthday" ms-cduplex="record.birthday"></ms:control-datepicker>-->
+                        <ms-form-item :widget="{label:'代表作'}">
+                            <ms-select :widget="{
+                                value:@record.masterpiece,
+                                col:'masterpiece',
+                                showSearch:true,
+                                mode:'multiple'
+                            }">
+                                <ms-select-option :widget="{value:'ane'}">Ane</ms-select-option>
+                                <ms-select-option :widget="{value:'ms-bus'}">ms-bus</ms-select-option>
+                                <ms-select-option :widget="{value:'up-loader'}">up-loader</ms-select-option>
+                            </ms-select>
+                        </ms-form-item>
+                        <ms-form-item :widget="{label:'出生日期'}">
+                            <ms-datepicker :widget="{
+                                value:@record.birthday,
+                                col:'birthday',
+                                placeholder:'请选择出生日期',
+                                format:'YYYY/MM/DD',
+                                startDate:'2017/5/26',
+                                endDate:'2018/7/26',
+                                $rules:{required:true,message:'请选择日期'}
+                            }"></ms-datepicker>
+                        </ms-form-item>
+                        <ms-form-item :widget="{label:'觉醒时间'}">
+                            <ms-datepicker :widget="{
+                                value:@record.bankai,
+                                col:'bankai',
+                                placeholder:'请选择觉醒时间',
+                                startDate:'2017-5-26',
+                                showTime: true,
+                                $rules:{required:true,message:'请选择日期和时间'}
+                            }"></ms-datepicker>
+                        </ms-form-item>
                         <ms-form-item :widget="{label:'头像'}">
                             <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: @fileUploadUrl,listType:'picture-card',showUploadList:false,beforeUpload:@handleBeforeUpload,$rules:{required:true,message:'请选择头像'}, onChange:@handleChange}">
                                 <i class="fa fa-plus"></i>选择图片

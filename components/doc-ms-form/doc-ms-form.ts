@@ -61,8 +61,9 @@ function initialData() {
     return {
         name: '123',
         gender: 'F',
-        masterpiece: ['xxapp/msBus'],
-        birthday: '2017-03-25T16:00:00Z',
+        masterpiece: ['ms-bus'],
+        birthday: '2017/03/25',
+        bankai: '2017-10-10 12:12:12',
         hobby: ['code'],
         avatar: '',
         education: ['常乐男子职业技术学院'],
