@@ -379,21 +379,14 @@ require.resourceMap({
         "node_modules/dom-align/lib/getVisibleRectForElement",
         "node_modules/dom-align/lib/adjustForViewport",
         "node_modules/dom-align/lib/getRegion",
-        "node_modules/dom-align/lib/getElFuturePos"
+        "node_modules/dom-align/lib/getElFuturePos",
+        "node_modules/dom-align/lib/getAlignOffset"
       ],
       "pkg": "p3"
     },
     "node_modules/up-loader/dist/up-loader": {
       "url": "/ms-bus/static/node_modules/up-loader/dist/up-loader.js",
       "type": "js",
-      "pkg": "p3"
-    },
-    "node_modules/noty/js/noty/packaged/jquery.noty.packaged": {
-      "url": "/ms-bus/static/node_modules/noty/js/noty/packaged/jquery.noty.packaged.js",
-      "type": "js",
-      "deps": [
-        "node_modules/jquery/dist/jquery"
-      ],
       "pkg": "p3"
     },
     "node_modules/moment/moment": {
@@ -406,6 +399,14 @@ require.resourceMap({
       "type": "js",
       "deps": [
         "node_modules/moment/moment"
+      ],
+      "pkg": "p3"
+    },
+    "node_modules/noty/js/noty/packaged/jquery.noty.packaged": {
+      "url": "/ms-bus/static/node_modules/noty/js/noty/packaged/jquery.noty.packaged.js",
+      "type": "js",
+      "deps": [
+        "node_modules/jquery/dist/jquery"
       ],
       "pkg": "p3"
     },
@@ -623,6 +624,87 @@ require.resourceMap({
       ],
       "pkg": "p0"
     },
+    "vendor/ane/components/ms-calendar/ms-calendar-year-view.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-calendar/ms-calendar-year-view.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/moment/moment"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-calendar/ms-calendar.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-calendar/ms-calendar.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/moment/moment",
+        "node_modules/moment/locale/zh-cn",
+        "vendor/ane/components/ms-select/index.ts",
+        "vendor/ane/components/ms-calendar/ms-calendar-year-view.ts"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-calendar/index.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-calendar/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane/components/ms-calendar/ms-calendar.ts"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-timepicker/ms-timepicker-view.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-timepicker/ms-timepicker-view.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/moment/moment"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-datepicker/ms-datepicker.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-datepicker/ms-datepicker.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/moment/moment",
+        "vendor/ane/components/ms-form/ms-control.ts",
+        "vendor/ane/components/ms-trigger/index.ts",
+        "vendor/ane/components/ms-calendar/index.ts",
+        "vendor/ane/components/ms-timepicker/ms-timepicker-view.ts",
+        "vendor/ane/components/ms-form/utils.ts"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-datepicker/index.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-datepicker/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane/components/ms-datepicker/ms-datepicker.ts"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-timepicker/ms-timepicker.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-timepicker/ms-timepicker.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/moment/moment",
+        "vendor/ane/components/ms-form/ms-control.ts",
+        "vendor/ane/components/ms-trigger/index.ts",
+        "vendor/ane/components/ms-timepicker/ms-timepicker-view.ts",
+        "vendor/ane/components/ms-form/utils.ts"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-timepicker/index.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-timepicker/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane/components/ms-timepicker/ms-timepicker.ts"
+      ],
+      "pkg": "p0"
+    },
     "vendor/ane/components/ms-checkbox/ms-checkbox-group.ts": {
       "url": "/ms-bus/static/vendor/ane/components/ms-checkbox/ms-checkbox-group.js",
       "type": "js",
@@ -707,6 +789,8 @@ require.resourceMap({
         "vendor/ane/components/ms-textarea/ms-textarea.ts",
         "vendor/ane/components/ms-select/index.ts",
         "vendor/ane/components/ms-upload/ms-upload.ts",
+        "vendor/ane/components/ms-datepicker/index.ts",
+        "vendor/ane/components/ms-timepicker/index.ts",
         "vendor/ane/components/ms-checkbox/ms-checkbox.ts",
         "vendor/ane/components/ms-checkbox/ms-checkbox-group.ts",
         "vendor/ane/components/ms-radio/index.ts",
