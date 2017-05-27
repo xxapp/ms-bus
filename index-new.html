@@ -4,46 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Redux Demo</title>
-    <!--[if lt IE 9]>
-    <script src="/ms-bus/static/static/polyfill/es5-shim.js"></script>
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="/ms-bus/static/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <title>Bus Admin</title>
+    <link href="/ms-bus/static/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="/ms-bus/ane.css" />
 </head>
 <body>
-    <div ms-controller="demo">
-        <button type="button" :click="@show = !@show"></button>
-        <ms-dialog :widget="{show: @show}">
-            <span slot="header">title</span>
-            <span slot="body">Hello</span>
-        </ms-dialog>
-        <!--<ms-form :widget="{$form: @$form}">
-            <ms-form-item :widget="{label: '标题'}">
-                <ms-input :widget="{value: @title, col: 'title'}"></ms-input>
-            </ms-form-item>
-        </ms-form>-->
-        <p>
-        Clicked: <span >{{value}}</span> times
-        <button ms-click="increment">+</button>
-        <button ms-click="decrement">-</button>
-        <button ms-click="incrementIfOdd">Increment if odd</button>
-        <button ms-click="incrementAsync">Increment async</button>
-        </p>
+    <div class="ane-layout">
+        <div class="ane-layout-header ane-layout-fixed-header">
+            header
+        </div>
+        <div class="ane-layout-footer ane-layout-fixed-footer">footer</div>
+        <div class="ane-layout" id="content-container">
+            <div class="ane-layout-sider">
+                <div class="ane-layout-sider-inner">
+                    sider
+                    <div style="height: 1500px;"></div>
+                    END
+                </div>
+            </div>
+            <div class="ane-layout-content">
+                START
+                <div style="height: 2500px;"></div>
+                END
+            </div>
+        </div>
     </div>
 <script src="/ms-bus/static/static/mod.js"></script>
 <script>/*resourcemap*/
 require.resourceMap({
   "res": {
-    "node_modules/redux/dist/redux": {
-      "url": "/ms-bus/static/node_modules/redux/dist/redux.js",
-      "type": "js"
-    },
-    "node_modules/avalon2/dist/avalon": {
-      "url": "/ms-bus/static/node_modules/avalon2/dist/avalon.js",
-      "type": "js",
-      "pkg": "p3"
-    },
     "node_modules/es5-shim/es5-shim": {
       "url": "/ms-bus/static/node_modules/es5-shim/es5-shim.js",
       "type": "js",
@@ -61,6 +51,11 @@ require.resourceMap({
     },
     "node_modules/bootstrap/dist/js/bootstrap": {
       "url": "/ms-bus/static/node_modules/bootstrap/dist/js/bootstrap.js",
+      "type": "js",
+      "pkg": "p3"
+    },
+    "node_modules/avalon2/dist/avalon": {
+      "url": "/ms-bus/static/node_modules/avalon2/dist/avalon.js",
       "type": "js",
       "pkg": "p3"
     },
@@ -847,15 +842,13 @@ require.resourceMap({
       ],
       "pkg": "p0"
     },
-    "pages/redux-demo/redux-demo.ts": {
-      "url": "/ms-bus/static/pages/redux-demo/redux-demo.js",
+    "index-new.ts": {
+      "url": "/ms-bus/static/index-new.js",
       "type": "js",
       "deps": [
-        "node_modules/redux/dist/redux",
-        "node_modules/avalon2/dist/avalon",
-        "node_modules/jquery/dist/jquery",
-        "node_modules/bootstrap/dist/js/bootstrap",
-        "vendor/ane/index.ts"
+        "node_modules/es5-shim/es5-shim",
+        "vendor/ane/components/ms-layout/index.ts",
+        "vendor/ane/components/ms-message/index.ts"
       ]
     }
   },
@@ -871,7 +864,8 @@ require.resourceMap({
   }
 });
 
-        require(['pages/redux-demo/redux-demo.ts']);
+        require(['index-new.ts']);
+        document.body.style.height = document.body.style.minHeight = window.document.documentElement.clientHeight + 'px';
     </script>
 </body>
 </html>
