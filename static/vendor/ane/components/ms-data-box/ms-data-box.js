@@ -1,1 +1,0 @@
-define("vendor/ane/components/ms-data-box/ms-data-box.ts",function(a){"use strict";var n=a("node_modules/avalon2/dist/avalon");n.component("ms-dataBox",{template:"\n<div></div>\n",defaults:{}})});

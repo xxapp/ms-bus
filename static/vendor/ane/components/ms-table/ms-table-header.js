@@ -1,0 +1,1 @@
+define("vendor/ane/components/ms-table/ms-table-header.ts",function(e){"use strict";var t=e("node_modules/avalon2/dist/avalon");t.component("ms-table-header",{template:"<th><slot /></th>",soleSlot:"content",defaults:{content:"",col:""}})});
