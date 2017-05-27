@@ -1,12 +1,13 @@
 import 'es5-shim';
-if (getInternetExplorerVersion() === 8) {
-    Object.defineProperty = function (obj, property, meta) {
-        obj[property] = meta.value;
-    }
-}
-import 'es5-shim/es5-sham';
-import 'es6-promise/dist/es6-promise.auto';
-import { message } from 'ane';
+// if (getInternetExplorerVersion() === 8) {
+//     Object.defineProperty = function (obj, property, meta) {
+//         obj[property] = meta.value;
+//     }
+// }
+// import 'es5-shim/es5-sham';
+// import 'es6-promise/dist/es6-promise.auto';
+import 'ane/components/ms-layout';
+import message from 'ane/components/ms-message';
 // import * as jQuery from 'jquery';
 // global.$ = global.jQuery = jQuery;
 
