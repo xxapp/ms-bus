@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bus Admin</title>
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="./static/mod.js"></script>
+</head>
+<body>
+    <div class="ane-layout" style="margin-left: 0;">
+        <div class="ane-layout-header">header</div>
+        <div class="ane-layout" style="margin-left: 0; height: calc(100% - 60px);">
+            <div class="ane-layout-sider">sider</div>
+            <div class="ane-layout">
+                <div class="ane-layout-content">
+                    START
+                    <!--<div style="height: 1500px;"></div>-->
+                    END
+                </div>
+            </div>
+        </div>
+        <div class="ane-layout-footer">footer</div>
+    </div>
+
+    <script>
+        require(['./index-new']);
+        document.body.style.height = window.document.documentElement.clientHeight + 'px';
+    </script>
+</body>
+</html>
