@@ -6,6 +6,7 @@ import 'es5-shim';
 // }
 // import 'es5-shim/es5-sham';
 // import 'es6-promise/dist/es6-promise.auto';
+import * as avalon from 'avalon2';
 import 'ane/components/ms-layout';
 import message from 'ane/components/ms-message';
 // import * as jQuery from 'jquery';
@@ -14,6 +15,11 @@ import message from 'ane/components/ms-message';
 message.success({
     content: 'ok'
 })
+
+avalon.define({
+    $id: 'newRoot',
+    text: '123'
+});
 
 function getInternetExplorerVersion() {
     let rv = -1;

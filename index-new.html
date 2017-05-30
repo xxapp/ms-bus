@@ -8,27 +8,27 @@
     <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <script src="./static/mod.js"></script>
 </head>
-<body>
-    <div class="ane-layout">
-        <div class="ane-layout-header ane-layout-fixed-header">
-            header
-        </div>
-        <div class="ane-layout-footer ane-layout-fixed-footer">footer</div>
-        <div class="ane-layout" id="content-container">
-            <div class="ane-layout-sider">
-                <div class="ane-layout-sider-inner">
+<body :controller="newRoot">
+    <xmp is="ms-layout">
+        <ms-layout-header :widget="{fixed:true,height:'60px'}">header</ms-layout-header>
+        <ms-layout-footer :widget="{fixed:true,height:'30px'}">footer</ms-layout-footer>
+        <ms-layout>
+            <ms-layout-sider :widget="{width:'300px'}">
+                <div>
                     sider
-                    <div style="height: 1500px;"></div>
+                    <div style="height: 1500px;"><input type="text" :duplex="@text"></div>
+                    END {{@text}}
+                </div>
+            </ms-layout-sider>
+            <ms-layout-content>
+                <div>
+                    START
+                    <div style="height: 2500px;"></div>
                     END
                 </div>
-            </div>
-            <div class="ane-layout-content">
-                START
-                <div style="height: 2500px;"></div>
-                END
-            </div>
-        </div>
-    </div>
+            </ms-layout-content>
+        </ms-layout>
+    </xmp>
 
     <script>
         require(['./index-new']);
