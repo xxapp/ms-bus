@@ -6,29 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bus Admin</title>
     <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <script src="./static/mod.js"></script>
 </head>
-<body>
-    <div class="ane-layout">
-        <div class="ane-layout-header ane-layout-fixed-header">
-            header
-        </div>
-        <div class="ane-layout-footer ane-layout-fixed-footer">footer</div>
-        <div class="ane-layout" id="content-container">
-            <div class="ane-layout-sider">
-                <div class="ane-layout-sider-inner">
-                    sider
-                    <div style="height: 1500px;"></div>
+<body :controller="newRoot">
+    <xmp is="ms-layout">
+        <ms-layout-header :widget="{fixed:true}">header</ms-layout-header>
+        <ms-layout-footer :widget="{fixed:true}">footer</ms-layout-footer>
+        <ms-layout>
+            <ms-layout-sider :widget="{fixed:true}">
+                <ms-menu :widget="{menu:@menu}"></ms-menu>
+            </ms-layout-sider>
+            <ms-layout-content>
+                <div>
+                    START
+                    <div style="height: 2500px;"></div>
                     END
                 </div>
-            </div>
-            <div class="ane-layout-content">
-                START
-                <div style="height: 2500px;"></div>
-                END
-            </div>
-        </div>
-    </div>
+            </ms-layout-content>
+        </ms-layout>
+    </xmp>
 
     <script>
         require(['./index-new']);

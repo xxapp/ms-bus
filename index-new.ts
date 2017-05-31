@@ -7,13 +7,39 @@ import 'es5-shim';
 // import 'es5-shim/es5-sham';
 // import 'es6-promise/dist/es6-promise.auto';
 import 'ane/components/ms-layout';
-import message from 'ane/components/ms-message';
-// import * as jQuery from 'jquery';
-// global.$ = global.jQuery = jQuery;
+import 'ane/components/ms-menu'
 
-message.success({
-    content: 'ok'
-})
+avalon.define({
+    $id: 'newRoot',
+    menu: [{
+        name: 'navigator1',
+        title: '导航一',
+        children: [{
+            name: 'option1',
+            title: '选项一'
+        }]
+    }, {
+        name: 'navigator2',
+        title: '导航二',
+        children: [{
+            name: 'submenu',
+            title: '子菜单',
+            children: [{
+                name: 'option2',
+                title: '选项二'
+            }, {
+                name: 'option3',
+                title: '选项三'
+            }]
+        }]
+    }, {
+        name: 'navigator3',
+        title: '导航三'
+    }, {
+        name: 'navigator4',
+        title: '导航四'
+    }]
+});
 
 function getInternetExplorerVersion() {
     let rv = -1;
