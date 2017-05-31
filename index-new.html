@@ -6,19 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bus Admin</title>
     <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <script src="./static/mod.js"></script>
 </head>
 <body :controller="newRoot">
     <xmp is="ms-layout">
-        <ms-layout-header :widget="{fixed:true,height:'60px'}">header</ms-layout-header>
-        <ms-layout-footer :widget="{fixed:true,height:'30px'}">footer</ms-layout-footer>
+        <ms-layout-header :widget="{fixed:true}">header</ms-layout-header>
+        <ms-layout-footer :widget="{fixed:true}">footer</ms-layout-footer>
         <ms-layout>
-            <ms-layout-sider :widget="{width:'300px'}">
-                <div>
-                    sider
-                    <div style="height: 1500px;"><input type="text" :duplex="@text"></div>
-                    END {{@text}}
-                </div>
+            <ms-layout-sider :widget="{fixed:true}">
+                <ms-menu :widget="{menu:@menu}"></ms-menu>
             </ms-layout-sider>
             <ms-layout-content>
                 <div>
