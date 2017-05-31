@@ -1,1 +1,1 @@
-define("vendor/ane/components/ms-layout/index.ts",function(){"use strict";""});
+define("vendor/ane/components/ms-layout/index.ts",function(n){"use strict";"";n("vendor/ane/components/ms-layout/ms-layout.ts")});

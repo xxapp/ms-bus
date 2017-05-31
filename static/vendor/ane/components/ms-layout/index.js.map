@@ -1,1 +1,1 @@
-{"version":3,"sources":["/vendor/ane/components/ms-layout/index.ts"],"names":[],"mappings":";;;AAAA,GAA0B","file":"index.js","sourcesContent":["import './ms-layout.scss';"]}
+{"version":3,"sources":["/vendor/ane/components/ms-layout/index.ts"],"names":[],"mappings":";;;AAAA,GAA0B;AAC1B,uBAAqB","file":"index.js","sourcesContent":["import './ms-layout.scss';\nimport './ms-layout';"]}

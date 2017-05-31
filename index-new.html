@@ -6,30 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bus Admin</title>
     <link href="/ms-bus/static/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/ms-bus/static/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="/ms-bus/ane.css" />
 </head>
-<body>
-    <div class="ane-layout">
-        <div class="ane-layout-header ane-layout-fixed-header">
-            header
-        </div>
-        <div class="ane-layout-footer ane-layout-fixed-footer">footer</div>
-        <div class="ane-layout" id="content-container">
-            <div class="ane-layout-sider">
-                <div class="ane-layout-sider-inner">
-                    sider
-                    <div style="height: 1500px;"></div>
+<body :controller="newRoot">
+    <xmp is="ms-layout">
+        <ms-layout-header :widget="{fixed:true}">header</ms-layout-header>
+        <ms-layout-footer :widget="{fixed:true}">footer</ms-layout-footer>
+        <ms-layout>
+            <ms-layout-sider :widget="{fixed:true}">
+                <ms-menu :widget="{menu:@menu}"></ms-menu>
+            </ms-layout-sider>
+            <ms-layout-content>
+                <div>
+                    START
+                    <div style="height: 2500px;"></div>
                     END
                 </div>
-            </div>
-            <div class="ane-layout-content">
-                START
-                <div style="height: 2500px;"></div>
-                END
-            </div>
-        </div>
-    </div>
+            </ms-layout-content>
+        </ms-layout>
+    </xmp>
 <script src="/ms-bus/static/static/mod.js"></script>
 <script>/*resourcemap*/
 require.resourceMap({
@@ -405,9 +402,137 @@ require.resourceMap({
       ],
       "pkg": "p3"
     },
+    "vendor/ane/components/ms-layout/ms-layout.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-layout/ms-layout.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ],
+      "pkg": "p2"
+    },
+    "components/common-header/common-header.ts": {
+      "url": "/ms-bus/static/components/common-header/common-header.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ],
+      "pkg": "p2"
+    },
+    "vendor/beyond/index": {
+      "url": "/ms-bus/static/vendor/beyond/index.js",
+      "type": "js",
+      "deps": [
+        "node_modules/jquery/dist/jquery",
+        "node_modules/avalon2/dist/avalon"
+      ],
+      "pkg": "p2"
+    },
+    "services/configService.ts": {
+      "url": "/ms-bus/static/services/configService.js",
+      "type": "js",
+      "pkg": "p2"
+    },
+    "services/ajaxService.ts": {
+      "url": "/ms-bus/static/services/ajaxService.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane/index.ts",
+        "services/configService.ts"
+      ],
+      "pkg": "p2"
+    },
+    "services/menuService.ts": {
+      "url": "/ms-bus/static/services/menuService.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "services/ajaxService.ts"
+      ],
+      "pkg": "p2"
+    },
+    "components/common-sidebar/common-sidebar.ts": {
+      "url": "/ms-bus/static/components/common-sidebar/common-sidebar.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "vendor/beyond/index",
+        "services/menuService.ts"
+      ],
+      "pkg": "p2"
+    },
+    "services/routerService.ts": {
+      "url": "/ms-bus/static/services/routerService.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/mmRouter/dist/mmRouter",
+        "components/common-header/common-header.ts",
+        "components/common-sidebar/common-sidebar.ts"
+      ],
+      "pkg": "p2"
+    },
+    "index.ts": {
+      "url": "/ms-bus/static/index.js",
+      "type": "js",
+      "deps": [
+        "node_modules/es5-shim/es5-shim",
+        "node_modules/es6-promise/dist/es6-promise.auto",
+        "node_modules/jquery/dist/jquery",
+        "node_modules/bootstrap/dist/js/bootstrap",
+        "node_modules/avalon2/dist/avalon",
+        "node_modules/mmRouter/dist/mmRouter",
+        "node_modules/es5-shim/es5-sham",
+        "services/routerService.ts"
+      ],
+      "pkg": "p2"
+    },
     "vendor/ane/components/ms-layout/index.ts": {
       "url": "/ms-bus/static/vendor/ane/components/ms-layout/index.js",
       "type": "js",
+      "deps": [
+        "vendor/ane/components/ms-layout/ms-layout.ts"
+      ],
+      "pkg": "p2"
+    },
+    "vendor/ane/index.ts": {
+      "url": "/ms-bus/static/vendor/ane/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane/components/ms-menu/index.ts",
+        "vendor/ane/components/ms-table/ms-table.ts",
+        "vendor/ane/components/ms-pagination/ms-pagination.ts",
+        "vendor/ane/components/ms-dialog/index.ts",
+        "vendor/ane/components/ms-form/index.ts",
+        "vendor/ane/components/ms-form/create-form.ts",
+        "vendor/ane/components/ms-input/index.ts",
+        "vendor/ane/components/ms-textarea/index.ts",
+        "vendor/ane/components/ms-select/index.ts",
+        "vendor/ane/components/ms-upload/index.ts",
+        "vendor/ane/components/ms-datepicker/index.ts",
+        "vendor/ane/components/ms-timepicker/index.ts",
+        "vendor/ane/components/ms-checkbox/index.ts",
+        "vendor/ane/components/ms-checkbox/ms-checkbox-group.ts",
+        "vendor/ane/components/ms-radio/index.ts",
+        "vendor/ane/components/ms-radio/ms-radio-group.ts",
+        "vendor/ane/components/ms-notification/index.ts",
+        "vendor/ane/components/ms-message/index.ts"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-menu/ms-menu.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-menu/ms-menu.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-menu/index.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-menu/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane/components/ms-menu/ms-menu.ts"
+      ],
       "pkg": "p0"
     },
     "vendor/ane/ane-util.ts": {
@@ -817,44 +942,23 @@ require.resourceMap({
       ],
       "pkg": "p0"
     },
-    "vendor/ane/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-layout/index.ts",
-        "vendor/ane/components/ms-table/ms-table.ts",
-        "vendor/ane/components/ms-pagination/ms-pagination.ts",
-        "vendor/ane/components/ms-dialog/index.ts",
-        "vendor/ane/components/ms-form/index.ts",
-        "vendor/ane/components/ms-form/create-form.ts",
-        "vendor/ane/components/ms-input/index.ts",
-        "vendor/ane/components/ms-textarea/index.ts",
-        "vendor/ane/components/ms-select/index.ts",
-        "vendor/ane/components/ms-upload/index.ts",
-        "vendor/ane/components/ms-datepicker/index.ts",
-        "vendor/ane/components/ms-timepicker/index.ts",
-        "vendor/ane/components/ms-checkbox/index.ts",
-        "vendor/ane/components/ms-checkbox/ms-checkbox-group.ts",
-        "vendor/ane/components/ms-radio/index.ts",
-        "vendor/ane/components/ms-radio/ms-radio-group.ts",
-        "vendor/ane/components/ms-notification/index.ts",
-        "vendor/ane/components/ms-message/index.ts"
-      ],
-      "pkg": "p0"
-    },
     "index-new.ts": {
       "url": "/ms-bus/static/index-new.js",
       "type": "js",
       "deps": [
         "node_modules/es5-shim/es5-shim",
         "vendor/ane/components/ms-layout/index.ts",
-        "vendor/ane/components/ms-message/index.ts"
+        "vendor/ane/components/ms-menu/index.ts"
       ]
     }
   },
   "pkg": {
     "p3": {
       "url": "/ms-bus/vendor.js",
+      "type": "js"
+    },
+    "p2": {
+      "url": "/ms-bus/app.js",
       "type": "js"
     },
     "p0": {

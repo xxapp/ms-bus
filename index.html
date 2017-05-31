@@ -498,9 +498,20 @@ require.resourceMap({
       ],
       "pkg": "p3"
     },
-    "vendor/ane/components/ms-layout/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-layout/index.js",
+    "vendor/ane/components/ms-menu/ms-menu.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-menu/ms-menu.js",
       "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ],
+      "pkg": "p0"
+    },
+    "vendor/ane/components/ms-menu/index.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-menu/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane/components/ms-menu/ms-menu.ts"
+      ],
       "pkg": "p0"
     },
     "vendor/ane/ane-util.ts": {
@@ -914,7 +925,7 @@ require.resourceMap({
       "url": "/ms-bus/static/vendor/ane/index.js",
       "type": "js",
       "deps": [
-        "vendor/ane/components/ms-layout/index.ts",
+        "vendor/ane/components/ms-menu/index.ts",
         "vendor/ane/components/ms-table/ms-table.ts",
         "vendor/ane/components/ms-pagination/ms-pagination.ts",
         "vendor/ane/components/ms-dialog/index.ts",
@@ -1008,6 +1019,22 @@ require.resourceMap({
         "node_modules/mmRouter/dist/mmRouter",
         "node_modules/es5-shim/es5-sham",
         "services/routerService.ts"
+      ],
+      "pkg": "p2"
+    },
+    "vendor/ane/components/ms-layout/ms-layout.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-layout/ms-layout.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ],
+      "pkg": "p2"
+    },
+    "vendor/ane/components/ms-layout/index.ts": {
+      "url": "/ms-bus/static/vendor/ane/components/ms-layout/index.js",
+      "type": "js",
+      "deps": [
+        "vendor/ane/components/ms-layout/ms-layout.ts"
       ],
       "pkg": "p2"
     },
