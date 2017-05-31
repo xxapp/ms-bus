@@ -16,7 +16,7 @@
         <ms-layout-footer :widget="{fixed:true}">footer</ms-layout-footer>
         <ms-layout>
             <ms-layout-sider :widget="{fixed:true}">
-                <ms-menu :widget="{menu:@menu}"></ms-menu>
+                <ms-menu :widget="{menu:@menu,openKeys:@openKeys,selectedKeys:@selectedKeys,onClick:@handleMenuClick}"></ms-menu>
             </ms-layout-sider>
             <ms-layout-content>
                 <div>
@@ -947,6 +947,7 @@ require.resourceMap({
       "type": "js",
       "deps": [
         "node_modules/es5-shim/es5-shim",
+        "node_modules/avalon2/dist/avalon",
         "vendor/ane/components/ms-layout/index.ts",
         "vendor/ane/components/ms-menu/index.ts"
       ]
