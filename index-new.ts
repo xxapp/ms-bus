@@ -13,34 +13,44 @@ import 'ane/components/ms-menu'
 avalon.define({
     $id: 'newRoot',
     menu: [{
-        name: 'navigator1',
+        key: 'navigator1',
+        icon: 'fa fa-send',
         title: '导航一',
         children: [{
-            name: 'option1',
+            key: 'option1',
             title: '选项一'
         }]
     }, {
-        name: 'navigator2',
+        key: 'navigator2',
+        icon: 'fa fa-server',
         title: '导航二',
         children: [{
-            name: 'submenu',
+            key: 'submenu',
             title: '子菜单',
             children: [{
-                name: 'option2',
+                key: 'option2',
                 title: '选项二'
             }, {
-                name: 'option3',
+                key: 'option3',
                 title: '选项三'
             }]
         }]
     }, {
-        name: 'navigator3',
+        key: 'navigator3',
+        icon: 'fa fa-umbrella',
         title: '导航三'
     }, {
-        name: 'navigator4',
+        key: 'navigator4',
+        icon: 'fa fa-wrench',
         title: '导航四'
-    }]
+    }],
+    openKeys: ['navigator2', 'submenu'],
+    selectedKeys: ['option2'],
+    handleMenuClick(item, key, keyPath) {
+        console.log(item, key, keyPath);
+    }
 });
+avalon.scan(document.body);
 
 function getInternetExplorerVersion() {
     let rv = -1;

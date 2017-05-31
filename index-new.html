@@ -15,7 +15,7 @@
         <ms-layout-footer :widget="{fixed:true}">footer</ms-layout-footer>
         <ms-layout>
             <ms-layout-sider :widget="{fixed:true}">
-                <ms-menu :widget="{menu:@menu}"></ms-menu>
+                <ms-menu :widget="{menu:@menu,openKeys:@openKeys,selectedKeys:@selectedKeys,onClick:@handleMenuClick}"></ms-menu>
             </ms-layout-sider>
             <ms-layout-content>
                 <div>
