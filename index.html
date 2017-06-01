@@ -17,14 +17,27 @@
 </head>
 <body :controller="root">
     <xmp is="ms-layout">
-        <ms-layout-header :widget="{fixed:true}">header</ms-layout-header>
-        <ms-layout-footer :widget="{fixed:true}">footer</ms-layout-footer>
+        <ms-layout-header :widget="{fixed:true}">
+            <h3>MS-BUS SPA 脚手架</h3>
+        </ms-layout-header>
+        <ms-layout-footer :widget="{fixed:true}">
+            <div class="text-center" style="line-height: 30px;">
+                <a href="https://github.com/xxapp/ms-bus" target="_blank">Github 仓库地址</a>
+            </div>
+        </ms-layout-footer>
         <ms-layout :widget="{style:{backgroundColor:'#ececec'}}">
             <ms-layout-sider :widget="{fixed:true}">
                 <wbr is="common-sidebar"/>
             </ms-layout-sider>
             <ms-layout-content>
-                <div ms-html="@currentPage"></div>
+                <ol class="breadcrumb">
+                    <li :for="($index,item) in @breadcrumb" :class="[($index===breadcrumb.length-1)?'active':'']">{{item.title}}</li>
+                </ol>
+                <div class="ane-layout-content-wrapper">
+                    <div class="container-fluid">
+                        <div ms-html="@currentPage"></div>
+                    </div>
+                </div>
             </ms-layout-content>
         </ms-layout>
     </xmp>
@@ -856,14 +869,6 @@ require.resourceMap({
       "type": "js",
       "pkg": "p2"
     },
-    "components/common-header/common-header.ts": {
-      "url": "/ms-bus/static/components/common-header/common-header.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p2"
-    },
     "services/ajaxService.ts": {
       "url": "/ms-bus/static/services/ajaxService.js",
       "type": "js",
@@ -883,12 +888,30 @@ require.resourceMap({
       ],
       "pkg": "p2"
     },
+    "services/storeService.ts": {
+      "url": "/ms-bus/static/services/storeService.js",
+      "type": "js",
+      "deps": [
+        "services/ajaxService.ts",
+        "services/menuService.ts"
+      ],
+      "pkg": "p2"
+    },
+    "components/common-header/common-header.ts": {
+      "url": "/ms-bus/static/components/common-header/common-header.js",
+      "type": "js",
+      "deps": [
+        "node_modules/avalon2/dist/avalon"
+      ],
+      "pkg": "p2"
+    },
     "components/common-sidebar/common-sidebar.ts": {
       "url": "/ms-bus/static/components/common-sidebar/common-sidebar.js",
       "type": "js",
       "deps": [
         "node_modules/avalon2/dist/avalon",
         "services/menuService.ts",
+        "services/storeService.ts",
         "vendor/ane/components/ms-menu/index.ts"
       ],
       "pkg": "p2"
@@ -899,6 +922,7 @@ require.resourceMap({
       "deps": [
         "node_modules/avalon2/dist/avalon",
         "node_modules/mmRouter/dist/mmRouter",
+        "services/storeService.ts",
         "components/common-header/common-header.ts",
         "components/common-sidebar/common-sidebar.ts"
       ],
@@ -931,6 +955,7 @@ require.resourceMap({
         "node_modules/bootstrap/dist/js/bootstrap",
         "node_modules/avalon2/dist/avalon",
         "services/routerService.ts",
+        "services/storeService.ts",
         "vendor/ane/components/ms-layout/index.ts"
       ],
       "pkg": "p2"
@@ -949,13 +974,6 @@ require.resourceMap({
       "type": "js",
       "deps": [
         "node_modules/avalon2/dist/avalon"
-      ]
-    },
-    "services/storeService.ts": {
-      "url": "/ms-bus/static/services/storeService.js",
-      "type": "js",
-      "deps": [
-        "services/ajaxService.ts"
       ]
     },
     "components/gf-demo/gf-demo.ts": {
