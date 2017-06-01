@@ -1,6 +1,6 @@
 import * as avalon from 'avalon2';
 import 'mmRouter';
-// import * as menuService from './menuService';
+import { menu as menuStore } from './storeService';
 
 function getPage(component) {
     const html = `<xmp is="${component}" :widget="{id:'${component.replace(/\-/g, '_')}',expire:${Date.now()}}"></xmp>`;
@@ -21,6 +21,7 @@ function applyRouteConfig(config, parentRoute, accPath = '') {
                 let component = components[viewName];
                 if (typeof component === 'function') {
                     component(function (m) {
+                        menuStore.selectedKeys$.onNext([m.name]);
                         avalon.vmodels[parentRoute.name][viewName] = getPage(m.name);
                     });
                 } else {
@@ -76,23 +77,3 @@ const routeConfig = [{
 applyRouteConfig(routeConfig, {
     name: 'root'
 });
-
-// mmState全局配置
-// avalon.state.config({
-//     onError: function() {
-//         console.log('mmState配置出错：', arguments)
-//     },
-//     onLoad: function(fromStat, toState) {
-//         var breadCrumb = [], flagTree;
-//         var root = avalon.vmodels.root;
-//         menuService.walkMenu(toState.stateName, function (item, level) {
-//             breadCrumb.unshift(item);
-//         });
-//         if (breadCrumb.length) {
-//             flagTree = breadCrumb[breadCrumb.length-1]
-//             root.title = flagTree.title;
-//             avalon.vmodels.sidebar.actived = flagTree.name;
-//             avalon.mix(root, { breadCrumb: breadCrumb });
-//         }
-//     }
-// })

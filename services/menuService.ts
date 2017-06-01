@@ -2,7 +2,7 @@ import * as avalon from  'avalon2';
 import ajax from './ajaxService';
 
 const menu = [{
-    key: 'dashboard',
+    key: 'gf-dashboard',
     title: '主页',
     icon: 'fa fa-home',
     uri: '/'
@@ -11,17 +11,17 @@ const menu = [{
     title: '例子一级',
     icon: 'fa fa-home',
     children: [{
-        key: 'demo',
+        key: 'gf-demo',
         title: '例子',
         icon: 'fa fa-home',
         uri: '/demo'
     }, {
-        key: 'demo-redux',
+        key: 'gf-demo-redux',
         title: 'redux例子',
         icon: 'fa fa-home',
         uri: '/demo-redux'
     }, {
-        key: 'demo-fast',
+        key: 'gf-demo-fast',
         title: '快速CURD例子',
         icon: 'fa fa-home',
         uri: '/demo-fast'
@@ -42,7 +42,7 @@ const menu = [{
 }, {
     key: 'rxjs-demo-page',
     title: 'RxJS Demo Page',
-    icon: 'fa fa-page',
+    icon: 'fa fa-circle',
     uri: '/pages/rxjs-demo/rxjs-demo.html',
     target: '_blank'
 }];
@@ -72,7 +72,7 @@ function travelMenu(menulet, functions, allowedFunctions) {
     for (let i = 0, item; item = menulet[i++]; ) {
         let hasPermission = false;
         for (let j = 0, func; func = functions[j++]; ) {
-            if (func.code === item.name && (allowedFunctions[func.code]) || allowedFunctions['all']) {
+            if (func.code === item.name && (allowedFunctions[func.code])) {
                 item.uri = func.uri || item.uri || 'javascript:;';
                 item.icon = func.icon_url || item.icon;
                 item.target = item.target || '_self';
@@ -81,6 +81,9 @@ function travelMenu(menulet, functions, allowedFunctions) {
                 hasPermission = true;
                 break;
             }
+            if (allowedFunctions['all']) {
+                hasPermission = true;
+            }
         }
         item.show = hasPermission === true;
 
@@ -88,28 +91,39 @@ function travelMenu(menulet, functions, allowedFunctions) {
     }
 }
 
-function walkMenu(name, process, level = 1, menuLet = menu.slice(0)) {
+function walkMenu(menu, key, process, level = 1) {
     let finded = false;
-    for (let i = 0, item; item = menuLet[i++]; ) {
-        if (item.name === name || item.stateName === name) {
-            process && process(item, level);
+    for (let i = 0; i < menu.length; i++) {
+        const item = menu[i];
+        process(item);
+        if (item.key === key) {
             finded = true;
             break;
         }
-        if (item.childStates && ~item.childStates.indexOf(name)) {
-            process && process(item, level);
+        if (item.children && walkMenu(item.children, key, process, level + 1)) {
             finded = true;
             break;
         }
-        if (item.children && walkMenu(name, process, level + 1, item.children)) {
-            process && process(item, level);
-            finded = true;
-            break;
-        }
-    }
+        process('', true);
+    };
     return finded;
 }
+function getKeyPath(key) {
+    return menuPromise.then((menu: any) => {
+        const keyPath = [];
+
+        walkMenu(menu.toJSON(), key, function (item, shift) {
+            if (shift) {
+                keyPath.shift();
+            } else {
+                keyPath.unshift(item);
+            }
+        })
+
+        return keyPath;
+    });
+}
 export {
-    walkMenu,
+    getKeyPath,
     menuPromise as menu
 }

@@ -1,7 +1,6 @@
 import * as avalon from 'avalon2';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import * as beyond from '../../vendor/beyond';
 
 import { createForm, message } from "ane";
 

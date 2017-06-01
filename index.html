@@ -16,14 +16,27 @@
 </head>
 <body :controller="root">
     <xmp is="ms-layout">
-        <ms-layout-header :widget="{fixed:true}">header</ms-layout-header>
-        <ms-layout-footer :widget="{fixed:true}">footer</ms-layout-footer>
+        <ms-layout-header :widget="{fixed:true}">
+            <h3>MS-BUS SPA 脚手架</h3>
+        </ms-layout-header>
+        <ms-layout-footer :widget="{fixed:true}">
+            <div class="text-center" style="line-height: 30px;">
+                <a href="https://github.com/xxapp/ms-bus" target="_blank">Github 仓库地址</a>
+            </div>
+        </ms-layout-footer>
         <ms-layout :widget="{style:{backgroundColor:'#ececec'}}">
             <ms-layout-sider :widget="{fixed:true}">
                 <wbr is="common-sidebar"/>
             </ms-layout-sider>
             <ms-layout-content>
-                <div ms-html="@currentPage"></div>
+                <ol class="breadcrumb">
+                    <li :for="($index,item) in @breadcrumb" :class="[($index===breadcrumb.length-1)?'active':'']">{{item.title}}</li>
+                </ol>
+                <div class="ane-layout-content-wrapper">
+                    <div class="container-fluid">
+                        <div ms-html="@currentPage"></div>
+                    </div>
+                </div>
             </ms-layout-content>
         </ms-layout>
     </xmp>

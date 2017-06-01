@@ -1,7 +1,7 @@
 import * as avalon from 'avalon2';
-import * as beyond from '../../vendor/beyond';
 
 import * as menuService from '../../services/menuService';
+import { menu as menuStore } from '../../services/storeService';
 import 'ane/components/ms-menu'
 
 avalon.effect('collapse', {
@@ -27,6 +27,12 @@ avalon.component(name, {
         onInit(event) {
             menuService.menu.then((menu) => {
                 this.menu = menu;
+            });
+            menuStore.selectedKeys$.subscribe(v => {
+                this.selectedKeys = v;
+            });
+            menuStore.openKeys$.subscribe(v => {
+                this.openKeys = v;
             });
         }
     }

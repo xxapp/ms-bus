@@ -11,11 +11,16 @@ global.$ = global.jQuery = jQuery;
 import 'bootstrap';
 import * as avalon from 'avalon2';
 import './services/routerService';
+import { breadcrumb } from './services/storeService';
 import 'ane/components/ms-layout';
 
-avalon.define({
+const root = avalon.define({
     $id: 'root',
-    currentPage: ''
+    currentPage: '',
+    breadcrumb: []
+});
+breadcrumb.list$.subscribe(v => {
+    root.breadcrumb = v;
 });
 avalon.history.start({
     fireAnchor: false

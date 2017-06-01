@@ -1,5 +1,5 @@
 import ajax from './ajaxService';
-import '../vendor/jquery/ajaxfileupload';
+import { getKeyPath } from './menuService';
 
 export const demo = {
     key: 'region_id',
@@ -82,3 +82,34 @@ export const github = {
         return data;
     }
 };
+
+export const menu = {
+    selectedKeys$: Observable(),
+    openKeys$: Observable()
+};
+menu.selectedKeys$.subscribe(v => {
+    v[0] && getKeyPath(v[0]).then(result => {
+        menu.openKeys$.onNext(result.map(item => item.key));
+        breadcrumb.list$.onNext(result.reverse());
+    });
+});
+
+export const breadcrumb = {
+    list$: Observable()
+};
+
+function Observable() {
+    return {
+        onNextCbList: [],
+        subscribe(onNext) {
+            this.onNextCbList.push(onNext);
+        },
+        onNext(value) {
+            this.onNextCbList.forEach(cb => {
+                if (typeof cb === 'function') {
+                    cb(value);
+                }
+            });
+        }
+    };
+}

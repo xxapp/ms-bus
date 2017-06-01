@@ -1,5 +1,4 @@
 import * as avalon from 'avalon2';
-import * as beyond from '../../vendor/beyond';
 import * as bootbox from 'bootbox';
 
 import ajax from '../../services/ajaxService';
