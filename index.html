@@ -8,7 +8,7 @@
     <link href="/ms-bus/static/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="/ms-bus/static/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <style>
-        .ms-controller {
+        .ms-controller,xmp {
             visibility: hidden;
         }
     </style>
@@ -34,6 +34,16 @@ require.resourceMap({
   "res": {
     "node_modules/es5-shim/es5-shim": {
       "url": "/ms-bus/static/node_modules/es5-shim/es5-shim.js",
+      "type": "js",
+      "pkg": "p3"
+    },
+    "node_modules/es5-shim/es5-sham": {
+      "url": "/ms-bus/static/node_modules/es5-shim/es5-sham.js",
+      "type": "js",
+      "pkg": "p3"
+    },
+    "node_modules/es6-promise/dist/es6-promise.auto": {
+      "url": "/ms-bus/static/node_modules/es6-promise/dist/es6-promise.auto.js",
       "type": "js",
       "pkg": "p3"
     },
@@ -915,6 +925,8 @@ require.resourceMap({
       "type": "js",
       "deps": [
         "node_modules/es5-shim/es5-shim",
+        "node_modules/es5-shim/es5-sham",
+        "node_modules/es6-promise/dist/es6-promise.auto",
         "node_modules/jquery/dist/jquery",
         "node_modules/bootstrap/dist/js/bootstrap",
         "node_modules/avalon2/dist/avalon",
@@ -939,19 +951,11 @@ require.resourceMap({
         "node_modules/avalon2/dist/avalon"
       ]
     },
-    "vendor/jquery/ajaxfileupload": {
-      "url": "/ms-bus/static/vendor/jquery/ajaxfileupload.js",
-      "type": "js",
-      "deps": [
-        "node_modules/jquery/dist/jquery"
-      ]
-    },
     "services/storeService.ts": {
       "url": "/ms-bus/static/services/storeService.js",
       "type": "js",
       "deps": [
-        "services/ajaxService.ts",
-        "vendor/jquery/ajaxfileupload"
+        "services/ajaxService.ts"
       ]
     },
     "components/gf-demo/gf-demo.ts": {
