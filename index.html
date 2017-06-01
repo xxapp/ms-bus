@@ -1,48 +1,12 @@
 <!DOCTYPE html>
-<!--
-BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.2.0
-Version: 1.0.0
-Purchase: http://wrapbootstrap.com
--->
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<!-- Head -->
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>后台管理</title>
-
-    <meta name="description" content="Dashboard" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="/ms-bus/static/static/beyond/img/favicon.png" type="image/x-icon">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="/ms-bus/static/static/polyfill/html5shiv.js"></script>
-    <script src="/ms-bus/static/static/polyfill/respond.src.js"></script>
-    <![endif]-->
-
-    <!--Basic Styles-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bus Admin</title>
     <link href="/ms-bus/static/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link id="bootstrap-rtl-link" rel="stylesheet" />
     <link href="/ms-bus/static/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="/ms-bus/static/static/beyond/css/weather-icons.min.css" rel="stylesheet" />
-
-    <!--Fonts-->
-    <!--<link href="http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">-->
-
-    <!--Beyond styles-->
-    <link id="beyond-link" href="/ms-bus/static/static/beyond/css/beyond.min.css" rel="stylesheet" type="text/css" />
-    <link href="/ms-bus/static/static/beyond/css/demo.min.css" rel="stylesheet" />
-    <link href="/ms-bus/static/static/beyond/css/typicons.min.css" rel="stylesheet" />
-    <link href="/ms-bus/static/static/beyond/css/animate.min.css" rel="stylesheet" />
-    <link id="skin-link" href="/ms-bus/static/static/beyond/css/skins/teal.min.css" rel="stylesheet" type="text/css" />
-
-    <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
-    <!--<script src="./static/beyond/js/skins.min.js"></script>-->
-
-    <!--Custom styles-->
     <style>
         .ms-controller {
             visibility: hidden;
@@ -51,89 +15,25 @@ Purchase: http://wrapbootstrap.com
 
     <link rel="stylesheet" type="text/css" href="/ms-bus/ane.css" />
 </head>
-<!-- /Head -->
-<!-- Body -->
-<body ms-controller="root">
-    <!-- Loading Container -->
-    <div class="loading-container loading-inactive">
-        <div class="loading-progress">
-            <div class="rotator">
-                <div class="rotator">
-                    <div class="rotator colored">
-                        <div class="rotator">
-                            <div class="rotator colored">
-                                <div class="rotator colored"></div>
-                                <div class="rotator"></div>
-                            </div>
-                            <div class="rotator colored"></div>
-                        </div>
-                        <div class="rotator"></div>
-                    </div>
-                    <div class="rotator"></div>
-                </div>
-                <div class="rotator"></div>
-            </div>
-            <div class="rotator"></div>
-        </div>
-    </div>
-    <!--  /Loading Container -->
-    <!-- Navbar -->
-    <div class="navbar">
-        <xmp is="common-header"></xmp>
-    </div>
-    <!-- /Navbar -->
-    <!-- Main Container -->
-    <div class="main-container container-fluid">
-        <!-- Page Container -->
-        <div class="page-container">
-        	<img id="loadImg" style="position: fixed;z-index: 1000;top: 50%;left: 80px;" src="/ms-bus/static/static/project/image/2013112931.gif" alt="" />
-             	
-            <!-- Page Sidebar -->
-            <div class="page-sidebar">
-                <xmp is="common-sidebar"></xmp>
-            </div>
-            <!-- /Page Sidebar -->
-            <!-- Page Content -->
-            <div class="page-content">
-                <!-- Page Breadcrumb -->
-                <!--<div class="page-breadcrumbs">
-                    <ul class="breadcrumb">
-                        <li ms-class="active:$index+1===breadCrumb.size()" ms-repeat-bread="breadCrumb">
-                            <i class="glyphicon" ms-class="{{bread.icon}}" style="font-size:14px;"></i>
-                            <a ms-if="$index+1!==breadCrumb.size()" ms-attr-href="bread.href">{{bread.title}}</a>
-                            <span ms-if="$index+1===breadCrumb.size()">{{bread.title}}</span>
-                        </li>
-                    </ul>
-                </div>-->
-                <!-- /Page Breadcrumb -->
-                <!-- Page Header -->
-                <!-- /Page Header -->
-                <!-- Page Body -->
-                <div class="page-body">
-                    <div id="content" ms-html="@currentPage"></div>
-                </div>
-                <!-- /Page Body -->
-            </div>
-            <!-- /Page Content -->
-        </div>
-        <!-- /Page Container -->
-        <!-- Main Container -->
-
-    </div>
-    <div id="dialog_layer"></div>
-
-
+<body :controller="root">
+    <xmp is="ms-layout">
+        <ms-layout-header :widget="{fixed:true}">header</ms-layout-header>
+        <ms-layout-footer :widget="{fixed:true}">footer</ms-layout-footer>
+        <ms-layout :widget="{style:{backgroundColor:'#ececec'}}">
+            <ms-layout-sider :widget="{fixed:true}">
+                <wbr is="common-sidebar"/>
+            </ms-layout-sider>
+            <ms-layout-content>
+                <div ms-html="@currentPage"></div>
+            </ms-layout-content>
+        </ms-layout>
+    </xmp>
 <script src="/ms-bus/static/static/mod.js"></script>
 <script>/*resourcemap*/
 require.resourceMap({
   "res": {
     "node_modules/es5-shim/es5-shim": {
       "url": "/ms-bus/static/node_modules/es5-shim/es5-shim.js",
-      "type": "js",
-      "pkg": "p3"
-    },
-    "node_modules/es6-promise/dist/es6-promise.auto": {
-      "url": "/ms-bus/static/node_modules/es6-promise/dist/es6-promise.auto.js",
       "type": "js",
       "pkg": "p3"
     },
@@ -154,11 +54,6 @@ require.resourceMap({
     },
     "node_modules/mmRouter/dist/mmRouter": {
       "url": "/ms-bus/static/node_modules/mmRouter/dist/mmRouter.js",
-      "type": "js",
-      "pkg": "p3"
-    },
-    "node_modules/es5-shim/es5-sham": {
-      "url": "/ms-bus/static/node_modules/es5-shim/es5-sham.js",
       "type": "js",
       "pkg": "p3"
     },
@@ -959,19 +854,11 @@ require.resourceMap({
       ],
       "pkg": "p2"
     },
-    "vendor/beyond/index": {
-      "url": "/ms-bus/static/vendor/beyond/index.js",
-      "type": "js",
-      "deps": [
-        "node_modules/jquery/dist/jquery",
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p2"
-    },
     "services/ajaxService.ts": {
       "url": "/ms-bus/static/services/ajaxService.js",
       "type": "js",
       "deps": [
+        "node_modules/jquery/dist/jquery",
         "vendor/ane/index.ts",
         "services/configService.ts"
       ],
@@ -991,8 +878,8 @@ require.resourceMap({
       "type": "js",
       "deps": [
         "node_modules/avalon2/dist/avalon",
-        "vendor/beyond/index",
-        "services/menuService.ts"
+        "services/menuService.ts",
+        "vendor/ane/components/ms-menu/index.ts"
       ],
       "pkg": "p2"
     },
@@ -1004,21 +891,6 @@ require.resourceMap({
         "node_modules/mmRouter/dist/mmRouter",
         "components/common-header/common-header.ts",
         "components/common-sidebar/common-sidebar.ts"
-      ],
-      "pkg": "p2"
-    },
-    "index.ts": {
-      "url": "/ms-bus/static/index.js",
-      "type": "js",
-      "deps": [
-        "node_modules/es5-shim/es5-shim",
-        "node_modules/es6-promise/dist/es6-promise.auto",
-        "node_modules/jquery/dist/jquery",
-        "node_modules/bootstrap/dist/js/bootstrap",
-        "node_modules/avalon2/dist/avalon",
-        "node_modules/mmRouter/dist/mmRouter",
-        "node_modules/es5-shim/es5-sham",
-        "services/routerService.ts"
       ],
       "pkg": "p2"
     },
@@ -1035,6 +907,19 @@ require.resourceMap({
       "type": "js",
       "deps": [
         "vendor/ane/components/ms-layout/ms-layout.ts"
+      ],
+      "pkg": "p2"
+    },
+    "index.ts": {
+      "url": "/ms-bus/static/index.js",
+      "type": "js",
+      "deps": [
+        "node_modules/es5-shim/es5-shim",
+        "node_modules/jquery/dist/jquery",
+        "node_modules/bootstrap/dist/js/bootstrap",
+        "node_modules/avalon2/dist/avalon",
+        "services/routerService.ts",
+        "vendor/ane/components/ms-layout/index.ts"
       ],
       "pkg": "p2"
     },
@@ -1150,7 +1035,7 @@ require.resourceMap({
 });
 
         require(['index.ts']);
+        document.body.style.height = document.body.style.minHeight = window.document.documentElement.clientHeight + 'px';
     </script>
 </body>
-<!--  /Body -->
 </html>
