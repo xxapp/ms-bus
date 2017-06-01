@@ -1,11 +1,11 @@
 import 'es5-shim';
-// if (getInternetExplorerVersion() === 8) {
-//     Object.defineProperty = function (obj, property, meta) {
-//         obj[property] = meta.value;
-//     }
-// }
-// import 'es5-shim/es5-sham';
-// import 'es6-promise/dist/es6-promise.auto';
+if (getInternetExplorerVersion() === 8) {
+    Object.defineProperty = function (obj, property, meta) {
+        obj[property] = meta.value;
+    }
+}
+import 'es5-shim/es5-sham';
+import 'es6-promise/dist/es6-promise.auto';
 import * as jQuery from 'jquery';
 global.$ = global.jQuery = jQuery;
 import 'bootstrap';
