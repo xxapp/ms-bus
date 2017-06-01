@@ -12,7 +12,7 @@
                 "developer": null,
                 "code": "demo1",
                 "uri": null,
-                "icon_url": "glyphicon-home",
+                "icon_url": "fa fa-book",
                 "open_mode": "N",
                 "dispatch_mode": "T"
             },
@@ -24,8 +24,8 @@
                 "status": "N",
                 "developer": null,
                 "code": "demo",
-                "uri": "#!/demo",
-                "icon_url": "glyphicon-home",
+                "uri": "/demo",
+                "icon_url": "fa fa-home",
                 "open_mode": "N",
                 "dispatch_mode": "T"
             },
@@ -37,8 +37,8 @@
                 "status": "N",
                 "developer": null,
                 "code": "item",
-                "uri": "#!/item",
-                "icon_url": "glyphicon-home",
+                "uri": "/item",
+                "icon_url": "fa fa-home",
                 "open_mode": "C",
                 "dispatch_mode": "T"
             }

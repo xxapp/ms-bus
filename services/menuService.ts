@@ -2,57 +2,48 @@ import * as avalon from  'avalon2';
 import ajax from './ajaxService';
 
 const menu = [{
-    name: 'dashboard',
-    stateName: 'root',
+    key: 'dashboard',
     title: '主页',
-    icon: 'glyphicon-home',
-    href: '#!/'
+    icon: 'fa fa-home',
+    uri: '/'
 }, {
-    name: 'demo1',
+    key: 'demo1',
     title: '例子一级',
-    icon: 'glyphicon-home',
-    href: 'javascript:;',
+    icon: 'fa fa-home',
     children: [{
-        name: 'demo',
-        stateName: 'root.demo',
+        key: 'demo',
         title: '例子',
-        icon: 'glyphicon-home',
-        href: '#!/demo',
-        childStates: ['root.supplier']
+        icon: 'fa fa-home',
+        uri: '/demo'
     }, {
-        name: 'demo-redux',
-        stateName: 'root.demoRedux',
+        key: 'demo-redux',
         title: 'redux例子',
-        icon: 'glyphicon-home',
-        href: '#!/demo-redux'
+        icon: 'fa fa-home',
+        uri: '/demo-redux'
     }, {
-        name: 'demo-fast',
-        stateName: 'root.demoFast',
+        key: 'demo-fast',
         title: '快速CURD例子',
-        icon: 'glyphicon-home',
-        href: '#!/demo-fast'
+        icon: 'fa fa-home',
+        uri: '/demo-fast'
     }]
 }, {
-    name: 'doc-ms',
+    key: 'doc-ms',
     title: '组件文档',
-    icon: 'glyphicon-book',
-    href: 'javascript:;',
+    icon: 'fa fa-book',
     children: [{
-        name: 'doc-ms-table',
-        stateName: 'root.doc-ms-table',
+        key: 'doc-ms-table',
         title: 'Table',
-        href: '#!/doc-ms-table'
+        uri: '/doc-ms-table'
     }, {
-        name: 'doc-ms-form',
-        stateName: 'root.doc-ms-form',
+        key: 'doc-ms-form',
         title: 'Form',
-        href: '#!/doc-ms-form'
+        uri: '/doc-ms-form'
     }]
 }, {
-    name: 'rxjs-demo-page',
+    key: 'rxjs-demo-page',
     title: 'RxJS Demo Page',
-    icon: 'glyphicon-page',
-    href: '/pages/rxjs-demo/rxjs-demo.html',
+    icon: 'fa fa-page',
+    uri: '/pages/rxjs-demo/rxjs-demo.html',
     target: '_blank'
 }];
 
@@ -82,7 +73,7 @@ function travelMenu(menulet, functions, allowedFunctions) {
         let hasPermission = false;
         for (let j = 0, func; func = functions[j++]; ) {
             if (func.code === item.name && (allowedFunctions[func.code]) || allowedFunctions['all']) {
-                item.href = func.uri || item.href || 'javascript:;';
+                item.uri = func.uri || item.uri || 'javascript:;';
                 item.icon = func.icon_url || item.icon;
                 item.target = item.target || '_self';
                 item.children = item.children || [];

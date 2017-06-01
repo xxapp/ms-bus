@@ -1,4 +1,6 @@
 import * as avalon from 'avalon2';
+import * as jQuery from 'jquery';
+global.$ = global.jQuery = jQuery;
 import * as beyond from '../vendor/beyond';
 
 import { notification } from 'ane';

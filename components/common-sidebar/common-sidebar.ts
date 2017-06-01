@@ -2,6 +2,7 @@ import * as avalon from 'avalon2';
 import * as beyond from '../../vendor/beyond';
 
 import * as menuService from '../../services/menuService';
+import 'ane/components/ms-menu'
 
 avalon.effect('collapse', {
     enter(elem, done) {
@@ -18,50 +19,15 @@ avalon.component(name, {
     template: __inline('./common-sidebar.html'),
     defaults: {
         menu: [],
-        actived: 'dashboard',
-        opened: '',
-        compact: false,
-        menuClick(item, parent) {
-            if (!item.children || item.children.length === 0) {
-                this.actived = item.name;
-                if (parent) {
-                    this.opened = parent.name;
-                }
-            } else {
-                if (this.opened == item.name) {
-                    this.opened = '';
-                } else {
-                    this.opened = item.name
-                }
-            }
-        },
-        search() {
-            this.$fire('all!title', 'Demo');
-        },
-        isChildActived(item) {
-            // if (item.name === sidebar.actived) {
-            //     return false;
-            // }
-            // for (var i = 0, bread; bread = avalon.vmodels.root.breadCrumb.$model[i++]; ) {
-            //     return bread.name === item.name;
-            // }
-            if (!item.children) return;
-            if (item.children.length === 0) return;
-            for (let i = 0, child; child = item.children[i++]; ) {
-                if (child.name === this.actived) {
-                    //sidebar.opened = item.name;
-                    return true;
-                }
-            }
-            return false;
+        selectedKeys: ['dashboard'],
+        openKeys: [],
+        handleMenuClick(item, key, keyPath) {
+            avalon.router.navigate(item.uri, 2);
         },
         onInit(event) {
             menuService.menu.then((menu) => {
                 this.menu = menu;
             });
-        },
-        onReady(event) {
-            beyond.initSidebar();
         }
     }
 });

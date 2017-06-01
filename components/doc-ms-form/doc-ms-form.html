@@ -1,94 +1,87 @@
 <template>
     <div class="row">
         <div class="col-xs-12 col-md-12">
-            <div class="widget">
-                <div class="widget-header bg-green">
-                    <span class="widget-caption">Form组件</span>
-                </div>
-                <div class="widget-body">
-                    <ms-form :widget="{$form: @$form}">
-                        <ms-form-item :widget="{label:'姓名'}">
-                            <ms-input :widget="{value:@record.name,col:'name',$rules:{required:true,message:'请输入文字'}, onChange:@handleChange}"></ms-input>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label:'兴趣'}">
-                            <ms-checkbox-group
-                                :widget="{value:@record.hobby,col:'hobby',options:[
-                                            { label: '编程', value: 'code' },
-                                            { label: '其他', value: 'other' }
-                                        ],$rules:{required:true,type:'array'}, onChange:@handleChange}">
-                            </ms-checkbox-group>
-                        </ms-form-item>
-                        <!--<div class="form-title">教育经历</div>-->
-                        <!--ms-for: ($index,school) in @record.education-->
-                        <!--<div style="width: 500px;">
-                            <ms-form-item>
-                                <ms-input :widget="{value:school,col:'education[' + $index +']',placeholder:'学校',$rules:{required:true,message:'请输入文字'}}"></ms-input>
-                                <button type="button" class="btn btn-danger" style="position: absolute;top: 1px;right: -55px;" :click="@removeEducation(school)">删除</button>
-                            </ms-form-item>
-                        </div>-->
-                        <!--ms-for-end:-->
-                        <!--<button type="button" class="btn btn-primary" :click="@addEducation"><i class="fa fa-plus-circle"></i> 添加教育经历</button>-->
-                        <ms-form-item :widget="{label:'性别'}">
-                            <ms-radio-group
-                                :widget="{value:@record.gender,col:'gender',options:[
-                                            { label: '男', value: 'M' },
-                                            { label: '女', value: 'F' }
-                                        ],$rules:{required:true}, onChange:@handleChange}">
-                            </ms-radio-group>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label:'代表作'}">
-                            <ms-select :widget="{
-                                value:@record.masterpiece,
-                                col:'masterpiece',
-                                showSearch:true,
-                                mode:'multiple'
-                            }">
-                                <ms-select-option :widget="{value:'ane'}">Ane</ms-select-option>
-                                <ms-select-option :widget="{value:'ms-bus'}">ms-bus</ms-select-option>
-                                <ms-select-option :widget="{value:'up-loader'}">up-loader</ms-select-option>
-                            </ms-select>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label:'出生日期'}">
-                            <ms-datepicker :widget="{
-                                value:@record.birthday,
-                                col:'birthday',
-                                placeholder:'请选择出生日期',
-                                format:'YYYY/MM/DD',
-                                startDate:'2017/5/26',
-                                endDate:'2018/7/26',
-                                $rules:{required:true,message:'请选择日期'}
-                            }"></ms-datepicker>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label:'觉醒时间'}">
-                            <ms-datepicker :widget="{
-                                value:@record.bankai,
-                                col:'bankai',
-                                placeholder:'请选择觉醒时间',
-                                startDate:'2017-5-26',
-                                showTime: true,
-                                $rules:{required:true,message:'请选择日期和时间'}
-                            }"></ms-datepicker>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label:'头像'}">
-                            <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: @fileUploadUrl,listType:'picture-card',showUploadList:false,beforeUpload:@handleBeforeUpload,$rules:{required:true,message:'请选择头像'}, onChange:@handleChange}">
-                                <i class="fa fa-plus"></i>选择图片
-                            </ms-upload>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label:'个人简介'}">
-                            <ms-textarea :widget="{value:@record.bio,col:'bio',rows:5,$rules:{required:true}, onChange:@handleChange}"></ms-textarea>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label:'附件'}">
-                            <ms-upload :widget="{value:@record.attachment,col:'attachment',action: @fileUploadUrl,listType:'text-list',$rules:{required:true,type:'array'}, onChange:@handleChange}">
-                                <i class="fa fa-upload"></i>选择文件
-                            </ms-upload>
-                        </ms-form-item>
-                    </ms-form>
-                    <pre>{{@json}}</pre>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button class="btn btn-info pull-right" :click="@submit"><i class="fa fa-save"></i>提交</button>
-                        </div>
-                    </div>
+            <ms-form :widget="{$form: @$form}">
+                <ms-form-item :widget="{label:'姓名'}">
+                    <ms-input :widget="{value:@record.name,col:'name',$rules:{required:true,message:'请输入文字'}, onChange:@handleChange}"></ms-input>
+                </ms-form-item>
+                <ms-form-item :widget="{label:'兴趣'}">
+                    <ms-checkbox-group
+                        :widget="{value:@record.hobby,col:'hobby',options:[
+                                    { label: '编程', value: 'code' },
+                                    { label: '其他', value: 'other' }
+                                ],$rules:{required:true,type:'array'}, onChange:@handleChange}">
+                    </ms-checkbox-group>
+                </ms-form-item>
+                <!--<div class="form-title">教育经历</div>-->
+                <!--ms-for: ($index,school) in @record.education-->
+                <!--<div style="width: 500px;">
+                    <ms-form-item>
+                        <ms-input :widget="{value:school,col:'education[' + $index +']',placeholder:'学校',$rules:{required:true,message:'请输入文字'}}"></ms-input>
+                        <button type="button" class="btn btn-danger" style="position: absolute;top: 1px;right: -55px;" :click="@removeEducation(school)">删除</button>
+                    </ms-form-item>
+                </div>-->
+                <!--ms-for-end:-->
+                <!--<button type="button" class="btn btn-primary" :click="@addEducation"><i class="fa fa-plus-circle"></i> 添加教育经历</button>-->
+                <ms-form-item :widget="{label:'性别'}">
+                    <ms-radio-group
+                        :widget="{value:@record.gender,col:'gender',options:[
+                                    { label: '男', value: 'M' },
+                                    { label: '女', value: 'F' }
+                                ],$rules:{required:true}, onChange:@handleChange}">
+                    </ms-radio-group>
+                </ms-form-item>
+                <ms-form-item :widget="{label:'代表作'}">
+                    <ms-select :widget="{
+                        value:@record.masterpiece,
+                        col:'masterpiece',
+                        showSearch:true,
+                        mode:'multiple'
+                    }">
+                        <ms-select-option :widget="{value:'ane'}">Ane</ms-select-option>
+                        <ms-select-option :widget="{value:'ms-bus'}">ms-bus</ms-select-option>
+                        <ms-select-option :widget="{value:'up-loader'}">up-loader</ms-select-option>
+                    </ms-select>
+                </ms-form-item>
+                <ms-form-item :widget="{label:'出生日期'}">
+                    <ms-datepicker :widget="{
+                        value:@record.birthday,
+                        col:'birthday',
+                        placeholder:'请选择出生日期',
+                        format:'YYYY/MM/DD',
+                        startDate:'2017/5/26',
+                        endDate:'2018/7/26',
+                        $rules:{required:true,message:'请选择日期'}
+                    }"></ms-datepicker>
+                </ms-form-item>
+                <ms-form-item :widget="{label:'觉醒时间'}">
+                    <ms-datepicker :widget="{
+                        value:@record.bankai,
+                        col:'bankai',
+                        placeholder:'请选择觉醒时间',
+                        startDate:'2017-5-26',
+                        showTime: true,
+                        $rules:{required:true,message:'请选择日期和时间'}
+                    }"></ms-datepicker>
+                </ms-form-item>
+                <ms-form-item :widget="{label:'头像'}">
+                    <ms-upload :widget="{value:[@record.avatar],col:'avatar',action: @fileUploadUrl,listType:'picture-card',showUploadList:false,beforeUpload:@handleBeforeUpload,$rules:{required:true,message:'请选择头像'}, onChange:@handleChange}">
+                        <i class="fa fa-plus"></i>选择图片
+                    </ms-upload>
+                </ms-form-item>
+                <ms-form-item :widget="{label:'个人简介'}">
+                    <ms-textarea :widget="{value:@record.bio,col:'bio',rows:5,$rules:{required:true}, onChange:@handleChange}"></ms-textarea>
+                </ms-form-item>
+                <ms-form-item :widget="{label:'附件'}">
+                    <ms-upload :widget="{value:@record.attachment,col:'attachment',action: @fileUploadUrl,listType:'text-list',$rules:{required:true,type:'array'}, onChange:@handleChange}">
+                        <i class="fa fa-upload"></i>选择文件
+                    </ms-upload>
+                </ms-form-item>
+            </ms-form>
+            <pre>{{@json}}</pre>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-info pull-right" :click="@submit"><i class="fa fa-save"></i>提交</button>
                 </div>
             </div>
         </div>

@@ -31,7 +31,6 @@ export default avalon.component('common-curd', {
             this.$store.fetch({...this.$searchForm.record, ...page}).then(data => {
                 this.pagination.total = data.total;
                 this.list = data.list;
-                console.log('数据加载完成，即将关闭mask');
                 this.loading = false;
             }, () => {
                 this.loading = false;
@@ -78,6 +77,8 @@ export default avalon.component('common-curd', {
                 if (result !== undefined && result.code === '0') {
                     this.fetch();
                 }
+            }).catch(err => {
+                avalon.log(err);
             });
         },
         _initMainDialog() {
@@ -104,6 +105,8 @@ export default avalon.component('common-curd', {
                         return this.$form.validateFields().then(isAllValid => {
                             if (isAllValid) {
                                 return [this.isEdit, this.$form.record];
+                            } else {
+                                return Promise.reject('表单验证未通过');
                             }
                         })
                     }

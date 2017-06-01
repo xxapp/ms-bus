@@ -19,45 +19,38 @@
                     </xmp>
                 </div>
             </ms-dialog>
-            <div class="widget">
-                <div class="widget-header bg-red">
-                    <span class="widget-caption">地区列表-快速-CURD</span>
-                </div>
-                <div class="widget-body">
-                    <ms-form :widget="{$form:@$searchForm,type:'search',inline:true}">
-                        <ms-form-item :widget="{label: 'ID'}">
-                            <ms-input :widget="{col: 'region_id'}"></ms-input>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label: '名称'}">
-                            <ms-input :widget="{col: 'region_name.firstName'}"></ms-input>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label: '开始日期'}">
-                            <ms-input :widget="{col: 'startDate', $rules: { pattern: @pattern, message: '日期格式不正确' }}"></ms-input>
-                        </ms-form-item>
-                        <ms-form-item :widget="{label: '结束日期'}">
-                            <ms-input :widget="{col: 'endDate'}"></ms-input>
-                        </ms-form-item>
-                        <button type="button" class="btn btn-info" :click="@search">
-                            <span class="fa fa-search"></span>搜索
-                        </button>
-                    </ms-form>
-                    <div class="table-toolbar">
-                        <button class="btn btn-info" :click="actions('add')">
-                            <span class="fa fa-plus">
-                            </span>新增地区
-                        </button>
-                    </div>
-                    <ms-table :widget="{data:@list,loading:@loading,actions:@actions,pagination:@pagination,onChange:@handleTableChange}">
-                        <ms-table-header :widget="{dataIndex:'region_id',type:'selection'}"></ms-table-header>
-                        <ms-table-header :widget="{title:'地区',dataIndex:'region_name'}"></ms-table-header>
-                        <ms-table-header :widget="{title:'PID',dataIndex:'region_parent_id'}"></ms-table-header>
-                        <ms-table-header :widget="{title:'操作',dataIndex:'region_id'}">
-                            <button type="button" class="btn btn-link btn-xs" :click="handle('edit')"><i class="fa fa-edit"></i> 编辑</button>
-                            <button type="button" class="btn btn-link btn-xs" :click="handle('del')"><i class="fa fa-trash-o"></i> 删除</button>
-                        </ms-table-header>
-                    </ms-table>
-                </div>
+            <ms-form :widget="{$form:@$searchForm,type:'search',inline:true}">
+                <ms-form-item :widget="{label: 'ID'}">
+                    <ms-input :widget="{col: 'region_id'}"></ms-input>
+                </ms-form-item>
+                <ms-form-item :widget="{label: '名称'}">
+                    <ms-input :widget="{col: 'region_name.firstName'}"></ms-input>
+                </ms-form-item>
+                <ms-form-item :widget="{label: '开始日期'}">
+                    <ms-input :widget="{col: 'startDate', $rules: { pattern: @pattern, message: '日期格式不正确' }}"></ms-input>
+                </ms-form-item>
+                <ms-form-item :widget="{label: '结束日期'}">
+                    <ms-input :widget="{col: 'endDate'}"></ms-input>
+                </ms-form-item>
+                <button type="button" class="btn btn-primary" :click="@search">
+                    <span class="fa fa-search"></span>搜索
+                </button>
+            </ms-form>
+            <div class="table-toolbar">
+                <button class="btn btn-success" :click="actions('add')">
+                    <span class="fa fa-plus">
+                    </span>新增地区
+                </button>
             </div>
+            <ms-table :widget="{data:@list,loading:@loading,actions:@actions,pagination:@pagination,onChange:@handleTableChange}">
+                <ms-table-header :widget="{dataIndex:'region_id',type:'selection'}"></ms-table-header>
+                <ms-table-header :widget="{title:'地区',dataIndex:'region_name'}"></ms-table-header>
+                <ms-table-header :widget="{title:'PID',dataIndex:'region_parent_id'}"></ms-table-header>
+                <ms-table-header :widget="{title:'操作',dataIndex:'region_id'}">
+                    <button type="button" class="btn btn-link btn-xs" :click="handle('edit')"><i class="fa fa-edit"></i> 编辑</button>
+                    <button type="button" class="btn btn-link btn-xs" :click="handle('del')"><i class="fa fa-trash-o"></i> 删除</button>
+                </ms-table-header>
+            </ms-table>
         </div>
     </div>
 </template>
