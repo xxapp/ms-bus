@@ -4,7 +4,7 @@
   <strong>基于 <a href="https://github.com/RubyLouvre/avalon">Avalon2</a> 的 SPA 脚手架 beta</strong>
 </div>
 
-## For developer
+## 开始
 
 1. 首先安装配置 node 环境, 需要 6.x 版本。
 
