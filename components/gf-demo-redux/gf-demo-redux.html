@@ -22,28 +22,46 @@
                 </div>
             </ms-dialog>
             <ms-form :widget="{$form:@$searchForm,type:'search',inline:true}">
-                <ms-form-item :widget="{label: 'ID'}">
-                    <ms-input :widget="{col: 'region_id'}"></ms-input>
-                </ms-form-item>
-                <ms-form-item :widget="{label: '名称'}">
-                    <ms-input :widget="{col: 'region_name.firstName'}"></ms-input>
-                </ms-form-item>
-                <ms-form-item :widget="{label: '开始日期'}">
-                    <ms-input :widget="{col: 'startDate', $rules: { pattern: @pattern, message: '日期格式不正确' }}"></ms-input>
-                </ms-form-item>
-                <ms-form-item :widget="{label: '结束日期'}">
-                    <ms-input :widget="{col: 'endDate'}"></ms-input>
-                </ms-form-item>
-                <button type="button" class="btn btn-primary" :click="@search">
-                    <span class="fa fa-search"></span>搜索
-                </button>
+                <div class="row">
+                    <div class="col-md-2">
+                        <ms-form-item :widget="{label: 'ID：'}">
+                            <ms-input :widget="{col: 'region_id', width: '75%'}"></ms-input>
+                        </ms-form-item>
+                    </div>
+                    <div class="col-md-2">
+                        <ms-form-item :widget="{label: '名称：'}">
+                            <ms-input :widget="{col: 'region_name.firstName', width: '75%'}"></ms-input>
+                        </ms-form-item>
+                    </div>
+                    <div class="col-md-3">
+                        <ms-form-item :widget="{label: '开始日期：'}">
+                            <ms-datepicker :widget="{
+                                col:'startDate',
+                                placeholder:'请选择开始日期',
+                                width: '70%'
+                            }"></ms-datepicker>
+                        </ms-form-item>
+                    </div>
+                    <div class="col-md-3">
+                        <ms-form-item :widget="{label: '结束日期：'}">
+                            <ms-datepicker :widget="{
+                                col:'endDate',
+                                placeholder:'请选择结束日期',
+                                width: '70%'
+                            }"></ms-datepicker>
+                        </ms-form-item>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" :click="@search">
+                            <span class="fa fa-search"></span>搜索
+                        </button>
+                        <button type="button" class="btn btn-success pull-right" :click="actions('add')">
+                            <span class="fa fa-plus">
+                            </span>新增地区
+                        </button>
+                    </div>
+                </div>
             </ms-form>
-            <div class="table-toolbar">
-                <button class="btn btn-success" :click="actions('add')">
-                    <span class="fa fa-plus">
-                    </span>新增地区
-                </button>
-            </div>
             <ms-table :widget="{data:@list,actions:@actions,pagination:@pagination,onChange:@handleTableChange}">
                 <ms-table-header :widget="{dataIndex:'region_id',type:'selection'}"></ms-table-header>
                 <ms-table-header :widget="{title:'地区',dataIndex:'region_name'}"></ms-table-header>
