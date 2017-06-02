@@ -33,9 +33,7 @@
                     <li :for="($index,item) in @breadcrumb" :class="[($index===breadcrumb.length-1)?'active':'']">{{item.title}}</li>
                 </ol>
                 <div class="ane-layout-content-wrapper">
-                    <div class="container-fluid">
-                        <div ms-html="@currentPage"></div>
-                    </div>
+                    <div ms-html="@currentPage"></div>
                 </div>
             </ms-layout-content>
         </ms-layout>
