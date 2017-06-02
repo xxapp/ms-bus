@@ -29,7 +29,7 @@ interface AvalonStatic {
         check: () => void,
         start: (options: mmHistoryOptions) => void,
         stop: () => void,
-        setHash: (s: string, replace: boolean) => void,
+        setHash: (s: string, replace?: boolean) => void,
         writeFrame: (s: string) => void,
         syncHash: () => this,
         getPath: () => string,

@@ -22,7 +22,7 @@ avalon.component(name, {
         selectedKeys: ['dashboard'],
         openKeys: [],
         handleMenuClick(item, key, keyPath) {
-            avalon.router.navigate(item.uri, 2);
+            avalon.history.setHash(item.uri);
         },
         onInit(event) {
             menuService.menu.then((menu) => {
