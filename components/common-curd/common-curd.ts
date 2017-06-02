@@ -116,7 +116,10 @@ export default avalon.component('common-curd', {
         _disposeDialogs() {
             Object.keys(this.$dialogs).map(name => {
                 let dialog = this.$dialogs[name];
-                dialog && delete avalon.vmodels[dialog.$id];
+                if (dialog) {
+                    delete this.$dialogs[name];
+                    delete avalon.vmodels[dialog.$id];
+                }
             });
         },
         onInit(event) {
