@@ -112,7 +112,7 @@ function getKeyPath(key) {
     return menuPromise.then((menu: any) => {
         const keyPath = [];
 
-        walkMenu(menu.toJSON(), key, function (item, shift) {
+        walkMenu(menu.toJSON ? menu.toJSON() : menu, key, function (item, shift) {
             if (shift) {
                 keyPath.shift();
             } else {
