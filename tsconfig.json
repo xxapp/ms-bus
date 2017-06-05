@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "es3",
+        "module": "commonjs"
+    },
+    "typeRoots": [
+        "typings",
+        "../node_modules/@types"
+    ]
+}
