@@ -24,6 +24,9 @@ avalon.component(name, {
         handleMenuClick(item, key, keyPath) {
             avalon.history.setHash(item.uri);
         },
+        handleOpenChange(openKeys) {
+            this.openKeys = openKeys.slice(-1);
+        },
         onInit(event) {
             menuService.menu.then((menu) => {
                 this.menu = menu;
