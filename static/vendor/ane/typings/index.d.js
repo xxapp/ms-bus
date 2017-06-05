@@ -1,0 +1,1 @@
+define("vendor/ane/typings/index.d.ts",function(){});
