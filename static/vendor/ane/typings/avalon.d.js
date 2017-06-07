@@ -1,1 +1,0 @@
-define("vendor/ane/typings/avalon.d.ts",function(){});

@@ -1,1 +1,0 @@
-define("vendor/ane/components/ms-trigger/index.ts",function(e){"use strict";e("vendor/ane/components/ms-trigger/ms-trigger.ts")});

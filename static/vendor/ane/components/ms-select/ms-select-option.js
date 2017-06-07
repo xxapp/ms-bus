@@ -1,1 +1,0 @@
-define("vendor/ane/components/ms-select/ms-select-option.ts",function(e){"use strict";var l=e("node_modules/avalon2/dist/avalon");l.component("ms-select-option",{template:"&nbsp;",soleSlot:"label",defaults:{label:"",value:"",disabled:!1}})});

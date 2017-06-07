@@ -1,1 +1,0 @@
-{"version":3,"sources":["/vendor/ane/components/ms-menu/index.ts"],"names":[],"mappings":";;;AAAA,GAAwB;AACxB,qBAAmB","file":"index.js","sourcesContent":["import './ms-menu.scss';\nimport './ms-menu';"]}

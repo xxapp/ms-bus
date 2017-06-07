@@ -7,13 +7,15 @@
     <title>Bus Admin</title>
     <link href="/ms-bus/static/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="/ms-bus/static/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/ms-bus/static/node_modules/ane/dist/layout.css" rel="stylesheet" />
+    <link href="/ms-bus/static/node_modules/ane/dist/ane.css" rel="stylesheet" />
     <style>
         .ms-controller,xmp {
             visibility: hidden;
         }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="/ms-bus/ane.css" />
+    
 </head>
 <body :controller="root">
     <xmp is="ms-layout">
@@ -46,50 +48,55 @@ require.resourceMap({
     "node_modules/es5-shim/es5-shim": {
       "url": "/ms-bus/static/node_modules/es5-shim/es5-shim.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/es6-promise/dist/es6-promise.auto": {
       "url": "/ms-bus/static/node_modules/es6-promise/dist/es6-promise.auto.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/jquery/dist/jquery": {
       "url": "/ms-bus/static/node_modules/jquery/dist/jquery.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/bootstrap/dist/js/bootstrap": {
       "url": "/ms-bus/static/node_modules/bootstrap/dist/js/bootstrap.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/avalon2/dist/avalon": {
       "url": "/ms-bus/static/node_modules/avalon2/dist/avalon.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/es5-shim/es5-sham": {
       "url": "/ms-bus/static/node_modules/es5-shim/es5-sham.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/mmRouter/dist/mmRouter": {
       "url": "/ms-bus/static/node_modules/mmRouter/dist/mmRouter.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
-    "node_modules/bootbox/bootbox": {
-      "url": "/ms-bus/static/node_modules/bootbox/bootbox.js",
+    "node_modules/moment/moment": {
+      "url": "/ms-bus/static/node_modules/moment/moment.js",
+      "type": "js",
+      "pkg": "p1"
+    },
+    "node_modules/noty/js/noty/packaged/jquery.noty.packaged": {
+      "url": "/ms-bus/static/node_modules/noty/js/noty/packaged/jquery.noty.packaged.js",
       "type": "js",
       "deps": [
         "node_modules/jquery/dist/jquery"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/util": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/util.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/rule/required": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/rule/required.js",
@@ -97,7 +104,7 @@ require.resourceMap({
       "deps": [
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/rule/whitespace": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/rule/whitespace.js",
@@ -105,7 +112,7 @@ require.resourceMap({
       "deps": [
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/rule/type": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/rule/type.js",
@@ -114,7 +121,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/util",
         "node_modules/async-validator/lib/rule/required"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/rule/range": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/rule/range.js",
@@ -122,7 +129,7 @@ require.resourceMap({
       "deps": [
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/rule/enum": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/rule/enum.js",
@@ -130,7 +137,7 @@ require.resourceMap({
       "deps": [
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/rule/pattern": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/rule/pattern.js",
@@ -138,7 +145,7 @@ require.resourceMap({
       "deps": [
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/rule/index": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/rule/index.js",
@@ -151,7 +158,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/enum",
         "node_modules/async-validator/lib/rule/pattern"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/string": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/string.js",
@@ -160,7 +167,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/method": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/method.js",
@@ -169,7 +176,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/number": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/number.js",
@@ -178,7 +185,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/boolean": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/boolean.js",
@@ -187,7 +194,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/util",
         "node_modules/async-validator/lib/rule/index"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/regexp": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/regexp.js",
@@ -196,7 +203,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/integer": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/integer.js",
@@ -205,7 +212,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/float": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/float.js",
@@ -214,7 +221,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/array": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/array.js",
@@ -223,7 +230,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/object": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/object.js",
@@ -232,7 +239,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/enum": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/enum.js",
@@ -241,7 +248,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/pattern": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/pattern.js",
@@ -250,7 +257,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/type": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/type.js",
@@ -259,7 +266,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/date": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/date.js",
@@ -268,7 +275,7 @@ require.resourceMap({
         "node_modules/async-validator/lib/rule/index",
         "node_modules/async-validator/lib/util"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/required": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/required.js",
@@ -276,7 +283,7 @@ require.resourceMap({
       "deps": [
         "node_modules/async-validator/lib/rule/index"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/validator/index": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/validator/index.js",
@@ -297,12 +304,12 @@ require.resourceMap({
         "node_modules/async-validator/lib/validator/date",
         "node_modules/async-validator/lib/validator/required"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/messages": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/messages.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/async-validator/lib/index": {
       "url": "/ms-bus/static/node_modules/async-validator/lib/index.js",
@@ -313,12 +320,25 @@ require.resourceMap({
         "node_modules/async-validator/lib/messages",
         "node_modules/async-validator/lib/rule/index"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
+    },
+    "node_modules/up-loader/dist/up-loader": {
+      "url": "/ms-bus/static/node_modules/up-loader/dist/up-loader.js",
+      "type": "js",
+      "pkg": "p1"
+    },
+    "node_modules/bootbox/bootbox": {
+      "url": "/ms-bus/static/node_modules/bootbox/bootbox.js",
+      "type": "js",
+      "deps": [
+        "node_modules/jquery/dist/jquery"
+      ],
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/propertyUtils": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/propertyUtils.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/utils": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/utils.js",
@@ -326,7 +346,7 @@ require.resourceMap({
       "deps": [
         "node_modules/dom-align/lib/propertyUtils"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/getOffsetParent": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/getOffsetParent.js",
@@ -334,7 +354,7 @@ require.resourceMap({
       "deps": [
         "node_modules/dom-align/lib/utils"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/getVisibleRectForElement": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/getVisibleRectForElement.js",
@@ -343,7 +363,7 @@ require.resourceMap({
         "node_modules/dom-align/lib/utils",
         "node_modules/dom-align/lib/getOffsetParent"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/adjustForViewport": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/adjustForViewport.js",
@@ -351,7 +371,7 @@ require.resourceMap({
       "deps": [
         "node_modules/dom-align/lib/utils"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/getRegion": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/getRegion.js",
@@ -359,12 +379,12 @@ require.resourceMap({
       "deps": [
         "node_modules/dom-align/lib/utils"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/getAlignOffset": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/getAlignOffset.js",
       "type": "js",
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/getElFuturePos": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/getElFuturePos.js",
@@ -372,7 +392,7 @@ require.resourceMap({
       "deps": [
         "node_modules/dom-align/lib/getAlignOffset"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
     "node_modules/dom-align/lib/index": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/index.js",
@@ -386,496 +406,45 @@ require.resourceMap({
         "node_modules/dom-align/lib/getElFuturePos",
         "node_modules/dom-align/lib/getAlignOffset"
       ],
-      "pkg": "p3"
+      "pkg": "p1"
     },
-    "node_modules/up-loader/dist/up-loader": {
-      "url": "/ms-bus/static/node_modules/up-loader/dist/up-loader.js",
-      "type": "js",
-      "pkg": "p3"
-    },
-    "node_modules/moment/moment": {
-      "url": "/ms-bus/static/node_modules/moment/moment.js",
-      "type": "js",
-      "pkg": "p3"
-    },
-    "node_modules/moment/locale/zh-cn": {
-      "url": "/ms-bus/static/node_modules/moment/locale/zh-cn.js",
-      "type": "js",
-      "deps": [
-        "node_modules/moment/moment"
-      ],
-      "pkg": "p3"
-    },
-    "node_modules/noty/js/noty/packaged/jquery.noty.packaged": {
-      "url": "/ms-bus/static/node_modules/noty/js/noty/packaged/jquery.noty.packaged.js",
-      "type": "js",
-      "deps": [
-        "node_modules/jquery/dist/jquery"
-      ],
-      "pkg": "p3"
-    },
-    "vendor/ane/components/ms-menu/ms-menu.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-menu/ms-menu.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-menu/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-menu/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-menu/ms-menu.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/ane-util.ts": {
-      "url": "/ms-bus/static/vendor/ane/ane-util.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-checkbox/ms-checkbox.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-checkbox/ms-checkbox.js",
+    "node_modules/ane/dist/ane": {
+      "url": "/ms-bus/static/node_modules/ane/dist/ane.js",
       "type": "js",
       "deps": [
         "node_modules/avalon2/dist/avalon",
-        "vendor/ane/ane-util.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-table/ms-table-header.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-table/ms-table-header.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-pagination/ms-pagination.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-pagination/ms-pagination.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-loading/ms-loading-directive.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-loading/ms-loading-directive.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-loading/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-loading/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-loading/ms-loading-directive.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-table/ms-table.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-table/ms-table.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "vendor/ane/components/ms-checkbox/ms-checkbox.ts",
-        "vendor/ane/components/ms-table/ms-table-header.ts",
-        "vendor/ane/components/ms-pagination/ms-pagination.ts",
-        "vendor/ane/ane-util.ts",
-        "vendor/ane/components/ms-loading/index.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-dialog/ms-dialog.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-dialog/ms-dialog.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
+        "node_modules/moment/moment",
+        "node_modules/noty/js/noty/packaged/jquery.noty.packaged",
+        "node_modules/jquery/dist/jquery",
+        "node_modules/async-validator/lib/index",
+        "node_modules/up-loader/dist/up-loader",
         "node_modules/bootbox/bootbox",
-        "vendor/ane/ane-util.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-dialog/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-dialog/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-dialog/ms-dialog.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-form/ms-form.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-form/ms-form.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-form/ms-form-item.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-form/ms-form-item.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "vendor/ane/ane-util.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-form/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-form/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-form/ms-form.ts",
-        "vendor/ane/components/ms-form/ms-form-item.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-form/create-form.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-form/create-form.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "node_modules/async-validator/lib/index"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-form/ms-control.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-form/ms-control.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-form/utils.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-form/utils.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/ane-util.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-input/ms-input.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-input/ms-input.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-form/ms-control.ts",
-        "vendor/ane/components/ms-form/utils.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-input/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-input/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-input/ms-input.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-textarea/ms-textarea.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-textarea/ms-textarea.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-form/ms-control.ts",
-        "vendor/ane/components/ms-form/utils.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-textarea/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-textarea/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-textarea/ms-textarea.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-trigger/ms-trigger.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-trigger/ms-trigger.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
         "node_modules/dom-align/lib/index"
       ],
-      "pkg": "p0"
+      "pkg": "p1"
     },
-    "vendor/ane/components/ms-trigger/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-trigger/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-trigger/ms-trigger.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-select/ms-select.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-select/ms-select.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "vendor/ane/components/ms-form/ms-control.ts",
-        "vendor/ane/components/ms-trigger/index.ts",
-        "vendor/ane/ane-util.ts",
-        "vendor/ane/components/ms-form/utils.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-select/ms-select-option.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-select/ms-select-option.js",
+    "node_modules/ane/dist/layout": {
+      "url": "/ms-bus/static/node_modules/ane/dist/layout.js",
       "type": "js",
       "deps": [
         "node_modules/avalon2/dist/avalon"
       ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-select/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-select/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-select/ms-select.ts",
-        "vendor/ane/components/ms-select/ms-select-option.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-upload/ms-upload-list.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-upload/ms-upload-list.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-upload/ms-upload-card.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-upload/ms-upload-card.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-upload/ms-upload.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-upload/ms-upload.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-form/ms-control.ts",
-        "vendor/ane/components/ms-form/utils.ts",
-        "vendor/ane/components/ms-upload/ms-upload-list.ts",
-        "vendor/ane/components/ms-upload/ms-upload-card.ts",
-        "node_modules/up-loader/dist/up-loader"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-upload/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-upload/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-upload/ms-upload.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-calendar/ms-calendar-year-view.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-calendar/ms-calendar-year-view.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "node_modules/moment/moment"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-calendar/ms-calendar.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-calendar/ms-calendar.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "node_modules/moment/moment",
-        "node_modules/moment/locale/zh-cn",
-        "vendor/ane/components/ms-select/index.ts",
-        "vendor/ane/components/ms-calendar/ms-calendar-year-view.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-calendar/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-calendar/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-calendar/ms-calendar.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-timepicker/ms-timepicker-view.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-timepicker/ms-timepicker-view.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "node_modules/moment/moment"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-datepicker/ms-datepicker.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-datepicker/ms-datepicker.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "node_modules/moment/moment",
-        "vendor/ane/components/ms-form/ms-control.ts",
-        "vendor/ane/components/ms-trigger/index.ts",
-        "vendor/ane/components/ms-calendar/index.ts",
-        "vendor/ane/components/ms-timepicker/ms-timepicker-view.ts",
-        "vendor/ane/components/ms-form/utils.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-datepicker/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-datepicker/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-datepicker/ms-datepicker.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-timepicker/ms-timepicker.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-timepicker/ms-timepicker.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "node_modules/moment/moment",
-        "vendor/ane/components/ms-form/ms-control.ts",
-        "vendor/ane/components/ms-trigger/index.ts",
-        "vendor/ane/components/ms-timepicker/ms-timepicker-view.ts",
-        "vendor/ane/components/ms-form/utils.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-timepicker/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-timepicker/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-timepicker/ms-timepicker.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-checkbox/ms-checkbox-group.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-checkbox/ms-checkbox-group.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-form/ms-control.ts",
-        "vendor/ane/components/ms-form/utils.ts",
-        "vendor/ane/components/ms-checkbox/ms-checkbox.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-checkbox/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-checkbox/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-checkbox/ms-checkbox.ts",
-        "vendor/ane/components/ms-checkbox/ms-checkbox-group.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-radio/ms-radio.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-radio/ms-radio.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon",
-        "vendor/ane/ane-util.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-radio/ms-radio-group.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-radio/ms-radio-group.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-form/ms-control.ts",
-        "vendor/ane/components/ms-form/utils.ts",
-        "vendor/ane/components/ms-radio/ms-radio.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-radio/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-radio/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-radio/ms-radio.ts",
-        "vendor/ane/components/ms-radio/ms-radio-group.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-notification/ms-notification.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-notification/ms-notification.js",
-      "type": "js",
-      "deps": [
-        "node_modules/noty/js/noty/packaged/jquery.noty.packaged"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-notification/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-notification/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-notification/ms-notification.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-message/ms-message.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-message/ms-message.js",
-      "type": "js",
-      "deps": [
-        "node_modules/noty/js/noty/packaged/jquery.noty.packaged"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/components/ms-message/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-message/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-message/ms-message.ts"
-      ],
-      "pkg": "p0"
-    },
-    "vendor/ane/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-menu/index.ts",
-        "vendor/ane/components/ms-table/ms-table.ts",
-        "vendor/ane/components/ms-pagination/ms-pagination.ts",
-        "vendor/ane/components/ms-dialog/index.ts",
-        "vendor/ane/components/ms-form/index.ts",
-        "vendor/ane/components/ms-form/create-form.ts",
-        "vendor/ane/components/ms-input/index.ts",
-        "vendor/ane/components/ms-textarea/index.ts",
-        "vendor/ane/components/ms-select/index.ts",
-        "vendor/ane/components/ms-upload/index.ts",
-        "vendor/ane/components/ms-datepicker/index.ts",
-        "vendor/ane/components/ms-timepicker/index.ts",
-        "vendor/ane/components/ms-checkbox/index.ts",
-        "vendor/ane/components/ms-checkbox/ms-checkbox-group.ts",
-        "vendor/ane/components/ms-radio/index.ts",
-        "vendor/ane/components/ms-radio/ms-radio-group.ts",
-        "vendor/ane/components/ms-notification/index.ts",
-        "vendor/ane/components/ms-message/index.ts"
-      ],
-      "pkg": "p0"
+      "pkg": "p1"
     },
     "services/configService.ts": {
       "url": "/ms-bus/static/services/configService.js",
       "type": "js",
-      "pkg": "p2"
+      "pkg": "p0"
     },
     "services/ajaxService.ts": {
       "url": "/ms-bus/static/services/ajaxService.js",
       "type": "js",
       "deps": [
         "node_modules/jquery/dist/jquery",
-        "vendor/ane/index.ts",
+        "node_modules/ane/dist/ane",
         "services/configService.ts"
       ],
-      "pkg": "p2"
+      "pkg": "p0"
     },
     "services/menuService.ts": {
       "url": "/ms-bus/static/services/menuService.js",
@@ -884,7 +453,7 @@ require.resourceMap({
         "node_modules/avalon2/dist/avalon",
         "services/ajaxService.ts"
       ],
-      "pkg": "p2"
+      "pkg": "p0"
     },
     "services/storeService.ts": {
       "url": "/ms-bus/static/services/storeService.js",
@@ -893,7 +462,7 @@ require.resourceMap({
         "services/ajaxService.ts",
         "services/menuService.ts"
       ],
-      "pkg": "p2"
+      "pkg": "p0"
     },
     "components/common-header/common-header.ts": {
       "url": "/ms-bus/static/components/common-header/common-header.js",
@@ -901,7 +470,7 @@ require.resourceMap({
       "deps": [
         "node_modules/avalon2/dist/avalon"
       ],
-      "pkg": "p2"
+      "pkg": "p0"
     },
     "components/common-sidebar/common-sidebar.ts": {
       "url": "/ms-bus/static/components/common-sidebar/common-sidebar.js",
@@ -910,9 +479,9 @@ require.resourceMap({
         "node_modules/avalon2/dist/avalon",
         "services/menuService.ts",
         "services/storeService.ts",
-        "vendor/ane/components/ms-menu/index.ts"
+        "node_modules/ane/dist/ane"
       ],
-      "pkg": "p2"
+      "pkg": "p0"
     },
     "services/routerService.ts": {
       "url": "/ms-bus/static/services/routerService.js",
@@ -924,23 +493,7 @@ require.resourceMap({
         "components/common-header/common-header.ts",
         "components/common-sidebar/common-sidebar.ts"
       ],
-      "pkg": "p2"
-    },
-    "vendor/ane/components/ms-layout/ms-layout.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-layout/ms-layout.js",
-      "type": "js",
-      "deps": [
-        "node_modules/avalon2/dist/avalon"
-      ],
-      "pkg": "p2"
-    },
-    "vendor/ane/components/ms-layout/index.ts": {
-      "url": "/ms-bus/static/vendor/ane/components/ms-layout/index.js",
-      "type": "js",
-      "deps": [
-        "vendor/ane/components/ms-layout/ms-layout.ts"
-      ],
-      "pkg": "p2"
+      "pkg": "p0"
     },
     "index.ts": {
       "url": "/ms-bus/static/index.js",
@@ -954,16 +507,16 @@ require.resourceMap({
         "node_modules/es5-shim/es5-sham",
         "services/routerService.ts",
         "services/storeService.ts",
-        "vendor/ane/components/ms-layout/index.ts"
+        "node_modules/ane/dist/layout"
       ],
-      "pkg": "p2"
+      "pkg": "p0"
     },
     "components/gf-dashboard/gf-dashboard.ts": {
       "url": "/ms-bus/static/components/gf-dashboard/gf-dashboard.js",
       "type": "js",
       "deps": [
         "node_modules/avalon2/dist/avalon",
-        "vendor/ane/index.ts",
+        "node_modules/ane/dist/ane",
         "services/ajaxService.ts"
       ]
     },
@@ -979,7 +532,7 @@ require.resourceMap({
       "type": "js",
       "deps": [
         "node_modules/avalon2/dist/avalon",
-        "vendor/ane/index.ts",
+        "node_modules/ane/dist/ane",
         "services/storeService.ts"
       ]
     },
@@ -998,7 +551,7 @@ require.resourceMap({
         "node_modules/avalon2/dist/avalon",
         "node_modules/redux/dist/redux",
         "node_modules/redux-thunk/lib/index",
-        "vendor/ane/index.ts",
+        "node_modules/ane/dist/ane",
         "services/storeService.ts"
       ]
     },
@@ -1007,14 +560,14 @@ require.resourceMap({
       "type": "js",
       "deps": [
         "node_modules/avalon2/dist/avalon",
-        "vendor/ane/index.ts"
+        "node_modules/ane/dist/ane"
       ]
     },
     "components/gf-demo-fast/gf-demo-fast.ts": {
       "url": "/ms-bus/static/components/gf-demo-fast/gf-demo-fast.js",
       "type": "js",
       "deps": [
-        "vendor/ane/index.ts",
+        "node_modules/ane/dist/ane",
         "components/common-curd/common-curd.ts",
         "services/storeService.ts"
       ]
@@ -1025,7 +578,7 @@ require.resourceMap({
       "deps": [
         "node_modules/avalon2/dist/avalon",
         "services/ajaxService.ts",
-        "vendor/ane/index.ts"
+        "node_modules/ane/dist/ane"
       ]
     },
     "components/doc-ms-form/doc-ms-form.ts": {
@@ -1034,20 +587,16 @@ require.resourceMap({
       "deps": [
         "node_modules/avalon2/dist/avalon",
         "services/configService.ts",
-        "vendor/ane/index.ts"
+        "node_modules/ane/dist/ane"
       ]
     }
   },
   "pkg": {
-    "p3": {
+    "p1": {
       "url": "/ms-bus/vendor.js",
       "type": "js"
     },
     "p0": {
-      "url": "/ms-bus/ane.js",
-      "type": "js"
-    },
-    "p2": {
       "url": "/ms-bus/app.js",
       "type": "js"
     }
