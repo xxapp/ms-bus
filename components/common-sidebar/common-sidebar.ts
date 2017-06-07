@@ -2,7 +2,7 @@ import * as avalon from 'avalon2';
 
 import * as menuService from '../../services/menuService';
 import { menu as menuStore } from '../../services/storeService';
-import 'ane/components/ms-menu'
+import 'ane';
 
 avalon.effect('collapse', {
     enter(elem, done) {

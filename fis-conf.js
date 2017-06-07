@@ -1,20 +1,14 @@
 // npm install [-g] fis3-hook-commonjs
 fis.hook('commonjs', {
     paths: {
-        mmState: './vendor/mmState/mmState.js',
         'moment-locale': './node_modules/moment/locale/zh-cn.js',
         redux: './node_modules/redux/dist/redux.js',
         bootstrap: './node_modules/bootstrap/dist/js/bootstrap.js'
     },
-    packages: [{
-        name: 'ane',
-        location: './vendor/ane',
-        main: 'index'
-    }],
     extList: ['.js', '.ts']
 });
 
-fis.set('project.ignore', ['vendor/ane/node_modules/**', 'vendor/ane/output/**', 'node_modules/**', 'output/**', '.git/**', 'fis-conf.js', 
+fis.set('project.ignore', ['node_modules/**', 'output/**', '.git/**', 'fis-conf.js', 
                             'README.md', 'readme.txt', 'cmd.cmd', 'package.json', 'LICENSE']);
 fis.set('baseurl', '');
 
@@ -39,9 +33,6 @@ fis.hook('node_modules', {
         }),
         rExt: '.js'
     });
-});
-fis.match('/vendor/ane/node_modules/**', {
-    parser: undefined
 });
 fis.match('{**.scss,*.html:scss}', {
     parser: fis.plugin('node-sass', {
@@ -79,10 +70,6 @@ fis.match('/components/**/*.html', {
 });
 fis.match('/components/**/*.scss', {
     release: '/$0'
-})
-fis.match('/vendor/ane/components/**/*.html', {
-    postprocessor: fis.plugin('component-view', { }),
-    release: false
 });
 fis.match('/{node_modules,components}/**/*.{css,scss,eot,svg,ttf,woff,woff2,map}', {
     release: '/static/$0'
@@ -100,9 +87,6 @@ fis.media('dev').match('/services/configService.{ts,js}', {
 });
 fis.match('/vendor/**/*.{ts,js}', {
     isMod: true,
-    release: '/static/$0'
-});
-fis.match('/vendor/ane/components/**/*.{css,scss}', {
     release: '/static/$0'
 });
 fis.match('/static/**', {
@@ -140,12 +124,6 @@ fis.media('gh-pages')
 .match('*.{css,scss}', {
   optimizer: fis.plugin('clean-css')
 })
-.match('ane.js', {
-    release: '/$0'
-})
-.match('ane.css', {
-    release: '/$0'
-})
 .match('app.js', {
     release: '/$0'
 })
@@ -158,18 +136,6 @@ fis.media('gh-pages')
 .match('::package', {
     packager: fis.plugin('deps-pack', {
         useTrack: false,
-        'ane.js': [
-            'vendor/ane/index.ts',
-            'vendor/ane/index.ts:deps',
-            '!vendor/ane/node_modules/**',
-            '!vendor/ane/node_modules/**:deps',
-            '!node_modules/**',
-            '!node_modules/**:deps'
-        ],
-        'ane.css': [
-            'vendor/ane/components/**.{css,scss}',
-            'vendor/ane/components/**.{css,scss}:deps'
-        ],
         'app.js': [
             'index.ts',
             'index.ts:deps',
@@ -178,13 +144,10 @@ fis.media('gh-pages')
         ],
         'vendor.js': [
             'index.ts',
-            'index.ts:deps',
-            'vendor/ane/index.ts',
-            'vendor/ane/index.ts:deps'
+            'index.ts:deps'
         ],
         'app.css': [
-            'index.ts:deps',
-            'vendor/ane/index.ts:deps',
+            'index.ts:deps'
         ]
     }),
 });

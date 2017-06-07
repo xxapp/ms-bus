@@ -12,7 +12,7 @@ if (avalon.msie === 8) {
 import 'es5-shim/es5-sham';
 import './services/routerService';
 import { breadcrumb } from './services/storeService';
-import 'ane/components/ms-layout';
+import 'ane/dist/layout';
 
 const root = avalon.define({
     $id: 'root',
