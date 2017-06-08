@@ -54,6 +54,10 @@
 - index.js              // 应用启动，包括 polyfill/必要的依赖/root VM/路由启动
 ```
 
+## 浏览器支持
+
+现代浏览器、IE8 及以上
+
 ## 鸣谢
 
 [活儿好又性感的在线 Mock 平台 - Easy Mock](https://www.easy-mock.com/) 提供模拟数据支持
