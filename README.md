@@ -33,10 +33,11 @@
 ```
 - components            // 将页面按功能和业务切分后的模块
   + common-header       // 命名规范：[业务名称]-[模块名称]
-  - gf-user             // gf 业务下的用户模块
-    - gf-user.html      // 模块的页面结构和样式
+  - gf-user             // gf 业务下的 user 模块
+    - gf-user.html      // 模块的页面结构
     - gf-user.js        // 模块的业务逻辑
-+ mock                  // 模拟后端服务的数据
+    - gf-user.css       // 模块的表现样式
++ mock                  // 模拟后端服务的数据
 + pages                 // 除 index.html 的完整 HTML 页面，用于多页面应用
 - services              // 超脱页面的业务逻辑模块
   - ajaxService.js      // 封装 ajax 方法，规范请求参数和响应数据的格式, 根据响应结果显示提示信息
