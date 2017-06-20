@@ -34,11 +34,6 @@ fis.hook('node_modules', {
         rExt: '.js'
     });
 });
-fis.match('{**.scss,*.html:scss}', {
-    parser: fis.plugin('node-sass', {
-    }),
-    rExt: '.css'
-})
 fis.match('**', {
     useHash: false,
     release: false
@@ -68,10 +63,7 @@ fis.match('/components/**/*.html', {
     postprocessor: fis.plugin('component-view', { }),
     release: false
 });
-fis.match('/components/**/*.scss', {
-    release: '/$0'
-});
-fis.match('/{node_modules,components}/**/*.{css,scss,eot,svg,ttf,woff,woff2,map}', {
+fis.match('/{node_modules,components}/**/*.{css,eot,svg,ttf,woff,woff2,map}', {
     release: '/static/$0'
 });
 fis.match('/services/*.{ts,js}', {
@@ -121,7 +113,7 @@ fis.media('gh-pages')
 .match('*.{js,ts}', {
     optimizer: fis.plugin('uglify-js')
 })
-.match('*.{css,scss}', {
+.match('*.{css}', {
   optimizer: fis.plugin('clean-css')
 })
 .match('app.js', {
