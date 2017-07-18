@@ -1,1 +1,0 @@
-{"version":3,"sources":["/services/configService.ts"],"names":[],"mappings":";;;AAAa,gBAAQ,GAAG,EAAE,CAAC;AAEd,cAAM,GAAG,YAAY,CAAC;AAEtB,kBAAU,GAAG,iBAAiB,CAAC","file":"configService.js","sourcesContent":["export const pageSize = 10;\n\nexport const domain = '__DOMAIN__';\n\nexport const serviceUrl = '__SERVICE_URL__';"]}

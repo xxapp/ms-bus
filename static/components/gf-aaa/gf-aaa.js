@@ -1,1 +1,1 @@
-define("components/gf-aaa/gf-aaa.ts",function(a,n){"use strict";var e=a("node_modules/avalon2/dist/avalon");n.name="gf-aaa",e.component(n.name,{template:"\n<div>\n    <h1>{{@text}}</h1>\n</div>\n",defaults:{text:"aaa"}})});
+define("components/gf-aaa/gf-aaa",function(e,a){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(a,"__esModule",{value:!0}),a.name=void 0;var t=e("node_modules/avalon2/dist/avalon"),o=n(t),d=a.name="gf-aaa";o.default.component(d,{template:"\n<div>\n    <h1>{{@text}}</h1>\n</div>\n",defaults:{text:"aaa"}})});

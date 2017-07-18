@@ -1,1 +1,1 @@
-define("services/configService.ts",function(e,c){"use strict";c.pageSize=10,c.domain="/ms-bus",c.serviceUrl="https://www.easy-mock.com/mock/58ff1b7c5e43ae5dbea5eff3"});
+define("services/configService",function(e,c){"use strict";Object.defineProperty(c,"__esModule",{value:!0});c.pageSize=10,c.domain="/ms-bus",c.serviceUrl="https://www.easy-mock.com/mock/58ff1b7c5e43ae5dbea5eff3"});
