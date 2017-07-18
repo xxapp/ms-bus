@@ -109,7 +109,7 @@ function walkMenu(menu, key, process, level = 1) {
     return finded;
 }
 function getKeyPath(key) {
-    return menuPromise.then((menu: any) => {
+    return menuPromise.then((menu) => {
         const keyPath = [];
 
         walkMenu(menu.toJSON ? menu.toJSON() : menu, key, function (item, shift) {
