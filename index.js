@@ -1,9 +1,9 @@
 import 'es5-shim';
 import 'es6-promise/dist/es6-promise.auto';
-import * as jQuery from 'jquery';
+import jQuery from 'jquery';
 global.$ = global.jQuery = jQuery;
-import 'bootstrap';
-import * as avalon from 'avalon2';
+require('bootstrap');
+import avalon from 'avalon2';
 if (avalon.msie === 8) {
     Object.defineProperty = function (obj, property, meta) {
         obj[property] = meta.value;

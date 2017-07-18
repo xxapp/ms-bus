@@ -1,4 +1,4 @@
-import * as avalon from 'avalon2';
+import avalon from 'avalon2';
 
 import ajax from '../../services/ajaxService';
 import { serviceUrl } from "../../services/configService";

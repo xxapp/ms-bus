@@ -1,5 +1,4 @@
-import * as avalon from 'avalon2';
-import beyond from '../../vendor/beyond';
+import avalon from 'avalon2';
 import ajax from '../../services/ajaxService';
 
 export const name = 'common-header';

@@ -1,4 +1,4 @@
-import * as avalon from 'avalon2';
+import avalon from 'avalon2';
 import 'mmRouter';
 import { menu as menuStore } from './storeService';
 
@@ -9,7 +9,7 @@ function getPage(component) {
 
 function applyRouteConfig(config, parentRoute, accPath = '') {
     config.map(function (route) {
-        let components:any = {};
+        let components = {};
         if (route.component) {
             components.currentPage = route.component;
         }

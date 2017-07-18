@@ -1,4 +1,4 @@
-import * as avalon from 'avalon2';
+import avalon from 'avalon2';
 import { createForm, notification } from 'ane';
 import ajax from '../../services/ajaxService'
 

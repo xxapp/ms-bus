@@ -5,7 +5,7 @@ fis.hook('commonjs', {
         redux: './node_modules/redux/dist/redux.js',
         bootstrap: './node_modules/bootstrap/dist/js/bootstrap.js'
     },
-    extList: ['.js', '.ts']
+    extList: ['.js']
 });
 
 fis.set('project.ignore', ['node_modules/**', 'output/**', '.git/**', 'fis-conf.js', 
@@ -24,13 +24,7 @@ fis.hook('node_modules', {
 ['/{pages,components,services,vendor}/**.{ts,js}', '/*.{ts,js}'].forEach(function (blob) {
     fis.match(blob, {
         preprocessor: fis.plugin('js-require-css'),
-        parser: fis.plugin('typescript', {
-            jsx: 1,
-            showNotices: false,
-            sourceMap: true,
-            target: 0,
-            allowSyntheticDefaultImports: true
-        }),
+        parser: fis.plugin('babel-6.x'),
         rExt: '.js'
     });
 });

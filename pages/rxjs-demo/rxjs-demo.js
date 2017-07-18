@@ -2,14 +2,14 @@ import 'es5-shim';
 import 'es6-promise/dist/es6-promise.auto';
 import 'addeventlistener-with-dispatch/src/addeventlistener-with-dispatch';
 
-import * as avalon from 'avalon2';
+import avalon from 'avalon2';
 if (avalon.msie === 8) {
     Object.defineProperty = function (obj, property, meta) {
         obj[property] = meta.value;
     }
 }
 
-import * as Rx from 'rx';
+import Rx from 'rx';
 
 avalon.define({
     $id: 'demo',
@@ -50,7 +50,7 @@ function isKonamiCode(buffer) {
     return codes.toString() === buffer.toString();
 }
 
-const keys = Rx.Observable.fromEvent<KeyboardEvent>(document, 'keyup')
+const keys = Rx.Observable.fromEvent(document, 'keyup')
     .map(e => e.keyCode)
     .bufferWithCount(10, 1)
     .filter(isKonamiCode)

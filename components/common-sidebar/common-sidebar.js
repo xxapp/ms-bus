@@ -1,4 +1,4 @@
-import * as avalon from 'avalon2';
+import avalon from 'avalon2';
 
 import * as menuService from '../../services/menuService';
 import { menu as menuStore } from '../../services/storeService';

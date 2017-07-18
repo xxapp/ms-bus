@@ -1,4 +1,4 @@
-import * as avalon from 'avalon2';
+import avalon from 'avalon2';
 
 import 'ane';
 import curdComponent from '../common-curd/common-curd';

@@ -32,10 +32,10 @@
     "rx": "^4.1.0"
   },
   "devDependencies": {
+    "fis-parser-babel-6.x": "^6.24.1",
     "fis3-hook-commonjs": "^0.1.25",
     "fis3-hook-node_modules": "^2.2.8",
     "fis3-packager-deps-pack": "^0.1.2",
-    "fis3-parser-typescript": "^1.1.1",
     "fis3-postpackager-loader": "^2.1.3",
     "fis3-postprocessor-component-view": "^1.0.8",
     "fis3-preprocessor-js-require-css": "^0.1.1"

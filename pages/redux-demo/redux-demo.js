@@ -1,9 +1,7 @@
-/// <reference path="../../typings/index.d.ts" />
-
 import { createStore } from 'redux';
-import * as avalon from 'avalon2';
+import avalon from 'avalon2';
 
-import * as jQuery from 'jquery';
+import jQuery from 'jquery';
 global.$ = global.jQuery = jQuery;
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
