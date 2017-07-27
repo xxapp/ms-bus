@@ -123,17 +123,17 @@ fis.media('gh-pages')
     packager: fis.plugin('deps-pack', {
         useTrack: false,
         'app.js': [
-            'index.ts',
-            'index.ts:deps',
+            'index.js',
+            'index.js:deps',
             '!node_modules/**',
             '!node_modules/**:deps'
         ],
         'vendor.js': [
-            'index.ts',
-            'index.ts:deps'
+            'index.js',
+            'index.js:deps'
         ],
         'app.css': [
-            'index.ts:deps'
+            'index.js:deps'
         ]
     }),
 });
