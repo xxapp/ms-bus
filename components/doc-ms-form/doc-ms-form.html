@@ -31,12 +31,23 @@
                                 ],$rules:{required:true}, onChange:@handleChange}">
                     </ms-radio-group>
                 </ms-form-item>
+                <ms-form-item :widget="{label:'所在地'}">
+                    <ms-tree-select :widget="{
+                        value:[@record.location],
+                        col:'location',
+                        treeData:@regionData,
+                        multiple:false,
+                        $rules:{required:true},
+                        onChange:@handleChange}"></ms-tree-select>
+                </ms-form-item>
                 <ms-form-item :widget="{label:'代表作'}">
                     <ms-select :widget="{
                         value:@record.masterpiece,
                         col:'masterpiece',
                         showSearch:true,
-                        mode:'multiple'
+                        mode:'multiple',
+                        $rules:{required:true,type:'array'},
+                        onChange:@handleChange
                     }">
                         <ms-select-option :widget="{value:'ane'}">Ane</ms-select-option>
                         <ms-select-option :widget="{value:'ms-bus'}">ms-bus</ms-select-option>

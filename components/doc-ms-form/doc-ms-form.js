@@ -15,6 +15,18 @@ avalon.component(name, {
         record: initialData(),
         json: '',
         expire: 0,
+        regionData: [
+            {key: 1, title: "重庆", children: []},
+            {key: 2, title: "四川", children: [
+                {key: 4, title: '成都', children: []},
+                {key: 5, title: '绵阳', children: []},
+                {key: 6, title: '攀枝花', children: []}
+            ]},
+            {key: 3, title: "浙江", children: [
+                {key: 7, title: '杭州', children: []},
+                {key: 8, title: '温州', children: []}
+            ]}
+        ],
         fileUploadUrl: serviceUrl + '/api/file/uploadFile',
         addEducation() {
             this.record.education.push('');
@@ -62,6 +74,7 @@ function initialData() {
         name: '123',
         gender: 'F',
         masterpiece: ['ms-bus'],
+        location: 4,
         birthday: '2017/03/25',
         bankai: '2017-10-10 12:12:12',
         hobby: ['code'],
