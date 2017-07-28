@@ -31,6 +31,9 @@
     "rx": "^4.1.0"
   },
   "devDependencies": {
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
+    "babel-plugin-transform-es3-property-literals": "^6.22.0",
     "fis-parser-babel-6.x": "^6.24.1",
     "fis3-hook-commonjs": "^0.1.25",
     "fis3-hook-node_modules": "^2.2.8",

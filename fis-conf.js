@@ -21,10 +21,12 @@ fis.hook('node_modules', {
 });
 
 // 默认情况下不添加hash
-['/{pages,components,services,vendor}/**.{ts,js}', '/*.{ts,js}'].forEach(function (blob) {
+['/{pages,components,services,vendor}/**.{ts,js}', '/*.{ts,js}', '/node_modules/babel-runtime/**.{ts,js}'].forEach(function (blob) {
     fis.match(blob, {
         preprocessor: fis.plugin('js-require-css'),
-        parser: fis.plugin('babel-6.x'),
+        parser: fis.plugin('babel-6.x', {
+            plugins: ['transform-es3-property-literals', 'transform-es3-member-expression-literals', 'add-module-exports']
+        }),
         rExt: '.js'
     });
 });
