@@ -251,8 +251,8 @@ require.resourceMap({
       ],
       "pkg": "p1"
     },
-    "node_modules/core-js/library/modules/_to-index": {
-      "url": "/ms-bus/static/node_modules/core-js/library/modules/_to-index.js",
+    "node_modules/core-js/library/modules/_to-absolute-index": {
+      "url": "/ms-bus/static/node_modules/core-js/library/modules/_to-absolute-index.js",
       "type": "js",
       "deps": [
         "node_modules/core-js/library/modules/_to-integer"
@@ -265,7 +265,7 @@ require.resourceMap({
       "deps": [
         "node_modules/core-js/library/modules/_to-iobject",
         "node_modules/core-js/library/modules/_to-length",
-        "node_modules/core-js/library/modules/_to-index"
+        "node_modules/core-js/library/modules/_to-absolute-index"
       ],
       "pkg": "p1"
     },
@@ -592,15 +592,6 @@ require.resourceMap({
       ],
       "pkg": "p1"
     },
-    "node_modules/core-js/library/modules/_keyof": {
-      "url": "/ms-bus/static/node_modules/core-js/library/modules/_keyof.js",
-      "type": "js",
-      "deps": [
-        "node_modules/core-js/library/modules/_object-keys",
-        "node_modules/core-js/library/modules/_to-iobject"
-      ],
-      "pkg": "p1"
-    },
     "node_modules/core-js/library/modules/_enum-keys": {
       "url": "/ms-bus/static/node_modules/core-js/library/modules/_enum-keys.js",
       "type": "js",
@@ -668,10 +659,10 @@ require.resourceMap({
         "node_modules/core-js/library/modules/_wks",
         "node_modules/core-js/library/modules/_wks-ext",
         "node_modules/core-js/library/modules/_wks-define",
-        "node_modules/core-js/library/modules/_keyof",
         "node_modules/core-js/library/modules/_enum-keys",
         "node_modules/core-js/library/modules/_is-array",
         "node_modules/core-js/library/modules/_an-object",
+        "node_modules/core-js/library/modules/_is-object",
         "node_modules/core-js/library/modules/_to-iobject",
         "node_modules/core-js/library/modules/_to-primitive",
         "node_modules/core-js/library/modules/_property-desc",
@@ -1008,12 +999,21 @@ require.resourceMap({
       ],
       "pkg": "p1"
     },
+    "node_modules/dom-align/lib/isAncestorFixed": {
+      "url": "/ms-bus/static/node_modules/dom-align/lib/isAncestorFixed.js",
+      "type": "js",
+      "deps": [
+        "node_modules/dom-align/lib/utils"
+      ],
+      "pkg": "p1"
+    },
     "node_modules/dom-align/lib/getVisibleRectForElement": {
       "url": "/ms-bus/static/node_modules/dom-align/lib/getVisibleRectForElement.js",
       "type": "js",
       "deps": [
         "node_modules/dom-align/lib/utils",
-        "node_modules/dom-align/lib/getOffsetParent"
+        "node_modules/dom-align/lib/getOffsetParent",
+        "node_modules/dom-align/lib/isAncestorFixed"
       ],
       "pkg": "p1"
     },
@@ -1055,8 +1055,7 @@ require.resourceMap({
         "node_modules/dom-align/lib/getVisibleRectForElement",
         "node_modules/dom-align/lib/adjustForViewport",
         "node_modules/dom-align/lib/getRegion",
-        "node_modules/dom-align/lib/getElFuturePos",
-        "node_modules/dom-align/lib/getAlignOffset"
+        "node_modules/dom-align/lib/getElFuturePos"
       ],
       "pkg": "p1"
     },
